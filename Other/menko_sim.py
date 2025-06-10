@@ -1,5 +1,6 @@
 import random
 from collections import Counter
+from queue import Queue
 
 class Card:
     def __init__(self, card_type: str, card_class: str):
@@ -17,6 +18,9 @@ presets = {
             Card(card_type='heavy', card_class='basic'),
             Card(card_type='light', card_class='basic'),
             Card(card_type='regular', card_class='basic'),
+            Card(card_type='heavy', card_class='basic'),
+            Card(card_type='light', card_class='basic'),
+            Card(card_type='regular', card_class='basic'),
             Card(card_type='heavy', card_class='basic')
         ],
         'omamori': 'none'
@@ -25,7 +29,7 @@ presets = {
 
 type_to_idx = {'light': 0, 'regular': 1, 'heavy': 2}
 num_cards = 6
-type_prob = [0.2, 0.7, 0.9]
+type_prob = [0.05, 0.5, 0.95]
 
 def draw_card(card, shown=True):
         width = 18
@@ -50,6 +54,10 @@ def draw_cards(cards, shown=None):
 
 class Agent:
     def __init__(self):
+        self.omamori = 'none'
+        return
+    
+    def show(self, type, idx):
         return
     
     def skill_check(self):
@@ -81,6 +89,9 @@ class Agent0(Agent):
         self.table_idx = 0
         self.skill = 2
     
+    def show(self, type, idx):
+        return
+    
     def skill_check(self, threshold=0.5):
         check = random.uniform(0, self.skill)
         return check < threshold
@@ -93,7 +104,7 @@ class Agent0(Agent):
 
         return self.hand.pop(), (self.table_idx,), (self.skill_check(),)
     
-    def backward(self, cards: list[Card]):
+    def backward(self, cards: list[str]):
         if cards[0] is not None:
             self.table[self.table_idx] = True
 
@@ -102,8 +113,11 @@ class Human(Agent):
         self.hand = starting_hand
         self.omamori = omamori
 
+    def show(self, type, idx):
+        return
+    
     def skill_check(self):
-        return int(input("Skill check result: "))
+        return 1
 
     def move(self):
         print('Hand: ')
@@ -129,9 +143,10 @@ class Agent1(Agent):
             Card(card_type='heavy', card_class='basic')
         ]
         self.omamori = 'none'
-        self.skill = 1.3
+        self.skill = 1.4
 
         self.type_freq = [0, 0, 0]
+        self.hand_freq = [3, 3, 3]
 
         self.rank = [1, 1, 1]
         mod = [(1-x) * 1/3 for x in type_prob]
@@ -149,25 +164,24 @@ class Agent1(Agent):
 
         self.last = None
     
+    def show(self, type, idx):
+        return
+    
     def skill_check(self, threshold=0.5):
         check = random.uniform(0, self.skill)
         return check < threshold
 
     def move(self):
-        freq = [
-            sum(1 for x in self.hand if x.c_type == 'light'),
-            sum(1 for x in self.hand if x.c_type == 'regular'),
-            sum(1 for x in self.hand if x.c_type == 'heavy')
-        ]
-        self.hand.sort(key = lambda x: (self.rank[type_to_idx[x.c_type]], freq[type_to_idx[x.c_type]]))
+        self.hand.sort(key = lambda x: (self.rank[type_to_idx[x.c_type]], self.hand_freq[type_to_idx[x.c_type]]))
         check = self.skill_check()
 
         self.last = self.hand[-1].c_type
+        self.hand_freq[type_to_idx[self.last]] -= 1
         return self.hand.pop(), (self.order[self.idx],), (check,)
     
-    def backward(self, cards: list[Card]):
+    def backward(self, cards: list[str]):
         if cards[0] is not None and self.idx < 5:
-            self.type_freq[type_to_idx[cards[0].c_type]] += 1
+            self.type_freq[type_to_idx[cards[0]]] += 1
             self.idx += 1
             self.rank = [
                 (2 - min(2, self.type_freq[2])) / (6 - self.idx),
@@ -180,6 +194,116 @@ class Agent1(Agent):
 class Agent2(Agent):
     def __init__(self):
         self.hand = [
+            Card(card_type='light', card_class='basic'),
+            Card(card_type='regular', card_class='basic'),
+            Card(card_type='heavy', card_class='basic'),
+            Card(card_type='light', card_class='basic'),
+            Card(card_type='regular', card_class='basic'),
+            Card(card_type='heavy', card_class='basic'),
+            Card(card_type='light', card_class='basic'),
+            Card(card_type='regular', card_class='basic'),
+            Card(card_type='heavy', card_class='basic')
+        ]
+        self.omamori = 'vision'
+        self.skill = 1
+
+        self.hand_freq = [3, 3, 3]
+        self.type_freq = [2, 2, 2]
+
+        self.known = [-1] * 6
+        self.assume = [-1] * 6
+        self.flipped = [False] * 6
+        self.order = list(range(6))
+
+        self.search_phase = True
+
+        self.idx = 0
+        self.last = 0
+
+    def show(self, type, idx):
+        self.known[idx] = self.assume[idx] = type_to_idx[type]
+        self.type_freq[type_to_idx[type]] -= 1
+        while self.idx < 6 and self.known[self.idx] != -1: self.idx += 1
+    
+    def skill_check(self, threshold=0.5):
+        check = random.uniform(0, self.skill)
+        return check < threshold
+    
+    def fix_assumption(self, type):
+        # print(f'3 {type}')
+        idx = next((i for i in range(6) if self.known[i] == -1 and self.assume[i] == type))
+        prev_type = (type + 2) % 3
+        next_type = (type + 1) % 3
+        if self.type_freq[prev_type] == 0:
+            # print(self.known)
+            if sum(1 for i in self.known if i == prev_type) == 2:
+                # print(1)
+                self.assume[idx] = next_type
+            else:
+                # print(2)
+                idx2 = next((i for i in range(6) if self.known[i] == -1 and self.assume[i] == prev_type))
+                self.assume[idx2] = next_type
+                self.assume[idx] = prev_type
+        else:
+            self.assume[idx] = prev_type
+
+    def move(self):
+        # print(self.known)
+        # print(self.assume)
+        # print(self.flipped)
+        # print(self.type_freq)
+        # print()
+
+        if self.search_phase:
+            self.hand.sort(key = lambda x: (self.type_freq[(type_to_idx[x.c_type] + 1) % 3]))
+            # print([str(x) for x in self.hand])
+            self.last = self.hand[-1].c_type
+            self.hand_freq[type_to_idx[self.hand[-1].c_type]] -= 1
+            return self.hand.pop(), (self.idx,), (self.skill_check(),)
+        else:
+            self.order.sort(key=lambda x: (
+                not self.flipped[x],
+                self.known[x] != -1,
+                self.hand_freq[(self.assume[x] + 1) % 3] > 0,
+                self.hand_freq[self.assume[x]] > 0
+            ))
+            order = self.order[-1]
+            assume = self.assume[order]
+            priority = [(assume + 1) % 3, assume, (assume + 2) % 3]
+            self.hand.sort(key=lambda x: priority.index(type_to_idx[x.c_type]), reverse=True)
+            # print(self.order)
+            # print([x.c_type for x in self.hand])
+            self.hand_freq[type_to_idx[self.hand[-1].c_type]] -= 1
+            return self.hand.pop(), (order,), (self.skill_check(),)
+
+    def backward(self, cards: list[str]):
+        if cards[0] is not None:
+            idx = self.idx if self.search_phase else self.order[-1]
+            self.flipped[idx] = True
+            self.assume[idx] = self.known[idx] = type_to_idx[cards[0]]
+        elif self.search_phase:
+            self.assume[self.idx] = (type_to_idx[self.last] + 1) % 3
+
+        if self.search_phase:
+            self.type_freq[self.assume[self.idx]] -= 1
+            if self.type_freq[self.assume[self.idx]] < 0:
+                self.fix_assumption(self.assume[self.idx])
+            if self.type_freq.count(0) == 2:
+                self.search_phase = False
+                # print('done')
+                last = next(i for i, val in enumerate(self.type_freq) if val != 0)
+                self.assume = [last if x == -1 else x for x in self.assume]
+
+            self.idx += 1
+            while self.idx < 6 and self.known[self.idx] != -1:
+                # print(self.known[self.idx])
+                self.idx += 1
+            if self.idx == 6:
+                self.search_phase = False
+
+class Agent3(Agent):
+    def __init__(self):
+        self.hand = [
             Card(card_type='light', card_class='bouncy'),
             Card(card_type='regular', card_class='bouncy'),
             Card(card_type='heavy', card_class='bouncy'),
@@ -188,12 +312,13 @@ class Agent2(Agent):
             Card(card_type='heavy', card_class='basic'),
             Card(card_type='light', card_class='basic'),
             Card(card_type='regular', card_class='basic'),
-            Card(card_type='heavy', card_class='basic')
+            Card(card_type='heavy', card_class='basic'),
         ]
         self.omamori = 'none'
-        self.skill = 1.2
+        self.skill = 0.9
 
         self.type_freq = [0, 0, 0]
+        self.hand_freq = [3, 3, 3]
 
         self.ranks = [[1/3] * 3] * 6
         self.orders = [list(range(6)) for _ in range(3)]
@@ -208,18 +333,15 @@ class Agent2(Agent):
 
         self.last = []
         self.count = 0
+
+    def show(self, type, idx):
+        return
     
     def skill_check(self, threshold=0.5):
         check = random.uniform(0, self.skill)
         return check < threshold
 
     def move(self):
-        freq = [
-            sum(1 for x in self.hand if x.c_type == 'light'),
-            sum(1 for x in self.hand if x.c_type == 'regular'),
-            sum(1 for x in self.hand if x.c_type == 'heavy')
-        ]
-
         for idx, row in enumerate(self.orders):
             row.sort(key = lambda x: self.ranks[x][idx], reverse=True)
 
@@ -227,23 +349,22 @@ class Agent2(Agent):
             (self.ranks[self.orders[w := type_to_idx[x.c_type]][0]][w]
             if x.c_class == 'basic' else
             (self.ranks[self.orders[w := type_to_idx[x.c_type]][0]][w] + self.ranks[self.orders[w][1]][w]),
-            freq[type_to_idx[x.c_type]])
+            self.hand_freq[type_to_idx[x.c_type]])
         ))
+        
+        self.hand_freq[type_to_idx[self.hand[-1].c_type]] -= 1
 
         if self.hand[-1].c_class == 'bouncy':
-            check1 = self.skill_check()
-            check2 = self.skill_check()
             order1 = self.orders[type_to_idx[self.hand[-1].c_type]][0]
             order2 = self.orders[type_to_idx[self.hand[-1].c_type]][1]
             self.last = [self.hand[-1].c_type, order1, order2]
-            return self.hand.pop(), (order1, order2), (check1, check2)
+            return self.hand.pop(), (order1, order2), (self.skill_check(), self.skill_check())
         else:
-            check = self.skill_check()
             order = self.orders[type_to_idx[self.hand[-1].c_type]][0]
             self.last = [self.hand[-1].c_type, order]
-            return self.hand.pop(), (order,), (check,)
+            return self.hand.pop(), (order,), (self.skill_check(),)
     
-    def backward(self, cards: list[Card]):
+    def backward(self, cards: list[str]):
         if self.count == 6: return
 
         old_prob = [
@@ -253,7 +374,7 @@ class Agent2(Agent):
         ]
         for card in cards:
             if card is not None:
-                self.type_freq[type_to_idx[card.c_type]] += 1
+                self.type_freq[type_to_idx[card]] += 1
                 self.count += 1
         
         if self.count == 6: return
@@ -308,6 +429,14 @@ class Game:
         self.count1 = 0
         self.count2 = 0
 
+        for agent, table in zip([self.agent1, self.agent2], [self.table1, self.table2]):
+            if agent.omamori == 'vision':
+                idx = random.sample(range(6), 2)
+                card = table[idx[0]]
+                agent.show(card.c_type, idx[0])
+                card = table[idx[1]]
+                agent.show(card.c_type, idx[1])
+
         if self.verbose:
             print('Agent 1:')
             print(draw_cards(self.table1, self.shown1))
@@ -327,15 +456,18 @@ class Game:
         
         result = []
         for i, c in zip(table_idx, check):
+            # print(i)
+            # c = 1
             threshold = type_prob[self.flip_chance[type_to_idx[card.c_type]][type_to_idx[table[i].c_type]]]
             if random.random() < threshold * c:
                 if self.verbose:
                     print(f'Agent {name} threw {str(card)} at {i} and it flipped')
                 update(i)
-                result.append(table[i])
+                result.append(table[i].c_type)
             else:
                 if self.verbose:
                     print(f'Agent {name} threw {str(card)} at {i} and it did not flip')
+                # print(table[i].c_type)
                 result.append(None)
 
         agent.backward(result)
@@ -371,15 +503,17 @@ class Game:
 results = []
 verbose = False
 
-for i in range(10000):
+for i in range(30000):
     human = Human(**presets['default'])
-    game = Game(Agent1(), Agent2(), verbose=verbose)
+    game = Game(Agent2(), Agent3(), verbose=verbose)
 
-    for i in range(6):
+    for i in range(9):
         if verbose:
             print(f'\n\nRound {i+1}!!')
         if game.round(): break
 
     results.append(game.winner())
 
-print(Counter(results))
+counter = Counter(results)
+print(counter)
+print(counter[2] / (counter[1] + counter[2]))
