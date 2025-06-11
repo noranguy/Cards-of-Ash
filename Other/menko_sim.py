@@ -105,7 +105,7 @@ class Agent0(Agent):
         self.table = [False] * num_cards
         self.table_idx = 0
         self.great_skill = 0.05
-        self.good_skill = 0.8
+        self.good_skill = 0.78
 
     def move(self):
         self.table_idx = 0
@@ -159,7 +159,7 @@ class Agent1(Agent):
         ]
         self.omamori = 'none'
         self.great_skill = 0.05
-        self.good_skill = 0.8
+        self.good_skill = 0.75
 
         self.type_freq = [0, 0, 0]
         self.hand_freq = [3, 3, 3]
@@ -220,7 +220,7 @@ class Agent2(Agent):
         ]
         self.omamori = 'vision'
         self.great_skill = 0.05
-        self.good_skill = 0.9
+        self.good_skill = 0.77
 
         self.hand_freq = [3, 3, 3]
         self.type_freq = [0, 0, 0]
@@ -324,7 +324,7 @@ class Agent3(Agent):
         ]
         self.omamori = 'trade'
         self.great_skill = 0.05
-        self.good_skill = 1
+        self.good_skill = 0.85
 
         self.type_freq = [0, 0, 0]
         self.hand_freq = [3, 3, 3]
@@ -424,7 +424,7 @@ class Agent4(Agent):
         ]
         self.omamori = 'none'
         self.great_skill = 0.05
-        self.good_skill = 1
+        self.good_skill = 0.87
 
         self.type_freq = [0, 0, 0]
         self.hand_freq = [3, 3, 3]
@@ -540,6 +540,103 @@ class Agent5(Agent):
         ]
         self.omamori = 'none'
         self.great_skill = 0.05
+        self.good_skill = 0.747
+
+        self.type_freq = [0, 0, 0]
+        self.hand_freq = [3, 3, 3]
+
+        self.ranks = [[1/3] * 3] * 6
+        self.orders = [list(range(6)) for _ in range(3)]
+        mod = [(1-x) * 1/3 for x in type_prob]
+        mod_sum = sum(mod)
+        self.flipped = [False] * 6
+        h, m, l = (x / mod_sum for x in mod)
+        self.rank_mod = [
+            [l, m, h],
+            [h, l, m],
+            [m, h, l]
+        ]
+
+        self.count = 0
+    
+    def add_card(self, card):
+        self.hand.append(card)
+        self.hand_freq[type_to_idx[card.c_type]] += 1
+
+    def move(self):
+        for idx, row in enumerate(self.orders):
+            row.sort(key = lambda x: (self.flipped[x], -self.ranks[x][idx]))
+
+        self.hand.sort(key = lambda x: (
+            x.c_class == 'bouncy',
+            (self.ranks[self.orders[w := type_to_idx[x.c_type]][0]][w]
+            if x.c_class == 'basic' else
+            (self.ranks[self.orders[w := type_to_idx[x.c_type]][0]][w] + self.ranks[self.orders[w][1]][w]),
+            self.hand_freq[type_to_idx[x.c_type]])
+        ))
+        
+        self.last = self.hand[-1].c_type
+        self.hand_freq[type_to_idx[self.last]] -= 1
+
+        if self.hand[-1].c_class == 'bouncy':
+            order1 = self.orders[type_to_idx[self.last]][0]
+            order2 = self.orders[type_to_idx[self.last]][1]
+            return self.hand.pop(), (order1, order2), (self.skill_check(), self.skill_check())
+        else:
+            order = self.orders[type_to_idx[self.last]][0]
+            return self.hand.pop(), (order,), (self.skill_check(),)
+    
+    def backward(self, cards: list[tuple[str, int]]):
+        old_prob = [
+            (2 - min(2, self.type_freq[2])) / (6 - self.count),
+            (2 - min(2, self.type_freq[0])) / (6 - self.count),
+            (2 - min(2, self.type_freq[1])) / (6 - self.count),
+        ]
+        for card, idx in cards:
+            if card is not None:
+                self.type_freq[type_to_idx[card]] += 1
+                if not self.flipped[idx]:
+                    self.count += 1
+                self.flipped[idx] = True
+        
+        if self.count == 6: return
+        
+        new_prob = [
+            (2 - min(2, self.type_freq[2])) / (6 - self.count),
+            (2 - min(2, self.type_freq[0])) / (6 - self.count),
+            (2 - min(2, self.type_freq[1])) / (6 - self.count),
+        ]
+
+        self.ranks = [[(row[x] / old_prob[x] * new_prob[x] if old_prob[x] != 0 else 0) for x in range(3)] for row in self.ranks]
+
+        for card, idx in cards:
+            if card is not None:
+                self.ranks[idx] = [-1e5, -1e5, -1e5]
+            elif self.skill_passed:
+                self.ranks[idx] = [a * b for a, b in zip(self.ranks[idx], self.rank_mod[type_to_idx[self.last]])]
+
+        for i, row in enumerate(self.ranks):
+            whole = sum(row)
+            if whole == 0:
+                self.ranks[i] = [-1e5, -1e5, -1e5]
+            else:
+                self.ranks[i] = [x / whole for x in row]
+
+class Agent6(Agent):
+    def __init__(self):
+        self.hand = [
+            Card(card_type='light', card_class='basic'),
+            Card(card_type='regular', card_class='basic'),
+            Card(card_type='heavy', card_class='basic'),
+            Card(card_type='light', card_class='basic'),
+            Card(card_type='regular', card_class='basic'),
+            Card(card_type='heavy', card_class='basic'),
+            Card(card_type='light', card_class='basic'),
+            Card(card_type='regular', card_class='basic'),
+            Card(card_type='heavy', card_class='basic'),
+        ]
+        self.omamori = 'none'
+        self.great_skill = 1
         self.good_skill = 1
 
         self.type_freq = [0, 0, 0]
@@ -753,7 +850,7 @@ class Game:
         return self.winner()
 
 verbose = False
-agents = [Agent0, Agent1, Agent2, Agent4, Agent3, Agent5]
+agents = [Agent0, Agent1, Agent2, Agent3, Agent4, Agent5, Agent6]
 for i in range(len(agents)-1):
     results = []
     for _ in range(30000):
@@ -770,7 +867,7 @@ for i in range(len(agents)-1):
 # verbose = False
 # for i in range(10000):
 #     human = Human(**presets['default'])
-#     game = Game(Agent4(), Agent5(), verbose=verbose)
+#     game = Game(Agent0(), Agent1(), verbose=verbose)
 #     results.append(game.run())
 
 # counter = Counter(results)
