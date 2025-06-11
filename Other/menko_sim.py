@@ -105,7 +105,7 @@ class Agent0(Agent):
         self.table = [False] * num_cards
         self.table_idx = 0
         self.great_skill = 0.05
-        self.good_skill = 0.78
+        self.good_skill = 0.82
 
     def move(self):
         self.table_idx = 0
@@ -159,7 +159,7 @@ class Agent1(Agent):
         ]
         self.omamori = 'none'
         self.great_skill = 0.05
-        self.good_skill = 0.75
+        self.good_skill = 0.79
 
         self.type_freq = [0, 0, 0]
         self.hand_freq = [3, 3, 3]
@@ -266,7 +266,7 @@ class Agent2(Agent):
 
     def move(self):
         if self.search_phase:
-            self.hand.sort(key = lambda x: {1: 0, 2: 1, 0: 2}[self.type_freq[(type_to_idx[x.c_type] + 1) % 3]])
+            self.hand.sort(key = lambda x: ({1: 0, 2: 1, 0: 2}[self.type_freq[(type_to_idx[x.c_type] + 1) % 3]], self.hand_freq[type_to_idx[x.c_type]]))
             self.last = self.hand[-1].c_type
             self.hand_freq[type_to_idx[self.hand[-1].c_type]] -= 1
             return self.hand.pop(), (self.idx,), (self.skill_check(),)
@@ -345,7 +345,7 @@ class Agent3(Agent):
         self.last = -1
     
     def trade(self, card):
-        self.hand.sort(key = lambda x: sum(a[type_to_idx[x.c_type]] for a in self.ranks), reverse=True)
+        self.hand.sort(key = lambda x: (x.c_class == "basic", -sum(a[type_to_idx[x.c_type]] for a in self.ranks)))
         ret = self.hand.pop()
         self.hand.append(card)
         self.hand_freq[type_to_idx[card.c_type]] += 1
@@ -367,8 +367,10 @@ class Agent3(Agent):
         
         self.last = type_to_idx[self.hand[-1].c_type]
         self.hand_freq[self.last] -= 1
-        self.order = self.orders[self.last][0]
-        return self.hand.pop(), (self.order,), (self.skill_check(),)
+        if self.hand[-1].c_class == 'bouncy':
+            return self.hand.pop(), (self.orders[self.last][0],), (self.skill_check(),)
+        else:
+            return self.hand.pop(), (self.orders[self.last][0],self.orders[self.last][1]), (self.skill_check(),)
     
     def backward(self, cards: list[tuple[str, int]]):
         old_prob = [
@@ -378,12 +380,13 @@ class Agent3(Agent):
         ]
         for card, idx in cards:
             if card is not None:
-                self.type_freq[type_to_idx[card]] += 1
-                if not self.flipped[idx]:
+                self.flipped[idx] = not self.flipped[idx]
+                if self.flipped[idx]:
                     self.count += 1
-                self.flipped[idx] = True
-        
-        if self.count >= 6: return
+                    self.type_freq[type_to_idx[card]] += 1
+                else:
+                    self.count -= 1
+                    self.type_freq[type_to_idx[card]] -= 1
         
         new_prob = [
             (2 - min(2, self.type_freq[2])) / (6 - self.count),
@@ -489,14 +492,16 @@ class Agent4(Agent):
             (2 - min(2, self.type_freq[0])) / (6 - self.count),
             (2 - min(2, self.type_freq[1])) / (6 - self.count),
         ]
+
         for card, idx in cards:
             if card is not None:
-                self.type_freq[type_to_idx[card]] += 1
-                if not self.flipped[idx]:
+                self.flipped[idx] = not self.flipped[idx]
+                if self.flipped[idx]:
                     self.count += 1
-                self.flipped[idx] = True
-        
-        if self.count >= 6: return
+                    self.type_freq[type_to_idx[card]] += 1
+                else:
+                    self.count -= 1
+                    self.type_freq[type_to_idx[card]] -= 1
         
         new_prob = [
             (2 - min(2, self.type_freq[2])) / (6 - self.count),
@@ -599,8 +604,6 @@ class Agent5(Agent):
                     self.count += 1
                 self.flipped[idx] = True
         
-        if self.count == 6: return
-        
         new_prob = [
             (2 - min(2, self.type_freq[2])) / (6 - self.count),
             (2 - min(2, self.type_freq[0])) / (6 - self.count),
@@ -636,8 +639,8 @@ class Agent6(Agent):
             Card(card_type='heavy', card_class='basic'),
         ]
         self.omamori = 'none'
-        self.great_skill = 1
-        self.good_skill = 1
+        self.great_skill = 0.99
+        self.good_skill = 0.99
 
         self.type_freq = [0, 0, 0]
         self.hand_freq = [3, 3, 3]
@@ -755,13 +758,17 @@ class Game:
         self.count1 = 0
         self.count2 = 0
 
-        for agent, table in zip([self.agent1, self.agent2], [self.table1, self.table2]):
+        for agent, table, name in zip([self.agent1, self.agent2], [self.table1, self.table2], [1, 2]):
             if agent.omamori == 'vision':
                 idx = random.sample(range(6), 2)
                 card = table[idx[0]]
                 agent.show(card.c_type, idx[0])
+                if verbose:
+                    print(f'{str(card)} at {idx[0]} shown to Agent {name}')
                 card = table[idx[1]]
                 agent.show(card.c_type, idx[1])
+                if verbose:
+                    print(f'{str(card)} at {idx[1]} shown to Agent {name}')
 
         if self.verbose:
             print('Agent 1:')
@@ -770,12 +777,16 @@ class Game:
             print(draw_cards(self.table2, self.shown2))
 
     def update1(self, idx):
-        self.shown1[idx] = True
-        self.count1 += 1
+        self.shown1[idx] = not self.shown1[idx]
+        if self.shown1[idx]: self.count1 += 1
+        else: self.count1 -= 1
+        return self.count1 == 6
     
     def update2(self, idx):
-        self.shown2[idx] = True
-        self.count2 += 1
+        self.shown2[idx] = not self.shown2[idx]
+        if self.shown2[idx]: self.count2 += 1
+        else: self.count2 -= 1
+        return self.count2 == 6
 
     def turn(self, agent: Agent, table: list[Card], update, name, other_agent: Agent):
         if agent.omamori == 'trade':
@@ -788,30 +799,31 @@ class Game:
         card, table_idx, check = agent.move()
         
         result = []
+        res = False
         for i, c in zip(table_idx, check):
             threshold = type_prob[self.flip_chance[type_to_idx[card.c_type]][type_to_idx[table[i].c_type]]]
             if random.random() < threshold * c:
                 if self.verbose:
-                    print(f'Agent {name} threw {str(card)} at {i} and it flipped')
-                update(i)
+                    print(f'Agent {name} threw {str(card)} at {i} and it flipped, skill check={c}')
+                res = update(i)
                 result.append((table[i].c_type, i))
             else:
                 if self.verbose:
-                    print(f'Agent {name} threw {str(card)} at {i} and it did not flip')
+                    print(f'Agent {name} threw {str(card)} at {i} and it did not flip, skill check={c}')
                 result.append((None, i))
             if card.c_class == 'ceramic':
                 for j in [x for x in [i-1, i+1] if 0 <= x <= 5]:
                     if random.random() < threshold * c * ceramic_prob:
                         if self.verbose:
-                            print(f'Ceramic card hit {str(card)} at {j} and it flipped')
-                        update(j)
+                            print(f'Ceramic card hit {str(card)} at {j} and it flipped, skill check={c}')
+                        res = update(j)
                         result.append((table[j].c_type, j))
                     else:
                         if self.verbose:
-                            print(f'Ceramic card hit {str(card)} at {j} and it did not flip')
+                            print(f'Ceramic card hit {str(card)} at {j} and it did not flip, skill check={c}')
                         result.append((None, j))
 
-        agent.backward(result)
+        if not res: agent.backward(result)
 
     def round(self):
         self.turn(self.agent1, self.table1, self.update1, 1, self.agent2)
@@ -823,7 +835,7 @@ class Game:
             print('Agent 2:')
             print(draw_cards(self.table2, self.shown2))
 
-        return sum(self.shown1) == num_cards or sum(self.shown2) == num_cards
+        return self.count1 == num_cards or self.count2 == num_cards
 
     def winner(self):
         if self.count1 > self.count2:
@@ -864,10 +876,10 @@ for i in range(len(agents)-1):
         print(counter[2] / (counter[1] + counter[2]))
 
 # results = []
-# verbose = False
-# for i in range(10000):
+# verbose = True
+# for i in range(30000):
 #     human = Human(**presets['default'])
-#     game = Game(Agent0(), Agent1(), verbose=verbose)
+#     game = Game(Agent1(), Agent2(), verbose=verbose)
 #     results.append(game.run())
 
 # counter = Counter(results)
