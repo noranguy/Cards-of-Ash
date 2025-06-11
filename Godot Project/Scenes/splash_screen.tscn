@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bidlfp6n23bbl"]
+[gd_scene load_steps=3 format=3 uid="uid://bidlfp6n23bbl"]
 
-[ext_resource type="Script" uid="uid://clcecd3aiusis" path="res://Scripts/SplashScreen/SplashScreen.cs" id="1_bio1j"]
+[ext_resource type="Texture2D" uid="uid://xxt44pkhqch0" path="res://Assets/SplashScreen/loading.png" id="1_wwf30"]
+[ext_resource type="Script" uid="uid://clcecd3aiusis" path="res://Scripts/SplashScreen/SplashScreen.cs" id="2_h5jmx"]
 
 [node name="SplashScreen" type="TextureRect"]
 anchors_preset = 15
@@ -8,7 +9,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bio1j")
+texture = ExtResource("1_wwf30")
+script = ExtResource("2_h5jmx")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1

@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="Cards of Ash"
+run/main_scene="uid://bidlfp6n23bbl"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+
+[autoload]
+
+SceneLoader="*res://Scenes/scene_loader.tscn"
 
 [display]
 

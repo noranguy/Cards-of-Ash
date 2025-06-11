@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://ba3cplw3k3d7t"]
+
+[node name="SettingsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.769231
+anchor_bottom = 0.769231
+offset_left = 73.846
+offset_top = 41.539
+offset_right = 73.846
+offset_bottom = 41.539
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label Container" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Master Volume Label" type="Label" parent="MarginContainer/HBoxContainer/Label Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Master Volume"
+
+[node name="Music Volume Label" type="Label" parent="MarginContainer/HBoxContainer/Label Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Music Volume"
+
+[node name="SFX Volume Label" type="Label" parent="MarginContainer/HBoxContainer/Label Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "SFX Volume"
+
+[node name="Slider Container" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Master Volume" type="HSlider" parent="MarginContainer/HBoxContainer/Slider Container"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+value = 50.0
+
+[node name="Music Volume" type="HSlider" parent="MarginContainer/HBoxContainer/Slider Container"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+value = 50.0
+
+[node name="SFX Volume" type="HSlider" parent="MarginContainer/HBoxContainer/Slider Container"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+value = 50.0
