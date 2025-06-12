@@ -11,8 +11,17 @@ config_version=5
 [application]
 
 config/name="Cards of Ash"
+run/main_scene="uid://bidlfp6n23bbl"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+
+[autoload]
+
+SceneLoader="*res://Scenes/scene_loader.tscn"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
 
 [dotnet]
 
@@ -22,3 +31,7 @@ project/assembly_name="Cards of Ash"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

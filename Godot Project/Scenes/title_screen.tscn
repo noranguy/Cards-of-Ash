@@ -1,0 +1,118 @@
+[gd_scene load_steps=8 format=3 uid="uid://g3bw52drwg7c"]
+
+[ext_resource type="Script" uid="uid://hwmm2q7j8aj3" path="res://Scripts/TitleScreen/TitleScreen.cs" id="1_4gxqj"]
+[ext_resource type="Texture2D" uid="uid://dvqe3x2okf37a" path="res://Assets/TitleScreen/sample_menko_card.png" id="1_p3fck"]
+[ext_resource type="Texture2D" uid="uid://72hyb3q0gyqe" path="res://Assets/TitleScreen/settings_logo.png" id="2_4gxqj"]
+[ext_resource type="Texture2D" uid="uid://b6egcpbftv20m" path="res://icon.svg" id="4_twnyg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g52x0"]
+bg_color = Color(0.319427, 0.662532, 0.682831, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tg6gk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5fww"]
+
+[node name="TitleScreen" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4gxqj")
+
+[node name="CardContainer1" type="CenterContainer" parent="."]
+layout_mode = 1
+offset_left = 150.0
+offset_top = 75.0
+offset_right = 250.0
+offset_bottom = 175.0
+rotation = -0.261799
+metadata/_edit_use_anchors_ = true
+
+[node name="Card" type="TextureRect" parent="CardContainer1"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_p3fck")
+expand_mode = 1
+
+[node name="CardContainer2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 25.0
+offset_right = 50.0
+offset_bottom = 125.0
+grow_horizontal = 2
+
+[node name="Card" type="TextureRect" parent="CardContainer2"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_p3fck")
+expand_mode = 1
+
+[node name="CardContainer3" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 50.0
+offset_right = -150.0
+offset_bottom = 150.0
+grow_horizontal = 0
+rotation = 0.261799
+
+[node name="Card" type="TextureRect" parent="CardContainer3"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_p3fck")
+expand_mode = 1
+
+[node name="ButtonContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -107.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ButtonBox" type="HBoxContainer" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="NewGame" type="Button" parent="ButtonContainer/ButtonBox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxFlat_g52x0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tg6gk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_i5fww")
+text = "New Game
+"
+
+[node name="Load Game" type="Button" parent="ButtonContainer/ButtonBox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxFlat_g52x0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tg6gk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_i5fww")
+text = "Load Game
+"
+
+[node name="Settings" type="TextureButton" parent="ButtonContainer/ButtonBox"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("2_4gxqj")
+texture_pressed = ExtResource("2_4gxqj")
+texture_hover = ExtResource("4_twnyg")
+ignore_texture_size = true
+stretch_mode = 0
