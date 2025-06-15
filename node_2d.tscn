@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d17c6844rwev1"]
+
+[ext_resource type="Script" uid="uid://d2i2c7yxgdy48" path="res://Godot Project/Scripts/Node2d.cs" id="1_wtcfe"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_wtcfe")
