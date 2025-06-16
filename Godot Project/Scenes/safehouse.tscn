@@ -1,21 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://ompxpgyt4oah"]
+[gd_scene load_steps=13 format=3 uid="uid://ompxpgyt4oah"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/player_character.tscn" id="1_qcbrc"]
+[ext_resource type="PackedScene" uid="uid://cfyc8k4gjjnmr" path="res://Scenes/out_play_safehouse.tscn" id="3_6l742"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
-a = Vector2(192, 0)
-b = Vector2(193.001, 319.999)
+a = Vector2(38, -10)
+b = Vector2(37, 305)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_vvy0r"]
-a = Vector2(88.9992, -223)
-b = Vector2(89.0004, 95.9997)
+a = Vector2(67.9986, -385)
+b = Vector2(67.9998, -66.0003)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1njoc"]
+size = Vector2(34, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qcbrc"]
-size = Vector2(42, 32)
+size = Vector2(11, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvy0r"]
-size = Vector2(34, 32)
+size = Vector2(50, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5cdq"]
+size = Vector2(76, 92)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpc17"]
+size = Vector2(16, 177)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_algie"]
+size = Vector2(60, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6l742"]
+size = Vector2(48, 79)
 
 [node name="Safehouse" type="StaticBody2D"]
 light_mask = 0
@@ -23,64 +39,45 @@ script = ExtResource("1_6l742")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
-zoom = Vector2(1.8, 1.8)
+process_callback = 0
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
-light_mask = 2
-position = Vector2(288, 32)
-shape = SubResource("SegmentShape2D_qcbrc")
+[node name="Background" parent="." instance=ExtResource("3_6l742")]
+z_as_relative = false
+position = Vector2(320, 180)
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+[node name="NorthWall" type="CollisionShape2D" parent="."]
 light_mask = 2
-position = Vector2(480, -97)
+z_index = 5
+z_as_relative = false
+position = Vector2(467, 46)
 rotation = 1.5708
 shape = SubResource("SegmentShape2D_qcbrc")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+[node name="EastWall" type="CollisionShape2D" parent="."]
 light_mask = 2
-position = Vector2(256, 176)
+z_index = 5
+z_as_relative = false
+position = Vector2(444, 32)
+shape = SubResource("SegmentShape2D_qcbrc")
+
+[node name="SouthWall" type="CollisionShape2D" parent="."]
+light_mask = 2
+z_index = 5
+z_as_relative = false
+position = Vector2(96, 272)
 rotation = 1.5708
 shape = SubResource("SegmentShape2D_vvy0r")
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+[node name="WestWall" type="CollisionShape2D" parent="."]
 light_mask = 2
-position = Vector2(-32, 32)
+z_index = 5
+z_as_relative = false
+position = Vector2(120, 32)
 shape = SubResource("SegmentShape2D_qcbrc")
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_qcbrc")]
-position = Vector2(192, 96)
-collision_layer = 2
-collision_mask = 5
-motion_mode = 1
-slide_on_ceiling = false
-
-[node name="Bed" type="Area2D" parent="."]
-position = Vector2(0, 1)
-collision_layer = 4
-collision_mask = 2
-
-[node name="ColorRect" type="ColorRect" parent="Bed"]
-offset_left = 444.0
-offset_top = 128.0
-offset_right = 478.0
-offset_bottom = 160.0
-color = Color(0, 0, 0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed"]
-light_mask = 2
-visibility_layer = 4
-position = Vector2(457, 144)
-shape = SubResource("RectangleShape2D_qcbrc")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Bed"]
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed/StaticBody2D"]
-position = Vector2(461, 144)
-shape = SubResource("RectangleShape2D_vvy0r")
 
 [node name="EndDayPrompt" type="Control" parent="."]
 visible = false
+z_index = 6
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -117,7 +114,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 35
 
-[node name="EndDay" type="Label" parent="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer"]
+[node name="EndDay?" type="Label" parent="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -136,13 +133,214 @@ text = "End Day"
 layout_mode = 2
 text = "Cancel"
 
-[node name="MorningOne" type="Control" parent="."]
+[node name="GoOutsidePrompt" type="Control" parent="."]
+visible = false
+z_index = 6
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[connection signal="body_entered" from="Bed" to="." method="_on_bed_body_entered"]
-[connection signal="body_entered" from="Bed" to="PlayerCharacter" method="_on_bed_body_entered"]
+[node name="CenterContainer" type="CenterContainer" parent="GoOutsidePrompt"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GoOutsidePrompt/CenterContainer"]
+custom_minimum_size = Vector2(170, 120)
+layout_mode = 2
+color = Color(0.509286, 0.509286, 0.509286, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GoOutsidePrompt/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 35
+
+[node name="Go Outside?" type="Label" parent="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Go Outside?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="GoOutside" type="Button" parent="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Go Outside"
+
+[node name="Cancel" type="Button" parent="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="StartGamePrompt" type="Control" parent="."]
+visible = false
+z_index = 6
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="StartGamePrompt"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="StartGamePrompt/CenterContainer"]
+custom_minimum_size = Vector2(170, 120)
+layout_mode = 2
+color = Color(0.509286, 0.509286, 0.509286, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartGamePrompt/CenterContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 35
+
+[node name="StartGame?" type="Label" parent="StartGamePrompt/CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Start Game?"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StartGamePrompt/CenterContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="StartGame" type="Button" parent="StartGamePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Cancel" type="Button" parent="StartGamePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_qcbrc")]
+top_level = true
+z_index = 5
+position = Vector2(425, 160)
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
+slide_on_ceiling = false
+
+[node name="Door" type="Area2D" parent="."]
+z_index = 5
+position = Vector2(0, 1)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2(209, 88.5)
+shape = SubResource("RectangleShape2D_1njoc")
+
+[node name="Bed" type="Area2D" parent="."]
+z_index = 5
+position = Vector2(0, 1)
+collision_layer = 4
+collision_mask = 2
+
+[node name="ColorRect" type="ColorRect" parent="Bed"]
+offset_left = 430.0
+offset_top = 130.0
+offset_right = 480.0
+offset_bottom = 170.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed"]
+light_mask = 2
+visibility_layer = 4
+position = Vector2(424.5, 150)
+shape = SubResource("RectangleShape2D_qcbrc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Bed"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed/StaticBody2D"]
+position = Vector2(455, 150)
+shape = SubResource("RectangleShape2D_vvy0r")
+
+[node name="MenkoTable" type="Area2D" parent="."]
+z_index = 5
+position = Vector2(319.5, 168)
+rotation = 1.5708
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MenkoTable"]
+position = Vector2(6.00002, -0.499939)
+shape = SubResource("RectangleShape2D_n5cdq")
+
+[node name="Furniture" type="StaticBody2D" parent="."]
+z_index = 5
+collision_mask = 0
+
+[node name="Dressers" type="CollisionShape2D" parent="Furniture"]
+position = Vector2(168, 200.5)
+shape = SubResource("RectangleShape2D_vpc17")
+
+[node name="CouchBody" type="CollisionPolygon2D" parent="Furniture"]
+position = Vector2(317.5, 332)
+build_mode = 1
+polygon = PackedVector2Array(-49.5, -5, -53.5, -15, -57.5, 6, 57.5, 6, 53.5, -14, 48.5, -5, -3.5, -5)
+
+[node name="Boxes" type="CollisionShape2D" parent="Furniture"]
+position = Vector2(450, 99.5)
+shape = SubResource("RectangleShape2D_algie")
+
+[node name="MenkoTable" type="CollisionShape2D" parent="Furniture"]
+position = Vector2(319.5, 168)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_6l742")
+
 [connection signal="pressed" from="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="PlayerCharacter" method="_on_cancel_pressed"]
+[connection signal="pressed" from="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="PlayerCharacter" method="_on_cancel_pressed"]
+[connection signal="pressed" from="StartGamePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="StartGamePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="PlayerCharacter" method="_on_cancel_pressed"]
+[connection signal="body_entered" from="Door" to="." method="_on_door_body_entered"]
+[connection signal="body_entered" from="Door" to="PlayerCharacter" method="_on_door_body_entered"]
+[connection signal="body_exited" from="Door" to="." method="_on_door_body_exited"]
+[connection signal="body_exited" from="Door" to="PlayerCharacter" method="_on_door_body_exited"]
+[connection signal="body_entered" from="Bed" to="." method="_on_bed_body_entered"]
+[connection signal="body_entered" from="Bed" to="PlayerCharacter" method="_on_bed_body_entered"]
+[connection signal="body_exited" from="Bed" to="." method="_on_bed_body_exited"]
+[connection signal="body_exited" from="Bed" to="PlayerCharacter" method="_on_bed_body_exited"]
+[connection signal="body_entered" from="MenkoTable" to="." method="_on_menko_table_body_entered"]
+[connection signal="body_entered" from="MenkoTable" to="PlayerCharacter" method="_on_menko_table_body_entered"]
+[connection signal="body_exited" from="MenkoTable" to="." method="_on_menko_table_body_exited"]
+[connection signal="body_exited" from="MenkoTable" to="PlayerCharacter" method="_on_menko_table_body_exited"]

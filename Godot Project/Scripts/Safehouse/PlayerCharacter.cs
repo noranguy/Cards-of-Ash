@@ -4,17 +4,34 @@ using System.Security.Cryptography.X509Certificates;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
+	// Flag to see if the player should be able to move, false when a prompt is on screen
 	public bool moveable = true;
+	// Player speed
 	public const float Speed = 150.0f;
-
-	[Export]
-	public RayCast2D _ray;
+	public RayCast2D _ray; // Ignore ray for now
+	// If the player is in an interactable area
+	bool _in_area = false;
 
 	public override void _Ready()
 	{
 		_ray = GetNode<RayCast2D>("RayCast2D");
 	}
 
+	public override void _Process(double delta)
+	{
+		// If the player is trying to interact with something
+		if (Input.IsActionJustPressed("interact"))
+		{
+			GD.Print("Mreow");
+			// If they were in an interactable area, then they are now in a prompt screen and shouldnt be able to move
+			if (_in_area)
+			{
+				moveable = false;
+			}
+		}
+	}
+
+	// Player character movement
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
@@ -68,17 +85,40 @@ public partial class PlayerCharacter : CharacterBody2D
 		MoveAndSlide();
 	}
 
+	// Signals from interactable areas
 	void _on_bed_body_entered(Node2D body)
 	{
-		if (Input.IsActionPressed("ui_accept"))
-		{
-			moveable = false;
-		}
+		_in_area = true;
 	}
 
+	void _on_bed_body_exited(Node2D body)
+	{
+		_in_area = false;
+	}
+
+	void _on_bed_door_entered(Node2D body)
+	{
+		_in_area = true;
+	}
+
+	void _on_bed_door_exited(Node2D body)
+	{
+		_in_area = false;
+	}
+
+	void _on_menko_table_body_entered(Node2D body)
+	{
+		_in_area = true;
+	}
+
+	void _on_menko_table_body_exited(Node2D body)
+	{
+		_in_area = false;
+	}
+
+	// If the players not in a prompt anymore, they can move
 	void _on_cancel_pressed()
 	{
 		moveable = true;
 	}
-
 }
