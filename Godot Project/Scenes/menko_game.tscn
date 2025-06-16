@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1qsys27lhrs2"]
+
+[ext_resource type="PackedScene" uid="uid://b2qhw5t3p15oj" path="res://Scenes/in_play_safehouse.tscn" id="1_qif4s"]
+
+[node name="MenkoGame" type="Node2D"]
+
+[node name="InPlaySafehouse" parent="." instance=ExtResource("1_qif4s")]
+position = Vector2(320, 180)
+scale = Vector2(0.78, 0.78)

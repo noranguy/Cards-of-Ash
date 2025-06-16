@@ -96,4 +96,10 @@ public partial class Safehouse : StaticBody2D
 		_go_outside_prompt.Visible = false;
 		_start_game_prompt.Visible = false;
 	}
+
+	// Start Menko Game
+	void _on_start_game_pressed()
+	{
+		GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("menko_game.tscn");
+	}
 }
