@@ -8,5 +8,8 @@ public partial class TitleScreen : TextureRect
 	{
 		GetNode<TextureButton>("ButtonContainer/ButtonBox/Settings").Pressed +=
 			() => GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("settings_screen.tscn");
+
+		GetNode<Button>("ButtonContainer/ButtonBox/NewGame").Pressed +=
+			() => GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 	}
 }
