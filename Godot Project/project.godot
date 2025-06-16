@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Cards of Ash"
-run/main_scene="uid://dn7nvgcdhokus"
+run/main_scene="uid://b2qhw5t3p15oj"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 
 [autoload]
