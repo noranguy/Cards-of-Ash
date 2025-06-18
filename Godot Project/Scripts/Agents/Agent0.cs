@@ -15,7 +15,6 @@ public class Agent0 : Agent {
 	public override (Card, int) Move(List<Card> hand) {
 		Card throwingCard = hand[rand.Next(hand.Count)];
 		int tableCardIdx = unflippedCards[rand.Next(unflippedCards.Count)];
-		GD.Print($"{throwingCard.type} {tableCardIdx}");
 		return (throwingCard, tableCardIdx);
 	}
 	
