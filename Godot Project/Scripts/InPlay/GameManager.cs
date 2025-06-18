@@ -2,8 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class GameManager : Node2D
-{
+public partial class GameManager : Node2D {
 	[Export] public NodePath playerHandPath;
 	[Export] public NodePath playerTablePath;
 	[Export] public NodePath buttonPath;
@@ -14,15 +13,14 @@ public partial class GameManager : Node2D
 	
 	private bool allowThrow = false;
 	
-	static readonly int[][] FlipRank = new int[][]{
+	static readonly int[][] FlipRank = new int[][] {
 		new int[]{1, 0, 2},
 		new int[]{2, 1, 0},
 		new int[]{0, 2, 1}
 	};
 	static readonly double[] FlipProb = new double[]{0.1, 0.5, 0.9};
 	private Random rand = new Random();
-	static readonly Dictionary<string, int> TypeMap = new()
-	{
+	static readonly Dictionary<string, int> TypeMap = new() {
 		{ "light", 0 },
 		{ "regular", 1 },
 		{ "heavy", 2 }
@@ -30,8 +28,7 @@ public partial class GameManager : Node2D
 	
 	int round = 1;
 
-	public override void _Ready()
-	{
+	public override void _Ready() {
 		throwButton = GetNode<ThrowButton>(buttonPath);
 		throwToggle(false);
 		throwButton.Connect(ThrowButton.SignalName.Pressed, new Callable(this, nameof(throwCard)));
@@ -74,7 +71,6 @@ public partial class GameManager : Node2D
 		double rnd = rand.NextDouble();
 		if (rnd < threshold) {
 			playerTable.activeCard.Reveal();
-		} else {
 		}
 		throwToggle(false);
 		

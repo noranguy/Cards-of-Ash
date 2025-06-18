@@ -2,8 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public abstract partial class CardContainer : Node2D
-{
+public abstract partial class CardContainer : Node2D {
 	[Signal]
 	public delegate void ActiveCardEventHandler(Card newCard);
 
@@ -14,12 +13,10 @@ public abstract partial class CardContainer : Node2D
 	protected float cardWidth = 50f;
 	public readonly int numCards = 6;
 	
-	public virtual void SpawnInitialCards(int count, bool visible, float y, bool isHand)
-	{
+	public virtual void SpawnInitialCards(int count, bool visible, float y, bool isHand) {
 		string[] types = {"light", "regular", "heavy"};
 		int[] typeOrder = GenerateTypeOrder(count);
-		for (int i = 0; i < count; i++)
-		{
+		for (int i = 0; i < count; i++) {
 			Card card = cardScene.Instantiate<Card>();
 			card.Name = $"Card{i}";
 			card.Position = Vector2.Zero;
@@ -51,17 +48,14 @@ public abstract partial class CardContainer : Node2D
 		return types;
 	}
 	
-	public virtual void UpdateCardPositions(float startX, float y, float width)
-	{
-		for (int i = 0; i < cards.Count; i++)
-		{
+	public virtual void UpdateCardPositions(float startX, float y, float width) {
+		for (int i = 0; i < cards.Count; i++) {
 			float x = startX + i * (cardWidth + spacing);
 			cards[i].Position = new Vector2(x, y);
 		}
 	}
 	
-	public virtual void OnCardClicked(Card card)
-	{
+	public virtual void OnCardClicked(Card card) {
 		if (card.visible != card.isHand || activeCard == card) {
 			return;
 		}
@@ -76,8 +70,7 @@ public abstract partial class CardContainer : Node2D
 		EmitSignal(SignalName.ActiveCard, card);
 	}
 	
-	public List<Card> GetCards()
-	{
+	public List<Card> GetCards() {
 		return cards;
 	}
 }

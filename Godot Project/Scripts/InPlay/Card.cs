@@ -1,8 +1,7 @@
 using Godot;
 using System;
 
-public partial class Card : Node2D
-{
+public partial class Card : Node2D {
 	[Signal]
 	public delegate void CardClickedEventHandler(Card card);
 	
@@ -39,36 +38,19 @@ public partial class Card : Node2D
 		sprite.Texture = texture;
 	}
 
-	public void OnInputEvent(Node viewport, InputEvent @event, int shapeIdx)
-	{
-		if (@event is InputEventMouseButton mouseEvent &&
+	public void OnInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
+		if (
+			@event is InputEventMouseButton mouseEvent &&
 			mouseEvent.Pressed &&
-			mouseEvent.ButtonIndex == MouseButton.Left)
-		{
+			mouseEvent.ButtonIndex == MouseButton.Left
+		) {
 			EmitSignal(SignalName.CardClicked, this);
 		}
 	}
 	
-	public void Highlight()
-	{
+	public void Highlight() {
 		var sprite = GetNode<Sprite2D>("CardImage");
-		string shaderCode = @"
-shader_type canvas_item;
-
-uniform vec4 glow_color : source_color = vec4(1.0, 1.0, 0.0, 1.0);
-uniform float glow_strength = 1.5;
-uniform float glow_radius = 0.02;
-
-void fragment() {
-	vec2 uv = UV;
-	float dist_to_edge = min(min(uv.x, 1.0 - uv.x), min(uv.y, 1.0 - uv.y));
-	float glow = smoothstep(glow_radius, 0.0, dist_to_edge) * glow_strength;
-
-	vec4 tex_color = texture(TEXTURE, uv);
-	COLOR = mix(glow_color, tex_color, 1.0 - glow);
-}";
-
-		Shader shader = new Shader { Code = shaderCode };
+		Shader shader = GD.Load<Shader>("res://Shaders/card_highlight.gdshader");
 		ShaderMaterial mat = new ShaderMaterial { Shader = shader };
 		sprite.Material = mat;
 	}
