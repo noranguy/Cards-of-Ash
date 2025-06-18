@@ -8,6 +8,7 @@ public partial class Card : Node2D {
 	public bool locked = false;
 	public bool visible;
 	public bool isHand;
+	public bool isPlayer;
 	public string type;
 	private Sprite2D sprite;
 	
@@ -15,14 +16,19 @@ public partial class Card : Node2D {
 		sprite = GetNode<Sprite2D>("CardImage");
 	}
 	
-	public void Init(string cardType, bool cardVisible, bool cardIsHand) {
+	public void Init(string cardType, bool cardVisible, bool cardIsHand, bool cardIsPlayer) {
 		if (sprite == null) {
 			sprite = GetNode<Sprite2D>("CardImage");
 		}
 		type = cardType;
 		visible = cardVisible;
 		isHand = cardIsHand;
+		isPlayer = cardIsPlayer;
 		
+		UpdateTexture();
+	}
+	
+	public void UpdateTexture() {
 		if (visible) {
 			var texture = GD.Load<Texture2D>($"res://Assets/Cards/{type}.png");
 			sprite.Texture = texture;
@@ -32,10 +38,9 @@ public partial class Card : Node2D {
 		}
 	}
 	
-	public void Reveal() {
-		visible = true;
-		var texture = GD.Load<Texture2D>($"res://Assets/Cards/{type}.png");
-		sprite.Texture = texture;
+	public void Flip() {
+		visible = !visible;
+		UpdateTexture();
 	}
 
 	public void OnInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
@@ -63,14 +68,10 @@ public partial class Card : Node2D {
 	}
 
 	public void OnMouseEntered() {
-		if (visible == isHand) {
-			Highlight();
-		}
+		Highlight();
 	}
 	
 	public void OnMouseExited() {
-		if (visible == isHand) {
-			Unhighlight();
-		}
+		Unhighlight();
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=28 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -6,10 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dvcyqsod6xw1g" path="res://Assets/In Play Safe House/side wall tile sheet.png" id="2_lkv0k"]
 [ext_resource type="Texture2D" uid="uid://i0shetx0bao8" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_D.png" id="2_tbg62"]
 [ext_resource type="Texture2D" uid="uid://bda3h4vm2eoh" path="res://Assets/In Play Safe House/pixilart-drawing (5).png" id="5_k3y4v"]
-[ext_resource type="Script" uid="uid://bfk6yw2c5tghc" path="res://Scripts/InPlay/CardHandContainer.cs" id="7_647v6"]
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
-[ext_resource type="Script" uid="uid://da1dp1iulyl2y" path="res://Scripts/InPlay/CardTableContainer.cs" id="10_dyk6q"]
+[ext_resource type="PackedScene" uid="uid://bwvm0huvpcf0u" path="res://Components/skill_check.tscn" id="10_dyk6q"]
 [ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
@@ -6144,18 +6143,9 @@ shadow_enabled = true
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_rt2xm")
 
-[node name="PlayerHand" type="Node2D" parent="."]
-script = ExtResource("7_647v6")
-cardScene = ExtResource("7_rt2xm")
-
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("9_dyk6q")
-playerHandPath = NodePath("../PlayerHand")
-playerTablePath = NodePath("../PlayerTable")
 buttonPath = NodePath("../ThrowButton")
-
-[node name="PlayerTable" type="Node2D" parent="."]
-script = ExtResource("10_dyk6q")
 cardScene = ExtResource("7_rt2xm")
 
 [node name="ThrowButton" parent="." instance=ExtResource("11_ivp4u")]
@@ -6164,3 +6154,5 @@ offset_left = 351.0
 offset_top = 8.03207
 offset_right = 351.0
 offset_bottom = 8.03207
+
+[node name="SkillCheck" parent="." instance=ExtResource("10_dyk6q")]

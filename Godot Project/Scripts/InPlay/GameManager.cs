@@ -1,15 +1,19 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class GameManager : Node2D {
-	[Export] public NodePath playerHandPath;
-	[Export] public NodePath playerTablePath;
 	[Export] public NodePath buttonPath;
+	[Export] public PackedScene cardScene;
 	
 	private CardHandContainer playerHand;
-	private CardTableContainer playerTable;
+	private CardHandContainer enemyHand;
+	private CardTableContainer table;
+	
 	private ThrowButton throwButton;
+	
+	private Agent agent;
 	
 	private bool allowThrow = false;
 	
@@ -30,53 +34,99 @@ public partial class GameManager : Node2D {
 
 	public override void _Ready() {
 		throwButton = GetNode<ThrowButton>(buttonPath);
-		throwToggle(false);
-		throwButton.Connect(ThrowButton.SignalName.Pressed, new Callable(this, nameof(throwCard)));
+		ThrowToggle(false);
+		throwButton.Connect(ThrowButton.SignalName.Pressed, new Callable(this, nameof(ThrowCard)));
 		
-		playerHand = GetNode<CardHandContainer>(playerHandPath);
-		playerTable = GetNode<CardTableContainer>(playerTablePath);
+		playerHand = new CardHandContainer();
+		enemyHand = new CardHandContainer();
+		table = new CardTableContainer();
 		
-		playerHand.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(updateActivePlayerHand)));
-		playerTable.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(updateActivePlayerTable)));
+		AddChild(playerHand);
+		AddChild(enemyHand);
+		AddChild(table);
+		
+		playerHand.Init(cardScene, 175, true);
+		table.Init(cardScene, 100);
+		enemyHand.Init(cardScene, -50, false);
+		
+		playerHand.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivePlayerHand)));
+		table.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivetable)));
+		
+		agent = new Agent0();
+		agent.Init();
 	}
 	
-	public void throwToggle(bool active) {
-		bool res = active && playerTable.activeCard != null && playerHand.activeCard != null;
+	public void ThrowToggle(bool active) {
+		bool res = active && table.activeCard != null && playerHand.activeCard != null;
 		if (!active && allowThrow) {
 			playerHand.RemoveCard(playerHand.activeCard);
-			playerTable.activeCard.locked = false;
-			playerTable.activeCard.Unhighlight();
-			playerTable.activeCard = playerHand.activeCard = null;
+			table.activeCard.locked = false;
+			table.activeCard.Unhighlight();
+			table.activeCard = playerHand.activeCard = null;
 		}
 		allowThrow = res;
 		throwButton.Disabled = !res;
 		throwButton.Modulate = res ? Colors.White : new Color(1, 1, 1, 0.4f);
 	}
 	
-	public void updateActivePlayerHand(Card card) {
+	public void UpdateActivePlayerHand(Card card) {
 		playerHand.activeCard = card;
-		throwToggle(true);
+		ThrowToggle(true);
 	}
 	
-	public void updateActivePlayerTable(Card card) {
-		playerTable.activeCard = card;
-		throwToggle(true);
+	public void UpdateActivetable(Card card) {
+		table.activeCard = card;
+		ThrowToggle(true);
 	}
 	
-	private void throwCard() {
+	private void ThrowCard() {
 		if (!allowThrow) return;
-		int throwingCard = TypeMap[playerHand.activeCard.type];
-		int tableCard = TypeMap[playerTable.activeCard.type];
-		double threshold = FlipProb[FlipRank[throwingCard][tableCard]];
 		double rnd = rand.NextDouble();
+		
+		// player turn
+		int throwingCardType = TypeMap[playerHand.activeCard.type];
+		int tableCardType = TypeMap[table.activeCard.type];
+		double threshold = FlipProb[FlipRank[throwingCardType][tableCardType]];
 		if (rnd < threshold) {
-			playerTable.activeCard.Reveal();
+			table.activeCard.Flip();
 		}
-		throwToggle(false);
+		
+		ThrowToggle(false);
+		
+		// agent turn
+		
+		var (throwingCard, tableCardIdx) = agent.Move(enemyHand.GetCards());
+		Card tableCard = table.GetEnemyCards()[tableCardIdx];
+		throwingCardType = TypeMap[throwingCard.type];
+		tableCardType = TypeMap[tableCard.type];
+		threshold = FlipProb[FlipRank[throwingCardType][tableCardType]];
+		
+		List<int> indices = new List<int>();
+		List<int> types = new List<int>();
+		
+		if (rnd < threshold) {
+			tableCard.Flip();
+			indices.Add(tableCardIdx);
+			indices.Add(tableCardType);
+		}
+		agent.Backward(indices, types);
+		enemyHand.RemoveCard(throwingCard);
+		
+		// round end
 		
 		round++;
-		if (round > playerHand.numCards) {
+		int playerCount = table.GetPlayerCards().Count(card => card.visible);
+		int enemyCount = table.GetEnemyCards().Count(card => card.visible);
+		
+		if (round > playerHand.numCards || playerCount == 6 || enemyCount == 6) {
 			GD.Print("game over");
+			if (playerCount > enemyCount) {
+				GD.Print("player wins");
+			} else if (playerCount < enemyCount) {
+				GD.Print("enemy wins");
+			} else {
+				GD.Print("tie");
+			}
 		}
 	}
 }
