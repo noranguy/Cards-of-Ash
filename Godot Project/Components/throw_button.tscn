@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://khvh2k3e3644"]
+
+[ext_resource type="Script" uid="uid://ctdqs70a3a6ii" path="res://Scripts/InPlay/ThrowButton.cs" id="1_43frs"]
+[ext_resource type="Texture2D" uid="uid://c37kylsjn3iyu" path="res://Assets/In Play Safe House/throw_button.png" id="1_axaln"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oiqi6"]
+radius = 47.0
+
+[node name="ThrowButton" type="TextureButton"]
+script = ExtResource("1_43frs")
+
+[node name="ThrowImage" type="Sprite2D" parent="."]
+z_index = 5
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_axaln")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_oiqi6")
+
+[connection signal="input_event" from="Area2D" to="." method="OnInputEvent"]
