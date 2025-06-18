@@ -72,12 +72,9 @@ public partial class GameManager : Node2D
 		int tableCard = TypeMap[playerTable.activeCard.type];
 		double threshold = FlipProb[FlipRank[throwingCard][tableCard]];
 		double rnd = rand.NextDouble();
-		GD.Print($"{rnd} {threshold}");
 		if (rnd < threshold) {
-			GD.Print("flipped");
 			playerTable.activeCard.Reveal();
 		} else {
-			GD.Print("not flipped");
 		}
 		throwToggle(false);
 		
