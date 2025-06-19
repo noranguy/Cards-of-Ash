@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://b2qhw5t3p15oj"]
+[gd_scene load_steps=28 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dvcyqsod6xw1g" path="res://Assets/In Play Safe House/side wall tile sheet.png" id="2_lkv0k"]
 [ext_resource type="Texture2D" uid="uid://i0shetx0bao8" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_D.png" id="2_tbg62"]
 [ext_resource type="Texture2D" uid="uid://bda3h4vm2eoh" path="res://Assets/In Play Safe House/pixilart-drawing (5).png" id="5_k3y4v"]
+[ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
+[ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
+[ext_resource type="PackedScene" uid="uid://bwvm0huvpcf0u" path="res://Components/skill_check.tscn" id="10_dyk6q"]
+[ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
@@ -6085,8 +6089,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [node name="InPlaySafehouse" type="Node2D"]
+scale = Vector2(1, 0.996007)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(0.929683, 6.10036)
+zoom = Vector2(1.4, 1.4)
 
 [node name="TileMap2" type="TileMap" parent="."]
 modulate = Color(0.376658, 0.376658, 0.376658, 1)
@@ -6122,7 +6129,6 @@ tile_map_data = PackedByteArray("AAD9//3/AAABAAIAAAD+//3/AAABAAIAAAD+//7/AAABAAA
 tile_set = SubResource("TileSet_f7naq")
 
 [node name="Side wall layer 2" type="TileMapLayer" parent="TileMap"]
-scale = Vector2(1, 1)
 tile_map_data = PackedByteArray("AAAEAAIAAAAFAAEAAAAEAAAAAAAFAAUAAAAEAAEAAAAFAAYAAAAEAP//AAAFAAQAAAAEAP7/AAAFAAQAAAD7//7/AAAFAAIAAAD7////AAABAAEAAAD7/wAAAAAEAAEAAAD7/wIAAAAFAAEAAAD7/wEAAAAEAAEAAAD7//3/AAAFAAEAAAAEAP3/AAAFAAEAAAD6//z/AAAFAAEAAAD6//3/AAAFAAAAAAD6//7/AAAFAAEAAAD6////AAAFAAAAAAD6/wAAAAAFAAAAAAD6/wEAAAAFAAEAAAD6/wIAAAAFAAIAAAD6/wMAAAAFAAEAAAAFAPz/AAAFAAEAAAAFAP3/AAAEAAQAAAAFAP7/AAAEAAUAAAAFAP//AAAFAAQAAAAFAAAAAAAEAAUAAAAFAAEAAAAFAAUAAAAFAAIAAAAGAAQAAAAFAAMAAAAFAAEAAAD5//z/AAAGAAIAAAD5//3/AAAGAAIAAAD5//7/AAAFAAIAAAD5////AAAEAAIAAAD5/wAAAAAFAAIAAAD5/wEAAAAEAAEAAAD5/wIAAAAEAAIAAAD5/wMAAAAGAAEAAAAGAPz/AAAEAAQAAAAGAP3/AAAFAAYAAAAGAP7/AAAEAAQAAAAGAP//AAAEAAUAAAAGAAAAAAAEAAQAAAAGAAEAAAAGAAUAAAAGAAIAAAAEAAUAAAAGAAMAAAAEAAUAAAD7//z/AAAEAAIAAAAEAPz/AAAGAAQAAAA=")
 tile_set = SubResource("TileSet_a7hbh")
 
@@ -6131,8 +6137,22 @@ color = Color(0.841499, 0.724029, 0.610333, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-13, 195)
-scale = Vector2(11.109, 12.305)
+scale = Vector2(11.109, 12.2075)
 color = Color(0.741176, 0.592157, 0, 1)
 shadow_enabled = true
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_rt2xm")
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("9_dyk6q")
+buttonPath = NodePath("../ThrowButton")
+cardScene = ExtResource("7_rt2xm")
+
+[node name="ThrowButton" parent="." instance=ExtResource("11_ivp4u")]
+z_index = 10
+offset_left = 351.0
+offset_top = 8.03207
+offset_right = 351.0
+offset_bottom = 8.03207
+
+[node name="SkillCheck" parent="." instance=ExtResource("10_dyk6q")]
