@@ -97,6 +97,7 @@ text = "New Game
 "
 
 [node name="Load Game" type="Button" parent="ButtonContainer/ButtonBox"]
+visible = false
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 10
@@ -109,6 +110,7 @@ text = "Load Game
 "
 
 [node name="Settings" type="TextureButton" parent="ButtonContainer/ButtonBox"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("2_4gxqj")
