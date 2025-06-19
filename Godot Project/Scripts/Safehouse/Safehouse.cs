@@ -38,7 +38,6 @@ public partial class Safehouse : StaticBody2D
 		// If the player is trying to interact with something
 		if (Input.IsActionJustPressed("interact"))
 		{
-			GD.Print("Mreow");
 
 			// If the player is in an interactable area, then show the prompt for that object
 			if (_at_table)
@@ -99,6 +98,11 @@ public partial class Safehouse : StaticBody2D
 
 	// Start Menko Game
 	void _on_start_game_pressed()
+	{
+		GetNode<AnimationPlayer>("FadeToBlack/AnimationPlayer").Play("fade_to_black");
+	}
+
+	void _on_animation_player_animation_finished(StringName anim_name)
 	{
 		GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("menko_game.tscn");
 	}

@@ -22,7 +22,6 @@ public partial class PlayerCharacter : CharacterBody2D
 		// If the player is trying to interact with something
 		if (Input.IsActionJustPressed("interact"))
 		{
-			GD.Print("Mreow");
 			// If they were in an interactable area, then they are now in a prompt screen and shouldnt be able to move
 			if (_in_area)
 			{
