@@ -11,10 +11,11 @@ script = ExtResource("1_43frs")
 
 [node name="ThrowImage" type="Sprite2D" parent="."]
 z_index = 5
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_axaln")
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_oiqi6")
