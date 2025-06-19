@@ -17,13 +17,15 @@ public partial class GameManager : Node2D {
 	
 	private bool allowThrow = false;
 	
+	static readonly float ySpacing = 40;
+	static readonly float yStart = 85;
 	static readonly int[][] FlipRank = new int[][] {
 		new int[]{1, 0, 2},
 		new int[]{2, 1, 0},
 		new int[]{0, 2, 1}
 	};
 	static readonly double[] FlipProb = new double[]{0.1, 0.5, 0.9};
-	private Random rand = new Random();
+	static readonly Random Rand = new Random();
 	static readonly Dictionary<string, int> TypeMap = new() {
 		{ "light", 0 },
 		{ "regular", 1 },
@@ -45,9 +47,9 @@ public partial class GameManager : Node2D {
 		AddChild(enemyHand);
 		AddChild(table);
 		
-		playerHand.Init(cardScene, 175, true);
-		table.Init(cardScene, 100);
-		enemyHand.Init(cardScene, -50, false);
+		enemyHand.Init(cardScene, yStart, false);
+		table.Init(cardScene, yStart + ySpacing, yStart + ySpacing * 2);
+		playerHand.Init(cardScene, yStart + ySpacing * 3, true);
 		
 		playerHand.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivePlayerHand)));
 		table.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivetable)));
@@ -79,19 +81,21 @@ public partial class GameManager : Node2D {
 		ThrowToggle(true);
 	}
 	
-	private void ThrowCard() {
+	private async void ThrowCard() {
 		if (!allowThrow) return;
-		double rnd = rand.NextDouble();
+		double rnd = Rand.NextDouble();
 		
 		// player turn
 		int throwingCardType = TypeMap[playerHand.activeCard.type];
 		int tableCardType = TypeMap[table.activeCard.type];
-		double threshold = FlipProb[FlipRank[throwingCardType][tableCardType]];
+		double threshold = FlipProb[FlipRank[throwingCardType][tableCardType]] * table.activeCard.durability;
 		if (rnd < threshold) {
 			table.activeCard.Flip();
+			table.activeCard.durability -= 0.2;
 		}
 		
 		ThrowToggle(false);
+		await ToSignal(GetTree().CreateTimer(1), "timeout");
 		
 		// agent turn
 		
@@ -99,7 +103,7 @@ public partial class GameManager : Node2D {
 		Card tableCard = table.GetEnemyCards()[tableCardIdx];
 		throwingCardType = TypeMap[throwingCard.type];
 		tableCardType = TypeMap[tableCard.type];
-		threshold = FlipProb[FlipRank[throwingCardType][tableCardType]];
+		threshold = FlipProb[FlipRank[throwingCardType][tableCardType]] * tableCard.durability;
 		
 		List<int> indices = new List<int>();
 		List<int> types = new List<int>();
@@ -108,6 +112,7 @@ public partial class GameManager : Node2D {
 			tableCard.Flip();
 			indices.Add(tableCardIdx);
 			indices.Add(tableCardType);
+			tableCard.durability -= 0.2;
 		}
 		agent.Backward(indices, types);
 		enemyHand.RemoveCard(throwingCard);

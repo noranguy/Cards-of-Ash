@@ -9,6 +9,7 @@ public partial class Card : Node2D {
 	public bool visible;
 	public bool isHand;
 	public bool isPlayer;
+	public double durability = 1;
 	public string type;
 	private Sprite2D sprite;
 	

@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bda3h4vm2eoh" path="res://Assets/In Play Safe House/pixilart-drawing (5).png" id="5_k3y4v"]
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
-[ext_resource type="PackedScene" uid="uid://bwvm0huvpcf0u" path="res://Components/skill_check.tscn" id="10_dyk6q"]
+[ext_resource type="PackedScene" uid="uid://sxw0q4lb7cdt" path="res://Components/skill_check.tscn" id="10_dyk6q"]
 [ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
@@ -6093,7 +6093,6 @@ scale = Vector2(1, 0.996007)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.929683, 6.10036)
-zoom = Vector2(1.4, 1.4)
 
 [node name="TileMap2" type="TileMap" parent="."]
 modulate = Color(0.376658, 0.376658, 0.376658, 1)

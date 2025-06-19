@@ -8,8 +8,8 @@ public partial class CardContainer : Node2D {
 
 	public PackedScene cardScene;
 	public Card activeCard = null;
-	protected float spacing = 10f;
-	protected float cardWidth = 50f;
+	protected float spacing = 5f;
+	protected float cardWidth = 25f;
 	
 	public virtual int[] GenerateTypeOrder(int n) {
 		int[] types = new int[n];

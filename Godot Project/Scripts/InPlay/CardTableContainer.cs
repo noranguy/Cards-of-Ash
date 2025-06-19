@@ -7,10 +7,10 @@ public partial class CardTableContainer : CardContainer {
 	protected List<Card> enemyCards = new();
 	public readonly int numCards = 6;
 	
-	public void Init(PackedScene scene, float y) {
+	public void Init(PackedScene scene, float y, float y2) {
 		cardScene = scene;
-		SpawnInitialCards(playerCards, numCards, y, true);
-		SpawnInitialCards(enemyCards, numCards, y-75, false);
+		SpawnInitialCards(enemyCards, numCards, y, false);
+		SpawnInitialCards(playerCards, numCards, y2, true);
 	}
 	
 	public virtual void SpawnInitialCards(List<Card> cards, int count, float y, bool isPlayer) {
