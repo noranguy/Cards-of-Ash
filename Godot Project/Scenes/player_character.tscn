@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://r1ojrlcpekmu"]
+
+[ext_resource type="Script" uid="uid://beukuavcuqka2" path="res://Scripts/Safehouse/PlayerCharacter.cs" id="1_cmdk4"]
+[ext_resource type="Texture2D" uid="uid://brlges6uriop6" path="res://Assets/main character mini sprite.png" id="1_qcwfp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmdk4"]
+size = Vector2(16.5, 16.5)
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+script = ExtResource("1_cmdk4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.596, 1.5)
+texture = ExtResource("1_qcwfp")
+offset = Vector2(16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 5
+visibility_layer = 2
+position = Vector2(25.625, 36.375)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_cmdk4")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(26, 26)
+target_position = Vector2(0, 37)
+collision_mask = 5
+collide_with_areas = true
