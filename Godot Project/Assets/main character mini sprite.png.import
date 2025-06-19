@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6hpx6nadp45w"
-path="res://.godot/imported/Scene Overview.png-f753762444f1cd132496f21635143b29.ctex"
+uid="uid://brlges6uriop6"
+path="res://.godot/imported/main character mini sprite.png-fcd58af8d678203511605ef7510ec989.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Scene Overview.png"
-dest_files=["res://.godot/imported/Scene Overview.png-f753762444f1cd132496f21635143b29.ctex"]
+source_file="res://Assets/main character mini sprite.png"
+dest_files=["res://.godot/imported/main character mini sprite.png-fcd58af8d678203511605ef7510ec989.ctex"]
 
 [params]
 
