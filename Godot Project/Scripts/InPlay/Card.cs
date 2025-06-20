@@ -36,7 +36,7 @@ public partial class Card : Node2D {
 			var texture = GD.Load<Texture2D>($"res://Assets/Cards/{type}_{clas}.png");
 			sprite.Texture = texture;
 		} else {
-			var texture = GD.Load<Texture2D>($"res://Assets/Cards/back.png");
+			var texture = GD.Load<Texture2D>($"res://Assets/Cards/{(isPlayer ? "player" : "enemy")}_back.png");
 			sprite.Texture = texture;
 		}
 	}
