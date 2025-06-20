@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=29 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -6088,6 +6088,28 @@ gradient = SubResource("Gradient_k3y4v")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="FontFile" id="FontFile_dyk6q"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/5/0/ascent = 0.0
+cache/0/5/0/descent = 0.0
+cache/0/5/0/underline_position = 0.0
+cache/0/5/0/underline_thickness = 0.0
+cache/0/5/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+
 [node name="InPlaySafehouse" type="Node2D"]
 scale = Vector2(1, 0.996007)
 
@@ -6144,7 +6166,6 @@ texture = SubResource("GradientTexture2D_rt2xm")
 
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("9_dyk6q")
-buttonPath = NodePath("../ThrowButton")
 cardScene = ExtResource("7_rt2xm")
 
 [node name="ThrowButton" parent="." instance=ExtResource("11_ivp4u")]
@@ -6155,3 +6176,15 @@ offset_right = 351.0
 offset_bottom = 8.03207
 
 [node name="SkillCheck" parent="." instance=ExtResource("10_dyk6q")]
+
+[node name="ResultLabel" type="Label" parent="."]
+z_index = 10
+custom_minimum_size = Vector2(840, 100)
+offset_left = -420.0
+offset_top = -222.89
+offset_right = 420.0
+offset_bottom = -122.89
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontFile_dyk6q")
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1

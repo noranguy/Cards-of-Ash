@@ -147,7 +147,6 @@ public class Agent1 : Agent {
 	}
 	
 	public override (Card, Card) Move() {
-		Card card;
 		switch (round) {
 			case 0:
 				last = GlobalState.Instance.TypeMap[hand[^1].type];

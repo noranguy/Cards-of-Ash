@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 public partial class GameManager : Node2D {
-	[Export] public NodePath buttonPath;
 	[Export] public PackedScene cardScene;
 	
 	private CardHandContainer playerHand;
@@ -12,6 +11,7 @@ public partial class GameManager : Node2D {
 	private CardTableContainer table;
 	
 	private ThrowButton throwButton;
+	private Label resultLabel;
 	
 	private Agent enemy;
 	
@@ -29,7 +29,10 @@ public partial class GameManager : Node2D {
 	int round = 1;
 
 	public override void _Ready() {
-		throwButton = GetNode<ThrowButton>(buttonPath);
+		resultLabel = GetParent().GetNode<Label>("ResultLabel");
+		resultLabel.Text = "";
+		
+		throwButton = GetParent().GetNode<ThrowButton>("ThrowButton");
 		ThrowToggle(false);
 		throwButton.Connect(ThrowButton.SignalName.Pressed, new Callable(this, nameof(Round)));
 		
@@ -136,20 +139,22 @@ public partial class GameManager : Node2D {
 		enemy.Backward();
 		enemyHand.RemoveCard(throwingCard);
 		
+		await ToSignal(GetTree().CreateTimer(1), "timeout");
+		
 		// round end
 		round++;
 		int playerCount = table.GetPlayerCards().Count(card => card.visible);
 		int enemyCount = table.GetEnemyCards().Count(card => card.visible);
 		
 		if (round > playerHand.numCards || playerCount == 6 || enemyCount == 6) {
-			GD.Print("game over");
 			if (playerCount > enemyCount) {
-				GD.Print("player wins");
+				resultLabel.Text = "You Win";
 			} else if (playerCount < enemyCount) {
-				GD.Print("enemy wins");
+				resultLabel.Text = "You Lose";
 			} else {
-				GD.Print("tie");
+				resultLabel.Text = "Tie";
 			}
+			await ToSignal(GetTree().CreateTimer(3), "timeout");
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		}
 	}
