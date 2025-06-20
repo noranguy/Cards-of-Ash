@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0sf07000i2oo"
-path="res://.godot/imported/back.png-90b5b81d7fac10ea6574e3cf9899089f.ctex"
+uid="uid://dyd5h2i1q3id8"
+path="res://.godot/imported/volcano_ceramic.png-52044ca3697ee4af47d8af675db07506.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/back.png"
-dest_files=["res://.godot/imported/back.png-90b5b81d7fac10ea6574e3cf9899089f.ctex"]
+source_file="res://Assets/Cards/volcano_ceramic.png"
+dest_files=["res://.godot/imported/volcano_ceramic.png-52044ca3697ee4af47d8af675db07506.ctex"]
 
 [params]
 

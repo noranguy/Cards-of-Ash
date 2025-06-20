@@ -8,24 +8,9 @@ public partial class CardContainer : Node2D {
 
 	public PackedScene cardScene;
 	public Card activeCard = null;
+	public bool allowActive = true;
 	protected float spacing = 5f;
 	protected float cardWidth = 25f;
-	
-	public virtual int[] GenerateTypeOrder(int n) {
-		int[] types = new int[n];
-		
-		for (int i = 0; i < n; i++) {
-			types[i] = i % 3;
-		}
-		
-		Random rand = new Random();
-		for (int i = n-1; i > 0; i--) {
-			int j = rand.Next(i+1);
-			(types[i], types[j]) = (types[j], types[i]);
-		}
-		
-		return types;
-	}
 	
 	public virtual void UpdateCardPositions(List<Card> cards, float startX, float y, float width) {
 		for (int i = 0; i < cards.Count; i++) {
@@ -35,7 +20,7 @@ public partial class CardContainer : Node2D {
 	}
 	
 	public virtual void OnCardClicked(Card card) {
-		if (activeCard == card) {
+		if (activeCard == card || !allowActive) {
 			return;
 		}
 		if (activeCard != null) {

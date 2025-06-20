@@ -7,34 +7,36 @@ public partial class Card : Node2D {
 	
 	public bool locked = false;
 	public bool visible;
-	public bool isHand;
 	public bool isPlayer;
 	public double durability = 1;
 	public string type;
+	public string clas;
+	public int index;
 	private Sprite2D sprite;
 	
 	public override void _Ready() {
 		sprite = GetNode<Sprite2D>("CardImage");
 	}
 	
-	public void Init(string cardType, bool cardVisible, bool cardIsHand, bool cardIsPlayer) {
+	public void Init(string type, string clas, bool visible, bool isPlayer, int index) {
 		if (sprite == null) {
 			sprite = GetNode<Sprite2D>("CardImage");
 		}
-		type = cardType;
-		visible = cardVisible;
-		isHand = cardIsHand;
-		isPlayer = cardIsPlayer;
+		this.type = type;
+		this.clas = clas;
+		this.visible = visible;
+		this.isPlayer = isPlayer;
+		this.index = index;
 		
 		UpdateTexture();
 	}
 	
 	public void UpdateTexture() {
 		if (visible) {
-			var texture = GD.Load<Texture2D>($"res://Assets/Cards/{type}.png");
+			var texture = GD.Load<Texture2D>($"res://Assets/Cards/{type}_{clas}.png");
 			sprite.Texture = texture;
 		} else {
-			var texture = GD.Load<Texture2D>($"res://Assets/Cards/back.png");
+			var texture = GD.Load<Texture2D>($"res://Assets/Cards/{(isPlayer ? "player" : "enemy")}_back.png");
 			sprite.Texture = texture;
 		}
 	}
@@ -55,6 +57,7 @@ public partial class Card : Node2D {
 	}
 	
 	public void Highlight() {
+		if (index == -1 && !isPlayer) return;
 		var sprite = GetNode<Sprite2D>("CardImage");
 		Shader shader = GD.Load<Shader>("res://Shaders/card_highlight.gdshader");
 		ShaderMaterial mat = new ShaderMaterial { Shader = shader };
@@ -62,7 +65,7 @@ public partial class Card : Node2D {
 	}
 	
 	public void Unhighlight() {
-		if (!locked) {
+		if ((index != -1 || isPlayer) && !locked) {
 			var sprite = GetNode<Sprite2D>("CardImage");
 			sprite.Material = null;
 		}

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0sf07000i2oo"
-path="res://.godot/imported/back.png-90b5b81d7fac10ea6574e3cf9899089f.ctex"
+uid="uid://bmijf1qhnrl8y"
+path="res://.godot/imported/tsunami_ceramic.png-c9ee84995e4c46447b4b93b3a2631997.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/back.png"
-dest_files=["res://.godot/imported/back.png-90b5b81d7fac10ea6574e3cf9899089f.ctex"]
+source_file="res://Assets/Cards/tsunami_ceramic.png"
+dest_files=["res://.godot/imported/tsunami_ceramic.png-c9ee84995e4c46447b4b93b3a2631997.ctex"]
 
 [params]
 
