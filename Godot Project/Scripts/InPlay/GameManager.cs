@@ -13,9 +13,9 @@ public partial class GameManager : Node2D {
 	
 	private ThrowButton throwButton;
 	
-	private Agent agent;
+	private Agent enemy;
 	
-	private bool allowThrow = false;
+	private bool allowThrow = false;	
 	
 	static readonly float ySpacing = 40;
 	static readonly float yStart = 85;
@@ -24,20 +24,14 @@ public partial class GameManager : Node2D {
 		new int[]{2, 1, 0},
 		new int[]{0, 2, 1}
 	};
-	static readonly double[] FlipProb = new double[]{0.1, 0.5, 0.9};
 	static readonly Random Rand = new Random();
-	static readonly Dictionary<string, int> TypeMap = new() {
-		{ "light", 0 },
-		{ "regular", 1 },
-		{ "heavy", 2 }
-	};
 	
 	int round = 1;
 
 	public override void _Ready() {
 		throwButton = GetNode<ThrowButton>(buttonPath);
 		ThrowToggle(false);
-		throwButton.Connect(ThrowButton.SignalName.Pressed, new Callable(this, nameof(ThrowCard)));
+		throwButton.Connect(ThrowButton.SignalName.Pressed, new Callable(this, nameof(Round)));
 		
 		playerHand = new CardHandContainer();
 		enemyHand = new CardHandContainer();
@@ -47,15 +41,22 @@ public partial class GameManager : Node2D {
 		AddChild(enemyHand);
 		AddChild(table);
 		
-		enemyHand.Init(cardScene, yStart, false);
-		table.Init(cardScene, yStart + ySpacing, yStart + ySpacing * 2);
-		playerHand.Init(cardScene, yStart + ySpacing * 3, true);
+		enemy = GlobalState.Instance.GetNextAgent();
+		
+		var (enemyHandTypes, enemyHandClasses) = enemy.GetHandCards();
+		var (enemyTableTypes, enemyTableClasses) = enemy.GetTableCards();
+		var (playerHandTypes, playerHandClasses) = GlobalState.Instance.GetHandCards();
+		var (playerTableTypes, playerTableClasses) = GlobalState.Instance.GetTableCards();
+		
+		enemyHand.Init(cardScene, yStart, false, enemyHandTypes, enemyHandClasses);
+		table.Init(cardScene, playerTableTypes, playerTableClasses, enemyTableTypes,
+		enemyTableClasses, yStart + ySpacing * 2, yStart + ySpacing);
+		playerHand.Init(cardScene, yStart + ySpacing * 3, true, playerHandTypes, playerHandClasses);
+		
+		enemy.Init(enemyHand.GetCards(), table.GetPlayerCards(), table.GetEnemyCards());
 		
 		playerHand.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivePlayerHand)));
 		table.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivetable)));
-		
-		agent = new Agent0();
-		agent.Init();
 	}
 	
 	public void ThrowToggle(bool active) {
@@ -81,44 +82,61 @@ public partial class GameManager : Node2D {
 		ThrowToggle(true);
 	}
 	
-	private async void ThrowCard() {
+	private void ThrowCard(Card throwingCard, List<Card> tableCards) {
+		int throwingCardType = GlobalState.Instance.TypeMap[throwingCard.type];
+		int tableCardType;
+		double threshold;
+		double rnd;
+		List<Card> active = tableCards[0].isPlayer ? table.GetPlayerCards() : table.GetEnemyCards();
+		
+		if (throwingCard.clas == "ceramic") {
+			if (tableCards[0].index > 0) {
+				tableCards.Add(active[tableCards[0].index - 1]);
+			}
+			if (tableCards[0].index < 5) {
+				tableCards.Add(active[tableCards[0].index + 1]);
+			}
+		}
+		
+		for (int i = 0; i < tableCards.Count; i++) {
+			tableCardType = GlobalState.Instance.TypeMap[tableCards[i].type];
+			threshold = GlobalState.Instance.FlipProb[FlipRank[throwingCardType][tableCardType]] * tableCards[i].durability;
+			rnd = Rand.NextDouble();
+			
+			if (i != 0) threshold *= 0.25;
+			
+			if (rnd < threshold) {
+				tableCards[i].Flip();
+				tableCards[i].durability -= 0.2;
+				
+				if (tableCards[i].clas == "ceramic") {
+					if (tableCards[i].index > 0) {
+						active[tableCards[i].index - 1].durability -= 0.2;
+					}
+					if (tableCards[i].index < 5) {
+						active[tableCards[i].index + 1].durability -= 0.2;
+					}
+				}
+			}
+		}
+	}
+	
+	private async void Round() {
 		if (!allowThrow) return;
-		double rnd = Rand.NextDouble();
 		
 		// player turn
-		int throwingCardType = TypeMap[playerHand.activeCard.type];
-		int tableCardType = TypeMap[table.activeCard.type];
-		double threshold = FlipProb[FlipRank[throwingCardType][tableCardType]] * table.activeCard.durability;
-		if (rnd < threshold) {
-			table.activeCard.Flip();
-			table.activeCard.durability -= 0.2;
-		}
-		
+		ThrowCard(playerHand.activeCard, new List<Card> {table.activeCard});		
 		ThrowToggle(false);
+		
 		await ToSignal(GetTree().CreateTimer(1), "timeout");
 		
-		// agent turn
-		
-		var (throwingCard, tableCardIdx) = agent.Move(enemyHand.GetCards());
-		Card tableCard = table.GetEnemyCards()[tableCardIdx];
-		throwingCardType = TypeMap[throwingCard.type];
-		tableCardType = TypeMap[tableCard.type];
-		threshold = FlipProb[FlipRank[throwingCardType][tableCardType]] * tableCard.durability;
-		
-		List<int> indices = new List<int>();
-		List<int> types = new List<int>();
-		
-		if (rnd < threshold) {
-			tableCard.Flip();
-			indices.Add(tableCardIdx);
-			indices.Add(tableCardType);
-			tableCard.durability -= 0.2;
-		}
-		agent.Backward(indices, types);
+		// enemy turn
+		var (throwingCard, tableCard) = enemy.Move();
+		ThrowCard(throwingCard, new List<Card> {tableCard});
+		enemy.Backward();
 		enemyHand.RemoveCard(throwingCard);
 		
 		// round end
-		
 		round++;
 		int playerCount = table.GetPlayerCards().Count(card => card.visible);
 		int enemyCount = table.GetEnemyCards().Count(card => card.visible);
@@ -132,6 +150,7 @@ public partial class GameManager : Node2D {
 			} else {
 				GD.Print("tie");
 			}
+			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		}
 	}
 }

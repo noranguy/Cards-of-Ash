@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnhe4fr21bwyc"]
 
 [ext_resource type="Script" uid="uid://dlts6ho2douea" path="res://Scripts/InPlay/Card.cs" id="1_rjlel"]
-[ext_resource type="Texture2D" uid="uid://ds8745q1ylnhs" path="res://Assets/Cards/regular.png" id="2_6gulv"]
+[ext_resource type="Texture2D" uid="uid://1ivdonv17ahd" path="res://Assets/Cards/earthquake_basic.png" id="2_6gulv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rjlel"]
-size = Vector2(158, 240)
+size = Vector2(32, 48)
 
 [node name="Card" type="Node2D"]
 z_index = 10
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_rjlel")
 
 [node name="CardImage" type="Sprite2D" parent="."]
@@ -18,7 +18,6 @@ texture = ExtResource("2_6gulv")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_rjlel")
 
 [connection signal="input_event" from="Area2D" to="." method="OnInputEvent"]

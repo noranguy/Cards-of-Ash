@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://q0myjrg8g6h"]
+
+[ext_resource type="Script" uid="uid://eaeee1vvinvi" path="res://Scripts/DialogueManager.cs" id="1_6rt2l"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_6rt2l")
+
+[node name="DialoguePanel" type="Panel" parent="."]
+offset_right = 251.0
+offset_bottom = 112.0
+
+[node name="DialogueText" type="Label" parent="DialoguePanel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 248.0
+offset_bottom = 54.0
+
+[node name="OptionsContainer" type="VBoxContainer" parent="DialoguePanel"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 64.0
+offset_right = 250.0
+offset_bottom = 111.0

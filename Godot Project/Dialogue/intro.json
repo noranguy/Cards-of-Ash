@@ -1,0 +1,27 @@
+[
+	{
+	  "id": "intro",
+	  "text": "Welcome to the game!",
+	  "options": [
+		{ "text": "Thanks!", "next": "greeting_response" },
+		{ "text": "Who are you?", "next": "ask_identity" }
+	  ]
+	},
+	{
+	  "id": "greeting_response",
+	  "text": "You're welcome!",
+	  "options": []
+	},
+	{
+	  "id": "ask_identity",
+	  "text": "I'm the guide for your journey.",
+	  "options": [
+		{ "text": "Cool.", "next": "end" }
+	  ]
+	},
+	{
+	  "id": "end",
+	  "text": "Good luck!",
+	  "options": []
+	}
+  ]
