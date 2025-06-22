@@ -49,7 +49,11 @@ public partial class GameManager : Node2D {
 		var (enemyHandTypes, enemyHandClasses) = enemy.GetHandCards();
 		var (enemyTableTypes, enemyTableClasses) = enemy.GetTableCards();
 		var (playerHandTypes, playerHandClasses) = GlobalState.Instance.GetHandCards();
-		var (playerTableTypes, playerTableClasses) = GlobalState.Instance.GetTableCards();
+		var playerTableClasses = GlobalState.Instance.GetTableClasses();
+		var playerTableTypes = new List<string> {
+			"tsunami", "volcano", "earthquake",
+			"tsunami", "volcano", "earthquake"
+		};
 		
 		enemyHand.Init(cardScene, yStart, false, enemyHandTypes, enemyHandClasses);
 		table.Init(cardScene, playerTableTypes, playerTableClasses, enemyTableTypes,
@@ -154,7 +158,8 @@ public partial class GameManager : Node2D {
 			} else {
 				resultLabel.Text = "Tie";
 			}
-			await ToSignal(GetTree().CreateTimer(3), "timeout");
+			GlobalState.Instance.NextDay();
+			await DialogueManager.Instance.StartDialogue("example");
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		}
 	}

@@ -13,6 +13,7 @@ public struct Info {
 		this.Description = Description;
 	}
 }
+
 public partial class GlobalState : Node {
 	public static GlobalState Instance { get; private set; }
 	
@@ -42,14 +43,6 @@ public partial class GlobalState : Node {
 		"basic",
 		"basic"
 	};
-	private List<string> humanTableTypes = new List<string> {
-		"tsunami",
-		"volcano",
-		"earthquake",
-		"tsunami",
-		"volcano",
-		"earthquake"
-	};
 	private List<string> humanTableClasses = new List<string> {
 		"basic",
 		"basic",
@@ -63,17 +56,16 @@ public partial class GlobalState : Node {
 		return (humanHandTypes, humanHandClasses);
 	}
 	
-	public (List<string>, List<string>) GetTableCards() {
-		return (humanTableTypes, humanTableClasses);
+	public List<string> GetTableClasses() {
+		return humanTableClasses;
 	}
 	
-	public void AddHandCard(string type, string clas) {
+	private void AddHandCard(string type, string clas) {
 		humanHandTypes.Add(type);
 		humanHandClasses.Add(clas);
 	}
 	
-	public void AddTableCard(string type, string clas) {
-		humanTableTypes.Add(type);
+	private void AddTableCard(string clas) {
 		humanTableClasses.Add(clas);
 	}
 	
@@ -115,11 +107,23 @@ Press SPACE to continue.
 	};
 	
 	public Agent GetNextAgent() {
-		return AgentFactories[day++]();
+		return AgentFactories[day]();
 	}
 	
 	public int GetDay() {
 		return day;
+	}
+	
+	public void NextDay() {
+		if (day > 0) {
+			var clas = GetInfo().Class;
+			AddHandCard("tsunami", clas);
+			AddHandCard("volcano", clas);
+			AddHandCard("earthquake", clas);
+			AddTableCard(clas);
+			AddTableCard(clas);
+		}
+		day++;
 	}
 	
 	public Info GetInfo() {

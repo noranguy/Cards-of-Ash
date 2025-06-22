@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SceneLoader="*res://Scenes/scene_loader.tscn"
 GlobalState="*res://Scripts/GlobalState.cs"
+DialogueManager="*res://Components/dialogue_manager.tscn"
 
 [dialogue_manager]
 

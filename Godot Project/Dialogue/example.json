@@ -1,27 +1,21 @@
 [
 	{
-	  "id": "intro",
-	  "text": "Welcome to the game!",
+	  "id": "start",
+	  "text": "Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome!",
 	  "options": [
-		{ "text": "Thanks!", "next": "greeting_response" },
-		{ "text": "Who are you?", "next": "ask_identity" }
+		{ "text": "A", "next": "a" }
 	  ]
 	},
 	{
-	  "id": "greeting_response",
-	  "text": "You're welcome!",
-	  "options": []
-	},
-	{
-	  "id": "ask_identity",
-	  "text": "I'm the guide for your journey.",
+	  "id": "a",
+	  "text": "AB",
 	  "options": [
-		{ "text": "Cool.", "next": "end" }
+		{ "text": "ABC", "next": "end" }
 	  ]
 	},
 	{
 	  "id": "end",
-	  "text": "Good luck!",
+	  "text": "ABCD",
 	  "options": []
 	}
   ]
