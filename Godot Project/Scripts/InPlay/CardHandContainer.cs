@@ -10,7 +10,6 @@ public partial class CardHandContainer : CardContainer {
 	public void Init(PackedScene scene, float y, bool visible, List<string> types, List<string> classes) {
 		cardScene = scene;
 		handY = y;
-		allowActive = visible;
 		SpawnCards(handY, visible, types, classes);
 	}
 

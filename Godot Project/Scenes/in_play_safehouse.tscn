@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=28 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bda3h4vm2eoh" path="res://Assets/In Play Safe House/pixilart-drawing (5).png" id="5_k3y4v"]
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
-[ext_resource type="PackedScene" uid="uid://bovfv7gcp7kdh" path="res://Components/skill_check.tscn" id="10_dyk6q"]
 [ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
@@ -6174,8 +6173,6 @@ offset_left = 351.0
 offset_top = 8.03207
 offset_right = 351.0
 offset_bottom = 8.03207
-
-[node name="SkillCheck" parent="." instance=ExtResource("10_dyk6q")]
 
 [node name="ResultLabel" type="Label" parent="."]
 z_index = 10
