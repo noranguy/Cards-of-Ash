@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform vec4 glow_color : source_color = vec4(1.0, 1.0, 0.0, 1.0);
 uniform float glow_strength = 1.5;
-uniform float glow_radius = 0.07;
+uniform float glow_radius = 0.1;
 
 void fragment() {
 	vec2 uv = UV;

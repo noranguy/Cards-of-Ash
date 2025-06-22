@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://c0aylnbakiun6"
+path="res://.godot/imported/main.dialogue-77667a1c3859e2ab8957bd5cee432340.tres"
+
+[deps]
+
+source_file="res://Dialogue/main.dialogue"
+dest_files=["res://.godot/imported/main.dialogue-77667a1c3859e2ab8957bd5cee432340.tres"]
+
+[params]
+
+defaults=true

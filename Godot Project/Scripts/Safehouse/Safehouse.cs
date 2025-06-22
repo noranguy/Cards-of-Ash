@@ -100,6 +100,6 @@ public partial class Safehouse : StaticBody2D
 	// Start Menko Game
 	void _on_start_game_pressed()
 	{
-		GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("menko_game.tscn");
+		GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("info_page.tscn");
 	}
 }

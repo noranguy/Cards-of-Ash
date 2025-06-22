@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq7syp05wybi8"]
+
+[ext_resource type="Script" uid="uid://bry0rb4f5o7ub" path="res://Scripts/Components/DialogueManager.cs" id="1_1dsj7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dsj7"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontFile" id="FontFile_6rt2l"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/2/0/ascent = 0.0
+cache/0/2/0/descent = 0.0
+cache/0/2/0/underline_position = 0.0
+cache/0/2/0/underline_thickness = 0.0
+cache/0/2/0/scale = 1.0
+cache/0/3/0/ascent = 0.0
+cache/0/3/0/descent = 0.0
+cache/0/3/0/underline_position = 0.0
+cache/0/3/0/underline_thickness = 0.0
+cache/0/3/0/scale = 1.0
+cache/0/4/0/ascent = 0.0
+cache/0/4/0/descent = 0.0
+cache/0/4/0/underline_position = 0.0
+cache/0/4/0/underline_thickness = 0.0
+cache/0/4/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/15/0/ascent = 0.0
+cache/0/15/0/descent = 0.0
+cache/0/15/0/underline_position = 0.0
+cache/0/15/0/underline_thickness = 0.0
+cache/0/15/0/scale = 1.0
+cache/0/10/0/ascent = 0.0
+cache/0/10/0/descent = 0.0
+cache/0/10/0/underline_position = 0.0
+cache/0/10/0/underline_thickness = 0.0
+cache/0/10/0/scale = 1.0
+
+[node name="DialogueManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 70.0
+offset_top = 225.0
+offset_right = 70.0
+offset_bottom = 225.0
+script = ExtResource("1_1dsj7")
+
+[node name="DialoguePanel" type="Panel" parent="."]
+offset_right = 500.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1dsj7")
+
+[node name="DialogueText" type="Label" parent="DialoguePanel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 495.0
+offset_bottom = 60.0
+theme_override_fonts/font = SubResource("FontFile_6rt2l")
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 3
+
+[node name="OptionsContainer" type="VBoxContainer" parent="DialoguePanel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 60.0
+offset_right = 495.0
+offset_bottom = 95.0

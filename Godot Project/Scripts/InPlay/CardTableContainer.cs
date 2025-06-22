@@ -1,35 +1,59 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class CardTableContainer : CardContainer {
-	protected List<Card> playerCards = new();
-	protected List<Card> enemyCards = new();
 	public readonly int numCards = 6;
 	
-	public void Init(PackedScene scene, float y, float y2) {
+	private List<Card> playerCards;
+	private List<Card> enemyCards;
+	private Random rand;
+	
+	public void Init(
+		PackedScene scene, List<string> playerTypes,
+		List<string> playerClasses,
+		List<string> enemyTypes, List<String> enemyClasses,
+		float playerY, float enemyY
+	) {
+		rand = new Random();
 		cardScene = scene;
-		SpawnInitialCards(enemyCards, numCards, y, false);
-		SpawnInitialCards(playerCards, numCards, y2, true);
+		enemyCards = SpawnCards(playerTypes, playerClasses, enemyY, false);
+		playerCards = SpawnCards(enemyTypes, enemyClasses, playerY, true);
 	}
 	
-	public virtual void SpawnInitialCards(List<Card> cards, int count, float y, bool isPlayer) {
-		string[] types = {"light", "regular", "heavy"};
-		int[] typeOrder = GenerateTypeOrder(count);
-		for (int i = 0; i < count; i++) {
+	private List<int> GenRandomOrder() {
+		List<int> order = Enumerable.Range(0, numCards).ToList();
+		
+		for (int i = numCards-1; i > 0; i--) {
+			int j = rand.Next(i+1);
+			(order[i], order[j]) = (order[j], order[i]);
+		}
+		
+		return order;
+	}
+	
+	public virtual List<Card> SpawnCards(
+		List<string> types, List<string> classes,
+		float y, bool isPlayer
+	) {
+		List<int> order = GenRandomOrder();
+		List<Card> cards = new List<Card>();
+		for (int i = 0; i < numCards; i++) {
 			Card card = cardScene.Instantiate<Card>();
 			card.Name = $"Card{i}";
 			card.Position = Vector2.Zero;
-			card.Init(types[typeOrder[i]], false, false, isPlayer);
+			card.Init(types[order[i]], classes[order[i]], false, isPlayer, i);
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 
 			AddChild(card);
 			cards.Add(card);
 		}
 
-		float totalWidth = cards.Count * cardWidth + (cards.Count - 1) * spacing;
+		float totalWidth = numCards * cardWidth + (numCards - 1) * spacing;
 		float startX = (cardWidth - totalWidth) / 2f;
 		UpdateCardPositions(cards, startX, y, totalWidth);
+		return cards;
 	}
 	
 	public List<Card> GetPlayerCards() {

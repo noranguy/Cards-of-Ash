@@ -5,22 +5,89 @@ using System.Linq;
 
 public class Agent0 : Agent {
 	private Random rand;
-	private List<int> unflippedCards;
+	private List<Card> hand;
+	private List<Card> playerTable;
+	private List<Card> enemyTable;
+	private int round;
 	
-	public override void Init() {
+	public override (List<string>, List<string>) GetHandCards() {
+		List<string> types = new List<string> {
+			"tsunami",
+			"volcano",
+			"earthquake",
+			"tsunami",
+			"volcano",
+			"earthquake",
+			"tsunami",
+			"volcano",
+			"earthquake"
+		};
+		
+		List<string> classes = new List<string> {
+			"basic",
+			"basic",
+			"basic",
+			"basic",
+			"basic",
+			"basic",
+			"basic",
+			"basic",
+			"basic"
+		};
+		
+		return (types, classes);
+	}
+	
+	public override (List<string>, List<string>) GetTableCards() {
+		List<string> types = new List<string> {
+			"tsunami",
+			"volcano",
+			"earthquake",
+			"tsunami",
+			"volcano",
+			"earthquake",
+		};
+		
+		List<string> classes = new List<string> {
+			"basic",
+			"basic",
+			"basic",
+			"basic",
+			"basic",
+			"basic"
+		};
+		
+		return (types, classes);
+	}
+	
+	public override void Init(List<Card> hand, List<Card> playerTable, List<Card> enemyTable) {
+		round = 0;
 		rand = new Random();	
-		unflippedCards = Enumerable.Range(0, 6).ToList();
+		
+		this.hand = hand;
+		this.playerTable = playerTable;
+		this.enemyTable = enemyTable;
 	}
 	
-	public override (Card, int) Move(List<Card> hand) {
+	public override (Card, Card) Move() {
 		Card throwingCard = hand[rand.Next(hand.Count)];
-		int tableCardIdx = unflippedCards[rand.Next(unflippedCards.Count)];
-		return (throwingCard, tableCardIdx);
+		
+		List<Card> flippedPlayerTable = playerTable.Where(x => x.visible).ToList();
+		List<Card> unflippedEnemyTable = enemyTable.Where(x => !x.visible).ToList();
+			
+		Card tableCard;
+		
+		if (round > 3 && round < 6 && flippedPlayerTable.Count > 0) {
+			tableCard = flippedPlayerTable[rand.Next(flippedPlayerTable.Count)];
+		} else if (unflippedEnemyTable.Count > 0) {
+			tableCard = unflippedEnemyTable[rand.Next(unflippedEnemyTable.Count)];
+		} else {
+			tableCard = playerTable[rand.Next(playerTable.Count)];
+		}
+		return (throwingCard, tableCard);
 	}
 	
-	public override void Backward(List<int> indices, List<int> types) {
-		if (indices.Count > 0) {
-			unflippedCards.Remove(indices[0]);
-		}
+	public override void Backward() {
+		round++;
 	}
 }

@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://sxw0q4lb7cdt"]
-
-[node name="SkillCheck" type="Node2D"]
-
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(9.30842, 8.58494)

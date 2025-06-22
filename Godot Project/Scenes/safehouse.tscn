@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://ompxpgyt4oah"]
+[gd_scene load_steps=13 format=3 uid="uid://bvd7sgi6dix5n"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
-[ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/player_character.tscn" id="1_qcbrc"]
+[ext_resource type="PackedScene" path="res://Scenes/player_character.tscn" id="1_qcbrc"]
 [ext_resource type="PackedScene" uid="uid://cfyc8k4gjjnmr" path="res://Scenes/out_play_safehouse.tscn" id="3_6l742"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
