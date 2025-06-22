@@ -13,9 +13,11 @@ public partial class Card : Node2D {
 	public string clas;
 	public int index;
 	private Sprite2D sprite;
-	
-	public override void _Ready() {
+
+	public override void _Ready()
+	{
 		sprite = GetNode<Sprite2D>("CardImage");
+		sprite.Scale = new Vector2(1.4f,1.4f);
 	}
 	
 	public void Init(string type, string clas, bool visible, bool isPlayer, int index) {
@@ -27,7 +29,7 @@ public partial class Card : Node2D {
 		this.visible = visible;
 		this.isPlayer = isPlayer;
 		this.index = index;
-		
+
 		UpdateTexture();
 	}
 	

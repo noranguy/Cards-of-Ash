@@ -1,14 +1,14 @@
-[gd_scene load_steps=29 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=31 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
 [ext_resource type="Texture2D" uid="uid://bo7f5l20s816i" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_E.png" id="2_a7hbh"]
 [ext_resource type="Texture2D" uid="uid://dvcyqsod6xw1g" path="res://Assets/In Play Safe House/side wall tile sheet.png" id="2_lkv0k"]
 [ext_resource type="Texture2D" uid="uid://i0shetx0bao8" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_D.png" id="2_tbg62"]
+[ext_resource type="Texture2D" uid="uid://b84suh0gqi4ti" path="res://Assets/In Play Safe House/edited table.png" id="5_dyk6q"]
 [ext_resource type="Texture2D" uid="uid://bda3h4vm2eoh" path="res://Assets/In Play Safe House/pixilart-drawing (5).png" id="5_k3y4v"]
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
-[ext_resource type="PackedScene" uid="uid://bovfv7gcp7kdh" path="res://Components/skill_check.tscn" id="10_dyk6q"]
 [ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
@@ -5973,8 +5973,52 @@ texture = ExtResource("1_uaklh")
 13:0/0 = 0
 14:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_efang"]
+texture = ExtResource("5_dyk6q")
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_f7naq"]
 sources/0 = SubResource("TileSetAtlasSource_lkv0k")
+sources/2 = SubResource("TileSetAtlasSource_efang")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dyk6q"]
 texture = ExtResource("5_k3y4v")
@@ -5988,8 +6032,52 @@ texture = ExtResource("5_k3y4v")
 1:2/0 = 0
 2:2/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_juooh"]
+texture = ExtResource("5_dyk6q")
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_ivp4u"]
 sources/0 = SubResource("TileSetAtlasSource_dyk6q")
+sources/1 = SubResource("TileSetAtlasSource_juooh")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f7naq"]
 texture = ExtResource("2_lkv0k")
@@ -6137,10 +6225,11 @@ tile_set = SubResource("TileSet_k3y4v")
 scale = Vector2(3.75, 3.75)
 tile_set = SubResource("TileSet_f7naq")
 format = 2
+layer_0/tile_data = PackedInt32Array(262138, 65538, 3, 131067, 131074, 1, 196603, 131074, 2, 262139, 131074, 3, 65532, 196610, 0, 131068, 196610, 1, 196604, 196610, 2, 262140, 196610, 3, 65533, 262146, 0, 131069, 262146, 1, 196605, 262146, 2, 262141, 262146, 3, 65534, 327682, 0, 131070, 327682, 1, 196606, 327682, 2, 262142, 327682, 3, 65535, 393218, 0, 131071, 393218, 1, 196607, 393218, 2, 262143, 393218, 3, 0, 458754, 0, 65536, 458754, 1, 131072, 458754, 2, 196608, 458754, 3, 1, 524290, 0, 65537, 524290, 1, 131073, 524290, 2, 196609, 524290, 3, 2, 589826, 0, 65538, 589826, 1, 131074, 589826, 2, 196610, 589826, 3, 3, 655362, 0, 65539, 655362, 1, 131075, 655362, 2, 196611, 655362, 3, 65540, 720898, 1, 131076, 720898, 2, 196612, 720898, 3, 196613, 786434, 3)
 
 [node name="Table" type="TileMapLayer" parent="TileMap"]
 z_index = 5
-tile_map_data = PackedByteArray("AAD7/wEAAAAAAAAAAAD6/wIAAAAAAAAAAAD5/wMAAAAAAAAAAAD6/wMAAAABAAEAAAD7/wMAAAABAAEAAAD8/wMAAAABAAEAAAD9/wMAAAABAAEAAAD+/wMAAAABAAEAAAD//wMAAAABAAEAAAAAAAMAAAABAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAACAAAAAAAFAAIAAAACAAAAAAAEAAEAAAACAAAAAAD8/wEAAAABAAAAAAD9/wEAAAABAAAAAAD+/wEAAAABAAAAAAD//wEAAAABAAAAAAAAAAEAAAABAAAAAAABAAEAAAABAAAAAAACAAEAAAABAAAAAAADAAEAAAABAAAAAAD7/wIAAAABAAEAAAD8/wIAAAABAAEAAAD9/wIAAAABAAEAAAD+/wIAAAABAAEAAAD//wIAAAABAAEAAAAAAAIAAAABAAEAAAABAAIAAAABAAEAAAACAAIAAAABAAEAAAADAAIAAAABAAEAAAAEAAIAAAABAAEAAAA=")
+tile_map_data = PackedByteArray("AAD6/wMAAQABAAMAAAD7/wEAAQACAAEAAAD7/wIAAQACAAIAAAD7/wMAAQACAAMAAAD8/wAAAQADAAAAAAD8/wEAAQADAAEAAAD8/wIAAQADAAIAAAD8/wMAAQADAAMAAAD9/wAAAQAEAAAAAAD9/wEAAQAEAAEAAAD9/wIAAQAEAAIAAAD9/wMAAQAEAAMAAAD+/wAAAQAFAAAAAAD+/wEAAQAFAAEAAAD+/wIAAQAFAAIAAAD+/wMAAQAFAAMAAAD//wAAAQAGAAAAAAD//wEAAQAGAAEAAAD//wIAAQAGAAIAAAD//wMAAQAGAAMAAAAAAAAAAQAHAAAAAAAAAAEAAQAHAAEAAAAAAAIAAQAHAAIAAAAAAAMAAQAHAAMAAAABAAAAAQAIAAAAAAABAAEAAQAIAAEAAAABAAIAAQAIAAIAAAABAAMAAQAIAAMAAAACAAAAAQAJAAAAAAACAAEAAQAJAAEAAAACAAIAAQAJAAIAAAACAAMAAQAJAAMAAAADAAAAAQAKAAAAAAADAAEAAQAKAAEAAAADAAIAAQAKAAIAAAADAAMAAQAKAAMAAAAEAAEAAQALAAEAAAAEAAIAAQALAAIAAAAEAAMAAQALAAMAAAAFAAMAAQAMAAMAAAA=")
 tile_set = SubResource("TileSet_ivp4u")
 
 [node name="Back and roof" type="TileMapLayer" parent="TileMap"]
@@ -6157,6 +6246,7 @@ tile_set = SubResource("TileSet_a7hbh")
 color = Color(0.841499, 0.724029, 0.610333, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(-13, 195)
 scale = Vector2(11.109, 12.2075)
 color = Color(0.741176, 0.592157, 0, 1)
@@ -6174,8 +6264,6 @@ offset_left = 351.0
 offset_top = 8.03207
 offset_right = 351.0
 offset_bottom = 8.03207
-
-[node name="SkillCheck" parent="." instance=ExtResource("10_dyk6q")]
 
 [node name="ResultLabel" type="Label" parent="."]
 z_index = 10

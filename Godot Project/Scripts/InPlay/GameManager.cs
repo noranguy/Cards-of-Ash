@@ -17,8 +17,8 @@ public partial class GameManager : Node2D {
 	
 	private bool allowThrow = false;	
 	
-	static readonly float ySpacing = 40;
-	static readonly float yStart = 85;
+	static readonly float ySpacing = 40 * 1.4f;
+	static readonly float yStart = 35;
 	static readonly int[][] FlipRank = new int[][] {
 		new int[]{1, 0, 2},
 		new int[]{2, 1, 0},
