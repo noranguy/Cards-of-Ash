@@ -1,0 +1,26 @@
+{
+	"speaker": "Old Man",
+	"dialogue": [
+		{
+			"id": "win",
+			"text": "You're picking up this game pretty fast. I'll be back in a few days to see how you've improved.",
+			"options": [
+			  { "text": "Back to Safe House", "next": "end" }
+			]
+		},
+		{
+			"id": "lose",
+			"text": "Now that you know how to play, I'll be back in a few days to see how you've improved.",
+			"options": [
+			  { "text": "Back to Safe House", "next": "end" }
+			]
+		},
+		{
+			"id": "tie",
+			"text": "We tied this one, but I'll be back in a few days to see how you've improved.",
+			"options": [
+			  { "text": "Back to Safe House", "next": "end" }
+			]
+		}
+  	]
+}

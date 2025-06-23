@@ -6,35 +6,35 @@ using System.Threading.Tasks;
 // Safehouse area
 public partial class Safehouse : StaticBody2D
 {
-    private CharacterBody2D _player;
+	private CharacterBody2D _player;
 
-    //RayCast2D _ray; - May come back to this, for now ignore all the ray stuff
+	//RayCast2D _ray; - May come back to this, for now ignore all the ray stuff
 
-    private float _day_num = 0; // Keep track of day, mornings will be whole numbers, nights will be X.5
+	private float _day_num = 0; // Keep track of day, mornings will be whole numbers, nights will be X.5
 
-    // Flags to see if the player is in an interactable area
-    private bool _in_bed;
-    private bool _at_door;
-    private bool _at_table;
+	// Flags to see if the player is in an interactable area
+	private bool _in_bed;
+	private bool _at_door;
+	private bool _at_table;
 
 	[Export]
 	public bool in_prompt;
 
-    // Flags for enviroment
+	// Flags for enviroment
 
-    private String[] _character_order = ["OldManTutorial", "Mom", "Kaishain", "Kid", "OldManEnd"];
-    private String[] _dialogue_order = ["old_man_tutorial_dialogue", "mom_dialogue", "Kaishain", "Kid", "OldManEnd"];
+	private String[] _character_order = ["OldManTutorial", "Mom", "Kaishain", "Kid", "OldManEnd"];
+	private String[] _dialogue_order = ["old_man_tutorial_dialogue", "mom_dialogue", "Kaishain", "Kid", "OldManEnd"];
 
-    // Flags to keep track of safehouse state
-    private bool _player_has_cards;
-    private bool _npc_waiting;
-    private bool _game_ready;
-    private bool _day_over;
+	// Flags to keep track of safehouse state
+	private bool _player_has_cards;
+	private bool _npc_waiting;
+	private bool _game_ready;
+	private bool _day_over;
 
-    // Will be prompt nodes
-    private Control _end_day_prompt;
-    private Control _open_door_prompt;
-    private Control _start_game_prompt;
+	// Will be prompt nodes
+	private Control _end_day_prompt;
+	private Control _open_door_prompt;
+	private Control _start_game_prompt;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -100,39 +100,39 @@ public partial class Safehouse : StaticBody2D
 		}
 	}
 
-    // Signals from interactable areas
-    private void _on_bed_body_entered(Node2D body)
+	// Signals from interactable areas
+	private void _on_bed_body_entered(Node2D body)
 	{
 		_in_bed = true;
 	}
 
-    private void _on_bed_body_exited(Node2D body)
+	private void _on_bed_body_exited(Node2D body)
 	{
 		_in_bed = false;
 	}
 
-    private void _on_door_body_entered(Node2D body)
+	private void _on_door_body_entered(Node2D body)
 	{
 		_at_door = true;
 	}
 
-    private void _on_door_body_exited(Node2D body)
+	private void _on_door_body_exited(Node2D body)
 	{
 		_at_door = false;
 	}
 
-    private void _on_menko_table_body_entered(Node2D body)
+	private void _on_menko_table_body_entered(Node2D body)
 	{
 		_at_table = true;
 	}
 
-    private void _on_menko_table_body_exited(Node2D body)
+	private void _on_menko_table_body_exited(Node2D body)
 	{
 		_at_table = false;
 	}
 
-    // Get rid of all prompts
-    private void _on_cancel_pressed()
+	// Get rid of all prompts
+	private void _on_cancel_pressed()
 	{
 		_end_day_prompt.Visible = false;
 		_open_door_prompt.Visible = false;
@@ -141,8 +141,8 @@ public partial class Safehouse : StaticBody2D
 
 	}
 
-    // When the player opens the door for the NPC
-    private void On_open_door_pressed()
+	// When the player opens the door for the NPC
+	private void _on_open_door_pressed()
 	{
 		_day_over = false;
 		_npc_waiting = false;
@@ -150,13 +150,13 @@ public partial class Safehouse : StaticBody2D
 		GetNode<AnimationPlayer>("FadeToBlack/AnimationPlayer").Play("fade_to_black_dialogue");
 	}
 
-    // Start Menko Game
-    private void On_start_game_pressed()
+	// Start Menko Game
+	private void _on_start_game_pressed()
 	{
 		GetNode<AnimationPlayer>("FadeToBlack/AnimationPlayer").Play("fade_to_game");
 	}
 
-    private void On_animation_player_animation_finished(StringName anim_name)
+	private void _on_animation_player_animation_finished(StringName anim_name)
 	{
 		if (anim_name == "fade_to_game")
 		{
@@ -171,14 +171,14 @@ public partial class Safehouse : StaticBody2D
 		}
 	}
 
-    private void Knock_at_door()
+	private void Knock_at_door()
 	{
 		_npc_waiting = true;
 		_day_over = false;
 		_game_ready = false;
 	}
 
-    private async Task Dialogue_setupAsync()
+	private async Task Dialogue_setupAsync()
 	{
 		string _character = _character_order[(int)_day_num];
 		_open_door_prompt.Visible = false;
@@ -195,7 +195,7 @@ public partial class Safehouse : StaticBody2D
 		//GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Dialogue/{_dialogue_order[(int)_day_num]}.tscn"); for when theres a whole scene for dialogue
 	}
 
-    private static async Task Start_day_oneAsync()
+	private static async Task Start_day_oneAsync()
 	{
 		await DialogueManager.Instance.StartDialogue("DayOne/pick_up_card_prompt");
 	}
