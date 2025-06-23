@@ -1,9 +1,0 @@
-[
-	{
-		"id": "start",
-		"text": "You can also unflip table cards that your opponent flipped.",
-		"options": [
-		  { "text": "Continue Game", "next": "end" }
-		]
-	}
-]

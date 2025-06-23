@@ -1,0 +1,12 @@
+{
+	"person": "OldMan",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "You got lucky that time. Whenever a table card flips, it deteriorates and becomes 20% harder to flip.",
+			"options": [
+			  { "text": "Continue Game", "next": "end" }
+			]
+		}
+  	]
+}
