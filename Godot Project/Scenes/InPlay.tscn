@@ -114,4 +114,4 @@ script = ExtResource("1_k2rkq")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rn477")
 animation = &"kaishain_idle"
-frame_progress = 0.576097
+frame_progress = 0.317782
