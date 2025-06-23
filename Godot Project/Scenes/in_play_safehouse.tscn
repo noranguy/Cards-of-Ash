@@ -6269,7 +6269,7 @@ theme_override_fonts/font = SubResource("FontFile_dyk6q")
 theme_override_font_sizes/font_size = 100
 horizontal_alignment = 1
 
-[node name="OldManInPlay" parent="." instance=ExtResource("11_efang")]
+[node name="InPlay" parent="." instance=ExtResource("11_efang")]
 z_index = 4
 position = Vector2(4, -95.3809)
 scale = Vector2(3, 3)
