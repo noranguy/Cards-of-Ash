@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxg82ai0opb6c"
-path="res://.godot/imported/Old Man Portrait-Sheet.png-3a71b6a25546891a5196066927d2b5c6.ctex"
+uid="uid://douh5gkl23ugx"
+path="res://.godot/imported/Old Man Portrait-animation-Sheet.png-fff27a969ae49f80fa2cc700ac5b34c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Old Man/Old Man Portrait-Sheet.png"
-dest_files=["res://.godot/imported/Old Man Portrait-Sheet.png-3a71b6a25546891a5196066927d2b5c6.ctex"]
+source_file="res://Assets/Character Designs/Old Man/Old Man Portrait-animation-Sheet.png"
+dest_files=["res://.godot/imported/Old Man Portrait-animation-Sheet.png-fff27a969ae49f80fa2cc700ac5b34c2.ctex"]
 
 [params]
 
