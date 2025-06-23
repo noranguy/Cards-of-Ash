@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xq7hj38pljxt"
-path="res://.godot/imported/Ceramic.png-54aedd32c327796aa7bec2cc316078fa.ctex"
+uid="uid://bopgo0oixdhej"
+path="res://.godot/imported/pixel_art_e.jpg-38deba32f22d68430ae84e62689a1eee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/Combined Class & Type/Ceramic.png"
-dest_files=["res://.godot/imported/Ceramic.png-54aedd32c327796aa7bec2cc316078fa.ctex"]
+source_file="res://Assets/Out of Play Safe House/pixel_art_e.jpg"
+dest_files=["res://.godot/imported/pixel_art_e.jpg-38deba32f22d68430ae84e62689a1eee.ctex"]
 
 [params]
 

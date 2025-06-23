@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvd7sgi6dix5n"]
+[gd_scene load_steps=20 format=3 uid="uid://bvd7sgi6dix5n"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
-[ext_resource type="PackedScene" path="res://Scenes/player_character.tscn" id="1_qcbrc"]
+[ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
 [ext_resource type="PackedScene" uid="uid://cfyc8k4gjjnmr" path="res://Scenes/out_play_safehouse.tscn" id="3_6l742"]
+[ext_resource type="PackedScene" uid="uid://dcpwly3u48me3" path="res://Scenes/Characters/old_man_tutorial.tscn" id="3_v5lnp"]
+[ext_resource type="Texture2D" uid="uid://ddawy8t0rxnsy" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
 a = Vector2(38, -10)
@@ -32,6 +34,74 @@ size = Vector2(60, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l742"]
 size = Vector2(48, 79)
+
+[sub_resource type="Animation" id="Animation_vpc17"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1njoc"]
+resource_name = "fade_to_black_dialogue"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v5lnp"]
+resource_name = "fade_to_dialogue"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6l742"]
+resource_name = "fade_to_game"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_algie"]
+_data = {
+&"RESET": SubResource("Animation_vpc17"),
+&"fade_to_black_dialogue": SubResource("Animation_1njoc"),
+&"fade_to_dialogue": SubResource("Animation_v5lnp"),
+&"fade_to_game": SubResource("Animation_6l742")
+}
 
 [node name="Safehouse" type="StaticBody2D"]
 light_mask = 0
@@ -77,7 +147,7 @@ shape = SubResource("SegmentShape2D_qcbrc")
 
 [node name="EndDayPrompt" type="Control" parent="."]
 visible = false
-z_index = 6
+z_index = 7
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,9 +203,9 @@ text = "End Day"
 layout_mode = 2
 text = "Cancel"
 
-[node name="GoOutsidePrompt" type="Control" parent="."]
+[node name="OpenDoorPrompt" type="Control" parent="."]
 visible = false
-z_index = 6
+z_index = 7
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -147,7 +217,7 @@ offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="GoOutsidePrompt"]
+[node name="CenterContainer" type="CenterContainer" parent="OpenDoorPrompt"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -157,12 +227,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="GoOutsidePrompt/CenterContainer"]
+[node name="ColorRect" type="ColorRect" parent="OpenDoorPrompt/CenterContainer"]
 custom_minimum_size = Vector2(170, 120)
 layout_mode = 2
 color = Color(0.509286, 0.509286, 0.509286, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GoOutsidePrompt/CenterContainer/ColorRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="OpenDoorPrompt/CenterContainer/ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -172,28 +242,29 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 35
 
-[node name="Go Outside?" type="Label" parent="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer"]
+[node name="OpenDoor?" type="Label" parent="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Go Outside?"
+text = "Open Door?"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="GoOutside" type="Button" parent="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+[node name="OpenDoor" type="Button" parent="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Go Outside"
+text = "Open Door
+"
 
-[node name="Cancel" type="Button" parent="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Cancel"
 
 [node name="StartGamePrompt" type="Control" parent="."]
 visible = false
-z_index = 6
+z_index = 7
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -245,12 +316,19 @@ text = "Cancel"
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_qcbrc")]
 top_level = true
-z_index = 5
+z_index = 6
 position = Vector2(425, 160)
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
 slide_on_ceiling = false
+
+[node name="OldManTutorial" parent="." instance=ExtResource("3_v5lnp")]
+visible = false
+z_index = 7
+position = Vector2(185, 90)
+collision_layer = 0
+collision_mask = 2
 
 [node name="Door" type="Area2D" parent="."]
 z_index = 5
@@ -320,22 +398,50 @@ position = Vector2(319.5, 168)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_6l742")
 
+[node name="MenkoCards" type="Node2D" parent="."]
+position = Vector2(315, 185)
+
+[node name="MenkoCards" type="TextureRect" parent="MenkoCards"]
+z_index = 5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -20.0
+offset_right = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_vpc17")
+expand_mode = 1
+
+[node name="FadeToBlack" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="ColorRect" parent="FadeToBlack"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeToBlack"]
+libraries = {
+&"": SubResource("AnimationLibrary_algie")
+}
+
 [connection signal="pressed" from="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="PlayerCharacter" method="_on_cancel_pressed"]
-[connection signal="pressed" from="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="GoOutsidePrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="PlayerCharacter" method="_on_cancel_pressed"]
+[connection signal="pressed" from="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/OpenDoor" to="." method="_on_open_door_pressed"]
+[connection signal="pressed" from="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="StartGamePrompt/CenterContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="StartGamePrompt/CenterContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="StartGamePrompt/CenterContainer/VBoxContainer/HBoxContainer/Cancel" to="PlayerCharacter" method="_on_cancel_pressed"]
 [connection signal="body_entered" from="Door" to="." method="_on_door_body_entered"]
-[connection signal="body_entered" from="Door" to="PlayerCharacter" method="_on_door_body_entered"]
 [connection signal="body_exited" from="Door" to="." method="_on_door_body_exited"]
-[connection signal="body_exited" from="Door" to="PlayerCharacter" method="_on_door_body_exited"]
 [connection signal="body_entered" from="Bed" to="." method="_on_bed_body_entered"]
-[connection signal="body_entered" from="Bed" to="PlayerCharacter" method="_on_bed_body_entered"]
 [connection signal="body_exited" from="Bed" to="." method="_on_bed_body_exited"]
-[connection signal="body_exited" from="Bed" to="PlayerCharacter" method="_on_bed_body_exited"]
 [connection signal="body_entered" from="MenkoTable" to="." method="_on_menko_table_body_entered"]
-[connection signal="body_entered" from="MenkoTable" to="PlayerCharacter" method="_on_menko_table_body_entered"]
 [connection signal="body_exited" from="MenkoTable" to="." method="_on_menko_table_body_exited"]
-[connection signal="body_exited" from="MenkoTable" to="PlayerCharacter" method="_on_menko_table_body_exited"]
+[connection signal="animation_finished" from="FadeToBlack/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

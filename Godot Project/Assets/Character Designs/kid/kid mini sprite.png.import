@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xq7hj38pljxt"
-path="res://.godot/imported/Ceramic.png-54aedd32c327796aa7bec2cc316078fa.ctex"
+uid="uid://ce6ai3ydpo3mp"
+path="res://.godot/imported/kid mini sprite.png-a20975883b80722408074e5ee0a50cb1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/Combined Class & Type/Ceramic.png"
-dest_files=["res://.godot/imported/Ceramic.png-54aedd32c327796aa7bec2cc316078fa.ctex"]
+source_file="res://Assets/Character Designs/kid/kid mini sprite.png"
+dest_files=["res://.godot/imported/kid mini sprite.png-a20975883b80722408074e5ee0a50cb1.ctex"]
 
 [params]
 

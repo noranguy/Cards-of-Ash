@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xq7hj38pljxt"
-path="res://.godot/imported/Ceramic.png-54aedd32c327796aa7bec2cc316078fa.ctex"
+uid="uid://eedpytk8y05l"
+path="res://.godot/imported/mom & son mini sprite.png-451547aa617c8d2bdd743c78964034b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/Combined Class & Type/Ceramic.png"
-dest_files=["res://.godot/imported/Ceramic.png-54aedd32c327796aa7bec2cc316078fa.ctex"]
+source_file="res://Assets/Character Designs/Mom & Son/mom & son mini sprite.png"
+dest_files=["res://.godot/imported/mom & son mini sprite.png-451547aa617c8d2bdd743c78964034b7.ctex"]
 
 [params]
 

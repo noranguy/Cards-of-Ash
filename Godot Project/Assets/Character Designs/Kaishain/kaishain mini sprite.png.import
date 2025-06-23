@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xq7hj38pljxt"
-path="res://.godot/imported/Ceramic.png-54aedd32c327796aa7bec2cc316078fa.ctex"
+uid="uid://h2hwj60jro7u"
+path="res://.godot/imported/kaishain mini sprite.png-8b274f1d721c493e467aee83cdf5eaaf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Cards/Combined Class & Type/Ceramic.png"
-dest_files=["res://.godot/imported/Ceramic.png-54aedd32c327796aa7bec2cc316078fa.ctex"]
+source_file="res://Assets/Character Designs/Kaishain/kaishain mini sprite.png"
+dest_files=["res://.godot/imported/kaishain mini sprite.png-8b274f1d721c493e467aee83cdf5eaaf.ctex"]
 
 [params]
 
