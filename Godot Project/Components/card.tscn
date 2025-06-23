@@ -1,24 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnhe4fr21bwyc"]
+[gd_scene load_steps=3 format=3 uid="uid://bnhe4fr21bwyc"]
 
 [ext_resource type="Script" uid="uid://dlts6ho2douea" path="res://Scripts/InPlay/Card.cs" id="1_rjlel"]
-[ext_resource type="Texture2D" uid="uid://1ivdonv17ahd" path="res://Assets/Cards/earthquake_basic.png" id="2_6gulv"]
+[ext_resource type="Texture2D" uid="uid://dyd5h2i1q3id8" path="res://Assets/Cards/volcano_ceramic.png" id="3_37end"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjlel"]
-size = Vector2(32, 48)
-
-[node name="Card" type="Node2D"]
+[node name="Card" type="Control"]
 z_index = 10
-scale = Vector2(0.75, 0.75)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_rjlel")
-
-[node name="CardImage" type="Sprite2D" parent="."]
-z_index = 15
-texture = ExtResource("2_6gulv")
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_rjlel")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, 1.33333, 2.66667, 5.33333, 5.33333, 2.66667, 2.66667, 0)
+
+[node name="CardImage" type="Polygon2D" parent="."]
+texture = ExtResource("3_37end")
+polygon = PackedVector2Array(9.6296, 10.0869, -3.85184, 10.0869, -3.85185, 40.3478, 9.6296, 40.3478)
 
 [connection signal="input_event" from="Area2D" to="." method="OnInputEvent"]
 [connection signal="mouse_entered" from="Area2D" to="." method="OnMouseEntered"]

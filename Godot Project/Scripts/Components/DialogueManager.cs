@@ -15,6 +15,11 @@ public class DialogueNode {
 	public List<DialogueOption> options { get; set; }
 }
 
+public class Dialogue {
+	public string person { get; set; }
+	public List<DialogueNode> dialogue { get; set; }
+}
+
 public partial class DialogueManager : Control {
 	public static DialogueManager Instance { get; private set; }
 	
@@ -27,7 +32,7 @@ public partial class DialogueManager : Control {
 	
 	private TaskCompletionSource<string> nextNodeSource;
 
-	public override async void _Ready() {
+	public override void _Ready() {
 		Instance = this;
 		var panel = GetNode<Panel>("DialoguePanel");
 		panel.ZIndex = 100;
@@ -54,8 +59,12 @@ public partial class DialogueManager : Control {
 		var jsonText = file.GetAsText();
 		file.Close();
 
-		var nodes = JsonSerializer.Deserialize<List<DialogueNode>>(jsonText);
-		foreach (var node in nodes) {
+		var dialogue = JsonSerializer.Deserialize<Dialogue>(jsonText);
+		var texture = GD.Load<Texture2D>($"res://Assets/CharacterDesigns/{dialogue.person}/portrait.png");
+		var sprite = GetNode<Sprite2D>("DialoguePanel/Person");
+		sprite.Texture = texture;
+		
+		foreach (var node in dialogue.dialogue) {
 			node.options ??= new List<DialogueOption>();
 			dialogueTree[node.id] = node;
 		}
