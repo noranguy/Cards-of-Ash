@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=31 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -6042,7 +6042,6 @@ texture = ExtResource("5_dyk6q")
 8:0/0 = 0
 9:0/0 = 0
 10:0/0 = 0
-2:1/0 = 0
 3:1/0 = 0
 4:1/0 = 0
 5:1/0 = 0
@@ -6051,8 +6050,6 @@ texture = ExtResource("5_dyk6q")
 8:1/0 = 0
 9:1/0 = 0
 10:1/0 = 0
-11:1/0 = 0
-2:2/0 = 0
 3:2/0 = 0
 4:2/0 = 0
 5:2/0 = 0
@@ -6061,9 +6058,6 @@ texture = ExtResource("5_dyk6q")
 8:2/0 = 0
 9:2/0 = 0
 10:2/0 = 0
-11:2/0 = 0
-1:3/0 = 0
-2:3/0 = 0
 3:3/0 = 0
 4:3/0 = 0
 5:3/0 = 0
@@ -6072,12 +6066,10 @@ texture = ExtResource("5_dyk6q")
 8:3/0 = 0
 9:3/0 = 0
 10:3/0 = 0
-11:3/0 = 0
-12:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ivp4u"]
 sources/0 = SubResource("TileSetAtlasSource_dyk6q")
-sources/1 = SubResource("TileSetAtlasSource_juooh")
+sources/2 = SubResource("TileSetAtlasSource_juooh")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f7naq"]
 texture = ExtResource("2_lkv0k")
@@ -6229,7 +6221,7 @@ layer_0/tile_data = PackedInt32Array(262138, 65538, 3, 131067, 131074, 1, 196603
 
 [node name="Table" type="TileMapLayer" parent="TileMap"]
 z_index = 5
-tile_map_data = PackedByteArray("AAD6/wMAAQABAAMAAAD7/wEAAQACAAEAAAD7/wIAAQACAAIAAAD7/wMAAQACAAMAAAD8/wAAAQADAAAAAAD8/wEAAQADAAEAAAD8/wIAAQADAAIAAAD8/wMAAQADAAMAAAD9/wAAAQAEAAAAAAD9/wEAAQAEAAEAAAD9/wIAAQAEAAIAAAD9/wMAAQAEAAMAAAD+/wAAAQAFAAAAAAD+/wEAAQAFAAEAAAD+/wIAAQAFAAIAAAD+/wMAAQAFAAMAAAD//wAAAQAGAAAAAAD//wEAAQAGAAEAAAD//wIAAQAGAAIAAAD//wMAAQAGAAMAAAAAAAAAAQAHAAAAAAAAAAEAAQAHAAEAAAAAAAIAAQAHAAIAAAAAAAMAAQAHAAMAAAABAAAAAQAIAAAAAAABAAEAAQAIAAEAAAABAAIAAQAIAAIAAAABAAMAAQAIAAMAAAACAAAAAQAJAAAAAAACAAEAAQAJAAEAAAACAAIAAQAJAAIAAAACAAMAAQAJAAMAAAADAAAAAQAKAAAAAAADAAEAAQAKAAEAAAADAAIAAQAKAAIAAAADAAMAAQAKAAMAAAAEAAEAAQALAAEAAAAEAAIAAQALAAIAAAAEAAMAAQALAAMAAAAFAAMAAQAMAAMAAAA=")
+tile_map_data = PackedByteArray("AAD8/wAAAgADAAAAAAD8/wEAAgADAAEAAAD8/wIAAgADAAIAAAD8/wMAAgADAAMAAAD9/wAAAgAEAAAAAAD9/wEAAgAEAAEAAAD9/wIAAgAEAAIAAAD9/wMAAgAEAAMAAAD+/wAAAgAFAAAAAAD+/wEAAgAFAAEAAAD+/wIAAgAFAAIAAAD+/wMAAgAFAAMAAAD//wAAAgAGAAAAAAD//wEAAgAGAAEAAAD//wIAAgAGAAIAAAD//wMAAgAGAAMAAAAAAAAAAgAHAAAAAAAAAAEAAgAHAAEAAAAAAAIAAgAHAAIAAAAAAAMAAgAHAAMAAAABAAAAAgAIAAAAAAABAAEAAgAIAAEAAAABAAIAAgAIAAIAAAABAAMAAgAIAAMAAAACAAAAAgAJAAAAAAACAAEAAgAJAAEAAAACAAIAAgAJAAIAAAACAAMAAgAJAAMAAAADAAAAAgAKAAAAAAADAAEAAgAKAAEAAAADAAIAAgAKAAIAAAADAAMAAgAKAAMAAAA=")
 tile_set = SubResource("TileSet_ivp4u")
 
 [node name="Back and roof" type="TileMapLayer" parent="TileMap"]
