@@ -40,8 +40,8 @@ public class Agent0 : Agent {
 	
 	public override (List<string>, List<string>) GetTableCards() {
 		List<string> types = new List<string> {
-			"tsunami",
 			"volcano",
+			"tsunami",
 			"earthquake",
 			"tsunami",
 			"volcano",
@@ -72,17 +72,17 @@ public class Agent0 : Agent {
 	public override (Card, Card) Move() {
 		Card throwingCard = hand[rand.Next(hand.Count)];
 		
-		List<Card> flippedPlayerTable = playerTable.Where(x => x.visible).ToList();
-		List<Card> unflippedEnemyTable = enemyTable.Where(x => !x.visible).ToList();
+		List<Card> unflippedPlayerTable = playerTable.Where(x => !x.visible).ToList();
+		List<Card> flippedEnemyTable = enemyTable.Where(x => x.visible).ToList();
 			
 		Card tableCard;
 		
-		if (round > 3 && round < 6 && flippedPlayerTable.Count > 0) {
-			tableCard = flippedPlayerTable[rand.Next(flippedPlayerTable.Count)];
-		} else if (unflippedEnemyTable.Count > 0) {
-			tableCard = unflippedEnemyTable[rand.Next(unflippedEnemyTable.Count)];
+		if (round >= 3 && round < 6 && flippedEnemyTable.Count > 0) {
+			tableCard = flippedEnemyTable[rand.Next(flippedEnemyTable.Count)];
+		} else if (unflippedPlayerTable.Count > 0) {
+			tableCard = unflippedPlayerTable[rand.Next(unflippedPlayerTable.Count)];
 		} else {
-			tableCard = playerTable[rand.Next(playerTable.Count)];
+			tableCard = enemyTable[rand.Next(enemyTable.Count)];
 		}
 		return (throwingCard, tableCard);
 	}

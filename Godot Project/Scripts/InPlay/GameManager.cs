@@ -26,9 +26,9 @@ public partial class GameManager : Node2D {
 	};
 	static readonly Random Rand = new Random();
 	
-	int round = 1;
+	int round = 0;
 
-	public override void _Ready() {
+	public async override void _Ready() {
 		resultLabel = GetParent().GetNode<Label>("ResultLabel");
 		resultLabel.Text = "";
 		
@@ -64,6 +64,13 @@ public partial class GameManager : Node2D {
 		
 		playerHand.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivePlayerHand)));
 		table.Connect(CardContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivetable)));
+		
+		if (GlobalState.Instance.GetDay() == 0) {
+			await DialogueManager.Instance.StartDialogue("tutorial_start");
+			playerHand.OnCardClicked(playerHand.GetCards()[0]);
+			table.OnCardClicked(table.GetEnemyCards()[0]);
+			playerHand.allowActive = table.allowActive = false;
+		}
 	}
 	
 	public void ThrowToggle(bool active) {
@@ -109,6 +116,9 @@ public partial class GameManager : Node2D {
 			tableCardType = GlobalState.Instance.TypeMap[tableCards[i].type];
 			threshold = GlobalState.Instance.FlipProb[FlipRank[throwingCardType][tableCardType]] * tableCards[i].durability;
 			rnd = Rand.NextDouble();
+			if (GlobalState.Instance.GetDay() == 0 && round == 0) {
+				rnd = 0;
+			}
 			
 			if (i != 0) threshold *= 0.25;
 			
@@ -142,15 +152,19 @@ public partial class GameManager : Node2D {
 		ThrowCard(throwingCard, new List<Card> {tableCard});
 		enemy.Backward();
 		enemyHand.RemoveCard(throwingCard);
-		
-		await ToSignal(GetTree().CreateTimer(1), "timeout");
-		
+				
 		// round end
 		round++;
-		int playerCount = table.GetPlayerCards().Count(card => card.visible);
-		int enemyCount = table.GetEnemyCards().Count(card => card.visible);
 		
-		if (round > playerHand.numCards || playerCount == 6 || enemyCount == 6) {
+		if (GlobalState.Instance.GetDay() == 0 && (round == 1 || round == 3)) {
+			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
+			playerHand.allowActive = table.allowActive = true;
+			await DialogueManager.Instance.StartDialogue($"tutorial_{round}");
+		}
+		int playerCount = table.GetEnemyCards().Count(card => card.visible);
+		int enemyCount = table.GetPlayerCards().Count(card => card.visible);
+		
+		if (round >= playerHand.numCards || playerCount == 6 || enemyCount == 6) {
 			if (playerCount > enemyCount) {
 				resultLabel.Text = "You Win";
 			} else if (playerCount < enemyCount) {
@@ -158,8 +172,10 @@ public partial class GameManager : Node2D {
 			} else {
 				resultLabel.Text = "Tie";
 			}
+			if (GlobalState.Instance.GetDay() == 0) {
+				await DialogueManager.Instance.StartDialogue("tutorial_end");
+			}
 			GlobalState.Instance.NextDay();
-			await DialogueManager.Instance.StartDialogue("example");
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		}
 	}
