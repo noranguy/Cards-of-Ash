@@ -124,6 +124,7 @@ public partial class Safehouse : StaticBody2D
 	// Start Menko Game
 	void _on_start_game_pressed()
 	{
+<<<<<<< HEAD
 		GetNode<AnimationPlayer>("FadeToGame/AnimationPlayer").Play("fade_to_game");
 	}
 
@@ -142,5 +143,8 @@ public partial class Safehouse : StaticBody2D
 	void _knock_at_door()
 	{
 		_npc_waiting = true;
+=======
+		GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("info_page.tscn");
+>>>>>>> origin/main
 	}
 }

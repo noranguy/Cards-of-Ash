@@ -1,0 +1,16 @@
+[
+	{
+	  "id": "start",
+	  "text": "Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome! Welcome!",
+	  "options": [
+		{ "text": "A", "next": "a" }
+	  ]
+	},
+	{
+	  "id": "a",
+	  "text": "AB",
+	  "options": [
+		{ "text": "ABC", "next": "end" }
+	  ]
+	}
+  ]

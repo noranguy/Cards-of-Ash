@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://hwmm2q7j8aj3" path="res://Scripts/TitleScreen/TitleScreen.cs" id="1_4gxqj"]
 [ext_resource type="Texture2D" uid="uid://dvqe3x2okf37a" path="res://Assets/TitleScreen/sample_menko_card.png" id="1_p3fck"]
 [ext_resource type="Texture2D" uid="uid://72hyb3q0gyqe" path="res://Assets/TitleScreen/settings_logo.png" id="2_4gxqj"]
-[ext_resource type="Texture2D" uid="uid://b6egcpbftv20m" path="res://icon.svg" id="4_twnyg"]
+[ext_resource type="Texture2D" uid="uid://2jw21ay0px7k" path="res://icon.svg" id="4_twnyg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g52x0"]
 bg_color = Color(0.319427, 0.662532, 0.682831, 1)
