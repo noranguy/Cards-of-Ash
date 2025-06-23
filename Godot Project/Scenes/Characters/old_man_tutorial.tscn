@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcpwly3u48me3"]
 
-[ext_resource type="Texture2D" uid="uid://baidmedvo6kt5" path="res://Assets/Character Designs/Old Man/old man mini sprite.png" id="1_0w4cl"]
+[ext_resource type="Texture2D" uid="uid://cssk8tjkdfgk" path="res://Assets/Character Designs/Old Man/old man mini sprite.png" id="1_0w4cl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0tdx"]
 

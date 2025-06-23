@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqd8rvwddtje4"]
+
+[ext_resource type="Script" uid="uid://dbxpe3r5o7cgy" path="res://Scripts/Safehouse/SafehouseData.cs" id="1_4qt2d"]
+
+[node name="SafeHouseData" type="Node"]
+script = ExtResource("1_4qt2d")

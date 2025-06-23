@@ -80,6 +80,8 @@ public partial class GlobalState : Node {
 	public readonly double CeramicProb = 0.25;
 	
 	private int day = 0;
+	private bool post_game = false;
+
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
 		() => new Agent1()
@@ -113,9 +115,21 @@ Press SPACE to continue.
 	public int GetDay() {
 		return day;
 	}
+
+	public bool GetPostGame()
+	{
+		return post_game;
+	}
+
+	public void SetPostGame(bool after_game)
+	{
+		post_game = after_game;
+	}
 	
-	public void NextDay() {
-		if (day > 0) {
+	public void NextDay()
+	{
+		if (day > 0)
+		{
 			var clas = GetInfo().Class;
 			AddHandCard("tsunami", clas);
 			AddHandCard("volcano", clas);
