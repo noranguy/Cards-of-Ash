@@ -5,12 +5,12 @@ using System.Security.Cryptography.X509Certificates;
 public partial class PlayerCharacter : CharacterBody2D
 {
 	// Flag to see if the player should be able to move, false when a prompt is on screen
-	public bool moveable = true;
+
+	bool _moveable = false;
+
 	// Player speed
 	public const float Speed = 150.0f;
 	public RayCast2D _ray; // Ignore ray for now
-	// If the player is in an interactable area
-	bool _in_area = false;
 
 	public override void _Ready()
 	{
@@ -19,15 +19,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
 	public override void _Process(double delta)
 	{
-		// If the player is trying to interact with something
-		if (Input.IsActionJustPressed("interact"))
-		{
-			// If they were in an interactable area, then they are now in a prompt screen and shouldnt be able to move
-			if (_in_area)
-			{
-				moveable = false;
-			}
-		}
+
 	}
 
 	// Player character movement
@@ -39,7 +31,7 @@ public partial class PlayerCharacter : CharacterBody2D
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
-		if (moveable && direction.X != 0)
+		if (_moveable && direction.X != 0)
 		{
 			velocity.Y = 0;
 			velocity.X = direction.X * Speed;
@@ -58,7 +50,7 @@ public partial class PlayerCharacter : CharacterBody2D
 			}
 		}
 
-		else if (moveable && direction.Y != 0)
+		else if (_moveable && direction.Y != 0)
 		{
 			velocity.X = 0;
 			velocity.Y = direction.Y * Speed;
@@ -84,40 +76,9 @@ public partial class PlayerCharacter : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	// Signals from interactable areas
-	void _on_bed_body_entered(Node2D body)
+	// setter for the players mobility
+	public void _set_movable(bool can_move)
 	{
-		_in_area = true;
-	}
-
-	void _on_bed_body_exited(Node2D body)
-	{
-		_in_area = false;
-	}
-
-	void _on_bed_door_entered(Node2D body)
-	{
-		_in_area = true;
-	}
-
-	void _on_bed_door_exited(Node2D body)
-	{
-		_in_area = false;
-	}
-
-	void _on_menko_table_body_entered(Node2D body)
-	{
-		_in_area = true;
-	}
-
-	void _on_menko_table_body_exited(Node2D body)
-	{
-		_in_area = false;
-	}
-
-	// If the players not in a prompt anymore, they can move
-	void _on_cancel_pressed()
-	{
-		moveable = true;
+		_moveable = can_move;
 	}
 }

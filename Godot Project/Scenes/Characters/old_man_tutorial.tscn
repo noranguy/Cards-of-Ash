@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcpwly3u48me3"]
+[gd_scene load_steps=3 format=3 uid="uid://dcpwly3u48me3"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ycmea"]
+[ext_resource type="Texture2D" uid="uid://baidmedvo6kt5" path="res://Assets/Character Designs/Old Man/old man mini sprite.png" id="1_0w4cl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0tdx"]
 
 [node name="OldManTutorial" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_0w4cl")
+offset = Vector2(16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_ycmea")
+position = Vector2(24, 38)
+shape = SubResource("RectangleShape2D_f0tdx")
