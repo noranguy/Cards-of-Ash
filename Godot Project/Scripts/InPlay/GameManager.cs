@@ -11,15 +11,12 @@ public partial class GameManager : Node2D {
 	private CardTableContainer table;
 	
 	private ThrowButton throwButton;
-	private Label resultLabel;
 	
 	private Agent enemy;
 	
 	private bool allowThrow = false;	
 	
-	static readonly int yEnemyHand = -80;
-	static readonly int yEnemyTable = 85;
-	static readonly int yPlayerTable = 125;
+	static readonly int yEnemyHand = -140;
 	static readonly int yPlayerHand = 90;
 	static readonly int[][] FlipRank = new int[][] {
 		new int[]{1, 0, 2},
@@ -31,8 +28,6 @@ public partial class GameManager : Node2D {
 	int round = 0;
 
 	public async override void _Ready() {
-		resultLabel = GetParent().GetNode<Label>("ResultLabel");
-		resultLabel.Text = "";
 		
 		throwButton = GetParent().GetNode<ThrowButton>("ThrowButton");
 		ThrowToggle(false);
@@ -59,7 +54,7 @@ public partial class GameManager : Node2D {
 		
 		enemyHand.Init(cardScene, yEnemyHand, 1, false, enemyHandTypes, enemyHandClasses);
 		table.Init(cardScene, playerTableTypes, playerTableClasses, enemyTableTypes,
-		enemyTableClasses, yPlayerTable, yEnemyTable);
+		enemyTableClasses);
 		playerHand.Init(cardScene, yPlayerHand, 1.5f, true, playerHandTypes, playerHandClasses);
 		
 		enemy.Init(enemyHand.GetCards(), table.GetPlayerCards(), table.GetEnemyCards());
@@ -67,8 +62,8 @@ public partial class GameManager : Node2D {
 		playerHand.Connect(Hand.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivePlayerHand)));
 		table.Connect(CardTableContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivetable)));
 		
+		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start");
 		if (GlobalState.Instance.GetDay() == 0) {
-			await DialogueManager.Instance.StartDialogue("tutorial/start");
 			playerHand.OnCardClicked(playerHand.GetCards()[0]);
 			table.OnCardClicked(table.GetEnemyCards()[0]);
 			playerHand.allowActive = table.allowActive = false;
@@ -154,28 +149,25 @@ public partial class GameManager : Node2D {
 		ThrowCard(throwingCard, new List<Card> {tableCard});
 		enemy.Backward();
 		enemyHand.RemoveCard(throwingCard);
-				
+		
 		// round end
 		round++;
 		
 		if (GlobalState.Instance.GetDay() == 0 && (round == 1 || round == 3)) {
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 			playerHand.allowActive = table.allowActive = true;
-			await DialogueManager.Instance.StartDialogue($"tutorial/{round}");
+			await DialogueManager.Instance.StartDialogue($"agent_0/{round}");
 		}
 		int playerCount = table.GetEnemyCards().Count(card => card.visible);
 		int enemyCount = table.GetPlayerCards().Count(card => card.visible);
 		
 		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
 			if (playerCount > enemyCount) {
-				resultLabel.Text = "You Win";
+				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "win");
 			} else if (playerCount < enemyCount) {
-				resultLabel.Text = "You Lose";
+				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "lose");
 			} else {
-				resultLabel.Text = "Tie";
-			}
-			if (GlobalState.Instance.GetDay() == 0) {
-				await DialogueManager.Instance.StartDialogue("tutorial/end");
+				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "tie");
 			}
 			GlobalState.Instance.NextDay();
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");

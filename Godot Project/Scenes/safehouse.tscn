@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
 [ext_resource type="PackedScene" uid="uid://cfyc8k4gjjnmr" path="res://Scenes/out_play_safehouse.tscn" id="3_6l742"]
 [ext_resource type="PackedScene" uid="uid://dcpwly3u48me3" path="res://Scenes/Characters/old_man_tutorial.tscn" id="3_v5lnp"]
-[ext_resource type="Texture2D" uid="uid://ddawy8t0rxnsy" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
+[ext_resource type="Texture2D" uid="uid://u1eorlu248cw" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
 a = Vector2(38, -10)

@@ -1,11 +1,11 @@
 {
-	"person": "OldMan",
+	"speaker": "Old Man",
 	"dialogue": [
 		{
 			"id": "start",
 			"text": "We will take turns throwing a card from our hand onto the opponent's table cards, trying to flip it.",
 			"options": [
-				{ "text": "Continue", "next": "end" }
+				{ "text": "Continue", "next": "a" }
 			]
 		},
 		{

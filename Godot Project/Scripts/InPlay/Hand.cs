@@ -48,7 +48,7 @@ public partial class Hand : Control {
 		float final_x_sep = (Size.X - cardSize * cardFormat) / (cardFormat - 1);
 		float all_cards_size = Size.X;
 
-		float offset = (cardSize - (cardSize * numCards + final_x_sep * (numCards - 1))) / 2;
+		float offset = (-(cardSize * numCards + final_x_sep * (numCards - 1))) / 2;
 		
 		for (int i = 0; i < numCards; i++) {
 			Card card = cards[i];

@@ -12,6 +12,7 @@ public partial class Card : Control {
 		new Vector2(SIZE.X, SIZE.Y),
 		new Vector2(0, SIZE.Y)
 	};
+	public static readonly Vector2 SIZE2 = new Vector2(40, 60);
 	
 	public bool locked = false;
 	public bool visible;
