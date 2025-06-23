@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1qsys27lhrs2"]
+[gd_scene load_steps=2 format=3 uid="uid://x204vd4q1g84"]
 
-[ext_resource type="PackedScene" uid="uid://b2qhw5t3p15oj" path="res://Scenes/in_play_safehouse.tscn" id="1_qif4s"]
+[ext_resource type="PackedScene" uid="uid://b1lpnxmiatxwa" path="res://Scenes/in_play_safehouse.tscn" id="1_qif4s"]
 
 [node name="MenkoGame" type="Node2D"]
 
