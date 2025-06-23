@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxg82ai0opb6c"
-path="res://.godot/imported/Old Man Portrait-Sheet.png-3a71b6a25546891a5196066927d2b5c6.ctex"
+uid="uid://bn084v6s8bu3i"
+path="res://.godot/imported/Ceramic.png-79dc5d38b1e11c3b4a340a3aa0b27985.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Old Man/Old Man Portrait-Sheet.png"
-dest_files=["res://.godot/imported/Old Man Portrait-Sheet.png-3a71b6a25546891a5196066927d2b5c6.ctex"]
+source_file="res://Assets/Cards/Combined Class & Type/straight/Ceramic.png"
+dest_files=["res://.godot/imported/Ceramic.png-79dc5d38b1e11c3b4a340a3aa0b27985.ctex"]
 
 [params]
 

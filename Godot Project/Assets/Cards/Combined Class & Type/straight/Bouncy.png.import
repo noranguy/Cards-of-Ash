@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxg82ai0opb6c"
-path="res://.godot/imported/Old Man Portrait-Sheet.png-3a71b6a25546891a5196066927d2b5c6.ctex"
+uid="uid://2ik11ywrcow0"
+path="res://.godot/imported/Bouncy.png-94b07fc7cab99b2c945700ab17af3390.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Old Man/Old Man Portrait-Sheet.png"
-dest_files=["res://.godot/imported/Old Man Portrait-Sheet.png-3a71b6a25546891a5196066927d2b5c6.ctex"]
+source_file="res://Assets/Cards/Combined Class & Type/straight/Bouncy.png"
+dest_files=["res://.godot/imported/Bouncy.png-94b07fc7cab99b2c945700ab17af3390.ctex"]
 
 [params]
 
