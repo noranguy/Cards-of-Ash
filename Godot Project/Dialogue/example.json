@@ -12,10 +12,5 @@
 	  "options": [
 		{ "text": "ABC", "next": "end" }
 	  ]
-	},
-	{
-	  "id": "end",
-	  "text": "ABCD",
-	  "options": []
 	}
   ]

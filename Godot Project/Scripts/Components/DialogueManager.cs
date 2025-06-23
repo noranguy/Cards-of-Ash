@@ -36,7 +36,6 @@ public partial class DialogueManager : Control {
 	}
 	
 	public async Task StartDialogue(string name) {
-		GD.Print("name");
 		dialogueTree = new();
 		dialogueText = GetNode<Label>("DialoguePanel/DialogueText");
 		optionsContainer = GetNode<VBoxContainer>("DialoguePanel/OptionsContainer");
@@ -77,8 +76,10 @@ public partial class DialogueManager : Control {
 				await ToSignal(GetTree().CreateTimer(0.05), "timeout");
 			}
 
-			if (node.options.Count == 0)
+			if (node.options.Count == 0) {
+				await ToSignal(GetTree().CreateTimer(2), "timeout");
 				break;
+			}
 
 			nextNodeSource = new TaskCompletionSource<string>();
 
@@ -93,9 +94,11 @@ public partial class DialogueManager : Control {
 				button.Pressed += () => nextNodeSource.TrySetResult(targetId);
 				optionsContainer.AddChild(button);
 			}
-			GD.Print("?");
 
 			currentId = await nextNodeSource.Task;
+			if (currentId == "end") {
+				break;
+			}
 		}
 
 		ClearOptions();

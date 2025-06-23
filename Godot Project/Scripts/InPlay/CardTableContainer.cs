@@ -18,16 +18,23 @@ public partial class CardTableContainer : CardContainer {
 	) {
 		rand = new Random();
 		cardScene = scene;
-		enemyCards = SpawnCards(playerTypes, playerClasses, enemyY, false);
-		playerCards = SpawnCards(enemyTypes, enemyClasses, playerY, true);
+		enemyCards = SpawnCards(enemyTypes, enemyClasses, enemyY, false);
+		playerCards = SpawnCards(playerTypes, playerClasses, playerY, true);
 	}
 	
 	private List<int> GenRandomOrder() {
 		List<int> order = Enumerable.Range(0, numCards).ToList();
 		
-		for (int i = numCards-1; i > 0; i--) {
-			int j = rand.Next(i+1);
-			(order[i], order[j]) = (order[j], order[i]);
+		if (GlobalState.Instance.GetDay() == 0) {
+			for (int i = numCards-1; i > 1; i--) {
+				int j = rand.Next(1, i+1);
+				(order[i], order[j]) = (order[j], order[i]);
+			}
+		} else {
+			for (int i = numCards-1; i > 0; i--) {
+				int j = rand.Next(i+1);
+				(order[i], order[j]) = (order[j], order[i]);
+			}
 		}
 		
 		return order;

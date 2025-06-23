@@ -123,8 +123,8 @@ public class Agent1 : Agent {
 			var row = orders[i];
 			
 			row.Sort((x, y) => {
-				if (enemyTable[x].visible && !enemyTable[y].visible) return 1;
-				if (!enemyTable[x].visible && enemyTable[y].visible) return -1;
+				if (playerTable[x].visible && !playerTable[y].visible) return 1;
+				if (!playerTable[x].visible && playerTable[y].visible) return -1;
 				
 				return GetRank(i, clas, y).CompareTo(GetRank(i, clas, x));
 			});
@@ -151,16 +151,16 @@ public class Agent1 : Agent {
 			case 0:
 				last = GlobalState.Instance.TypeMap[hand[^1].type];
 				order = 1;
-				return (hand[^1], enemyTable[1]);
+				return (hand[^1], playerTable[1]);
 			case 1:
 				last = GlobalState.Instance.TypeMap[hand[^1].type];
 				order = 4;
-				return (hand[^1], enemyTable[4]);
+				return (hand[^1], playerTable[4]);
 			case 2:
 				SortOrders("ceramic");
 				last = GlobalState.Instance.TypeMap[hand[^1].type];
 				order = orders[last][0];
-				return (hand[^1], enemyTable[order]);
+				return (hand[^1], playerTable[order]);
 			default:
 				SortOrders("basic");
 				SortHand();
@@ -168,7 +168,7 @@ public class Agent1 : Agent {
 				last = GlobalState.Instance.TypeMap[hand[^1].type];
 				freq[last]--;
 				order = orders[last][0];
-				return (hand[^1], enemyTable[order]);
+				return (hand[^1], playerTable[order]);
 		}
 	}
 	
@@ -180,7 +180,7 @@ public class Agent1 : Agent {
 			.ToArray();
 			
 		tableFreq = Enumerable.Range(0, 3)
-			.Select(type => enemyTable.Count(card => !card.visible && GlobalState.Instance.TypeMap[card.type] == type))
+			.Select(type => playerTable.Count(card => !card.visible && GlobalState.Instance.TypeMap[card.type] == type))
 			.ToArray();
 		sum = tableFreq.Sum();
 		if (sum == 0) return;
@@ -195,25 +195,25 @@ public class Agent1 : Agent {
 			).ToList()
 		).ToList();
 		
-		for (int i = 0; i < enemyTable.Count; i++) {
-			if (enemyTable[i].visible) {
+		for (int i = 0; i < playerTable.Count; i++) {
+			if (playerTable[i].visible) {
 				ranks[i] = new List<double> {-1e5, -1e5, -1e5};
 			}
 		}
 		
-		if (!enemyTable[order].visible) {
+		if (!playerTable[order].visible) {
 			for (int i = 0; i < freq.Length; i++) {
 				ranks[order][i] *= rankMod[last][i];
 			}
 		}
 		
-		if (order > 0 && round < 3 && !enemyTable[order-1].visible) {
+		if (order > 0 && round < 3 && !playerTable[order-1].visible) {
 			for (int i = 0; i < freq.Length; i++) {
 				ranks[order-1][i] *= adjRankMod[last][i];
 			}
 		}
 		
-		if (order < 5 && round < 3 && !enemyTable[order+1].visible) {
+		if (order < 5 && round < 3 && !playerTable[order+1].visible) {
 			for (int i = 0; i < freq.Length; i++) {
 				ranks[order+1][i] *= adjRankMod[last][i];
 			}

@@ -52,6 +52,7 @@ offset_bottom = 225.0
 script = ExtResource("1_1dsj7")
 
 [node name="DialoguePanel" type="Panel" parent="."]
+layout_mode = 0
 offset_right = 500.0
 offset_bottom = 100.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1dsj7")
@@ -63,7 +64,7 @@ offset_top = 5.0
 offset_right = 495.0
 offset_bottom = 60.0
 theme_override_fonts/font = SubResource("FontFile_6rt2l")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 16
 autowrap_mode = 3
 
 [node name="OptionsContainer" type="VBoxContainer" parent="DialoguePanel"]
