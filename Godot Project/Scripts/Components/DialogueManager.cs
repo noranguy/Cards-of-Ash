@@ -16,7 +16,7 @@ public class DialogueNode {
 }
 
 public class Dialogue {
-	public string person { get; set; }
+	public string speaker { get; set; }
 	public List<DialogueNode> dialogue { get; set; }
 }
 
@@ -24,13 +24,11 @@ public partial class DialogueManager : Control {
 	public static DialogueManager Instance { get; private set; }
 	
 	private Dictionary<string, DialogueNode> dialogueTree;
-	public static DialogueNode currentNode;
-
 	private Label dialogueText;
 	private VBoxContainer optionsContainer;
 	private PackedScene optionButtonScene;
-	
 	private TaskCompletionSource<string> nextNodeSource;
+	private string currentSpeaker;
 
 	public override void _Ready() {
 		Instance = this;
@@ -41,6 +39,11 @@ public partial class DialogueManager : Control {
 	}
 	
 	public async Task StartDialogue(string name) {
+		await StartDialogue(name, "start");
+	}
+	
+	public async Task StartDialogue(string name, string startNode) {
+		GD.Print($"{name} {startNode}");
 		dialogueTree = new();
 		dialogueText = GetNode<Label>("DialoguePanel/DialogueText");
 		optionsContainer = GetNode<VBoxContainer>("DialoguePanel/OptionsContainer");
@@ -48,37 +51,48 @@ public partial class DialogueManager : Control {
 		var panel = GetNode<Panel>("DialoguePanel");
 		panel.Visible = true;
 		
-		LoadDialogue($"res://Dialogue/{name}.json");
-		await RunDialogue("start");
-		
-		panel.Visible = false;
-	}
-
-	public void LoadDialogue(string path) {
-		var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+		var file = FileAccess.Open($"res://Dialogue/{name}.json", FileAccess.ModeFlags.Read);
 		var jsonText = file.GetAsText();
 		file.Close();
 
 		var dialogue = JsonSerializer.Deserialize<Dialogue>(jsonText);
-		var texture = GD.Load<Texture2D>($"res://Assets/CharacterDesigns/{dialogue.person}/portrait.png");
+		currentSpeaker = dialogue.speaker;
+		
 		var sprite = GetNode<Sprite2D>("DialoguePanel/Person");
-		sprite.Texture = texture;
+			
+		if (currentSpeaker == "self") {
+			sprite.Visible = false;
+			dialogueText.Size = new Vector2(490, dialogueText.Size.Y);
+			dialogueText.Position = new Vector2(5, dialogueText.Position.Y);
+			optionsContainer.Size = new Vector2(490, optionsContainer.Size.Y);
+			optionsContainer.Position = new Vector2(5, optionsContainer.Position.Y);
+		} else {
+			sprite.Visible = true;
+			dialogueText.Size = new Vector2(390, dialogueText.Size.Y);
+			dialogueText.Position = new Vector2(105, dialogueText.Position.Y);
+			optionsContainer.Size = new Vector2(390, optionsContainer.Size.Y);
+			optionsContainer.Position = new Vector2(105, optionsContainer.Position.Y);
+			var texture = GD.Load<Texture2D>($"res://Assets/CharacterDesigns/{dialogue.speaker}/portrait.png");
+			sprite.Texture = texture;
+		}
 		
 		foreach (var node in dialogue.dialogue) {
 			node.options ??= new List<DialogueOption>();
 			dialogueTree[node.id] = node;
 		}
+		
+		await RunDialogue(startNode);
+		panel.Visible = false;
 	}
 
-	public async Task RunDialogue(string startId) {
+	private async Task RunDialogue(string startId) {
 		string currentId = startId;
 
 		while (dialogueTree.ContainsKey(currentId)) {
 			var node = dialogueTree[currentId];
-			currentNode = node;
 
 			ClearOptions();
-			dialogueText.Text = "";
+			dialogueText.Text = currentSpeaker == "self" ? "" : $"{currentSpeaker}: ";
 
 			foreach (string word in node.text.Split(' ')) {
 				dialogueText.Text += word + " ";
