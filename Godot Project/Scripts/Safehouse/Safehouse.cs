@@ -135,7 +135,7 @@ public partial class Safehouse : StaticBody2D
 		}
 		else if (anim_name == "fade_to_dialogue")
 		{
-			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"{_character_order[(int)_day_num]}.tscn");
+			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Dialogue/{_character_order[(int)_day_num]}.tscn");
 		}
 	}
 
