@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=32 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bda3h4vm2eoh" path="res://Assets/In Play Safe House/pixilart-drawing (5).png" id="5_k3y4v"]
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
+[ext_resource type="PackedScene" uid="uid://cma322fr1tebd" path="res://Scenes/old_man_in_play.tscn" id="11_efang"]
 [ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
@@ -6238,7 +6239,6 @@ tile_set = SubResource("TileSet_a7hbh")
 color = Color(0.841499, 0.724029, 0.610333, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(-13, 195)
 scale = Vector2(11.109, 12.2075)
 color = Color(0.741176, 0.592157, 0, 1)
@@ -6268,3 +6268,8 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = SubResource("FontFile_dyk6q")
 theme_override_font_sizes/font_size = 100
 horizontal_alignment = 1
+
+[node name="OldManInPlay" parent="." instance=ExtResource("11_efang")]
+z_index = 4
+position = Vector2(4, -95.3809)
+scale = Vector2(3, 3)
