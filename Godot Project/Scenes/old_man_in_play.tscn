@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://cma322fr1tebd"]
+
+[ext_resource type="Texture2D" uid="uid://douh5gkl23ugx" path="res://Assets/Character Designs/Old Man/Old Man Portrait-animation-Sheet.png" id="1_u8on5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7423"]
+atlas = ExtResource("1_u8on5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7v8e"]
+atlas = ExtResource("1_u8on5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlkpo"]
+atlas = ExtResource("1_u8on5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dwm7"]
+atlas = ExtResource("1_u8on5")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukaco"]
+atlas = ExtResource("1_u8on5")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d67ct"]
+atlas = ExtResource("1_u8on5")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qo3o"]
+atlas = ExtResource("1_u8on5")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rn477"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_m7423")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_o7v8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlkpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dwm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukaco")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_d67ct")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_8qo3o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="OldManInPlay" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rn477")
+animation = &"idle"
+autoplay = "idle"
+frame = 5
+frame_progress = 0.249074

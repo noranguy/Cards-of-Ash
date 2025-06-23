@@ -1,33 +1,63 @@
 using Godot;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 // Safehouse area
 public partial class Safehouse : StaticBody2D
 {
-	CharacterBody2D _player;
+    private CharacterBody2D _player;
 
-	//RayCast2D _ray; - May come back to this, for now ignore all the ray stuff
+    //RayCast2D _ray; - May come back to this, for now ignore all the ray stuff
 
-	float _day_num; // Keep track of day, mornigns will be whole numbers, nights will be X.5
+    private float _day_num = 0; // Keep track of day, mornings will be whole numbers, nights will be X.5
 
-	// Flags to see if the player is in an interactable area
-	bool _in_bed = false;
-	bool _at_door = false;
-	bool _at_table = false;
+    // Flags to see if the player is in an interactable area
+    private bool _in_bed;
+    private bool _at_door;
+    private bool _at_table;
 
-	// Will be prompt nodes
-	Control _end_day_prompt;
-	Control _go_outside_prompt;
-	Control _start_game_prompt;
+	[Export]
+	public bool in_prompt;
+
+    // Flags for enviroment
+
+    private String[] _character_order = ["OldManTutorial", "Mom", "Kaishain", "Kid", "OldManEnd"];
+    private String[] _dialogue_order = ["old_man_tutorial_dialogue", "mom_dialogue", "Kaishain", "Kid", "OldManEnd"];
+
+    // Flags to keep track of safehouse state
+    private bool _player_has_cards;
+    private bool _npc_waiting;
+    private bool _game_ready;
+    private bool _day_over;
+
+    // Will be prompt nodes
+    private Control _end_day_prompt;
+    private Control _open_door_prompt;
+    private Control _start_game_prompt;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		// Set all flags
+		_player_has_cards = false;
+		_npc_waiting = false;
+		_game_ready = false;
+		_day_over = false;
+		_in_bed = false;
+		_at_door = false;
+		_at_table = false;
+
 		// Get all the prompt nodes
 		_end_day_prompt = GetNode<Control>("EndDayPrompt");
-		_go_outside_prompt = GetNode<Control>("GoOutsidePrompt");
+		_open_door_prompt = GetNode<Control>("OpenDoorPrompt");
 		_start_game_prompt = GetNode<Control>("StartGamePrompt");
+
+		_player = GetNode<CharacterBody2D>("PlayerCharacter");
+		_player.Visible = true;
+
+		_ = Start_day_oneAsync();
+		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
 
 		//_ray = GetNode<RayCast2D>("PlayerCharacter/RayCast2D");
 	}
@@ -38,68 +68,135 @@ public partial class Safehouse : StaticBody2D
 		// If the player is trying to interact with something
 		if (Input.IsActionJustPressed("interact"))
 		{
-			GD.Print("Mreow");
 
 			// If the player is in an interactable area, then show the prompt for that object
 			if (_at_table)
 			{
-				_start_game_prompt.Visible = true;
+				if (!_player_has_cards)
+				{
+					GetNode<Node2D>("MenkoCards").Visible = false;
+					_player_has_cards = true;
+					_npc_waiting = true;
+				}
+
+				else if (_game_ready)
+				{
+					_start_game_prompt.Visible = true;
+					GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
+				}
 			}
 
-			else if (_in_bed)
+			else if (_in_bed && _day_over)
 			{
 				_end_day_prompt.Visible = true;
+				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 			}
 
-			else if (_at_door)
+			else if (_at_door && _npc_waiting)
 			{
-				_go_outside_prompt.Visible = true;
+				_open_door_prompt.Visible = true;
+				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 			}
 		}
 	}
 
-	// Signals from interactable areas
-	void _on_bed_body_entered(Node2D body)
+    // Signals from interactable areas
+    private void _on_bed_body_entered(Node2D body)
 	{
 		_in_bed = true;
 	}
 
-	void _on_bed_body_exited(Node2D body)
+    private void _on_bed_body_exited(Node2D body)
 	{
 		_in_bed = false;
 	}
 
-	void _on_door_body_entered(Node2D body)
+    private void _on_door_body_entered(Node2D body)
 	{
 		_at_door = true;
 	}
 
-	void _on_door_body_exited(Node2D body)
+    private void _on_door_body_exited(Node2D body)
 	{
 		_at_door = false;
 	}
 
-	void _on_menko_table_body_entered(Node2D body)
+    private void _on_menko_table_body_entered(Node2D body)
 	{
 		_at_table = true;
 	}
 
-	void _on_menko_table_body_exited(Node2D body)
+    private void _on_menko_table_body_exited(Node2D body)
 	{
 		_at_table = false;
 	}
 
-	// Get rid of all prompts
-	void _on_cancel_pressed()
+    // Get rid of all prompts
+    private void _on_cancel_pressed()
 	{
 		_end_day_prompt.Visible = false;
-		_go_outside_prompt.Visible = false;
+		_open_door_prompt.Visible = false;
 		_start_game_prompt.Visible = false;
+		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
+
 	}
 
-	// Start Menko Game
-	void _on_start_game_pressed()
+    // When the player opens the door for the NPC
+    private void On_open_door_pressed()
 	{
-		GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("info_page.tscn");
+		_day_over = false;
+		_npc_waiting = false;
+		_game_ready = true;
+		GetNode<AnimationPlayer>("FadeToBlack/AnimationPlayer").Play("fade_to_black_dialogue");
+	}
+
+    // Start Menko Game
+    private void On_start_game_pressed()
+	{
+		GetNode<AnimationPlayer>("FadeToBlack/AnimationPlayer").Play("fade_to_game");
+	}
+
+    private void On_animation_player_animation_finished(StringName anim_name)
+	{
+		if (anim_name == "fade_to_game")
+		{
+			_start_game_prompt.Visible = false;
+			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("info_page.tscn");
+		}
+
+		else if (anim_name == "fade_to_black_dialogue")
+		{
+			_ = Dialogue_setupAsync();
+			GetNode<AnimationPlayer>("FadeToBlack/AnimationPlayer").Play("fade_to_dialogue");
+		}
+	}
+
+    private void Knock_at_door()
+	{
+		_npc_waiting = true;
+		_day_over = false;
+		_game_ready = false;
+	}
+
+    private async Task Dialogue_setupAsync()
+	{
+		string _character = _character_order[(int)_day_num];
+		_open_door_prompt.Visible = false;
+		GetNode<CharacterBody2D>(_character).Visible = true;
+		GetNode<CharacterBody2D>(_character).CollisionLayer = 1;
+		_player.Position = new Vector2(185, 130);
+
+		await DialogueManager.Instance.StartDialogue("example");
+
+		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
+		_npc_waiting = false;
+		_day_over = false;
+		_game_ready = true;
+		//GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Dialogue/{_dialogue_order[(int)_day_num]}.tscn"); for when theres a whole scene for dialogue
+	}
+
+    private static async Task Start_day_oneAsync()
+	{
+		await DialogueManager.Instance.StartDialogue("DayOne/pick_up_card_prompt");
 	}
 }
