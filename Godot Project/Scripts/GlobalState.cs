@@ -89,7 +89,9 @@ public partial class GlobalState : Node {
 	public readonly double CeramicProb = 0.25;
 	
 	private int day = 0;
-	
+	private bool post_game = false;
+	private bool player_has_cards = false;
+
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
 		() => new Agent1()
@@ -122,6 +124,26 @@ Press SPACE to continue.
 	
 	public int GetDay() {
 		return day;
+	}
+
+	public bool GetPostGame()
+	{
+		return post_game;
+	}
+
+	public void SetPostGame(bool after_game)
+	{
+		post_game = after_game;
+	}
+
+	public bool DoesPlayerHaveCards()
+	{
+		return player_has_cards;
+	}
+
+	public void PlayerGetsCards()
+	{
+		player_has_cards = true;
 	}
 	
 	// Updates the player's decks and increments day counter

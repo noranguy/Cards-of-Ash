@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bopgo0oixdhej"
-path="res://.godot/imported/pixel_art_e.jpg-38deba32f22d68430ae84e62689a1eee.ctex"
+uid="uid://bjj0q6bxp7ycj"
+path="res://.godot/imported/N.png-86cdcba45effe387d0e8a4a3762766a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Out of Play Safe House/pixel_art_e.jpg"
-dest_files=["res://.godot/imported/pixel_art_e.jpg-38deba32f22d68430ae84e62689a1eee.ctex"]
+source_file="res://Assets/Out of Play Safe House/N.png"
+dest_files=["res://.godot/imported/N.png-86cdcba45effe387d0e8a4a3762766a1.ctex"]
 
 [params]
 
