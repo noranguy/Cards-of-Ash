@@ -1,58 +1,59 @@
-[gd_scene load_steps=17 format=3 uid="uid://cma322fr1tebd"]
+[gd_scene load_steps=18 format=3 uid="uid://b4n15u6ggsmew"]
 
-[ext_resource type="Texture2D" uid="uid://4msq2lpgt055" path="res://Assets/Character Designs/Kaishain/kaishain draft-animation-Sheet.png" id="1_m7423"]
-[ext_resource type="Texture2D" uid="uid://douh5gkl23ugx" path="res://Assets/Character Designs/Old Man/Old Man Portrait-animation-Sheet.png" id="1_u8on5"]
+[ext_resource type="Texture2D" uid="uid://4msq2lpgt055" path="res://Assets/Character Designs/Kaishain/kaishain draft-animation-Sheet.png" id="1_gd7ai"]
+[ext_resource type="Script" uid="uid://dstkn6m2gf73c" path="res://Scenes/InPlay.cs" id="1_k2rkq"]
+[ext_resource type="Texture2D" uid="uid://douh5gkl23ugx" path="res://Assets/Character Designs/Old Man/Old Man Portrait-animation-Sheet.png" id="2_k2rkq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rn477"]
-atlas = ExtResource("1_m7423")
+atlas = ExtResource("1_gd7ai")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbxoi"]
-atlas = ExtResource("1_m7423")
+atlas = ExtResource("1_gd7ai")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fduc5"]
-atlas = ExtResource("1_m7423")
+atlas = ExtResource("1_gd7ai")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stntk"]
-atlas = ExtResource("1_m7423")
+atlas = ExtResource("1_gd7ai")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgitd"]
-atlas = ExtResource("1_m7423")
+atlas = ExtResource("1_gd7ai")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eavdf"]
-atlas = ExtResource("1_m7423")
+atlas = ExtResource("1_gd7ai")
 region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7423"]
-atlas = ExtResource("1_u8on5")
+atlas = ExtResource("2_k2rkq")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o7v8e"]
-atlas = ExtResource("1_u8on5")
+atlas = ExtResource("2_k2rkq")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tlkpo"]
-atlas = ExtResource("1_u8on5")
+atlas = ExtResource("2_k2rkq")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5dwm7"]
-atlas = ExtResource("1_u8on5")
+atlas = ExtResource("2_k2rkq")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ukaco"]
-atlas = ExtResource("1_u8on5")
+atlas = ExtResource("2_k2rkq")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d67ct"]
-atlas = ExtResource("1_u8on5")
+atlas = ExtResource("2_k2rkq")
 region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qo3o"]
-atlas = ExtResource("1_u8on5")
+atlas = ExtResource("2_k2rkq")
 region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rn477"]
@@ -108,9 +109,9 @@ animations = [{
 }]
 
 [node name="InPlay" type="Node2D"]
+script = ExtResource("1_k2rkq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rn477")
 animation = &"kaishain_idle"
-autoplay = "old_man_idle"
-frame_progress = 0.485373
+frame_progress = 0.317782
