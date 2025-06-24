@@ -82,6 +82,7 @@ public partial class GlobalState : Node {
 	
 	private int day = 0;
 	private bool post_game = false;
+	private bool player_has_cards = false;
 
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
@@ -125,6 +126,16 @@ Press SPACE to continue.
 	public void SetPostGame(bool after_game)
 	{
 		post_game = after_game;
+	}
+
+	public bool DoesPlayerHaveCards()
+	{
+		return player_has_cards;
+	}
+
+	public void PlayerGetsCards()
+	{
+		player_has_cards = true;
 	}
 	
 	public void NextDay()

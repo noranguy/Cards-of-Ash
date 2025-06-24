@@ -1,0 +1,117 @@
+{
+	"speaker": "Old Man",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Excuse my intrusion, but I saw the lights on and wanted to see if someone was hiding away in here.",
+			"options": [
+				{ "text": "\"I’ve made this my safehouse since the earthquake\"", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "I see … But I’m sorry to say, you will never survive secluding yourself away in a “safehouse” like this.",
+			"options": [
+				{ "text": "Continue", "next": "b" }
+		  	]
+		},
+	  {
+			"id": "b",
+			"text": "I’m an old man now, so this isn't my first “once in a lifetime” earthquake.",
+			"options": [
+				{ "text": "Continue", "next": "c" }
+		  	]
+		},
+	  {
+			"id": "c",
+			"text": "People get ugly in times of struggle, and It’s up to you to look out for yourself.",
+			"options": [
+				{ "text": "\"The earthquake destroyed everything I knew. I have nothing left.\"", "next": "d" }
+		  	]
+		},
+	  {
+			"id": "d",
+			"text": "...",
+			"options": [
+				{ "text": "Continue", "next": "e" }
+		  	]
+		},
+	  {
+			"id": "e",
+			"text": "You know you remind me of my daughter. She didn’t look out for herself. She cared too much for others. ",
+			"options": [
+				{ "text": "Continue", "next": "f" }
+		  	]
+		},
+	  {
+			"id": "f",
+			"text": "In times like these, all that gets you is trouble…",
+			"options": [
+				{ "text": "Continue", "next": "h" }
+		  	]
+		},
+	  {
+			"id": "h",
+			"text": "*Sigh* I suppose I can give you a few tips on how to handle yourself. That is if you even have any interest in surviving.",
+			"options": [
+				{ "text": "\"Please\"", "next": "i" }
+		  	]
+		},
+	  {
+			"id": "i",
+			"text": "I see you are desperate to survive. Good. You need to be.",
+			"options": [
+				{ "text": "Continue", "next": "j" }
+		  	]
+		},
+	  {
+			"id": "j",
+			"text": "First off, you can't let the earthquake break you down. Remember to hold on to any decent structure and whatever memories you have left",
+			"options": [
+				{ "text": "Continue", "next": "k" }
+		  	]
+		},
+	  {
+			"id": "k",
+			"text": "*He peers down and exclaims at the sight of the cards in your hand* Are those menko cards?",
+			"options": [
+				{ "text": "\"These? I'm not sure\"", "next": "l" }
+		  	]
+		},
+	  {
+			"id": "l",
+			"text": "They are! Pay attention now, I’m going to teach you the most paramount skill you'll need to survive. Learn from me, and you might be able to make it out of this. ",
+			"options": [
+				{ "text": "Continue", "next": "m" }
+		  	]
+		},
+	  {
+			"id": "m",
+			"text": "Menko’s a game where you put everything on the line. Risk your own resources, and you'll get the chance to take your opponent’s.",
+			"options": [
+				{ "text": "Continue", "next": "n" }
+		  	]
+		},
+	  {
+			"id": "n",
+			"text": "Of course, losing means disastrous consequences. But I’ll teach you my own ways. I have never been defeated - not once.",
+			"options": [
+				{ "text": "\"Isn’t taking resources from other people kinda…\"", "next": "o" }
+		  	]
+		},
+	  {
+			"id": "o",
+			"text": "*Sigh* So naive… Just like my daughter. You’ll listen to what I have to teach you, or you’ll end up just like her…",
+			"options": [
+				{ "text": "Continue", "next": "p" }
+		  	]
+		},
+	  {
+			"id": "p",
+			"text": "Go to the table and we can start a game.",
+			"options": [
+				{ "text": "Continue", "next": "end" }
+		  	]
+		}
+  	]
+}

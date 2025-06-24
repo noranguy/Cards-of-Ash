@@ -175,7 +175,6 @@ public partial class GameManager : Node2D {
 			} else {
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "tie");
 			}
-			GlobalState.Instance.NextDay();
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		}
 	}

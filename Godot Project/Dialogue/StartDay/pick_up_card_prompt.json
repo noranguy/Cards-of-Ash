@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-	"person": "example",
-=======
 	"speaker": "self",
->>>>>>> origin/main
 	"dialogue": [
 		{
 		  "id": "start",
