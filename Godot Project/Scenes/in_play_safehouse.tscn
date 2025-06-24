@@ -9,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bda3h4vm2eoh" path="res://Assets/In Play Safe House/pixilart-drawing (5).png" id="5_k3y4v"]
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
-[ext_resource type="Texture2D" uid="uid://4msq2lpgt055" path="res://Assets/Character Designs/Kaishain/kaishain draft-animation-Sheet.png" id="11_efang"]
+[ext_resource type="Texture2D" uid="uid://bnphgfq0s4mbh" path="res://Assets/Character Designs/Kaishain/agent_1.png" id="11_efang"]
 [ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
-[ext_resource type="Texture2D" uid="uid://douh5gkl23ugx" path="res://Assets/Character Designs/Old Man/Old Man Portrait-animation-Sheet.png" id="12_juooh"]
+[ext_resource type="Texture2D" uid="uid://bikssbixl4p0c" path="res://Assets/Character Designs/Old Man/agent_0.png" id="12_juooh"]
 [ext_resource type="AudioStream" uid="uid://cx2oaphfhg6v5" path="res://Assets/Music/CoffeeBlack.ogg" id="13_juooh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
