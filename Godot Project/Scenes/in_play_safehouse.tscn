@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dhivoubu7rp5c" path="res://Assets/In Play Safe House/info_button.png" id="12_60qq6"]
 [ext_resource type="Texture2D" uid="uid://bikssbixl4p0c" path="res://Assets/Character Designs/Old Man/agent_0.png" id="12_juooh"]
 [ext_resource type="AudioStream" uid="uid://cx2oaphfhg6v5" path="res://Assets/Music/CoffeeBlack.ogg" id="13_juooh"]
-[ext_resource type="PackedScene" path="res://Scenes/rule_book.tscn" id="13_qn0kl"]
+[ext_resource type="PackedScene" uid="uid://dn8arlwkev5by" path="res://Scenes/rule_book.tscn" id="13_qn0kl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
