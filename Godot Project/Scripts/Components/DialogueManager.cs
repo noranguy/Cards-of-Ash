@@ -33,6 +33,7 @@ public partial class DialogueManager : Control {
 	public override void _Ready() {
 		Instance = this;
 		var panel = GetNode<Panel>("DialoguePanel");
+		
 		panel.ZIndex = 100;
 		panel.SetZAsRelative(false);
 		panel.Visible = false;
@@ -43,14 +44,15 @@ public partial class DialogueManager : Control {
 	}
 	
 	public async Task StartDialogue(string name, string startNode) {
-		GD.Print($"{name} {startNode}");
 		dialogueTree = new();
 		dialogueText = GetNode<Label>("DialoguePanel/DialogueText");
 		optionsContainer = GetNode<VBoxContainer>("DialoguePanel/OptionsContainer");
 
+		// show dialogue box
 		var panel = GetNode<Panel>("DialoguePanel");
 		panel.Visible = true;
 		
+		// load dialogue from json
 		var file = FileAccess.Open($"res://Dialogue/{name}.json", FileAccess.ModeFlags.Read);
 		var jsonText = file.GetAsText();
 		file.Close();
@@ -60,6 +62,7 @@ public partial class DialogueManager : Control {
 		
 		var sprite = GetNode<Sprite2D>("DialoguePanel/Person");
 			
+		// display speaker portrait if not player
 		if (currentSpeaker == "self") {
 			sprite.Visible = false;
 			dialogueText.Size = new Vector2(490, dialogueText.Size.Y);
@@ -72,10 +75,11 @@ public partial class DialogueManager : Control {
 			dialogueText.Position = new Vector2(105, dialogueText.Position.Y);
 			optionsContainer.Size = new Vector2(390, optionsContainer.Size.Y);
 			optionsContainer.Position = new Vector2(105, optionsContainer.Position.Y);
-			var texture = GD.Load<Texture2D>($"res://Assets/CharacterDesigns/{dialogue.speaker}/portrait.png");
+			var texture = GD.Load<Texture2D>($"res://Assets/Character Designs/{dialogue.speaker}/portrait.png");
 			sprite.Texture = texture;
 		}
 		
+		// build dialogue tree
 		foreach (var node in dialogue.dialogue) {
 			node.options ??= new List<DialogueOption>();
 			dialogueTree[node.id] = node;
@@ -94,6 +98,7 @@ public partial class DialogueManager : Control {
 			ClearOptions();
 			dialogueText.Text = currentSpeaker == "self" ? "" : $"{currentSpeaker}: ";
 
+			// load current message one word at a time
 			foreach (string word in node.text.Split(' ')) {
 				dialogueText.Text += word + " ";
 				await ToSignal(GetTree().CreateTimer(0.05), "timeout");

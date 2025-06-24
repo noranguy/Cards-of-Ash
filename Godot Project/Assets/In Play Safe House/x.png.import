@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2dt1yvnq5vg3"
-path="res://.godot/imported/mom & son mini sprite.png-7a024480defb349b68225cdd4444b027.ctex"
+uid="uid://bjlp2hlm6v2gu"
+path="res://.godot/imported/x.png-b1a64223af6dd0db3e38d7e411725de1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CharacterDesigns/Mom & Son/mom & son mini sprite.png"
-dest_files=["res://.godot/imported/mom & son mini sprite.png-7a024480defb349b68225cdd4444b027.ctex"]
+source_file="res://Assets/In Play Safe House/x.png"
+dest_files=["res://.godot/imported/x.png-b1a64223af6dd0db3e38d7e411725de1.ctex"]
 
 [params]
 

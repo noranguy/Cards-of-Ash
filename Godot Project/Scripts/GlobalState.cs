@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+// Stores information to display before each Menko game
 public struct Info {
 	public string Title;
 	public string Class;
@@ -22,6 +23,7 @@ public partial class GlobalState : Node {
 		Instance = this;
 	}
 	
+	// Tracks the types of the cards in the player's hand deck
 	private List<string> humanHandTypes = new List<string> {
 		"tsunami",
 		"volcano",
@@ -33,6 +35,8 @@ public partial class GlobalState : Node {
 		"volcano",
 		"earthquake"
 	};
+	
+	// Tracks the classes of the cards in the player's hand deck
 	private List<string> humanHandClasses = new List<string> {
 		"basic",
 		"basic",
@@ -44,6 +48,8 @@ public partial class GlobalState : Node {
 		"basic",
 		"basic"
 	};
+	
+	// Tracks the classes of the cards in the player's table deck
 	private List<string> humanTableClasses = new List<string> {
 		"basic",
 		"basic",
@@ -70,6 +76,7 @@ public partial class GlobalState : Node {
 		humanTableClasses.Add(clas);
 	}
 	
+	// Base probabilities of flipping a card against [stronger, equal, weaker] type
 	public readonly float[] FlipProb = new float[] {0.05f, 0.5f, 0.95f};
 	
 	public readonly Dictionary<string, int> TypeMap = new() {
@@ -78,9 +85,11 @@ public partial class GlobalState : Node {
 		{ "earthquake", 2 }
 	};
 	
+	// Probability multiplier of flipping adjacent cards when throwing a ceramic card
 	public readonly double CeramicProb = 0.25;
 	
 	private int day = 0;
+	
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
 		() => new Agent1()
@@ -115,6 +124,7 @@ Press SPACE to continue.
 		return day;
 	}
 	
+	// Updates the player's decks and increments day counter
 	public void NextDay() {
 		if (day > 0) {
 			var clas = GetInfo().Class;

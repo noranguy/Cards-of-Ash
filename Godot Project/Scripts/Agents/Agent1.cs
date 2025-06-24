@@ -58,11 +58,24 @@ public class Agent1 : Agent {
 		return (types, classes);
 	}
 	
+	// probability of each table card being each type, shape 6x3
 	private List<List<double>> ranks;
+	// range for table indices to be sorted, shape 3x6
 	private List<List<int>> orders;
+	
+	// probability modifier when failing a throw from a certain type
+	// rankMod[x] = the probability of the card being each of [light, regular, heavy] type after
+	//              failing a throw with card of type x
 	private double[][] rankMod;
+	
+	// similar to rankMod but for adjacent cards when throwing a ceramic card since lower chance of
+	// flipping
 	private double[][] adjRankMod;
+	
+	// frequency of enemy basic hand cards by type
 	private int[] freq;
+	
+	// frequency of unflipped player table cards by type
 	private int[] tableFreq;
 	
 	private int round;
@@ -80,6 +93,7 @@ public class Agent1 : Agent {
 		this.playerTable = playerTable;
 		this.enemyTable = enemyTable;
 		
+		// start with equal chance of unflipped cards being each type
 		ranks = Enumerable.Range(0, 6)
 			.Select(_ => new List<double> {1.0 / 3, 1.0 / 3, 1.0 / 3})
 			.ToList();
@@ -173,6 +187,7 @@ public class Agent1 : Agent {
 	}
 	
 	public override void Backward() {
+		// update part of rank from using frequency of flipped player table cards
 		int sum = tableFreq.Sum();
 		
 		double[] oldProb = Enumerable.Range(0, 3)
@@ -180,8 +195,9 @@ public class Agent1 : Agent {
 			.ToArray();
 			
 		tableFreq = Enumerable.Range(0, 3)
-			.Select(type => playerTable.Count(card => !card.visible && GlobalState.Instance.TypeMap[card.type] == type))
-			.ToArray();
+			.Select(type => playerTable.Count(card =>
+				!card.visible && GlobalState.Instance.TypeMap[card.type] == type
+			)).ToArray();
 		sum = tableFreq.Sum();
 		if (sum == 0) return;
 			
@@ -195,24 +211,28 @@ public class Agent1 : Agent {
 			).ToList()
 		).ToList();
 		
+		// prioritize unflipped table cards
 		for (int i = 0; i < playerTable.Count; i++) {
 			if (playerTable[i].visible) {
 				ranks[i] = new List<double> {-1e5, -1e5, -1e5};
 			}
 		}
 		
+		// apply rank modifier if last throw failed
 		if (!playerTable[order].visible) {
 			for (int i = 0; i < freq.Length; i++) {
 				ranks[order][i] *= rankMod[last][i];
 			}
 		}
 		
+		// apply rank modifier for left card if last throw failed and was ceramic
 		if (order > 0 && round < 3 && !playerTable[order-1].visible) {
 			for (int i = 0; i < freq.Length; i++) {
 				ranks[order-1][i] *= adjRankMod[last][i];
 			}
 		}
 		
+		// apply rank modifier for right card if last throw failed and was ceramic
 		if (order < 5 && round < 3 && !playerTable[order+1].visible) {
 			for (int i = 0; i < freq.Length; i++) {
 				ranks[order+1][i] *= adjRankMod[last][i];

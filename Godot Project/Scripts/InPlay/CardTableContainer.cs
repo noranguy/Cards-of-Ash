@@ -33,6 +33,7 @@ public partial class CardTableContainer : Node2D {
 		playerCards = SpawnCards(playerTypes, playerClasses, true);
 	}
 	
+	// randomize order of table cards
 	private List<int> GenRandomOrder() {
 		List<int> order = Enumerable.Range(0, numCards).ToList();
 		
@@ -51,6 +52,7 @@ public partial class CardTableContainer : Node2D {
 		return order;
 	}
 	
+	// instantiate cards using vectors to a vanishing point for perspective distortion
 	public virtual List<Card> SpawnCards(
 		List<string> types, List<string> classes,
 		bool isPlayer
@@ -77,7 +79,6 @@ public partial class CardTableContainer : Node2D {
 			}
 			Vector2 topLeft = bottomLeft + dirLeft * Card.SIZE2.Y;
 			Vector2 topRight = bottomRight + dirRight * Card.SIZE2.Y;
-			//GD.Print($"({topLeft.X}, {topLeft.Y}) ({topRight.X}, {topRight.Y}) ({bottomRight.X}, {bottomRight.Y}) ({bottomLeft.X}, {bottomLeft.Y})");
 			Vector2[] vertices = new Vector2[] {
 				topLeft + offset,
 				topRight + offset,
@@ -107,10 +108,10 @@ public partial class CardTableContainer : Node2D {
 
 	public PackedScene cardScene;
 	public Card activeCard = null;
-	public bool allowActive = true;
+	public HashSet<Card> restrictAllow;
 	
 	public virtual void OnCardClicked(Card card) {
-		if (activeCard == card || !allowActive || (!card.isPlayer && card.index == -1)) {
+		if (activeCard == card || (restrictAllow != null && !restrictAllow.Contains(card)) || (!card.isPlayer && card.index == -1)) {
 			return;
 		}
 		

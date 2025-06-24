@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4as6cy10b5ce"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loefu"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Rulebook" type="Panel"]
+z_index = 10
+
+[node name="DialoguePanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_loefu")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(480, 280)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 490.0
+offset_bottom = 290.0
+bbcode_enabled = true
+text = "[center]Menko Rulebook[/center]
+
+1. Tsunami beats Volcano, Volcano beats Earthquake, and Earthquake beats Tsunami.
+
+2. Whenever a table card flips, it deteriorates and becomes 20% harder to flip.
+
+3. Win by flipping more of the opponent's cards than yours.
+
+4. The game ends when all cards are thrown or a player has flipped all 6 cards."

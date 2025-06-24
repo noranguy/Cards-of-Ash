@@ -11,29 +11,38 @@ public partial class GameManager : Node2D {
 	private CardTableContainer table;
 	private AnimatedSprite2D anim;
 	
-	private ThrowButton throwButton;
+	private BetterButton throwButton;
+	private BetterButton infoButton;
+	private Panel rulebook;
 	
 	private Agent enemy;
 	
-	private bool allowThrow = false;	
+	private bool allowThrow = false;
 	
-	static readonly int yEnemyHand = -140;
-	static readonly int yPlayerHand = 90;
-	static readonly int[][] FlipRank = new int[][] {
+	// y values for hand positions
+	private readonly int yEnemyHand = -140;
+	private readonly int yPlayerHand = 90;
+	
+	// relationship between card types
+	private readonly int[][] FlipRank = new int[][] {
 		new int[]{1, 0, 2},
 		new int[]{2, 1, 0},
 		new int[]{0, 2, 1}
 	};
-	static readonly Random Rand = new Random();
+	private readonly Random Rand = new Random();
 	
 	int round = 0;
 
 	public async override void _Ready() {
-		anim = GetParent().GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 				
-		throwButton = GetParent().GetNode<ThrowButton>("ThrowButton");
+		throwButton = GetNode<BetterButton>("ThrowButton");
+		infoButton = GetNode<BetterButton>("InfoButton");
+		rulebook = GetNode<Panel>("Rulebook");
+		
 		ThrowToggle(false);
-		throwButton.Connect(ThrowButton.SignalName.Pressed, new Callable(this, nameof(Round)));
+		throwButton.Connect(BetterButton.SignalName.Pressed, new Callable(this, nameof(Round)));
+		infoButton.Connect(BetterButton.SignalName.Pressed, new Callable(this, nameof(RulebookToggle)));
 		
 		playerHand = new Hand();
 		enemyHand = new Hand();
@@ -45,8 +54,11 @@ public partial class GameManager : Node2D {
 		
 		enemy = GlobalState.Instance.GetNextAgent();
 		
+		// loads enemy hand/table
 		var (enemyHandTypes, enemyHandClasses) = enemy.GetHandCards();
 		var (enemyTableTypes, enemyTableClasses) = enemy.GetTableCards();
+		
+		// loads player decks as hand (will be replaced with deck builder scene)
 		var (playerHandTypes, playerHandClasses) = GlobalState.Instance.GetHandCards();
 		var playerTableClasses = GlobalState.Instance.GetTableClasses();
 		var playerTableTypes = new List<string> {
@@ -61,19 +73,39 @@ public partial class GameManager : Node2D {
 		
 		enemy.Init(enemyHand.GetCards(), table.GetPlayerCards(), table.GetEnemyCards());
 		
-		playerHand.Connect(Hand.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivePlayerHand)));
-		table.Connect(CardTableContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActivetable)));
+		playerHand.Connect(Hand.SignalName.ActiveCard, new Callable(this, nameof(UpdateActiveHandCard)));
+		table.Connect(CardTableContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActiveTableCard)));
 		
 		anim.Play($"agent_{GlobalState.Instance.GetDay()}");
 
+		var playerFirst = playerHand.GetCards()[0];
+		var tableFirst = table.GetEnemyCards()[0];
+		
+		if (GlobalState.Instance.GetDay() == 0) {
+			playerHand.restrictAllow = new HashSet<Card> { playerFirst };
+			table.restrictAllow = new HashSet<Card> { tableFirst };
+		}
+		
 		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start");
-
-		if (GlobalState.Instance.GetDay() == 0)
-		{
-			playerHand.OnCardClicked(playerHand.GetCards()[0]);
-			table.OnCardClicked(table.GetEnemyCards()[0]);
-			playerHand.allowActive = table.allowActive = false;
-		} 
+		
+		if (GlobalState.Instance.GetDay() == 0) {
+			playerFirst.Focus();
+			tableFirst.Focus();
+		}
+	}
+	
+	public void RulebookToggle() {
+		if (rulebook.Visible) {
+			rulebook.Visible = false;
+			var sprite = GetNode<Sprite2D>("InfoButton/Image");
+			var texture = GD.Load<Texture2D>("res://Assets/In Play Safe House/info_button.png");
+			sprite.Texture = texture;
+		} else {
+			rulebook.Visible = true;
+			var sprite = GetNode<Sprite2D>("InfoButton/Image");
+			var texture = GD.Load<Texture2D>("res://Assets/In Play Safe House/x.png");
+			sprite.Texture = texture;
+		}
 	}
 	
 	public void ThrowToggle(bool active) {
@@ -89,12 +121,12 @@ public partial class GameManager : Node2D {
 		throwButton.Modulate = res ? Colors.White : new Color(1, 1, 1, 0.4f);
 	}
 	
-	public void UpdateActivePlayerHand(Card card) {
+	public void UpdateActiveHandCard(Card card) {
 		playerHand.activeCard = card;
 		ThrowToggle(true);
 	}
 	
-	public void UpdateActivetable(Card card) {
+	public void UpdateActiveTableCard(Card card) {
 		table.activeCard = card;
 		ThrowToggle(true);
 	}
@@ -143,9 +175,10 @@ public partial class GameManager : Node2D {
 	
 	private async void Round() {
 		if (!allowThrow) return;
+		table.activeCard.Unfocus();
 		
 		// player turn
-		ThrowCard(playerHand.activeCard, new List<Card> {table.activeCard});		
+		ThrowCard(playerHand.activeCard, new List<Card> {table.activeCard});
 		ThrowToggle(false);
 		
 		await ToSignal(GetTree().CreateTimer(1), "timeout");
@@ -158,15 +191,19 @@ public partial class GameManager : Node2D {
 		
 		// round end
 		round++;
+		playerHand.restrictAllow = table.restrictAllow = null;
 		
+		// tutorial dialogue
 		if (GlobalState.Instance.GetDay() == 0 && (round == 1 || round == 3)) {
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
-			playerHand.allowActive = table.allowActive = true;
 			await DialogueManager.Instance.StartDialogue($"agent_0/{round}");
 		}
+		
+		// track player and enemy score
 		int playerCount = table.GetEnemyCards().Count(card => card.visible);
 		int enemyCount = table.GetPlayerCards().Count(card => card.visible);
 		
+		// game end
 		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
 			if (playerCount > enemyCount) {
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "win");

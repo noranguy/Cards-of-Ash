@@ -17,34 +17,13 @@
 		},
 		{
 			"id": "b",
-			"text": "There are three card types: Tsunami, Volcano, and Earthquake. Each one has strengths and weaknesses.",
+			"text": "But remember, table card types are hidden until they are revealed.",
 			"options": [
 			  { "text": "Continue", "next": "c" }
 			]
 		},
 		{
 			"id": "c",
-			"text": "Tsunami beats Volcano, Volcano beats Earthquake, and Earthquake beats Tsunami. Like rock-paper-scissors.",
-			"options": [
-				{ "text": "Continue", "next": "d" }
-			]
-		},
-		{
-			"id": "d",
-			"text": "Picking the right type greatly increases your flip chance: 95% if strong, 50% if same type, and only 5% if weak.",
-			"options": [
-				{ "text": "Continue", "next": "e" }
-			]
-		},
-		{
-			"id": "e",
-			"text": "But remember, table card types are hidden until they are revealed.",
-			"options": [
-			  { "text": "Continue", "next": "f" }
-			]
-		},
-		{
-			"id": "f",
 			"text": "Throw your leftmost throwing card at my leftmost table card by pressing the Throw button.",
 			"options": [
 				{ "text": "Start Game", "next": "end" }
