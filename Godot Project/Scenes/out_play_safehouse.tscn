@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://cfyc8k4gjjnmr"]
+[gd_scene load_steps=32 format=4 uid="uid://cfyc8k4gjjnmr"]
 
 [ext_resource type="Texture2D" uid="uid://ckfgjv3b7nhid" path="res://Assets/Out of Play Safe House/wall border and floor tilesheet 16.png" id="2_rq048"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="3_aoges"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://fxiwo7ukluj0" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Tileset Stone Ground.png" id="9_fyvbu"]
 [ext_resource type="Texture2D" uid="uid://c54vfs3s5wuhh" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Struct.png" id="10_3dj7d"]
 [ext_resource type="Texture2D" uid="uid://q13m6b7q3gil" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Plant.png" id="11_xpeuc"]
+[ext_resource type="AudioStream" uid="uid://c4m4vsbc0c3s2" path="res://Assets/Music/out_play.mp3" id="12_h5bus"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4lti2"]
 texture = ExtResource("2_rq048")
@@ -8017,3 +8018,9 @@ tile_map_data = PackedByteArray("AADs//T/AQAAAAAAAADs//X/AQAAAAEAAADs//b/AQAGAAc
 tile_set = SubResource("TileSet_2drdq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+editor_description = "\"Solo Jazz Guitar - Riverline\" by Tri-Tachyon - https://soundcloud.com/tri-tachyon/albums"
+stream = ExtResource("12_h5bus")
+autoplay = true
+parameters/looping = true
