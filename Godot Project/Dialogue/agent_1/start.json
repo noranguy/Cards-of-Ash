@@ -1,0 +1,12 @@
+{
+	"speaker": "Kaishain",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "You got a smoke?",
+			"options": [
+				{ "text": "Continue", "next": "end" }
+			]
+		}
+	]
+}

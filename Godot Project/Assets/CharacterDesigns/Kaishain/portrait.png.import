@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di57cptrr6aj1"
-path="res://.godot/imported/portrait.png-14b8303c0629a71a9b04a8bebbbbf3bc.ctex"
+uid="uid://dirr4833faon8"
+path="res://.godot/imported/portrait.png-dc0ace46ca20f2211733fdab380494f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CharacterDesigns/OldMan/portrait.png"
-dest_files=["res://.godot/imported/portrait.png-14b8303c0629a71a9b04a8bebbbbf3bc.ctex"]
+source_file="res://Assets/CharacterDesigns/Kaishain/portrait.png"
+dest_files=["res://.godot/imported/portrait.png-dc0ace46ca20f2211733fdab380494f2.ctex"]
 
 [params]
 

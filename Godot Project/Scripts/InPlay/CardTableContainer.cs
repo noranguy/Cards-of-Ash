@@ -11,25 +11,26 @@ public partial class CardTableContainer : Node2D {
 	private Random rand;
 	
 	private List<Vector2> vectorX = new List<Vector2>();
-	private Vector2 vanishingPoint = new Vector2(108.5f, -500);
-	private Vector2 offset = new Vector2(-92.5f, 175);
+	private Vector2 vanishingPoint = new Vector2(108.5f, -2000);
+	private Vector2 offset;
 
 	public void Init(
 		PackedScene scene, List<string> playerTypes,
 		List<string> playerClasses,
-		List<string> enemyTypes, List<String> enemyClasses,
-		float playerY, float enemyY
+		List<string> enemyTypes, List<string> enemyClasses
 	) {
 		rand = new Random();
 		cardScene = scene;
 		
 		for (int i = 0; i < numCards; i++) {
-			vectorX.Add(new Vector2(i * (32 + 5), 0));
-			vectorX.Add(new Vector2(i * (32 + 5) + 32, 0));
+			vectorX.Add(new Vector2(i * (Card.SIZE2.X + 5), 0));
+			vectorX.Add(new Vector2(i * (Card.SIZE2.X + 5) + Card.SIZE2.X, 0));
 		}
 		
-		enemyCards = SpawnCards(enemyTypes, enemyClasses, enemyY, false);
-		playerCards = SpawnCards(playerTypes, playerClasses, playerY, true);
+		offset = new Vector2(-(vectorX[0].X + vectorX[^1].X) / 2, 175);
+		
+		enemyCards = SpawnCards(enemyTypes, enemyClasses, false);
+		playerCards = SpawnCards(playerTypes, playerClasses, true);
 	}
 	
 	private List<int> GenRandomOrder() {
@@ -49,22 +50,14 @@ public partial class CardTableContainer : Node2D {
 		
 		return order;
 	}
-	/*
-		Vector2 bottomLeft = bottomCenter + new Vector2(-width / 2, 0);
-		Vector2 bottomRight = bottomCenter + new Vector2(width / 2, 0);
-
-		Vector2 dirLeft = (vanishingPoint - bottomLeft).Normalized();
-		Vector2 dirRight = (vanishingPoint - bottomRight).Normalized();
-
-		Vector2 topLeft = bottomLeft + dirLeft * height;
-		Vector2 topRight = bottomRight + dirRight * height;*/
 	
 	public virtual List<Card> SpawnCards(
 		List<string> types, List<string> classes,
-		float y, bool isPlayer
+		bool isPlayer
 	) {
 		List<int> order = GenRandomOrder();
 		List<Card> cards = new List<Card>();
+		
 		for (int i = 0; i < numCards; i++) {
 			Card card = cardScene.Instantiate<Card>();
 			card.Name = $"Card{i}";
@@ -79,11 +72,11 @@ public partial class CardTableContainer : Node2D {
 				bottomLeft = lVec;
 				bottomRight = rVec;
 			} else {
-				bottomLeft = lVec + dirLeft * (Card.SIZE.Y + 5);
-				bottomRight = rVec + dirRight * (Card.SIZE.Y + 5);
+				bottomLeft = lVec + dirLeft * (Card.SIZE2.Y + 5);
+				bottomRight = rVec + dirRight * (Card.SIZE2.Y + 5);
 			}
-			Vector2 topLeft = bottomLeft + dirLeft * Card.SIZE.Y;
-			Vector2 topRight = bottomRight + dirRight * Card.SIZE.Y;
+			Vector2 topLeft = bottomLeft + dirLeft * Card.SIZE2.Y;
+			Vector2 topRight = bottomRight + dirRight * Card.SIZE2.Y;
 			//GD.Print($"({topLeft.X}, {topLeft.Y}) ({topRight.X}, {topRight.Y}) ({bottomRight.X}, {bottomRight.Y}) ({bottomLeft.X}, {bottomLeft.Y})");
 			Vector2[] vertices = new Vector2[] {
 				topLeft + offset,
