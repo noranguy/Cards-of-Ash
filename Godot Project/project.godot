@@ -21,7 +21,6 @@ SceneLoader="*res://Scenes/scene_loader.tscn"
 GlobalState="*res://Scripts/GlobalState.cs"
 DialogueManager="*res://Components/dialogue_manager.tscn"
 PlayerCharacter="*res://Scenes/Characters/player_character.tscn"
-SafeHouseData="*res://Scenes/safe_house_data.tscn"
 
 [dialogue_manager]
 
