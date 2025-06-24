@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cwj72mveseo4r"]
 
-[ext_resource type="Script" uid="uid://buy2alspb62at" path="res://Scripts/InfoPage.cs" id="1_iwbsr"]
+[ext_resource type="Script" uid="uid://buy2alspb62at" path="res://Scripts/InPlay/InfoPage.cs" id="1_iwbsr"]
 [ext_resource type="Texture2D" uid="uid://1ivdonv17ahd" path="res://Assets/Cards/earthquake_basic.png" id="1_jhmf5"]
 [ext_resource type="Texture2D" uid="uid://cm6o02qusl4qr" path="res://Assets/Cards/tsunami_basic.png" id="2_pi2h0"]
 [ext_resource type="Texture2D" uid="uid://bsyook4jja5ra" path="res://Assets/Cards/volcano_basic.png" id="3_fp1kd"]

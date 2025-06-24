@@ -13,11 +13,12 @@ script = ExtResource("1_rjlel")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(0, 1.33333, 2.66667, 5.33333, 5.33333, 2.66667, 2.66667, 0)
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 48, 0, 48)
 
 [node name="CardImage" type="Polygon2D" parent="."]
 texture = ExtResource("3_37end")
-polygon = PackedVector2Array(9.6296, 10.0869, -3.85184, 10.0869, -3.85185, 40.3478, 9.6296, 40.3478)
+polygon = PackedVector2Array(32, 0, 0, 0, 2.38419e-07, 48, 32, 48)
+uv = PackedVector2Array(32, 0, 0, 0, 0.248221, 47.8755, 33.3645, 48.2476)
 
 [connection signal="input_event" from="Area2D" to="." method="OnInputEvent"]
 [connection signal="mouse_entered" from="Area2D" to="." method="OnMouseEntered"]

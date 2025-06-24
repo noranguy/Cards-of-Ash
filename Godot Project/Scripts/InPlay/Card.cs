@@ -25,7 +25,6 @@ public partial class Card : Control {
 	
 	public override void _Ready() {
 		sprite = GetNode<Polygon2D>("CardImage");
-		//Init(DEFAULT_VERTICES, "volcano", "basic", true, true, 0);
 	}
 	
 	public void Init(Vector2[] vertices, string type, string clas, bool visible, bool isPlayer, int index) {
@@ -36,11 +35,9 @@ public partial class Card : Control {
 		this.visible = visible;
 		this.isPlayer = isPlayer;
 		this.index = index;
-
-		sprite.UV = DEFAULT_VERTICES;
 		
 		if (index == -1) {
-			collisionPolygon.Polygon = sprite.Polygon = sprite.UV;
+			collisionPolygon.Polygon = sprite.Polygon = DEFAULT_VERTICES;
 		} else {
 			collisionPolygon.Polygon = sprite.Polygon = vertices;
 		}

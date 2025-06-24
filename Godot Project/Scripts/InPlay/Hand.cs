@@ -40,6 +40,7 @@ public partial class Hand : Control {
 		UpdateCardPositions();
 	}
 	
+	// card fan
 	public virtual void UpdateCardPositions() {
 		int numCards = cards.Count;
 		int cardFormat = 8 + cards.Count % 2;
