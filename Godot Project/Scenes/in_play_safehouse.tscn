@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://4msq2lpgt055" path="res://Assets/Character Designs/Kaishain/kaishain draft-animation-Sheet.png" id="11_efang"]
 [ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
 [ext_resource type="Texture2D" uid="uid://douh5gkl23ugx" path="res://Assets/Character Designs/Old Man/Old Man Portrait-animation-Sheet.png" id="12_juooh"]
-[ext_resource type="AudioStream" uid="uid://8yo8xfm81f42" path="res://Assets/Music/in_play.mp3" id="13_juooh"]
+[ext_resource type="AudioStream" uid="uid://cx2oaphfhg6v5" path="res://Assets/Music/CoffeeBlack.ogg" id="13_juooh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
@@ -6350,7 +6350,7 @@ sprite_frames = SubResource("SpriteFrames_qn0kl")
 animation = &"agent_1"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-editor_description = "SOUND AIRYLUVS by ISAo https://airyluvs.com/"
+editor_description = "Coffee Black by GrimFrenzy"
 stream = ExtResource("13_juooh")
 autoplay = true
 parameters/looping = true
