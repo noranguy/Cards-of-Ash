@@ -9,6 +9,7 @@ public partial class GameManager : Node2D {
 	private Hand playerHand;
 	private Hand enemyHand;
 	private CardTableContainer table;
+	private AnimatedSprite2D anim;
 	
 	private ThrowButton throwButton;
 	
@@ -31,6 +32,8 @@ public partial class GameManager : Node2D {
 	int round = 0;
 
 	public async override void _Ready() {
+		anim = GetParent().GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+				
 		throwButton = GetParent().GetNode<ThrowButton>("ThrowButton");
 		ThrowToggle(false);
 		throwButton.Connect(ThrowButton.SignalName.Pressed, new Callable(this, nameof(Round)));
@@ -67,12 +70,16 @@ public partial class GameManager : Node2D {
 		playerHand.Connect(Hand.SignalName.ActiveCard, new Callable(this, nameof(UpdateActiveHandCard)));
 		table.Connect(CardTableContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActiveTableCard)));
 		
+		anim.Play($"agent_{GlobalState.Instance.GetDay()}");
+
 		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start");
-		if (GlobalState.Instance.GetDay() == 0) {
+
+		if (GlobalState.Instance.GetDay() == 0)
+		{
 			playerHand.OnCardClicked(playerHand.GetCards()[0]);
 			table.OnCardClicked(table.GetEnemyCards()[0]);
 			playerHand.allowActive = table.allowActive = false;
-		}
+		} 
 	}
 	
 	public void ThrowToggle(bool active) {

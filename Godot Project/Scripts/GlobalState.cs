@@ -7,8 +7,9 @@ public struct Info {
 	public string Title;
 	public string Class;
 	public string Description;
-	
-	public Info(string Title, string Class, string Description) {
+
+	public Info(string Title, string Class, string Description)
+	{
 		this.Title = Title;
 		this.Class = Class;
 		this.Description = Description;

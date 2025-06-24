@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=46 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -9,8 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bda3h4vm2eoh" path="res://Assets/In Play Safe House/pixilart-drawing (5).png" id="5_k3y4v"]
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
-[ext_resource type="PackedScene" uid="uid://cma322fr1tebd" path="res://Scenes/old_man_in_play.tscn" id="11_efang"]
+[ext_resource type="Texture2D" uid="uid://4msq2lpgt055" path="res://Assets/Character Designs/Kaishain/kaishain draft-animation-Sheet.png" id="11_efang"]
 [ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
+[ext_resource type="Texture2D" uid="uid://douh5gkl23ugx" path="res://Assets/Character Designs/Old Man/Old Man Portrait-animation-Sheet.png" id="12_juooh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
@@ -6169,6 +6170,110 @@ gradient = SubResource("Gradient_k3y4v")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7423"]
+atlas = ExtResource("12_juooh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7v8e"]
+atlas = ExtResource("12_juooh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlkpo"]
+atlas = ExtResource("12_juooh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dwm7"]
+atlas = ExtResource("12_juooh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukaco"]
+atlas = ExtResource("12_juooh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d67ct"]
+atlas = ExtResource("12_juooh")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qo3o"]
+atlas = ExtResource("12_juooh")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rn477"]
+atlas = ExtResource("11_efang")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbxoi"]
+atlas = ExtResource("11_efang")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fduc5"]
+atlas = ExtResource("11_efang")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stntk"]
+atlas = ExtResource("11_efang")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgitd"]
+atlas = ExtResource("11_efang")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eavdf"]
+atlas = ExtResource("11_efang")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qn0kl"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_m7423")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_o7v8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlkpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dwm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukaco")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_d67ct")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_8qo3o")
+}],
+"loop": true,
+"name": &"agent_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_rn477")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbxoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fduc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stntk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgitd")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_eavdf")
+}],
+"loop": true,
+"name": &"agent_1",
+"speed": 5.0
+}]
+
 [node name="InPlaySafehouse" type="Node2D"]
 scale = Vector2(1, 0.996007)
 
@@ -6235,7 +6340,9 @@ offset_top = 8.03207
 offset_right = 351.0
 offset_bottom = 8.03207
 
-[node name="OldManInPlay" parent="." instance=ExtResource("11_efang")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 4
-position = Vector2(4, -95.3809)
-scale = Vector2(3, 3)
+position = Vector2(0, -73.2927)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_qn0kl")
+animation = &"agent_0"
