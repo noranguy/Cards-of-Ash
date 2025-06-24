@@ -40,6 +40,7 @@ public partial class Hand : Control {
 		UpdateCardPositions();
 	}
 	
+	// card fan
 	public virtual void UpdateCardPositions() {
 		int numCards = cards.Count;
 		int cardFormat = 8 + cards.Count % 2;
@@ -87,10 +88,10 @@ public partial class Hand : Control {
 
 	public PackedScene cardScene;
 	public Card activeCard = null;
-	public bool allowActive = true;
+	public HashSet<Card> restrictAllow;
 	
 	public virtual void OnCardClicked(Card card) {
-		if (activeCard == card || !allowActive || (!card.isPlayer && card.index == -1)) {
+		if (activeCard == card || (restrictAllow != null && !restrictAllow.Contains(card)) || (!card.isPlayer && card.index == -1)) {
 			return;
 		}
 		

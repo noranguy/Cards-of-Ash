@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmiwowijb7e5e"
-path="res://.godot/imported/portrait.png-c13b4a9cf42455c553f74b693a86e82c.ctex"
+uid="uid://dhivoubu7rp5c"
+path="res://.godot/imported/info_button.png-28cd7fe2576b2e6f598328f669d74e3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CharacterDesigns/Default/portrait.png"
-dest_files=["res://.godot/imported/portrait.png-c13b4a9cf42455c553f74b693a86e82c.ctex"]
+source_file="res://Assets/In Play Safe House/info_button.png"
+dest_files=["res://.godot/imported/info_button.png-28cd7fe2576b2e6f598328f669d74e3f.ctex"]
 
 [params]
 
