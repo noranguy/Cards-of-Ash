@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbf7r2klo73sb"
-path="res://.godot/imported/old man mini sprite.png-543d89fe35eff314980368005a91c356.ctex"
+uid="uid://bmiwowijb7e5e"
+path="res://.godot/imported/portrait.png-69bbd1c22645e8fdd8d33906a9cdaf03.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CharacterDesigns/Old Man/old man mini sprite.png"
-dest_files=["res://.godot/imported/old man mini sprite.png-543d89fe35eff314980368005a91c356.ctex"]
+source_file="res://Assets/Character Designs/Default/portrait.png"
+dest_files=["res://.godot/imported/portrait.png-69bbd1c22645e8fdd8d33906a9cdaf03.ctex"]
 
 [params]
 

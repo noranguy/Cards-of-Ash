@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=49 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -10,8 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
 [ext_resource type="Texture2D" uid="uid://bnphgfq0s4mbh" path="res://Assets/Character Designs/Kaishain/agent_1.png" id="11_efang"]
-[ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
+[ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/better_button.tscn" id="11_ivp4u"]
+[ext_resource type="Texture2D" uid="uid://c37kylsjn3iyu" path="res://Assets/In Play Safe House/throw_button.png" id="11_juooh"]
 [ext_resource type="Texture2D" uid="uid://bikssbixl4p0c" path="res://Assets/Character Designs/Old Man/agent_0.png" id="12_juooh"]
+[ext_resource type="Texture2D" uid="uid://dhivoubu7rp5c" path="res://Assets/In Play Safe House/info_button.png" id="12_qn0kl"]
+[ext_resource type="PackedScene" uid="uid://b4as6cy10b5ce" path="res://Scenes/rule_book.tscn" id="15_6cmn6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
@@ -6275,7 +6278,8 @@ animations = [{
 }]
 
 [node name="InPlaySafehouse" type="Node2D"]
-scale = Vector2(1, 0.996007)
+script = ExtResource("9_dyk6q")
+cardScene = ExtResource("7_rt2xm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.929683, 6.10036)
@@ -6329,16 +6333,22 @@ shadow_enabled = true
 shadow_filter = 1
 texture = SubResource("GradientTexture2D_rt2xm")
 
-[node name="GameManager" type="Node2D" parent="."]
-script = ExtResource("9_dyk6q")
-cardScene = ExtResource("7_rt2xm")
-
 [node name="ThrowButton" parent="." instance=ExtResource("11_ivp4u")]
 z_index = 10
-offset_left = 351.0
-offset_top = 8.03207
-offset_right = 351.0
-offset_bottom = 8.03207
+offset_left = 298.0
+offset_top = 28.0
+offset_right = 298.0
+offset_bottom = 28.0
+texture = ExtResource("11_juooh")
+
+[node name="InfoButton" parent="." instance=ExtResource("11_ivp4u")]
+z_index = 10
+offset_left = 381.0
+offset_top = -199.0
+offset_right = 381.0
+offset_bottom = -199.0
+scale = Vector2(1, 1)
+texture = ExtResource("12_qn0kl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 4
@@ -6346,3 +6356,11 @@ position = Vector2(0, -73.2927)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_qn0kl")
 animation = &"agent_0"
+
+[node name="Rulebook" parent="." instance=ExtResource("15_6cmn6")]
+visible = false
+z_index = 20
+offset_left = -250.0
+offset_top = -150.0
+offset_right = -250.0
+offset_bottom = -150.0

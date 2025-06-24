@@ -60,6 +60,8 @@ public partial class Safehouse : StaticBody2D
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
 
 		//_ray = GetNode<RayCast2D>("PlayerCharacter/RayCast2D");
+		Label dayLabel = GetNode<Label>("DayLabel");
+		dayLabel.Text = $"Day {GlobalState.Instance.GetDay() + 1}";
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

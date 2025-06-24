@@ -44,7 +44,6 @@ public partial class DialogueManager : Control {
 	}
 	
 	public async Task StartDialogue(string name, string startNode) {
-		GD.Print($"{name} {startNode}");
 		dialogueTree = new();
 		dialogueText = GetNode<Label>("DialoguePanel/DialogueText");
 		optionsContainer = GetNode<VBoxContainer>("DialoguePanel/OptionsContainer");
@@ -76,7 +75,7 @@ public partial class DialogueManager : Control {
 			dialogueText.Position = new Vector2(105, dialogueText.Position.Y);
 			optionsContainer.Size = new Vector2(390, optionsContainer.Size.Y);
 			optionsContainer.Position = new Vector2(105, optionsContainer.Position.Y);
-			var texture = GD.Load<Texture2D>($"res://Assets/CharacterDesigns/{dialogue.speaker}/portrait.png");
+			var texture = GD.Load<Texture2D>($"res://Assets/Character Designs/{dialogue.speaker}/portrait.png");
 			sprite.Texture = texture;
 		}
 		

@@ -173,7 +173,7 @@ cache/0/80/0/scale = 1.0
 script = ExtResource("1_iwbsr")
 
 [node name="Tsunami" type="Sprite2D" parent="."]
-position = Vector2(-259, 0)
+position = Vector2(-260, 0)
 scale = Vector2(2, 2)
 texture = ExtResource("2_pi2h0")
 
@@ -183,7 +183,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("3_fp1kd")
 
 [node name="Earthquake" type="Sprite2D" parent="."]
-position = Vector2(-102, 0)
+position = Vector2(-100, 0)
 scale = Vector2(2, 2)
 texture = ExtResource("1_jhmf5")
 
@@ -213,3 +213,30 @@ theme_override_font_sizes/normal_font_size = 80
 text = "Card Info"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TsunamiText" type="Label" parent="."]
+offset_left = -292.0
+offset_top = 53.0
+offset_right = -228.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 12
+text = "Tsunami"
+horizontal_alignment = 1
+
+[node name="VolcanoText" type="Label" parent="."]
+offset_left = -212.0
+offset_top = 53.0
+offset_right = -148.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 12
+text = "Volcano"
+horizontal_alignment = 1
+
+[node name="EarthquakeText" type="Label" parent="."]
+offset_left = -132.0
+offset_top = 53.0
+offset_right = -68.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 12
+text = "Earthquake"
+horizontal_alignment = 1

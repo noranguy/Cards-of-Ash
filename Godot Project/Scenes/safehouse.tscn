@@ -433,6 +433,14 @@ libraries = {
 &"": SubResource("AnimationLibrary_algie")
 }
 
+[node name="DayLabel" type="Label" parent="."]
+z_index = 5
+offset_left = 581.0
+offset_top = -2.0
+offset_right = 624.0
+offset_bottom = 21.0
+text = "Day 1"
+
 [connection signal="pressed" from="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/OpenDoor" to="." method="_on_open_door_pressed"]
 [connection signal="pressed" from="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

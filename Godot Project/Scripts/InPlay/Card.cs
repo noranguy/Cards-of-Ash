@@ -23,12 +23,40 @@ public partial class Card : Control {
 	public int index;
 	private Polygon2D sprite;
 	
+	private Sprite2D indicator;
+	private float indicatorMin = -30;
+	private float indicatorMax = -10;
+	private float indicatorDir = 1;
+	private float indicatorX;
+	
 	public override void _Ready() {
 		sprite = GetNode<Polygon2D>("CardImage");
+		indicator.Visible = false;
+		indicatorX = indicator.Position.X;
+		indicator.Position = new Vector2(indicatorX, indicatorMin);
+	}
+	
+	public override void _Process(double delta) {
+		indicator.Position += new Vector2(0, 1 / (2 * (float)delta) * indicatorDir * (float)delta);
+		if (indicator.Position.Y > indicatorMax) {
+			indicatorDir = -1;
+		} else if (indicator.Position.Y < indicatorMin) {
+			indicatorDir = 1;
+		}
+	}
+	
+	public void Focus() {
+		indicator.Visible = true;
+	}
+	
+	public void Unfocus() {
+		indicator.Visible = false;
 	}
 	
 	public void Init(Vector2[] vertices, string type, string clas, bool visible, bool isPlayer, int index) {
 		sprite = GetNode<Polygon2D>("CardImage");
+		indicator = GetNode<Sprite2D>("Indicator");
+		
 		var collisionPolygon = GetNode<CollisionPolygon2D>("Area2D/CollisionPolygon2D");
 		this.type = type;
 		this.clas = clas;
@@ -36,10 +64,14 @@ public partial class Card : Control {
 		this.isPlayer = isPlayer;
 		this.index = index;
 		
+		sprite.UV = DEFAULT_VERTICES;
 		if (index == -1) {
 			collisionPolygon.Polygon = sprite.Polygon = DEFAULT_VERTICES;
 		} else {
 			collisionPolygon.Polygon = sprite.Polygon = vertices;
+			indicatorMin += vertices[0].Y;
+			indicatorMax += vertices[0].Y;
+			indicator.Position = new Vector2((vertices[0].X + vertices[1].X) / 2, indicatorMin);
 		}
 		
 		UpdateTexture();

@@ -11,7 +11,9 @@ public partial class GameManager : Node2D {
 	private CardTableContainer table;
 	private AnimatedSprite2D anim;
 	
-	private ThrowButton throwButton;
+	private BetterButton throwButton;
+	private BetterButton infoButton;
+	private Panel rulebook;
 	
 	private Agent enemy;
 	
@@ -32,11 +34,15 @@ public partial class GameManager : Node2D {
 	int round = 0;
 
 	public async override void _Ready() {
-		anim = GetParent().GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 				
-		throwButton = GetParent().GetNode<ThrowButton>("ThrowButton");
+		throwButton = GetNode<BetterButton>("ThrowButton");
+		infoButton = GetNode<BetterButton>("InfoButton");
+		rulebook = GetNode<Panel>("Rulebook");
+		
 		ThrowToggle(false);
-		throwButton.Connect(ThrowButton.SignalName.Pressed, new Callable(this, nameof(Round)));
+		throwButton.Connect(BetterButton.SignalName.Pressed, new Callable(this, nameof(Round)));
+		infoButton.Connect(BetterButton.SignalName.Pressed, new Callable(this, nameof(RulebookToggle)));
 		
 		playerHand = new Hand();
 		enemyHand = new Hand();
@@ -72,14 +78,34 @@ public partial class GameManager : Node2D {
 		
 		anim.Play($"agent_{GlobalState.Instance.GetDay()}");
 
+		var playerFirst = playerHand.GetCards()[0];
+		var tableFirst = table.GetEnemyCards()[0];
+		
+		if (GlobalState.Instance.GetDay() == 0) {
+			playerHand.restrictAllow = new HashSet<Card> { playerFirst };
+			table.restrictAllow = new HashSet<Card> { tableFirst };
+		}
+		
 		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start");
-
-		if (GlobalState.Instance.GetDay() == 0)
-		{
-			playerHand.OnCardClicked(playerHand.GetCards()[0]);
-			table.OnCardClicked(table.GetEnemyCards()[0]);
-			playerHand.allowActive = table.allowActive = false;
-		} 
+		
+		if (GlobalState.Instance.GetDay() == 0) {
+			playerFirst.Focus();
+			tableFirst.Focus();
+		}
+	}
+	
+	public void RulebookToggle() {
+		if (rulebook.Visible) {
+			rulebook.Visible = false;
+			var sprite = GetNode<Sprite2D>("InfoButton/Image");
+			var texture = GD.Load<Texture2D>("res://Assets/In Play Safe House/info_button.png");
+			sprite.Texture = texture;
+		} else {
+			rulebook.Visible = true;
+			var sprite = GetNode<Sprite2D>("InfoButton/Image");
+			var texture = GD.Load<Texture2D>("res://Assets/In Play Safe House/x.png");
+			sprite.Texture = texture;
+		}
 	}
 	
 	public void ThrowToggle(bool active) {
@@ -149,9 +175,10 @@ public partial class GameManager : Node2D {
 	
 	private async void Round() {
 		if (!allowThrow) return;
+		table.activeCard.Unfocus();
 		
 		// player turn
-		ThrowCard(playerHand.activeCard, new List<Card> {table.activeCard});		
+		ThrowCard(playerHand.activeCard, new List<Card> {table.activeCard});
 		ThrowToggle(false);
 		
 		await ToSignal(GetTree().CreateTimer(1), "timeout");
@@ -164,11 +191,11 @@ public partial class GameManager : Node2D {
 		
 		// round end
 		round++;
+		playerHand.restrictAllow = table.restrictAllow = null;
 		
 		// tutorial dialogue
 		if (GlobalState.Instance.GetDay() == 0 && (round == 1 || round == 3)) {
 			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
-			playerHand.allowActive = table.allowActive = true;
 			await DialogueManager.Instance.StartDialogue($"agent_0/{round}");
 		}
 		
