@@ -92,6 +92,7 @@ public partial class GlobalState : Node {
 	private bool post_game = false;
 	private bool player_has_cards = false;
 
+
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
 		() => new Agent1()
