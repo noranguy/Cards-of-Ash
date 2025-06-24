@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=47 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
 [ext_resource type="Texture2D" uid="uid://bnphgfq0s4mbh" path="res://Assets/Character Designs/Kaishain/agent_1.png" id="11_efang"]
 [ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/throw_button.tscn" id="11_ivp4u"]
-[ext_resource type="Texture2D" uid="uid://bikssbixl4p0c" path="res://Assets/Character Designs/Old Man/agent_0.png" id="12_juooh"]
+
+[ext_resource type="Texture2D" uid="uid://douh5gkl23ugx" path="res://Assets/Character Designs/Old Man/Old Man Portrait-animation-Sheet.png" id="12_juooh"]
+[ext_resource type="AudioStream" uid="uid://cx2oaphfhg6v5" path="res://Assets/Music/CoffeeBlack.ogg" id="13_juooh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
@@ -6282,6 +6284,7 @@ scale = Vector2(0.929683, 6.10036)
 
 [node name="TileMap2" type="TileMap" parent="."]
 modulate = Color(0.376658, 0.376658, 0.376658, 1)
+position = Vector2(0, 10)
 scale = Vector2(1.15, 1.15)
 format = 2
 
@@ -6294,7 +6297,7 @@ tile_set = SubResource("TileSet_dyk6q")
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMap2"]
 z_index = 3
 scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAACAP7/AAAOAAIAAAACAP//AAAOAAIAAAACAAAAAAAOAAMAAAACAAEAAAAOAAQAAAADAP7/AAAOAAIAAAADAP//AAAPAAIAAAADAAAAAAAPAAMAAAADAAEAAAAPAAQAAAAEAP7/AAAOAAIAAAAEAP//AAAPAAIAAAAEAAAAAAAPAAMAAAAEAAEAAAAPAAQAAAAFAP7/AAAOAAIAAAAFAP//AAAPAAIAAAAFAAAAAAAPAAMAAAAFAAEAAAAPAAQAAAAGAP7/AAAQAAIAAAAGAP//AAAQAAIAAAAGAAAAAAAQAAMAAAAGAAEAAAAQAAQAAAAAAP3/AAAMAAEAAAAAAP7/AAAMAAIAAAAAAP//AAAMAAIAAAAAAAAAAAAMAAMAAAAAAAEAAAAMAAQAAAABAP3/AAANAAEAAAABAP7/AAANAAIAAAABAP//AAANAAIAAAABAAAAAAANAAMAAAABAAEAAAANAAQAAAACAP3/AAAOAAEAAAADAP3/AAAOAAEAAAAEAP3/AAAOAAEAAAAFAP3/AAAOAAEAAAAGAP3/AAAQAAEAAAD5//3/AQAsACcAAAD5//7/AQAsACgAAAD5////AQAsACkAAAD5/wAAAQAsACoAAAD5/wEAAQAsACsAAAD5/wIAAQAsACwAAAD6//3/AQAtACcAAAD6//7/AQAtACgAAAD6////AQAtACkAAAD6/wAAAQAtACoAAAD6/wEAAQAtACsAAAD6/wIAAQAtACwAAAD7//3/AQAuACcAAAD7//7/AQAuACgAAAD7////AQAuACkAAAD7/wAAAQAuACoAAAD7/wEAAQAuACsAAAD7/wIAAQAuACwAAAD4//3/AQArACcAAAD4//7/AQArACgAAAD4////AQArACkAAAD4/wAAAQArACoAAAD4/wEAAQArACsAAAD4/wIAAQArACwAAAA=")
+tile_map_data = PackedByteArray("AAACAP7/AAAOAAIAAAACAP//AAAOAAIAAAACAAAAAAAOAAMAAAACAAEAAAAOAAQAAAADAP7/AAAOAAIAAAADAP//AAAPAAIAAAADAAAAAAAPAAMAAAADAAEAAAAPAAQAAAAEAP7/AAAOAAIAAAAEAP//AAAPAAIAAAAEAAAAAAAPAAMAAAAEAAEAAAAPAAQAAAAFAP7/AAAOAAIAAAAFAP//AAAPAAIAAAAFAAAAAAAPAAMAAAAFAAEAAAAPAAQAAAAGAP7/AAAQAAIAAAAGAP//AAAQAAIAAAAGAAAAAAAQAAMAAAAGAAEAAAAQAAQAAAAAAP3/AAAMAAEAAAAAAP7/AAAMAAIAAAAAAP//AAAMAAIAAAAAAAAAAAAMAAMAAAAAAAEAAAAMAAQAAAABAP3/AAANAAEAAAABAP7/AAANAAIAAAABAP//AAANAAIAAAABAAAAAAANAAMAAAABAAEAAAANAAQAAAACAP3/AAAOAAEAAAADAP3/AAAOAAEAAAAEAP3/AAAOAAEAAAAFAP3/AAAOAAEAAAAGAP3/AAAQAAEAAAD4//7/AQArACgAAAD4////AQArACkAAAD4/wAAAQArACoAAAD4/wEAAQArACsAAAD4/wIAAQArACwAAAD5//7/AQAsACgAAAD5////AQAsACkAAAD5/wAAAQAsACoAAAD5/wEAAQAsACsAAAD5/wIAAQAsACwAAAD6//7/AQAtACgAAAD6////AQAtACkAAAD6/wAAAQAtACoAAAD6/wEAAQAtACsAAAD6/wIAAQAtACwAAAD7//7/AQAuACgAAAD7////AQAuACkAAAD7/wAAAQAuACoAAAD7/wEAAQAuACsAAAD7/wIAAQAuACwAAAD4//3/AQArACcAAAD5//3/AQAsACcAAAD6//3/AQAtACcAAAD7//3/AQAuACcAAAA=")
 tile_set = SubResource("TileSet_k3y4v")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -6345,4 +6348,10 @@ z_index = 4
 position = Vector2(0, -73.2927)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_qn0kl")
-animation = &"agent_0"
+animation = &"agent_1"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+editor_description = "Coffee Black by GrimFrenzy"
+stream = ExtResource("13_juooh")
+autoplay = true
+parameters/looping = true
