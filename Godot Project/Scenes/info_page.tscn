@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bsyook4jja5ra" path="res://Assets/Cards/volcano_basic.png" id="3_fp1kd"]
 
 [sub_resource type="FontFile" id="FontFile_celcy"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -148,6 +151,9 @@ cache/0/64/0/underline_thickness = 0.0
 cache/0/64/0/scale = 1.0
 
 [sub_resource type="FontFile" id="FontFile_o88k8"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0

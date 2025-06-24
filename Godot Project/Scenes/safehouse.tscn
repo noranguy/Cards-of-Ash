@@ -1,10 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://bvd7sgi6dix5n"]
+[gd_scene load_steps=29 format=3 uid="uid://bvd7sgi6dix5n"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
 [ext_resource type="PackedScene" uid="uid://cfyc8k4gjjnmr" path="res://Scenes/out_play_safehouse.tscn" id="3_6l742"]
 [ext_resource type="PackedScene" uid="uid://dcpwly3u48me3" path="res://Scenes/Characters/old_man_tutorial.tscn" id="3_v5lnp"]
 [ext_resource type="Texture2D" uid="uid://u1eorlu248cw" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
+[ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishaiin.tscn" id="5_algie"]
+[ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
+[ext_resource type="Texture2D" uid="uid://b7p24k71dg18m" path="res://Assets/Out of Play Safe House/KO.png" id="8_mt6l6"]
+[ext_resource type="Texture2D" uid="uid://bjj0q6bxp7ycj" path="res://Assets/Out of Play Safe House/N.png" id="9_mt6l6"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
 a = Vector2(38, -10)
@@ -35,12 +39,74 @@ size = Vector2(60, 27)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l742"]
 size = Vector2(48, 79)
 
+[sub_resource type="Animation" id="Animation_krigs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ko:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("N:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b4d46"]
+resource_name = "knocking"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ko:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 0.316667, 0.566667, 0.816667, 1.06667, 1.31667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("N:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0666667, 0.316667, 0.566667, 0.816667, 1.06667, 1.31667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uq6vu"]
+_data = {
+&"RESET": SubResource("Animation_krigs"),
+&"knocking": SubResource("Animation_b4d46")
+}
+
 [sub_resource type="Animation" id="Animation_vpc17"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:color")
+tracks/0/path = NodePath("Interact:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -55,7 +121,7 @@ resource_name = "fade_to_black_dialogue"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:color")
+tracks/0/path = NodePath("Interact:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,12 +131,27 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_gxkjp"]
+resource_name = "fade_to_day"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interact:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_v5lnp"]
 resource_name = "fade_to_dialogue"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:color")
+tracks/0/path = NodePath("Interact:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -85,7 +166,23 @@ resource_name = "fade_to_game"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:color")
+tracks/0/path = NodePath("Interact:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_algie"]
+resource_name = "fade_to_night"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interact:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -99,8 +196,10 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_vpc17"),
 &"fade_to_black_dialogue": SubResource("Animation_1njoc"),
+&"fade_to_day": SubResource("Animation_gxkjp"),
 &"fade_to_dialogue": SubResource("Animation_v5lnp"),
-&"fade_to_game": SubResource("Animation_6l742")
+&"fade_to_game": SubResource("Animation_6l742"),
+&"fade_to_night": SubResource("Animation_algie")
 }
 
 [node name="Safehouse" type="StaticBody2D"]
@@ -330,6 +429,12 @@ position = Vector2(185, 90)
 collision_layer = 0
 collision_mask = 2
 
+[node name="Kaishain" parent="." instance=ExtResource("5_algie")]
+visible = false
+z_index = 7
+position = Vector2(185, 90)
+collision_layer = 0
+
 [node name="Door" type="Area2D" parent="."]
 z_index = 5
 position = Vector2(0, 1)
@@ -372,6 +477,24 @@ position = Vector2(319.5, 168)
 rotation = 1.5708
 collision_mask = 2
 
+[node name="Interact" type="TextureRect" parent="MenkoTable"]
+visible = false
+z_index = 5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = 12.0
+offset_right = -6.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+texture = ExtResource("7_gxkjp")
+expand_mode = 1
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MenkoTable"]
 position = Vector2(6.00002, -0.499939)
 shape = SubResource("RectangleShape2D_n5cdq")
@@ -399,6 +522,7 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_6l742")
 
 [node name="MenkoCards" type="Node2D" parent="."]
+visible = false
 position = Vector2(315, 185)
 
 [node name="MenkoCards" type="TextureRect" parent="MenkoCards"]
@@ -416,9 +540,47 @@ grow_vertical = 2
 texture = ExtResource("4_vpc17")
 expand_mode = 1
 
+[node name="Interact" type="TextureRect" parent="MenkoCards"]
+z_index = 7
+offset_left = -30.0
+offset_top = -50.0
+offset_right = -6.0
+offset_bottom = -26.0
+texture = ExtResource("7_gxkjp")
+expand_mode = 1
+
+[node name="Knock" type="Node2D" parent="."]
+visible = false
+z_index = 6
+position = Vector2(225, 50)
+scale = Vector2(0.5, 0.5)
+
+[node name="Ko" type="TextureRect" parent="Knock"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("8_mt6l6")
+expand_mode = 1
+
+[node name="N" type="TextureRect" parent="Knock"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_mt6l6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Knock"]
+libraries = {
+&"": SubResource("AnimationLibrary_uq6vu")
+}
+
 [node name="FadeToBlack" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="ColorRect" parent="FadeToBlack"]
+[node name="Interact" type="ColorRect" parent="FadeToBlack"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -440,6 +602,8 @@ offset_top = -2.0
 offset_right = 624.0
 offset_bottom = 21.0
 text = "Day 1"
+
+[connection signal="pressed" from="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/EndDay" to="." method="_on_end_day_pressed"]
 
 [connection signal="pressed" from="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/OpenDoor" to="." method="_on_open_door_pressed"]

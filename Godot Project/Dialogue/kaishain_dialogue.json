@@ -1,0 +1,68 @@
+{
+	"speaker": "Kaishain",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Hey kid, nice place you got here.",
+			"options": [
+				{ "text": "\"Thanks\"", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "To be honest, I’ve been kinda down on my luck recently.",
+			"options": [
+				{ "text": "Continue", "next": "b" }
+		  	]
+		},
+	  {
+			"id": "b",
+			"text": "I mean I’m even down to my last pack of cigs.",
+			"options": [
+				{ "text": "Continue", "next": "c" }
+		  	]
+		},
+	  {
+			"id": "c",
+			"text": "But from the looks of it my luck’s turning around.",
+			"options": [
+				{ "text": "Continue", "next": "d" }
+		  	]
+		},
+	  {
+			"id": "d",
+			"text": "I'm assuming you know how things work around here?",
+			"options": [
+				{ "text": "Continue", "next": "e" }
+		  	]
+		},
+	  {
+			"id": "e",
+			"text": "Me and you in a game of Menko, with our resources on the line.",
+			"options": [
+				{ "text": "Can't believe people actually do that", "next": "f" }
+		  	]
+		},
+	  {
+			"id": "f",
+			"text": "Oh yeah baby, this is the real world now",
+			"options": [
+				{ "text": "Continue", "next": "g" }
+		  	]
+		},
+	  {
+			"id": "g",
+			"text": "Forget whatever you've seen about menko, I've got some cards that'll blow you away. ",
+			"options": [
+				{ "text": "Continue", "next": "h" }
+		  	]
+		},
+	  {
+			"id": "h",
+			"text": "Get ready to part with your stuff kind, we're settling this at the table",
+			"options": [
+				{ "text": "Continue", "next": "end" }
+		  	]
+		}
+	]
+}
