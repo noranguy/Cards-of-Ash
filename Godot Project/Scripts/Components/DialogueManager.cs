@@ -117,10 +117,12 @@ public partial class DialogueManager : Control {
 					Text = option.text,
 					Name = i.ToString()
 				};
-
+				
 				string targetId = option.next;
 				button.Pressed += () => nextNodeSource.TrySetResult(targetId);
 				optionsContainer.AddChild(button);
+				button.FocusMode = FocusModeEnum.All;
+				button.GrabFocus();
 			}
 
 			currentId = await nextNodeSource.Task;

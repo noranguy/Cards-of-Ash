@@ -59,7 +59,7 @@
 		},
 	  {
 			"id": "h",
-			"text": "Get ready to part with your stuff kind, we're settling this at the table",
+			"text": "Get ready to part with your stuff kid, we're settling this at the table",
 			"options": [
 				{ "text": "Continue", "next": "end" }
 		  	]

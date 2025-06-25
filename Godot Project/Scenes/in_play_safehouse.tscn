@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
 [ext_resource type="Texture2D" uid="uid://c37kylsjn3iyu" path="res://Assets/In Play Safe House/throw_button.png" id="11_5y0wf"]
 [ext_resource type="Texture2D" uid="uid://bnphgfq0s4mbh" path="res://Assets/Character Designs/Kaishain/agent_1.png" id="11_efang"]
-[ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/better_button.tscn" id="11_ivp4u"]
+[ext_resource type="PackedScene" uid="uid://c8k8fivslbsf0" path="res://Components/better_button.tscn" id="11_ivp4u"]
 [ext_resource type="Texture2D" uid="uid://dhivoubu7rp5c" path="res://Assets/In Play Safe House/info_button.png" id="12_60qq6"]
 [ext_resource type="Texture2D" uid="uid://bikssbixl4p0c" path="res://Assets/Character Designs/Old Man/agent_0.png" id="12_juooh"]
 [ext_resource type="AudioStream" uid="uid://cx2oaphfhg6v5" path="res://Assets/Music/CoffeeBlack.ogg" id="13_juooh"]
@@ -6345,11 +6345,11 @@ texture = ExtResource("11_5y0wf")
 
 [node name="InfoButton" parent="." instance=ExtResource("11_ivp4u")]
 z_index = 10
-offset_left = 376.0
-offset_top = -195.782
-offset_right = 376.0
-offset_bottom = -195.782
-scale = Vector2(1, 1)
+offset_left = 369.0
+offset_top = -158.0
+offset_right = 369.0
+offset_bottom = -158.0
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_60qq6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

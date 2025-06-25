@@ -23,18 +23,18 @@ public partial class Card : Control {
 	public int index;
 	private Polygon2D sprite;
 	
-	private Sprite2D indicator;
-	private float indicatorMin = -30;
-	private float indicatorMax = -10;
-	private float indicatorDir = 1;
-	private float indicatorX;
-	
 	public override void _Ready() {
 		sprite = GetNode<Polygon2D>("CardImage");
 		indicator.Visible = false;
 		indicatorX = indicator.Position.X;
 		indicator.Position = new Vector2(indicatorX, indicatorMin);
 	}
+	
+	private Sprite2D indicator;
+	private float indicatorMin = -30;
+	private float indicatorMax = -10;
+	private float indicatorDir = 1;
+	private float indicatorX;
 	
 	public override void _Process(double delta) {
 		indicator.Position += new Vector2(0, 1 / (2 * (float)delta) * indicatorDir * (float)delta);
