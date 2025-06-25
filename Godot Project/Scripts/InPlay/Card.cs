@@ -21,13 +21,11 @@ public partial class Card : Control {
 	public string type;
 	public string clas;
 	public int index;
-	private Polygon2D sprite;
+	public Polygon2D sprite;
 	
-	private Sprite2D indicator;
-	private float indicatorMin = -30;
-	private float indicatorMax = -10;
-	private float indicatorDir = 1;
-	private float indicatorX;
+	private Tween tween;
+	public Vector2 upperPosition;
+	public Vector2 lowerPosition;
 	
 	public override void _Ready() {
 		sprite = GetNode<Polygon2D>("CardImage");
@@ -35,6 +33,12 @@ public partial class Card : Control {
 		indicatorX = indicator.Position.X;
 		indicator.Position = new Vector2(indicatorX, indicatorMin);
 	}
+	
+	private Sprite2D indicator;
+	private float indicatorMin = -30;
+	private float indicatorMax = -10;
+	private float indicatorDir = 1;
+	private float indicatorX;
 	
 	public override void _Process(double delta) {
 		indicator.Position += new Vector2(0, 1 / (2 * (float)delta) * indicatorDir * (float)delta);
@@ -73,6 +77,8 @@ public partial class Card : Control {
 			indicatorMax += vertices[0].Y;
 			indicator.Position = new Vector2((vertices[0].X + vertices[1].X) / 2, indicatorMin);
 		}
+		upperPosition = Position + new Vector2(0, -10);
+		lowerPosition = Position;
 		
 		UpdateTexture();
 	}
@@ -104,17 +110,27 @@ public partial class Card : Control {
 	
 	public void Highlight() {
 		if (index == -1 && !isPlayer) return;
-		var sprite = GetNode<Polygon2D>("CardImage");
 		Shader shader = GD.Load<Shader>("res://Shaders/card_highlight.gdshader");
 		ShaderMaterial mat = new ShaderMaterial { Shader = shader };
 		sprite.Material = mat;
+		
+		if (index != -1) return;
+
+		if (tween != null && tween.IsRunning()) {
+			return;
+		}
+		tween = GetTree().CreateTween();
+		tween.TweenProperty(this, "position", upperPosition, 0.05f);
 	}
 	
 	public void Unhighlight() {
-		if ((index != -1 || isPlayer) && !locked) {
-			var sprite = GetNode<Polygon2D>("CardImage");
-			sprite.Material = null;
-		}
+		if ((index == -1 && !isPlayer) || locked) return;
+		sprite.Material = null;
+		
+		if (index != -1) return;
+		
+		tween = GetTree().CreateTween();
+		tween.TweenProperty(this, "position", lowerPosition, 0.05f);
 	}
 
 	public void OnMouseEntered() {

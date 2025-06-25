@@ -6345,11 +6345,11 @@ texture = ExtResource("11_5y0wf")
 
 [node name="InfoButton" parent="." instance=ExtResource("11_ivp4u")]
 z_index = 10
-offset_left = 376.0
-offset_top = -195.782
-offset_right = 376.0
-offset_bottom = -195.782
-scale = Vector2(1, 1)
+offset_left = 369.0
+offset_top = -158.0
+offset_right = 369.0
+offset_bottom = -158.0
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_60qq6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

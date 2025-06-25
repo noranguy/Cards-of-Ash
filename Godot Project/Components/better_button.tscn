@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://khvh2k3e3644"]
+[gd_scene load_steps=4 format=3 uid="uid://c8k8fivslbsf0"]
 
 [ext_resource type="Script" uid="uid://ctdqs70a3a6ii" path="res://Scripts/InPlay/BetterButton.cs" id="1_43frs"]
+[ext_resource type="Texture2D" uid="uid://blj04aeyq47b0" path="res://Assets/Cards/indicator.png" id="2_d0lhg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oiqi6"]
 radius = 47.0
@@ -18,5 +19,10 @@ scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_oiqi6")
+
+[node name="Indicator" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(0, -36)
+texture = ExtResource("2_d0lhg")
 
 [connection signal="input_event" from="Area2D" to="." method="OnInputEvent"]

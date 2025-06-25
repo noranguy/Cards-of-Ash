@@ -194,9 +194,19 @@ public partial class GameManager : Node2D {
 		playerHand.restrictAllow = table.restrictAllow = null;
 		
 		// tutorial dialogue
-		if (GlobalState.Instance.GetDay() == 0 && (round == 1 || round == 3)) {
-			await ToSignal(GetTree().CreateTimer(0.5), "timeout");
-			await DialogueManager.Instance.StartDialogue($"agent_0/{round}");
+		if (GlobalState.Instance.GetDay() == 0) {
+			switch (round) {
+				case 1: case 3:
+					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
+					await DialogueManager.Instance.StartDialogue($"agent_0/{round}");
+					break;
+				case 2:
+					infoButton.Focus();
+					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
+					await DialogueManager.Instance.StartDialogue($"agent_0/{round}");
+					infoButton.Unfocus();
+					break;
+			}
 		}
 		
 		// track player and enemy score

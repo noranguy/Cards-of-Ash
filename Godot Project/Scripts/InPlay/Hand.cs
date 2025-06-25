@@ -68,6 +68,8 @@ public partial class Hand : Control {
 			
 			card.Position = new Vector2(final_x, final_y);
 			card.RotationDegrees = max_rotation_degrees * rot_multiplier;
+			card.upperPosition = card.Position + -10 * Vector2.FromAngle((card.RotationDegrees + 90) * (float)Math.PI / 180);
+			card.lowerPosition = card.Position;
 		}
 	}
 
