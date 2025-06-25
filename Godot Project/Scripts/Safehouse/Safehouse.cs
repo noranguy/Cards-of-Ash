@@ -24,7 +24,7 @@ public partial class Safehouse : StaticBody2D
 	// Flags for enviroment
 
 	private String[] _character_order = ["OldManTutorial", "Kaishain", "Mom", "Kid", "OldManEnd"];
-	private String[] _dialogue_order = ["old_man_tutorial_dialogue", "kaishain_dialogue", "Kaishain", "Kid", "OldManEnd"];
+	private String[] _dialogue_order = ["old_man_tutorial_dialogue", "kaishain_dialogue", "Mom", "Kid", "OldManEnd"];
 
 	// Flags to keep track of safehouse state
 	private bool _player_has_cards;
