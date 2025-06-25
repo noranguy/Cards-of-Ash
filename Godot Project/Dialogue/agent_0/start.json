@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "We will take turns throwing a card from our hand onto the opponent's table cards, trying to flip it.",
+			"text": "We will take turns throwing cards from our hand onto the opponent's table cards, trying to flip it.",
 			"options": [
 				{ "text": "Continue", "next": "a" }
 			]

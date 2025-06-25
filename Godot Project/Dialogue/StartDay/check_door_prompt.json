@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 		  "id": "start",
-		  "text": "Someone Kocking again!? Who could it be this time?",
+		  "text": "Someone knocking again!? Who could it be this time?",
 		  "options": [
 			{ "text": "Continue", "next": "end" }
 		  ]
