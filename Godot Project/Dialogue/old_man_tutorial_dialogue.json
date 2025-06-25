@@ -3,29 +3,22 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Excuse my intrusion, but I saw the lights on, and I was curious.",
+			"text": "Excuse my intrusion, but I saw the lights on and was curious.",
 			"options": [
-				{ "text": "\"I’ve been here since the earthquake\"", "next": "end" }
+				{ "text": "I’ve been here since the earthquake", "next": "b" }
 			]
 		},
 		{
 			"id": "b",
-			"text": "I’m sorry to say, you won't survive secluding yourself away in a “safehouse” like this.",
+			"text": "I see. I’m sorry to say, but you won't survive by solely secluding yourself away in a “safehouse”.",
 			"options": [
-				{ "text": "...", "next": "c" }
-		  	]
-		},
-	  {
-			"id": "c",
-			"text": "I’m an old man now, so this isn't my first “once in a lifetime” earthquake.",
-			"options": [
-				{ "text": "I see", "next": "d" }
+				{ "text": "I didn't know what to do...", "next": "d" }
 		  	]
 		},
 	 
 	  {
 			"id": "d",
-			"text": "You know you remind me of my daughter.",
+			"text": "I see... You know you remind me of my daughter.",
 			"options": [
 				{ "text": "Your daughter?", "next": "e" }
 		  	]
@@ -34,35 +27,28 @@
 			"id": "e",
 			"text": "She didn’t look out for herself. She cared too much for others.",
 			"options": [
-				{ "text": "Oh...", "next": "f" }
+				{ "text": "...", "next": "f" }
 		  	]
 		},
 	  {
 			"id": "f",
-			"text": "She was... gone. In an instant.",
+			"text": "She was... gone. In an instant. She panicked and didn't know what to do.",
 			"options": [
-				{ "text": "I'm sorry...", "next": "g" }
+				{ "text": "I'm sorry...", "next": "z" }
 		  	]
 		},
 	  {
-			"id": "g",
+			"id": "z",
 			"text": "*Sigh* I suppose I can give you a few tips on how to handle yourself.",
 			"options": [
-				{ "text": "...", "next": "g" }
+				{ "text": "Really?", "next": "g" }
 		  	]
 		},
 		{
 			"id": "g",
-			"text": "That is if you even have any interest in surviving.",
+			"text": "That is if you promise to not share the same fate.",
 			"options": [
-				{ "text": "\"Please\"", "next": "h" }
-		  	]
-		},
-	  {
-			"id": "h",
-			"text": "I see you are desperate to survive. Good. You'll need to be.",
-			"options": [
-				{ "text": "...", "next": "i" }
+				{ "text": "I promise", "next": "i" }
 		  	]
 		},
 	  {
@@ -74,35 +60,35 @@
 		},
 		 {
 			"id": "j",
-			"text": "Remember to hold on to any decent structure and whatever memories you have left",
+			"text": "Remember to hold on to any decent structure and find cover.",
 			"options": [
 				{ "text": "So under tables and desks?", "next": "k" }
 		  	]
 		},
 	  {
 			"id": "k",
-			"text": "Yes, exactly. *He peers down at the cards in your hand* Are those menko cards?",
+			"text": "Yes, exactly. *peers down at the cards in your hand* Are those menko cards?",
 			"options": [
-				{ "text": "\"These? I'm not sure\"", "next": "l" }
+				{ "text": "These? I'm not sure", "next": "l" }
 		  	]
 		},
 	  {
 			"id": "l",
 			"text": "They are! Pay attention, I’m going to teach you the most important skills you'll need.",
 			"options": [
-				{ "text": "What do I do?", "next": "m" }
+				{ "text": "Through a card game?", "next": "m" }
 		  	]
 		},
 		{
 			"id": "m",
-			"text": "Look out for yourself and learn from me, and you might be able to make it out of this.",
+			"text": "Look out for only yourself, and you might be able to make it out of this.",
 			"options": [
 				{ "text": "...", "next": "n" }
 		  	]
 		},
 	  {
 			"id": "n",
-			"text": "Menko’s a game where you put everything on the line. ",
+			"text": "Menko’s a game where you put everything on the line.",
 			"options": [
 				{ "text": "Menko?", "next": "o" }
 		  	]
@@ -125,19 +111,12 @@
 			"id": "q",
 			"text": "But I’ll teach you my own ways. I have never been defeated - not once.",
 			"options": [
-				{ "text": "\"Isn’t taking resources from other people kinda…\"", "next": "r" }
+				{ "text": "Isn’t taking resources from other people kinda…", "next": "r" }
 		  	]
 		},
 	  {
 			"id": "r",
-			"text": "*Sigh* So naive… Just like my daughter.",
-			"options": [
-				{ "text": "...", "next": "s" }
-		  	]
-		},
-	  {
-			"id": "s",
-			"text": "Go to the table and we can start a game.",
+			"text": "*Sigh* So naive… Go to the table and we can start a game.",
 			"options": [
 				{ "text": "Okay...", "next": "end" }
 		  	]
