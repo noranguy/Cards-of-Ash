@@ -63,9 +63,6 @@ public partial class Safehouse : StaticBody2D
 		}
 
 		_day_num = GlobalState.Instance.GetDay();
-		GD.Print(_day_num);
-		GD.Print(GlobalState.Instance.GetDay());
-		GD.Print(GlobalState.Instance.GetPostGame());
 
 		_ = Start_dayAsync();
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
@@ -171,8 +168,6 @@ public partial class Safehouse : StaticBody2D
 	private void _on_start_game_pressed()
 	{
 		GlobalState.Instance.SetPostGame(true);
-		GD.Print(GlobalState.Instance.GetDay());
-		GD.Print(GlobalState.Instance.GetPostGame());
 		GetNode<AnimationPlayer>("FadeToBlack/AnimationPlayer").Play("fade_to_game");
 	}
 

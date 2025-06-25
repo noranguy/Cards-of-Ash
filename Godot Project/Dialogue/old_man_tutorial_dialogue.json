@@ -3,170 +3,122 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Excuse my intrusion, but I saw the lights on and wanted to see if someone was hiding in here.",
+			"text": "Excuse my intrusion, but I saw the lights on and was curious.",
 			"options": [
-				{ "text": "\"I’ve been here since the earthquake\"", "next": "a" }
+				{ "text": "I’ve been here since the earthquake", "next": "b" }
 			]
 		},
 		{
-			"id": "a",
-			"text": "I see … ",
-			"options": [
-				{ "text": "Continue", "next": "b" }
-		  	]
-		},
-		{
 			"id": "b",
-			"text": "I’m sorry to say, you wont survive secluding yourself away in a “safehouse” like this.",
+			"text": "I see. I’m sorry to say, but you won't survive by solely secluding yourself away in a “safehouse”.",
 			"options": [
-				{ "text": "Continue", "next": "c" }
+				{ "text": "I didn't know what to do...", "next": "d" }
 		  	]
 		},
-	  {
-			"id": "c",
-			"text": "I’m an old man now, so this isn't my first “once in a lifetime” earthquake.",
-			"options": [
-				{ "text": "Continue", "next": "d" }
-		  	]
-		},
+	 
 	  {
 			"id": "d",
-			"text": "People get ugly in times of struggle, you have to be tought to survive",
+			"text": "I see... You know you remind me of my daughter.",
 			"options": [
-				{ "text": "\"I'm already so tired\"", "next": "e" }
-		  	]
-		},
-	  {
-			"id": "e",
-			"text": "...",
-			"options": [
-				{ "text": "Continue", "next": "f" }
-		  	]
-		},
-	  {
-			"id": "f",
-			"text": "You know you remind me of my daughter.",
-			"options": [
-				{ "text": "Continue", "next": "f" }
+				{ "text": "Your daughter?", "next": "e" }
 		  	]
 		},
 		{
-			"id": "f",
+			"id": "e",
 			"text": "She didn’t look out for herself. She cared too much for others.",
 			"options": [
-				{ "text": "Continue", "next": "g" }
+				{ "text": "...", "next": "f" }
 		  	]
 		},
 	  {
-			"id": "g",
-			"text": "In times like these, all that gets you is trouble…",
+			"id": "f",
+			"text": "She was... gone. In an instant. She panicked and didn't know what to do.",
 			"options": [
-				{ "text": "Continue", "next": "h" }
+				{ "text": "I'm sorry...", "next": "z" }
 		  	]
 		},
 	  {
-			"id": "h",
+			"id": "z",
 			"text": "*Sigh* I suppose I can give you a few tips on how to handle yourself.",
 			"options": [
-				{ "text": "Continue", "next": "i" }
+				{ "text": "Really?", "next": "g" }
 		  	]
 		},
 		{
-			"id": "i",
-			"text": "That is if you even have any interest in surviving.",
+			"id": "g",
+			"text": "That is if you promise to not share the same fate.",
 			"options": [
-				{ "text": "\"Please\"", "next": "k" }
+				{ "text": "I promise", "next": "i" }
+		  	]
+		},
+	  {
+			"id": "i",
+			"text": "First off, you can't let the earthquake break you down.",
+			"options": [
+				{ "text": "...", "next": "j" }
+		  	]
+		},
+		 {
+			"id": "j",
+			"text": "Remember to hold on to any decent structure and find cover.",
+			"options": [
+				{ "text": "So under tables and desks?", "next": "k" }
 		  	]
 		},
 	  {
 			"id": "k",
-			"text": "I see you are desperate to survive. Good. You'll need to be.",
+			"text": "Yes, exactly. *peers down at the cards in your hand* Are those menko cards?",
 			"options": [
-				{ "text": "Continue", "next": "l" }
+				{ "text": "These? I'm not sure", "next": "l" }
 		  	]
 		},
 	  {
 			"id": "l",
-			"text": "First off, you can't let the earthquake break you down.",
+			"text": "They are! Pay attention, I’m going to teach you the most important skills you'll need.",
 			"options": [
-				{ "text": "Continue", "next": "m" }
+				{ "text": "Through a card game?", "next": "m" }
 		  	]
 		},
-		 {
+		{
 			"id": "m",
-			"text": "Remember to hold on to any decent structure and whatever memories you have left",
+			"text": "Look out for only yourself, and you might be able to make it out of this.",
 			"options": [
-				{ "text": "Continue", "next": "n" }
+				{ "text": "...", "next": "n" }
 		  	]
 		},
 	  {
 			"id": "n",
-			"text": "*He peers down at the cards in your hand* Are those menko cards?",
+			"text": "Menko’s a game where you put everything on the line.",
 			"options": [
-				{ "text": "\"These? I'm not sure\"", "next": "o" }
+				{ "text": "Menko?", "next": "o" }
 		  	]
 		},
-	  {
+		{
 			"id": "o",
-			"text": "They are! Pay attention, I’m going to teach you the most important skill you'll need.",
-			"options": [
-				{ "text": "Continue", "next": "p" }
-		  	]
-		},
-		{
-			"id": "p",
-			"text": " Learn from me, and you might be able to make it out of this.",
-			"options": [
-				{ "text": "Continue", "next": "q" }
-		  	]
-		},
-	  {
-			"id": "q",
-			"text": "Menko’s a game where you put everything on the line. ",
-			"options": [
-				{ "text": "Continue", "next": "r" }
-		  	]
-		},
-		{
-			"id": "r",
 			"text": "Risk your own resources, and you'll get the chance to take your opponent’s.",
 			"options": [
-				{ "text": "Continue", "next": "s" }
+				{ "text": "I see...", "next": "p" }
 		  	]
 		},
 	  {
-			"id": "s",
+			"id": "p",
 			"text": "Of course, losing means disastrous consequences.",
 			"options": [
-				{ "text": "Continue", "next": "t" }
+				{ "text": "...", "next": "q" }
 		  	]
 		},
 		{
-			"id": "t",
+			"id": "q",
 			"text": "But I’ll teach you my own ways. I have never been defeated - not once.",
 			"options": [
-				{ "text": "\"Isn’t taking resources from other people kinda…\"", "next": "u" }
+				{ "text": "Isn’t taking resources from other people kinda…", "next": "r" }
 		  	]
 		},
 	  {
-			"id": "u",
-			"text": "*Sigh* So naive… Just like my daughter.",
+			"id": "r",
+			"text": "*Sigh* So naive… Go to the table and we can start a game.",
 			"options": [
-				{ "text": "Continue", "next": "v" }
-		  	]
-		},
-		{
-			"id": "v",
-			"text": "You’ll listen to what I have to teach you, or you’ll end up just like her…",
-			"options": [
-				{ "text": "Continue", "next": "w" }
-		  	]
-		},
-	  {
-			"id": "w",
-			"text": "Go to the table and we can start a game.",
-			"options": [
-				{ "text": "Continue", "next": "end" }
+				{ "text": "Okay...", "next": "end" }
 		  	]
 		}
   	]

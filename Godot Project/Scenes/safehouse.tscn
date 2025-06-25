@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://u1eorlu248cw" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
 [ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishaiin.tscn" id="5_algie"]
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
-[ext_resource type="Texture2D" uid="uid://b7p24k71dg18m" path="res://Assets/Out of Play Safe House/KO.png" id="8_mt6l6"]
-[ext_resource type="Texture2D" uid="uid://bjj0q6bxp7ycj" path="res://Assets/Out of Play Safe House/N.png" id="9_mt6l6"]
+[ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
+[ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
 a = Vector2(38, -10)
@@ -22,7 +22,7 @@ b = Vector2(67.9998, -66.0003)
 size = Vector2(34, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qcbrc"]
-size = Vector2(11, 40)
+size = Vector2(61, 51)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvy0r"]
 size = Vector2(50, 40)
@@ -461,7 +461,7 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bed"]
 light_mask = 2
 visibility_layer = 4
-position = Vector2(424.5, 150)
+position = Vector2(449.5, 150.5)
 shape = SubResource("RectangleShape2D_qcbrc")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Bed"]
@@ -565,7 +565,7 @@ offset_left = -40.0
 offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("8_mt6l6")
+texture = ExtResource("8_gxkjp")
 expand_mode = 1
 
 [node name="N" type="TextureRect" parent="Knock"]
@@ -604,7 +604,6 @@ offset_bottom = 21.0
 text = "Day 1"
 
 [connection signal="pressed" from="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/EndDay" to="." method="_on_end_day_pressed"]
-
 [connection signal="pressed" from="EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
 [connection signal="pressed" from="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/OpenDoor" to="." method="_on_open_door_pressed"]
 [connection signal="pressed" from="OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

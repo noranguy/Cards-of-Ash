@@ -1,6 +1,4 @@
-
 [gd_scene load_steps=50 format=4 uid="uid://b1lpnxmiatxwa"]
-
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -13,12 +11,11 @@
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
 [ext_resource type="Texture2D" uid="uid://c37kylsjn3iyu" path="res://Assets/In Play Safe House/throw_button.png" id="11_5y0wf"]
 [ext_resource type="Texture2D" uid="uid://bnphgfq0s4mbh" path="res://Assets/Character Designs/Kaishain/agent_1.png" id="11_efang"]
-[ext_resource type="PackedScene" path="res://Components/better_button.tscn" id="11_ivp4u"]
+[ext_resource type="PackedScene" uid="uid://khvh2k3e3644" path="res://Components/better_button.tscn" id="11_ivp4u"]
 [ext_resource type="Texture2D" uid="uid://dhivoubu7rp5c" path="res://Assets/In Play Safe House/info_button.png" id="12_60qq6"]
 [ext_resource type="Texture2D" uid="uid://bikssbixl4p0c" path="res://Assets/Character Designs/Old Man/agent_0.png" id="12_juooh"]
 [ext_resource type="AudioStream" uid="uid://cx2oaphfhg6v5" path="res://Assets/Music/CoffeeBlack.ogg" id="13_juooh"]
 [ext_resource type="PackedScene" uid="uid://dn8arlwkev5by" path="res://Scenes/rule_book.tscn" id="13_qn0kl"]
-
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
@@ -6283,7 +6280,6 @@ animations = [{
 
 [node name="InPlaySafehouse" type="Node2D"]
 scale = Vector2(1, 0.996007)
-
 script = ExtResource("9_dyk6q")
 cardScene = ExtResource("7_rt2xm")
 
@@ -6349,19 +6345,19 @@ texture = ExtResource("11_5y0wf")
 
 [node name="InfoButton" parent="." instance=ExtResource("11_ivp4u")]
 z_index = 10
-offset_left = 376.0
-offset_top = -195.782
-offset_right = 376.0
-offset_bottom = -195.782
-scale = Vector2(1, 1)
+offset_left = 369.0
+offset_top = -158.0
+offset_right = 369.0
+offset_bottom = -158.0
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_60qq6")
-
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 4
 position = Vector2(0, -73.2927)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_qn0kl")
+animation = &"agent_0"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 editor_description = "Coffee Black by GrimFrenzy"
@@ -6375,4 +6371,3 @@ offset_left = -250.0
 offset_top = -150.0
 offset_right = -250.0
 offset_bottom = -150.0
-
