@@ -109,11 +109,11 @@ $@"Card Type Advantages:
 Press SPACE to continue.
 "),
 new Info("Ceramic Class", "ceramic",
-$@"Throwing Ability (3 in hand):
-Flips adjacent cards to the target at 25% of the original chance (considering the adjacent type, not the target type).
+$@"Throwing Ability:
+Opponent will have 3 of these cards in their hand. Flips adjacent cards to the target at 25% of the original chance (considering the adjacent type, not the target type).
 {spacer}
-Table Ability (2 in hand):
-Deteriorates adjacent cards by 20% when flipped.
+Table Ability:
+Opponent will have 2 of these cards on their table. Deteriorates adjacent cards by 20% when flipped.
 {spacer}
 Press SPACE to continue.
 ")
