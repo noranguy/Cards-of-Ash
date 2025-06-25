@@ -30,6 +30,7 @@ public partial class Hand : Control {
 			card.Name = $"Card{i}";
 			card.Position = Vector2.Zero;
 			card.Scale = new Vector2(scale, scale);
+			card.ZIndex = 15;
 			card.Init(Card.DEFAULT_VERTICES, types[i], classes[i], visible, visible, -1);
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 
