@@ -11,25 +11,23 @@ public partial class Hand : Control {
 	private readonly int x_sep = 0;
 	private int y_min;
 	private int y_max;
-	private float scale;
+	private Vector2 scaleV;
 	
 	public void Init(PackedScene scene, int y, float scale, bool visible, List<string> types, List<string> classes) {
 		SetMouseFilter(Control.MouseFilterEnum.Ignore);
 		cardScene = scene;
 		y_max = y;
 		y_min = y + 100;
-		scale *= 0.75f;
-		this.scale = scale;
 		Size = new Vector2(250 * scale, 100 * scale);
+		scaleV = new Vector2(scale, scale);
 		SpawnCards(visible, types, classes);
 	}
 
-	public virtual void SpawnCards(bool visible, List<string> types, List<string> classes) {
+	public async virtual void SpawnCards(bool visible, List<string> types, List<string> classes) {
 		for (int i = 0; i < startingAmount; i++) {
 			Card card = cardScene.Instantiate<Card>();
 			card.Name = $"Card{i}";
 			card.Position = Vector2.Zero;
-			card.Scale = new Vector2(scale, scale);
 			card.ZIndex = 15;
 			card.Init(Card.DEFAULT_VERTICES, types[i], classes[i], visible, visible, -1);
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
@@ -38,39 +36,50 @@ public partial class Hand : Control {
 			cards.Add(card);
 		}
 
-		UpdateCardPositions();
+		UpdateCardPositions(true);
 	}
 	
 	// card fan
-	public virtual void UpdateCardPositions() {
+	public async virtual void UpdateCardPositions(bool first) {
 		int numCards = cards.Count;
-		int cardFormat = 8 + cards.Count % 2;
-		int cardSize = (int)(Card.SIZE.X * scale);
+		int cardSize = (int)(Card.SIZE.X * scaleV.X);
+		if (numCards == 1) {
+			Vector2 pos = new Vector2(-cardSize / 2f, cards[0].Position.Y);
+			cards[0].UpdatePosition(pos);
+			cards[0].RotationDegrees = 0;
+			cards[0].upperPosition = pos + new Vector2(0, -10);
+			cards[0].lowerPosition = pos;
+			return;
+		}
 		
-		float final_x_sep = (Size.X - cardSize * cardFormat) / (cardFormat - 1);
+		float final_x_sep = (Size.X - cardSize * numCards) / (numCards - 1);
 		float all_cards_size = Size.X;
 
 		float offset = (-(cardSize * numCards + final_x_sep * (numCards - 1))) / 2;
 		
 		for (int i = 0; i < numCards; i++) {
 			Card card = cards[i];
-			int alignIdx = (cardFormat - numCards) / 2 + i;
 			float y_multiplier, rot_multiplier;
 			
 			if (numCards > 1) {
-				y_multiplier = hand_curve.Sample(1f / (cardFormat-1) * alignIdx);
-				rot_multiplier = rotation_curve.Sample(1f / (cardFormat-1) * alignIdx);
+				y_multiplier = hand_curve.Sample(1f / (numCards-1) * i);
+				rot_multiplier = rotation_curve.Sample(1f / (numCards-1) * i);
 			} else {
 				y_multiplier = rot_multiplier = 0;
 			}
 			
-			float final_x = (cardSize + final_x_sep) * i + offset;
-			float final_y = y_min - Size.Y * y_multiplier;
+			float finalX = (cardSize + final_x_sep) * i + offset;
+			float finalY = y_min - Size.Y * y_multiplier;
+			Vector2 finalV = new Vector2(finalX, finalY);
 			
-			card.Position = new Vector2(final_x, final_y);
+			if (first) {
+				await card.UpdatePosition(finalV, scaleV);
+			} else {
+				card.UpdatePosition(finalV);
+			}
 			card.RotationDegrees = max_rotation_degrees * rot_multiplier;
-			card.upperPosition = card.Position + -10 * Vector2.FromAngle((card.RotationDegrees + 90) * (float)Math.PI / 180);
-			card.lowerPosition = card.Position;
+			card.upperPosition = finalV + -10 * Vector2.FromAngle((card.RotationDegrees + 90) * (float)Math.PI / 180);
+			card.lowerPosition = finalV;
 		}
 	}
 
@@ -78,7 +87,8 @@ public partial class Hand : Control {
 		if (cards.Contains(card)) {
 			cards.Remove(card);
 			card.QueueFree();
-			UpdateCardPositions();
+			Size -= new Vector2(26.5f * scaleV.X, 0);
+			UpdateCardPositions(false);
 		}
 	}
 	

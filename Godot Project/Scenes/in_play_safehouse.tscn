@@ -6346,11 +6346,12 @@ texture = ExtResource("11_5y0wf")
 [node name="InfoButton" parent="." instance=ExtResource("11_ivp4u")]
 z_index = 10
 offset_left = 369.0
-offset_top = -158.0
+offset_top = -157.629
 offset_right = 369.0
-offset_bottom = -158.0
+offset_bottom = -157.629
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("12_60qq6")
+action = "info"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 4
@@ -6371,3 +6372,13 @@ offset_left = -250.0
 offset_top = -150.0
 offset_right = -250.0
 offset_bottom = -150.0
+
+[node name="RoundLabel" type="Label" parent="."]
+z_index = 20
+offset_left = -80.0
+offset_top = -230.0
+offset_right = 80.0
+offset_bottom = -188.0
+theme_override_font_sizes/font_size = 30
+text = "Round 1"
+horizontal_alignment = 1

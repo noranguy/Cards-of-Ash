@@ -114,22 +114,17 @@ public class Agent1 : Agent {
 			new double[] { m, h, l }
 		};
 		
-		h = (1 - typeProb[0]) * 0.25f / 3;
-		m = (1 - typeProb[1]) * 0.25f / 3;
-		l = (1 - typeProb[2]) * 0.25f / 3;
+		var ceramicProb = GlobalState.Instance.CeramicProb;
+		
+		h = (1 - typeProb[0]) * ceramicProb / 3;
+		m = (1 - typeProb[1]) * ceramicProb / 3;
+		l = (1 - typeProb[2]) * ceramicProb / 3;
 
 		adjRankMod = new double[][] {
 			new double[] { l, m, h },
 			new double[] { h, l, m },
 			new double[] { m, h, l }
 		};
-	}
-	
-	private double GetRank(int type, string clas, int i) {
-		double center = ranks[i][type];
-		double left = (i == 0 || clas != "ceramic") ? 0 : GlobalState.Instance.CeramicProb * ranks[i - 1][type];
-		double right = (i == 5 || clas != "ceramic") ? 0 : GlobalState.Instance.CeramicProb * ranks[i + 1][type];
-		return center + left + right;
 	}
 	
 	private void SortOrders(string clas) {
@@ -140,7 +135,7 @@ public class Agent1 : Agent {
 				if (playerTable[x].visible && !playerTable[y].visible) return 1;
 				if (!playerTable[x].visible && playerTable[y].visible) return -1;
 				
-				return GetRank(i, clas, y).CompareTo(GetRank(i, clas, x));
+				return ranks[y][i].CompareTo(ranks[x][i]);
 			});
 		}
 	}

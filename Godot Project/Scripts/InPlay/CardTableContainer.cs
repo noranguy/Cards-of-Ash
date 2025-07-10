@@ -79,6 +79,7 @@ public partial class CardTableContainer : Node2D {
 			}
 			Vector2 topLeft = bottomLeft + dirLeft * Card.SIZE2.Y;
 			Vector2 topRight = bottomRight + dirRight * Card.SIZE2.Y;
+			
 			Vector2[] vertices = new Vector2[] {
 				topLeft + offset,
 				topRight + offset,
@@ -87,7 +88,11 @@ public partial class CardTableContainer : Node2D {
 			};
 			card.Init(vertices, types[order[i]], classes[order[i]], false, isPlayer, i);
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
-
+			
+			Vector2 dPos = new Vector2((topLeft.X + topRight.X) / 2f - 16, topLeft.Y);
+			card.durabilityBar.Visible = false;
+			card.durabilityBar.Position = dPos;
+			
 			AddChild(card);
 			cards.Add(card);
 		}

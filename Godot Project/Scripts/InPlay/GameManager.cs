@@ -14,6 +14,7 @@ public partial class GameManager : Node2D {
 	private BetterButton throwButton;
 	private BetterButton infoButton;
 	private Panel rulebook;
+	private Label roundLabel;
 	
 	private Agent enemy;
 	
@@ -35,10 +36,11 @@ public partial class GameManager : Node2D {
 
 	public async override void _Ready() {
 		anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-				
+		
 		throwButton = GetNode<BetterButton>("ThrowButton");
 		infoButton = GetNode<BetterButton>("InfoButton");
 		rulebook = GetNode<Panel>("Rulebook");
+		roundLabel = GetNode<Label>("RoundLabel");
 		
 		ThrowToggle(false);
 		throwButton.Connect(BetterButton.SignalName.Pressed, new Callable(this, nameof(Round)));
@@ -66,10 +68,10 @@ public partial class GameManager : Node2D {
 			"tsunami", "volcano", "earthquake"
 		};
 		
-		enemyHand.Init(cardScene, yEnemyHand, 1, false, enemyHandTypes, enemyHandClasses);
+		enemyHand.Init(cardScene, yEnemyHand, 0.75f, false, enemyHandTypes, enemyHandClasses);
 		table.Init(cardScene, playerTableTypes, playerTableClasses, enemyTableTypes,
 		enemyTableClasses);
-		playerHand.Init(cardScene, yPlayerHand, 1.5f, true, playerHandTypes, playerHandClasses);
+		playerHand.Init(cardScene, yPlayerHand, 1.125f, true, playerHandTypes, playerHandClasses);
 		
 		enemy.Init(enemyHand.GetCards(), table.GetPlayerCards(), table.GetEnemyCards());
 		
@@ -85,6 +87,8 @@ public partial class GameManager : Node2D {
 			playerHand.restrictAllow = new HashSet<Card> { playerFirst };
 			table.restrictAllow = new HashSet<Card> { tableFirst };
 		}
+		
+		await ToSignal(GetTree().CreateTimer(2), "timeout");
 		
 		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start");
 		
@@ -159,14 +163,13 @@ public partial class GameManager : Node2D {
 			
 			if (rnd < threshold) {
 				tableCards[i].Flip();
-				tableCards[i].durability -= 0.2;
 				
 				if (tableCards[i].clas == "ceramic") {
 					if (tableCards[i].index > 0) {
-						active[tableCards[i].index - 1].durability -= 0.2;
+						active[tableCards[i].index - 1].ReduceDurability();
 					}
 					if (tableCards[i].index < 5) {
-						active[tableCards[i].index + 1].durability -= 0.2;
+						active[tableCards[i].index + 1].ReduceDurability();
 					}
 				}
 			}
@@ -216,13 +219,18 @@ public partial class GameManager : Node2D {
 		// game end
 		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
 			if (playerCount > enemyCount) {
+				roundLabel.Text = "You Win";
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "win");
 			} else if (playerCount < enemyCount) {
+				roundLabel.Text = "You Lose";
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "lose");
 			} else {
+				roundLabel.Text = "Tie";
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "tie");
 			}
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
+		} else {
+			roundLabel.Text = $"Round {round+1}";
 		}
 	}
 }

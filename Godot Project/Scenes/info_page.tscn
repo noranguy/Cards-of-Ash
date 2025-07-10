@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwj72mveseo4r"]
+[gd_scene load_steps=8 format=3 uid="uid://cwj72mveseo4r"]
 
 [ext_resource type="Script" uid="uid://buy2alspb62at" path="res://Scripts/InPlay/InfoPage.cs" id="1_iwbsr"]
 [ext_resource type="Texture2D" uid="uid://1ivdonv17ahd" path="res://Assets/Cards/earthquake_basic.png" id="1_jhmf5"]
 [ext_resource type="Texture2D" uid="uid://cm6o02qusl4qr" path="res://Assets/Cards/tsunami_basic.png" id="2_pi2h0"]
 [ext_resource type="Texture2D" uid="uid://bsyook4jja5ra" path="res://Assets/Cards/volcano_basic.png" id="3_fp1kd"]
+[ext_resource type="Texture2D" uid="uid://rixpxm2y0xxy" path="res://Assets/Rulebook/arrow.png" id="5_pi2h0"]
 
 [sub_resource type="FontFile" id="FontFile_celcy"]
 subpixel_positioning = 0
@@ -179,17 +180,17 @@ cache/0/80/0/scale = 1.0
 script = ExtResource("1_iwbsr")
 
 [node name="Tsunami" type="Sprite2D" parent="."]
-position = Vector2(-260, 0)
+position = Vector2(-250, -60)
 scale = Vector2(2, 2)
 texture = ExtResource("2_pi2h0")
 
 [node name="Volcano" type="Sprite2D" parent="."]
-position = Vector2(-180, 0)
+position = Vector2(-180, 80)
 scale = Vector2(2, 2)
 texture = ExtResource("3_fp1kd")
 
 [node name="Earthquake" type="Sprite2D" parent="."]
-position = Vector2(-100, 0)
+position = Vector2(-110, -60)
 scale = Vector2(2, 2)
 texture = ExtResource("1_jhmf5")
 
@@ -198,9 +199,9 @@ texture = ExtResource("1_jhmf5")
 [node name="Description" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(1200, 1000)
 offset_left = -46.0
-offset_top = -96.0
-offset_right = 254.0
-offset_bottom = 154.0
+offset_top = -104.0
+offset_right = 1154.0
+offset_bottom = 896.0
 scale = Vector2(0.25, 0.25)
 theme_override_fonts/normal_font = SubResource("FontFile_celcy")
 theme_override_font_sizes/normal_font_size = 64
@@ -221,28 +222,47 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TsunamiText" type="Label" parent="."]
-offset_left = -292.0
-offset_top = 53.0
-offset_right = -228.0
-offset_bottom = 76.0
+offset_left = -284.0
+offset_top = -130.0
+offset_right = -216.0
+offset_bottom = -110.0
 theme_override_font_sizes/font_size = 12
 text = "Tsunami"
 horizontal_alignment = 1
 
 [node name="VolcanoText" type="Label" parent="."]
-offset_left = -212.0
-offset_top = 53.0
-offset_right = -148.0
-offset_bottom = 76.0
+offset_left = -214.0
+offset_top = 130.0
+offset_right = -146.0
+offset_bottom = 150.0
 theme_override_font_sizes/font_size = 12
 text = "Volcano"
 horizontal_alignment = 1
 
 [node name="EarthquakeText" type="Label" parent="."]
-offset_left = -132.0
-offset_top = 53.0
-offset_right = -68.0
-offset_bottom = 76.0
+offset_left = -144.0
+offset_top = -130.0
+offset_right = -76.0
+offset_bottom = -110.0
 theme_override_font_sizes/font_size = 12
 text = "Earthquake"
 horizontal_alignment = 1
+
+[node name="Arrow1" type="Sprite2D" parent="."]
+position = Vector2(-180, -60)
+scale = Vector2(0.092, 0.048)
+skew = 0.000805259
+texture = ExtResource("5_pi2h0")
+
+[node name="Arrow2" type="Sprite2D" parent="."]
+position = Vector2(-126, 24)
+rotation = 2.05251
+scale = Vector2(0.092, 0.048)
+skew = 0.204414
+texture = ExtResource("5_pi2h0")
+
+[node name="Arrow3" type="Sprite2D" parent="."]
+position = Vector2(-236, 20)
+rotation = 4.21148
+scale = Vector2(0.0921548, 0.0482547)
+texture = ExtResource("5_pi2h0")

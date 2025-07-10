@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Card : Control {
 	[Signal]
@@ -22,6 +23,7 @@ public partial class Card : Control {
 	public string clas;
 	public int index;
 	public Polygon2D sprite;
+	public ProgressBar durabilityBar;
 	
 	private Tween tween;
 	public Vector2 upperPosition;
@@ -49,6 +51,11 @@ public partial class Card : Control {
 		}
 	}
 	
+	public void ReduceDurability() {
+		durability -= 0.2;
+		durabilityBar.Value = durability * 100;
+	}
+	
 	public void Focus() {
 		indicator.Visible = true;
 	}
@@ -58,8 +65,9 @@ public partial class Card : Control {
 	}
 	
 	public void Init(Vector2[] vertices, string type, string clas, bool visible, bool isPlayer, int index) {
-		sprite = GetNode<Polygon2D>("CardImage");
 		indicator = GetNode<Sprite2D>("Indicator");
+		sprite = GetNode<Polygon2D>("CardImage");
+		durabilityBar = GetNode<ProgressBar>("DurabilityBar");
 		
 		var collisionPolygon = GetNode<CollisionPolygon2D>("Area2D/CollisionPolygon2D");
 		this.type = type;
@@ -71,6 +79,7 @@ public partial class Card : Control {
 		sprite.UV = DEFAULT_VERTICES;
 		if (index == -1) {
 			collisionPolygon.Polygon = sprite.Polygon = DEFAULT_VERTICES;
+			Position = isPlayer ? new Vector2(-180, 125) : new Vector2(-180, 50);
 		} else {
 			collisionPolygon.Polygon = sprite.Polygon = vertices;
 			indicatorMin += vertices[0].Y;
@@ -81,6 +90,18 @@ public partial class Card : Control {
 		lowerPosition = Position;
 		
 		UpdateTexture();
+	}
+	
+	public async Task UpdatePosition(Vector2 position) {
+		tween = GetTree().CreateTween();
+		tween.TweenProperty(this, "position", position, 0.1f);
+	}
+	
+	public async Task UpdatePosition(Vector2 position, Vector2 scale) {
+		tween = GetTree().CreateTween();
+		tween.TweenProperty(this, "position", position, 0.1f);
+		tween.TweenProperty(this, "scale", scale, 0.1f);
+		await ToSignal(tween, "finished");
 	}
 	
 	public void UpdateTexture() {
@@ -96,6 +117,7 @@ public partial class Card : Control {
 	public void Flip() {
 		visible = !visible;
 		UpdateTexture();
+		ReduceDurability();
 	}
 
 	public void OnInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
