@@ -118,7 +118,7 @@
 			"id": "r",
 			"text": "*Sigh* So naive… Go to the table and we can start a game.",
 			"options": [
-				{ "text": "Okay...", "next": "end" }
+				{ "text": "Okay...", "next": "a" }
 		  	]
 		}
   	]

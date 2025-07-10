@@ -16,17 +16,26 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_loefu")
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(480, 280)
 layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 490.0
-offset_bottom = 290.0
+offset_left = 9.0
+offset_top = 11.0
+offset_right = 489.0
+offset_bottom = 291.0
 bbcode_enabled = true
 text = "[center]Menko Rulebook[/center]
 
-1. Tsunami beats Volcano, Volcano beats Earthquake, and Earthquake beats Tsunami.
+Each player starts with 9 throwing cards and 6 table cards. The objective is to flip more of the opponent’s cards. The game ends after 9 rounds, or earlier if a player flips all 6 of the opponent’s table cards. The outcome (win, lose, or tie) affects your resources in the safe house.
 
-2. Whenever a table card flips, it deteriorates and becomes 20% harder to flip.
+You can throw at any table card to defend / attack. Once a card is thrown, it is discarded and can’t be thrown again.
 
-3. Win by flipping more of the opponent's cards than yours.
+Each card will have a type of Tsunami, Volcano, or Earthquake, forming a rock-paper-scissors relationship which affects the chance of flipping the table card:
 
-4. The game ends when all cards are thrown or a player has flipped all 6 cards."
+[center][img={400}]res://Assets/Rulebook/types.jpeg[/img][/center]
+
+You will see the types of your throwing cards but the types of table cards remain hidden until flipped.
+
+Throwing a card:
+- Strong against the table card → 95% flip chance
+- Same type → 50% flip chance
+- Weak against → 5% flip chance
+
+If a table card has been flipped, it can be flipped again to “unflip” it. However, each successful flip causes the card to deteriorate, making it 20% harder to flip in future attempts. For example, the chance of flipping a table card that is of the same type and has been flipped twice is 50% * 60% = 30%."
