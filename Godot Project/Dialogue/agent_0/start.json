@@ -24,7 +24,7 @@
 		},
 		{
 			"id": "c",
-			"text": "Throw your leftmost throwing card at my leftmost table card by pressing the Throw button.",
+			"text": "Throw your leftmost throwing card at my leftmost table card and press the Throw button.",
 			"options": [
 				{ "text": "Start Game", "next": "end" }
 			]

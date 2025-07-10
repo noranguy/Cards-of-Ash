@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class BetterButton : TextureButton {
 	[Export] public Texture2D texture;
+	[Export] public string action;
 	
 	[Signal]
 	public delegate void PressedEventHandler();
@@ -32,6 +33,10 @@ public partial class BetterButton : TextureButton {
 		} else if (indicator.Position.Y < indicatorMin) {
 			indicatorDir = 1;
 		}
+		
+		//if (Input.IsActionPressed(action)) {
+			//EmitSignal(SignalName.Pressed);
+		//}
 	}
 	
 	public void Focus() {
@@ -43,11 +48,8 @@ public partial class BetterButton : TextureButton {
 	}
 
 	public void OnInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-		if (
-			@event is InputEventMouseButton mouseEvent &&
-			mouseEvent.Pressed &&
-			mouseEvent.ButtonIndex == MouseButton.Left
-		) {
+		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed &&
+			mouseEvent.ButtonIndex == MouseButton.Left) {
 			EmitSignal(SignalName.Pressed);
 		}
 	}

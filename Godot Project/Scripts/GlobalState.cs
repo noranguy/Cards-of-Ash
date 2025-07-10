@@ -101,10 +101,12 @@ public partial class GlobalState : Node {
 	private static string spacer = "\n\u00A0\n";
 	private Info[] Infos = new Info[] {
 new Info("Card Types", "basic", 
-$@"Card Type Advantages:
-- Tsunami beats Volcano
-- Volcano beats Earthquake
-- Earthquake beats Tsunami
+$@"Each player begins with 9 throwing cards and 6 table cards, evenly split between three types: Tsunami, Volcano, and Earthquake. These types follow a rock-paper-scissors system.
+{spacer}
+Throwing a card:
+- Strong against the table card → 95% flip chance
+- Same type → 50% flip chance
+- Weak against → 5% flip chance
 {spacer}
 Press SPACE to continue.
 "),
