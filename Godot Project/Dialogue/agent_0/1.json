@@ -5,6 +5,13 @@
 			"id": "start",
 			"text": "You got lucky that time. Whenever a table card flips, it deteriorates and becomes 20% harder to flip.",
 			"options": [
+			  { "text": "Continue", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "This is shown with the durability bar above each table card.",
+			"options": [
 			  { "text": "Continue Game", "next": "end" }
 			]
 		}

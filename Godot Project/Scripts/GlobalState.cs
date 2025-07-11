@@ -19,6 +19,8 @@ public struct Info {
 public partial class GlobalState : Node {
 	public static GlobalState Instance { get; private set; }
 	
+	public bool interactive = true;
+	
 	public override void _Ready() {
 		Instance = this;
 	}
@@ -88,14 +90,20 @@ public partial class GlobalState : Node {
 	// Probability multiplier of flipping adjacent cards when throwing a ceramic card
 	public readonly double CeramicProb = 0.25;
 	
-	private int day = 0;
+	// Probability multiplier when throwing an elastic card
+	public readonly double ElasticProb = 0.75;
+	
+	// Probability multiplier when throwing at a defense card
+	public readonly double DefenseProb = 0.75;
+	
+	private int day = 1;
 	private bool post_game = false;
 	private bool player_has_cards = false;
 
 
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
-		() => new Agent1()
+		() => new Agent4()
 	};
 	
 	private static string spacer = "\n\u00A0\n";

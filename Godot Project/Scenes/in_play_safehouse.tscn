@@ -6375,9 +6375,9 @@ offset_bottom = -150.0
 
 [node name="RoundLabel" type="Label" parent="."]
 z_index = 20
-offset_left = -80.0
+offset_left = -300.0
 offset_top = -230.0
-offset_right = 80.0
+offset_right = 300.0
 offset_bottom = -188.0
 theme_override_font_sizes/font_size = 30
 text = "Round 1"
