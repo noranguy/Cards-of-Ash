@@ -10,6 +10,7 @@ public partial class GameManager : Node2D {
 	private Hand enemyHand;
 	private CardTableContainer table;
 	private AnimatedSprite2D anim;
+	private AnimatedSprite2D cardThrow;
 	
 	private BetterButton throwButton;
 	private BetterButton infoButton;
@@ -36,6 +37,7 @@ public partial class GameManager : Node2D {
 
 	public async override void _Ready() {
 		anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		cardThrow = GetNode<AnimatedSprite2D>("CardThrowAnimate");
 		
 		throwButton = GetNode<BetterButton>("ThrowButton");
 		infoButton = GetNode<BetterButton>("InfoButton");
@@ -114,11 +116,14 @@ public partial class GameManager : Node2D {
 	
 	public void ThrowToggle(bool active) {
 		bool res = active && table.activeCard != null && playerHand.activeCard != null;
-		if (!active && allowThrow) {
+		if (!active && allowThrow)
+		{
 			playerHand.RemoveCard(playerHand.activeCard);
 			table.activeCard.locked = false;
 			table.activeCard.Unhighlight();
 			table.activeCard = playerHand.activeCard = null;
+			cardThrow.Visible = true;
+			cardThrow.Play("card_throw");			
 		}
 		allowThrow = res;
 		throwButton.Disabled = !res;
