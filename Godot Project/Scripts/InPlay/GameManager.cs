@@ -10,7 +10,8 @@ public partial class GameManager : Node2D {
 	private Hand enemyHand;
 	private CardTableContainer table;
 	private AnimatedSprite2D anim;
-	private AnimatedSprite2D cardThrow;
+	private AnimatedSprite2D playerCardThrow;
+	private AnimatedSprite2D oppCardThrow;
 	
 	private BetterButton throwButton;
 	private BetterButton infoButton;
@@ -37,8 +38,8 @@ public partial class GameManager : Node2D {
 
 	public async override void _Ready() {
 		anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		cardThrow = GetNode<AnimatedSprite2D>("CardThrowAnimate");
-		
+		playerCardThrow = GetNode<AnimatedSprite2D>("Player_CardThrowAnimate");
+		oppCardThrow = GetNode<AnimatedSprite2D>("Opp_CardThrowAnimate");
 		throwButton = GetNode<BetterButton>("ThrowButton");
 		infoButton = GetNode<BetterButton>("InfoButton");
 		rulebook = GetNode<Panel>("Rulebook");
@@ -122,8 +123,8 @@ public partial class GameManager : Node2D {
 			table.activeCard.locked = false;
 			table.activeCard.Unhighlight();
 			table.activeCard = playerHand.activeCard = null;
-			cardThrow.Visible = true;
-			cardThrow.Play("card_throw");			
+			playerCardThrow.Visible = true;
+			playerCardThrow.Play("player_card_throw");			
 		}
 		allowThrow = res;
 		throwButton.Disabled = !res;
@@ -196,6 +197,8 @@ public partial class GameManager : Node2D {
 		ThrowCard(throwingCard, new List<Card> {tableCard});
 		enemy.Backward();
 		enemyHand.RemoveCard(throwingCard);
+		oppCardThrow.Visible = true;
+		oppCardThrow.Play("opp_card_throw");
 		
 		// round end
 		round++;

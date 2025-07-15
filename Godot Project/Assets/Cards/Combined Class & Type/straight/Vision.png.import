@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4t4aa5kktyv"
-path="res://.godot/imported/throw-Sheet_draft_1.png-7cd6d34dc798aa7b1bbfcd8ed41a1666.ctex"
+uid="uid://s1tgkcwbbhox"
+path="res://.godot/imported/Vision.png-d1c0a4febb2df2d91590b8980d878b71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/In Play Safe House/throw-Sheet_draft_1.png"
-dest_files=["res://.godot/imported/throw-Sheet_draft_1.png-7cd6d34dc798aa7b1bbfcd8ed41a1666.ctex"]
+source_file="res://Assets/Cards/Combined Class & Type/straight/Vision.png"
+dest_files=["res://.godot/imported/Vision.png-d1c0a4febb2df2d91590b8980d878b71.ctex"]
 
 [params]
 

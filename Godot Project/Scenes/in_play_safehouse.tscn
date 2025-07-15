@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=72 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -16,8 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://bikssbixl4p0c" path="res://Assets/Character Designs/Old Man/agent_0.png" id="12_juooh"]
 [ext_resource type="AudioStream" uid="uid://cx2oaphfhg6v5" path="res://Assets/Music/CoffeeBlack.ogg" id="13_juooh"]
 [ext_resource type="PackedScene" uid="uid://dn8arlwkev5by" path="res://Scenes/rule_book.tscn" id="13_qn0kl"]
-[ext_resource type="Texture2D" uid="uid://d4mtpqxw6nrhw" path="res://Assets/In Play Safe House/throw-Sheet.png" id="15_docdc"]
-[ext_resource type="Texture2D" uid="uid://c4t4aa5kktyv" path="res://Assets/In Play Safe House/throw-Sheet_draft_1.png" id="17_60qq6"]
+[ext_resource type="Texture2D" uid="uid://d4mtpqxw6nrhw" path="res://Assets/In Play Safe House/Animations/throw-Sheet.png" id="15_docdc"]
+[ext_resource type="Texture2D" uid="uid://cvi3k5bmupfms" path="res://Assets/In Play Safe House/Animations/opponent throw-Sheet.png" id="15_n48vj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
@@ -6328,70 +6328,6 @@ region = Rect2(1440, 0, 144, 128)
 atlas = ExtResource("15_docdc")
 region = Rect2(1584, 0, 144, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_docdc"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(0, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n48vj"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(144, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_drq8l"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(288, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kaojq"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(432, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uc6ei"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(576, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t6xv6"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(720, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mdhqq"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(864, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mm3jw"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(1008, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hhvg0"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(1152, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wpoma"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(1296, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_odxyl"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(1440, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1lq4u"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(1584, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1coug"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(1728, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkoxr"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(1872, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gvwvf"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(2016, 0, 144, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_65r2t"]
-atlas = ExtResource("17_60qq6")
-region = Rect2(2160, 0, 144, 128)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_qwe8v"]
 animations = [{
 "frames": [{
@@ -6435,9 +6371,36 @@ animations = [{
 "texture": null
 }],
 "loop": false,
-"name": &"card_throw",
+"name": &"player_card_throw",
 "speed": 12.0
-}, {
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_docdc"]
+atlas = ExtResource("15_n48vj")
+region = Rect2(576, 0, 144, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n48vj"]
+atlas = ExtResource("15_n48vj")
+region = Rect2(720, 0, 144, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drq8l"]
+atlas = ExtResource("15_n48vj")
+region = Rect2(864, 0, 144, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kaojq"]
+atlas = ExtResource("15_n48vj")
+region = Rect2(1008, 0, 144, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uc6ei"]
+atlas = ExtResource("15_n48vj")
+region = Rect2(1152, 0, 144, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6xv6"]
+atlas = ExtResource("15_n48vj")
+region = Rect2(1296, 0, 144, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mdhqq"]
+animations = [{
 "frames": [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_docdc")
@@ -6458,38 +6421,11 @@ animations = [{
 "texture": SubResource("AtlasTexture_t6xv6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mdhqq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mm3jw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hhvg0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wpoma")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_odxyl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1lq4u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1coug")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qkoxr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gvwvf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_65r2t")
+"texture": null
 }],
 "loop": false,
-"name": &"default",
-"speed": 20.0
+"name": &"opp_card_throw",
+"speed": 12.0
 }]
 
 [node name="InPlaySafehouse" type="Node2D"]
@@ -6574,15 +6510,21 @@ sprite_frames = SubResource("SpriteFrames_qn0kl")
 animation = &"agent_0"
 autoplay = "agent_0"
 
-[node name="CardThrowAnimate" type="AnimatedSprite2D" parent="."]
+[node name="Player_CardThrowAnimate" type="AnimatedSprite2D" parent="."]
 visible = false
 z_index = 11
-position = Vector2(153, 75.3007)
+position = Vector2(153, 75)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_qwe8v")
-animation = &"card_throw"
-frame = 6
-frame_progress = 0.866142
+animation = &"player_card_throw"
+
+[node name="Opp_CardThrowAnimate" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 11
+position = Vector2(-71, 85.3408)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_mdhqq")
+animation = &"opp_card_throw"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 editor_description = "Coffee Black by GrimFrenzy"
