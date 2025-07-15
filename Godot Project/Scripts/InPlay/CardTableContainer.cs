@@ -71,11 +71,11 @@ public partial class CardTableContainer : Node2D {
 			Vector2 bottomLeft, bottomRight;
 			
 			if (isPlayer) {
-				bottomLeft = lVec;
-				bottomRight = rVec;
+				bottomLeft = lVec + dirLeft * 10;
+				bottomRight = rVec + dirRight * 10;
 			} else {
-				bottomLeft = lVec + dirLeft * (Card.SIZE2.Y + 5);
-				bottomRight = rVec + dirRight * (Card.SIZE2.Y + 5);
+				bottomLeft = lVec + dirLeft * (Card.SIZE2.Y + 20);
+				bottomRight = rVec + dirRight * (Card.SIZE2.Y + 20);
 			}
 			Vector2 topLeft = bottomLeft + dirLeft * Card.SIZE2.Y;
 			Vector2 topRight = bottomRight + dirRight * Card.SIZE2.Y;
@@ -89,11 +89,14 @@ public partial class CardTableContainer : Node2D {
 			card.Init(vertices, types[order[i]], classes[order[i]], false, isPlayer, i);
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 			
-			Vector2 dPos = new Vector2((topLeft.X + topRight.X) / 2f - 16, topLeft.Y);
-			card.durabilityBar.Visible = false;
+			Vector2 dPos = new Vector2((topLeft.X + topRight.X) / 2f + offset.X - 16, topLeft.Y + offset.Y - 3);
+			card.durabilityBar.Visible = true;
 			card.durabilityBar.Position = dPos;
+			card.durabilityBar.Size *= new Vector2(1, 0.25f);
+			card.durabilityBar.Scale *= new Vector2(1, 0.25f);
 			
 			AddChild(card);
+			card.ready = true;
 			cards.Add(card);
 		}
 
@@ -113,10 +116,10 @@ public partial class CardTableContainer : Node2D {
 
 	public PackedScene cardScene;
 	public Card activeCard = null;
-	public HashSet<Card> restrictAllow;
+	public HashSet<Card> restrictAllow = new HashSet<Card>();
 	
 	public virtual void OnCardClicked(Card card) {
-		if (activeCard == card || (restrictAllow != null && !restrictAllow.Contains(card)) || (!card.isPlayer && card.index == -1)) {
+		if (activeCard == card || (restrictAllow.Count > 0 && !restrictAllow.Contains(card)) || (!card.isPlayer && card.index == -1)) {
 			return;
 		}
 		
