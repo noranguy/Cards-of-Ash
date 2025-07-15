@@ -8,8 +8,7 @@ public struct Info {
 	public string Class;
 	public string Description;
 
-	public Info(string Title, string Class, string Description)
-	{
+	public Info(string Title, string Class, string Description) {
 		this.Title = Title;
 		this.Class = Class;
 		this.Description = Description;
@@ -96,14 +95,16 @@ public partial class GlobalState : Node {
 	// Probability multiplier when throwing at a defense card
 	public readonly double DefenseProb = 0.75;
 	
-	private int day = 1;
+	private int day = 0;
 	private bool post_game = false;
 	private bool player_has_cards = false;
-
-
+	
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
-		() => new Agent4()
+		() => new Agent1(),
+		() => new Agent2(),
+		() => new Agent3(),
+		() => new Agent4(),
 	};
 	
 	private static string spacer = "\n\u00A0\n";
@@ -119,14 +120,45 @@ Throwing a card:
 Press SPACE to continue.
 "),
 new Info("Ceramic Class", "ceramic",
-$@"Throwing Ability:
-Opponent will have 3 of these cards in their hand. Flips adjacent cards to the target at 25% of the original chance (considering the adjacent type, not the target type).
+$@"Throwing Ability: (3 in opponent’s hand)
+When thrown, this card also attempts to flip the table cards adjacent to the target, but at 25% of the original flip chance. For example, a tsunami ceramic card thrown at a volcano table card with an adjacent tsunami table card, has 95% and 12.5% chances to flip, respectively.
 {spacer}
-Table Ability:
-Opponent will have 2 of these cards on their table. Deteriorates adjacent cards by 20% when flipped.
+
+Table Ability: (2 on opponent’s table)
+When flipped, this card causes adjacent cards to deteriorate, reducing the probability of them flipping by 20% in future attempts.
 {spacer}
 Press SPACE to continue.
-")
+"),
+new Info("Elastic Class", "elastic",
+$@"Throwing Ability: (3 in opponent’s hand)
+Targets two table cards instead of one, each at 75% of the original flip chance.
+{spacer}
+
+Table Ability: (2 on opponent’s table)
+When flipped, it randomly chooses an unflipped card on the opposing table to be thrown at.
+{spacer}
+Press SPACE to continue.
+"),
+new Info("Vision Class", "vision",
+$@"Throwing Ability: (3 in opponent’s hand)
+Flips a table card twice (without deterioration) to reveal its type.
+{spacer}
+
+Table Ability: (2 on opponent’s table)
+After 3 rounds, each Vision card randomly swaps places with another table card.
+{spacer}
+Press SPACE to continue.
+"),
+new Info("Defense Class", "defense",
+$@"Throwing Ability: (3 in opponent’s hand)
+Instead of attempting to flip the target, this card deteriorates it, reducing its future flip chance by 20%.
+{spacer}
+
+Table Ability: (2 on opponent’s table)
+Has 75% of the normal chance to be flipped.
+{spacer}
+Press SPACE to continue.
+"),
 	};
 	
 	public Agent GetNextAgent() {
