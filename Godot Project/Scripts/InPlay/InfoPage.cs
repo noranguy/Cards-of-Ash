@@ -2,19 +2,22 @@ using Godot;
 using System;
 
 public partial class InfoPage : Node2D {
-	public override void _Ready() {
-		string[] types = new string[] {"Tsunami", "Volcano", "Earthquake"};
+	public override void _Ready()
+	{
+
+		string[] types = new string[] { "Tsunami", "Volcano", "Earthquake" };
 		Info info = GlobalState.Instance.GetInfo();
 		string titleText = info.Title;
 		string clas = info.Class;
 		string descriptionText = info.Description;
-		
-		foreach (string type in types) {
+
+		foreach (string type in types)
+		{
 			var sprite = GetNode<Sprite2D>(type);
 			var texture = GD.Load<Texture2D>($"res://Assets/Cards/{type.ToLower()}_{clas}.png");
 			sprite.Texture = texture;
 		}
-		
+
 		var title = GetNode<RichTextLabel>("Title");
 		title.Text = titleText;
 		var description = GetNode<RichTextLabel>("Description");

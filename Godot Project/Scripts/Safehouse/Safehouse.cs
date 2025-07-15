@@ -14,17 +14,18 @@ public partial class Safehouse : StaticBody2D
 
 	private int _day_num; // Keep track of day, mornings will be whole numbers, nights will be X.5
 
-	// Flags to see if the player is in an interactable area
+	// Flags to see if the player is in an interactable area 
 	private bool _in_bed;
 	private bool _at_door;
 	private bool _at_table;
 
+	// If the character is in a prompt screen
 	public bool in_prompt;
 
-	// Flags for enviroment
-
-	private String[] _character_order = ["OldManTutorial", "Kaishain", "Mom", "Kid", "OldManEnd"];
-	private String[] _dialogue_order = ["old_man_tutorial_dialogue", "kaishain_dialogue", "Mom", "Kid", "OldManEnd"];
+	//List that follows the day order for when characters show up
+	private String[] _character_order = ["OldManTutorial", "Kaishain", "Mom", "Kid", "OldManEndGame"];
+	private String[] _dialogue_order = ["old_man_tutorial", "kaishain", "mom", "kid", "old_man_end_game"];
+	private bool[] _inhabitants;
 
 	// Flags to keep track of safehouse state
 	private bool _player_has_cards;
@@ -42,12 +43,15 @@ public partial class Safehouse : StaticBody2D
 	{
 		// Set all flags
 		_player_has_cards = GlobalState.Instance.DoesPlayerHaveCards();
+		GD.Print(_player_has_cards);
 		_npc_waiting = false;
 		_game_ready = false;
 		_day_over = GlobalState.Instance.GetPostGame();
 		_in_bed = false;
 		_at_door = false;
 		_at_table = false;
+
+		_inhabitants = GlobalState.Instance.GetInhabitants();
 
 		// Get all the prompt nodes
 		_end_day_prompt = GetNode<Control>("EndDayPrompt");
@@ -60,6 +64,7 @@ public partial class Safehouse : StaticBody2D
 		if (!_player_has_cards)
 		{
 			GetNode<Node2D>("MenkoCards").Visible = true;
+			GetNode<AnimationPlayer>("MenkoCards/AnimationPlayer").Play("bounce");
 		}
 
 		_day_num = GlobalState.Instance.GetDay();
@@ -85,6 +90,7 @@ public partial class Safehouse : StaticBody2D
 				if (!_player_has_cards)
 				{
 					GetNode<Node2D>("MenkoCards").Visible = false;
+					GetNode<AnimationPlayer>("MenkoCards/AnimationPlayer").Stop();
 					_player_has_cards = true;
 					GlobalState.Instance.PlayerGetsCards();
 					Knock_at_door();
@@ -110,6 +116,22 @@ public partial class Safehouse : StaticBody2D
 				_open_door_prompt.Visible = true;
 				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 			}
+		}
+	}
+
+	private void InhabitSafehouse()
+	{
+		if (_inhabitants[1] == true)
+		{
+			// Show Kaishain
+		}
+		if (_inhabitants[2] == true)
+		{
+			// Show Mom
+		}
+		if (_inhabitants[3] == true)
+		{
+			// Show Kid
 		}
 	}
 
@@ -160,6 +182,7 @@ public partial class Safehouse : StaticBody2D
 		_npc_waiting = false;
 		_game_ready = true;
 		GetNode<Node2D>("Knock").Visible = false;
+		GetNode<TextureRect>("Door/Interact").Visible = false;
 		GetNode<AnimationPlayer>("Knock/AnimationPlayer").Stop();
 		GetNode<AnimationPlayer>("FadeToBlack/AnimationPlayer").Play("fade_to_black_dialogue");
 	}
@@ -200,6 +223,12 @@ public partial class Safehouse : StaticBody2D
 
 	private void Knock_at_door()
 	{
+		if (_day_num == 0)
+		{
+			GetNode<TextureRect>("Door/Interact").Visible = true;
+			GetNode<AnimationPlayer>("Door/AnimationPlayer").Play("bounce");
+		}
+
 		GetNode<Node2D>("Knock").Visible = true;
 		GetNode<AnimationPlayer>("Knock/AnimationPlayer").Play("knocking");
 		_npc_waiting = true;
@@ -209,23 +238,27 @@ public partial class Safehouse : StaticBody2D
 
 	private async Task Dialogue_setupAsync()
 	{
+		GD.Print("Dialgoue starting");
 		string _character = _character_order[_day_num];
 		string dialogue = _dialogue_order[_day_num];
 		_open_door_prompt.Visible = false;
 		GetNode<CharacterBody2D>(_character).Visible = true;
 		GetNode<CharacterBody2D>(_character).CollisionLayer = 1;
-		_player.Position = new Vector2(185, 130);
+		_player.Position = new Vector2(105, 85);
 
 		await DialogueManager.Instance.StartDialogue(dialogue);
 
 		if (_day_num == 0)
 		{
 			GetNode<TextureRect>("MenkoTable/Interact").Visible = true;
+			GetNode<AnimationPlayer>("MenkoTable/AnimationPlayer").Play("bounce");
 		}
+
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
 		_npc_waiting = false;
 		_day_over = false;
 		_game_ready = true;
+		
 		//GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Dialogue/{_dialogue_order[(int)_day_num]}.tscn"); for when theres a whole scene for dialogue
 	}
 
@@ -242,6 +275,18 @@ public partial class Safehouse : StaticBody2D
 					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt");
 					Knock_at_door();
 					break;
+				case 2:
+					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt");
+					Knock_at_door();
+					break;
+				case 3:
+					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt");
+					Knock_at_door();
+					break;
+				case 4:
+					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt");
+					Knock_at_door();
+					break;
 			}
 		}
 		else
@@ -252,7 +297,16 @@ public partial class Safehouse : StaticBody2D
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
 					break;
 				case 1:
-					await DialogueManager.Instance.StartDialogue("EndDay/end_prototype");
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
+					break;
+				case 2:
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
+					break;
+				case 3:
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
+					break;
+				case 4:
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
 					break;
 			}
 		}

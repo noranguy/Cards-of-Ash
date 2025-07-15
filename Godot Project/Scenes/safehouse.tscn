@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bvd7sgi6dix5n"]
+[gd_scene load_steps=39 format=3 uid="uid://bvd7sgi6dix5n"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
@@ -21,25 +21,7 @@ b = Vector2(67.9998, -66.0003)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1njoc"]
 size = Vector2(34, 17)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qcbrc"]
-size = Vector2(61, 51)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvy0r"]
-size = Vector2(50, 40)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5cdq"]
-size = Vector2(76, 92)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpc17"]
-size = Vector2(16, 177)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_algie"]
-size = Vector2(60, 27)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6l742"]
-size = Vector2(48, 79)
-
-[sub_resource type="Animation" id="Animation_mt6l6"]
+[sub_resource type="Animation" id="Animation_yxvog"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -51,7 +33,53 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-30, -50)]
+"values": [Vector2(197, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_80bok"]
+resource_name = "bounce"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interact:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(197, 10), Vector2(197, 5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_40vev"]
+_data = {
+&"RESET": SubResource("Animation_yxvog"),
+&"bounce": SubResource("Animation_80bok")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qcbrc"]
+size = Vector2(61, 51)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvy0r"]
+size = Vector2(50, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5cdq"]
+size = Vector2(76, 92)
+
+[sub_resource type="Animation" id="Animation_mt6l6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MenkoCards/Interact:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-30, -50), Vector2(-30, -45)]
 }
 
 [sub_resource type="Animation" id="Animation_uq6vu"]
@@ -67,13 +95,59 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-30, -50), Vector2(-30, -45)]
+"values": [Vector2(-40, 12), Vector2(-35, 12)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0yw7c"]
 _data = {
 &"RESET": SubResource("Animation_mt6l6"),
 &"bounce": SubResource("Animation_uq6vu")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpc17"]
+size = Vector2(16, 177)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_algie"]
+size = Vector2(60, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6l742"]
+size = Vector2(48, 79)
+
+[sub_resource type="Animation" id="Animation_w270n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interact:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_0yw7c"]
+resource_name = "bounce"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interact:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-30, -50), Vector2(-30, -45)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_80bok"]
+_data = {
+&"RESET": SubResource("Animation_w270n"),
+&"bounce": SubResource("Animation_0yw7c")
 }
 
 [sub_resource type="Animation" id="Animation_krigs"]
@@ -137,6 +211,9 @@ _data = {
 &"RESET": SubResource("Animation_krigs"),
 &"knocking": SubResource("Animation_b4d46")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxkjp"]
+size = Vector2(100, 72)
 
 [sub_resource type="Animation" id="Animation_vpc17"]
 length = 0.001
@@ -241,10 +318,12 @@ _data = {
 
 [node name="Safehouse" type="StaticBody2D"]
 light_mask = 0
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_6l742")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(320, 180)
+scale = Vector2(0.5, 0.5)
+anchor_mode = 0
 process_callback = 0
 
 [node name="Background" parent="." instance=ExtResource("3_6l742")]
@@ -453,7 +532,7 @@ text = "Cancel"
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_qcbrc")]
 top_level = true
 z_index = 6
-position = Vector2(425, 160)
+position = Vector2(230, 100)
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
@@ -462,14 +541,30 @@ slide_on_ceiling = false
 [node name="OldManTutorial" parent="." instance=ExtResource("3_v5lnp")]
 visible = false
 z_index = 7
-position = Vector2(185, 90)
+position = Vector2(210, 120)
+scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 2
 
 [node name="Kaishain" parent="." instance=ExtResource("5_algie")]
 visible = false
 z_index = 7
-position = Vector2(185, 90)
+position = Vector2(210, 120)
+scale = Vector2(2, 2)
+collision_layer = 0
+
+[node name="Mom" parent="." instance=ExtResource("5_algie")]
+visible = false
+z_index = 7
+position = Vector2(210, 120)
+scale = Vector2(2, 2)
+collision_layer = 0
+
+[node name="Kid" parent="." instance=ExtResource("5_algie")]
+visible = false
+z_index = 7
+position = Vector2(210, 120)
+scale = Vector2(2, 2)
 collision_layer = 0
 
 [node name="Door" type="Area2D" parent="."]
@@ -480,6 +575,19 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2(209, 88.5)
 shape = SubResource("RectangleShape2D_1njoc")
+
+[node name="Interact" type="TextureRect" parent="Door"]
+visible = false
+offset_left = 197.0
+offset_top = 20.0
+offset_right = 221.0
+offset_bottom = 44.0
+texture = ExtResource("7_gxkjp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
+libraries = {
+&"": SubResource("AnimationLibrary_40vev")
+}
 
 [node name="Bed" type="Area2D" parent="."]
 z_index = 5
@@ -522,9 +630,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -30.0
+offset_left = -40.0
 offset_top = 12.0
-offset_right = -6.0
+offset_right = -16.0
 offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -535,6 +643,11 @@ expand_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MenkoTable"]
 position = Vector2(6.00002, -0.499939)
 shape = SubResource("RectangleShape2D_n5cdq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenkoTable"]
+libraries = {
+&"": SubResource("AnimationLibrary_0yw7c")
+}
 
 [node name="Furniture" type="StaticBody2D" parent="."]
 z_index = 5
@@ -559,6 +672,7 @@ rotation = 1.5708
 shape = SubResource("RectangleShape2D_6l742")
 
 [node name="MenkoCards" type="Node2D" parent="."]
+visible = false
 position = Vector2(315, 185)
 
 [node name="MenkoCards" type="TextureRect" parent="MenkoCards"]
@@ -578,22 +692,22 @@ expand_mode = 1
 
 [node name="Interact" type="TextureRect" parent="MenkoCards"]
 z_index = 7
-offset_left = -30.0
-offset_top = -50.0
-offset_right = -6.0
-offset_bottom = -26.0
+offset_left = -40.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 36.0
 texture = ExtResource("7_gxkjp")
 expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MenkoCards"]
 libraries = {
-&"": SubResource("AnimationLibrary_0yw7c")
+&"": SubResource("AnimationLibrary_80bok")
 }
 
 [node name="Knock" type="Node2D" parent="."]
 visible = false
 z_index = 6
-position = Vector2(225, 50)
+position = Vector2(225, 60)
 scale = Vector2(0.5, 0.5)
 
 [node name="Ko" type="TextureRect" parent="Knock"]
@@ -619,12 +733,33 @@ libraries = {
 &"": SubResource("AnimationLibrary_uq6vu")
 }
 
+[node name="Kaishain Area" type="Area2D" parent="."]
+visible = false
+position = Vector2(-18, -2)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kaishain Area"]
+z_index = 5
+position = Vector2(446, 304)
+shape = SubResource("RectangleShape2D_gxkjp")
+
+[node name="Kaishain" parent="Kaishain Area" instance=ExtResource("5_algie")]
+z_index = 7
+position = Vector2(450, 305)
+scale = Vector2(2, 2)
+collision_layer = 0
+
 [node name="FadeToBlack" type="CanvasLayer" parent="."]
 
 [node name="Interact" type="ColorRect" parent="FadeToBlack"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -1.0
+offset_right = -9.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

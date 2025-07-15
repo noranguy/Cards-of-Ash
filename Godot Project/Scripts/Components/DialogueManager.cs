@@ -35,7 +35,6 @@ public partial class DialogueManager : Control {
 
 	public override void _Ready() {
 		Instance = this;
-		
 		panel = GetNode<Panel>("DialoguePanel");
 		panel.ZIndex = 100;
 		panel.SetZAsRelative(false);
