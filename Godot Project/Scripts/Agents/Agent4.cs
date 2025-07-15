@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Agent1 : Agent {
+public class Agent4 : Agent {
 	private List<Card> hand;
 	private List<Card> playerTable;
 	private List<Card> enemyTable;
@@ -28,9 +28,9 @@ public class Agent1 : Agent {
 			"basic",
 			"basic",
 			"basic",
-			"ceramic",
-			"ceramic",
-			"ceramic"
+			"defense",
+			"defense",
+			"defense"
 		};
 		
 		return (types, classes);
@@ -47,8 +47,8 @@ public class Agent1 : Agent {
 		};
 		
 		List<string> classes = new List<string> {
-			"ceramic",
-			"ceramic",
+			"defense",
+			"defense",
 			"basic",
 			"basic",
 			"basic",
@@ -68,10 +68,6 @@ public class Agent1 : Agent {
 	//              failing a throw with card of type x
 	private double[][] rankMod;
 	
-	// similar to rankMod but for adjacent cards when throwing a ceramic card since lower chance of
-	// flipping
-	private double[][] adjRankMod;
-	
 	// frequency of enemy basic hand cards by type
 	private int[] freq;
 	
@@ -83,15 +79,15 @@ public class Agent1 : Agent {
 	private int last;
 	
 	public override void Init(List<Card> hand, List<Card> playerTable, List<Card> enemyTable) {
+		this.hand = hand;
+		this.playerTable = playerTable;
+		this.enemyTable = enemyTable;
+		
 		freq = new int[] {2, 2, 2};
 		tableFreq = new int[] {2, 2, 2};
 		round = 0;
 		order = -1;
 		last = -1;
-		
-		this.hand = hand;
-		this.playerTable = playerTable;
-		this.enemyTable = enemyTable;
 		
 		// start with equal chance of unflipped cards being each type
 		ranks = Enumerable.Range(0, 6)
@@ -113,28 +109,13 @@ public class Agent1 : Agent {
 			new double[] { h, l, m },
 			new double[] { m, h, l }
 		};
-		
-		var ceramicProb = GlobalState.Instance.CeramicProb;
-		
-		h = (1 - typeProb[0] * ceramicProb) / 3;
-		m = (1 - typeProb[1] * ceramicProb) / 3;
-		l = (1 - typeProb[2] * ceramicProb) / 3;
-
-		adjRankMod = new double[][] {
-			new double[] { l, m, h },
-			new double[] { h, l, m },
-			new double[] { m, h, l }
-		};
 	}
 	
-	private void SortOrders(string clas) {
+	private void SortOrders() {
 		for (int i = 0; i < orders.Count; i++) {
-			var row = orders[i];
-			
-			row.Sort((x, y) => {
+			orders[i].Sort((x, y) => {
 				if (playerTable[x].visible && !playerTable[y].visible) return 1;
 				if (!playerTable[x].visible && playerTable[y].visible) return -1;
-				
 				return ranks[y][i].CompareTo(ranks[x][i]);
 			});
 		}
@@ -156,82 +137,66 @@ public class Agent1 : Agent {
 	}
 	
 	public override (Card, Card, Card) Move() {
-		switch (round) {
-			case 0:
-				last = GlobalState.Instance.TypeMap[hand[^1].type];
-				order = 1;
-				return (hand[^1], playerTable[1], null);
-			case 1:
-				last = GlobalState.Instance.TypeMap[hand[^1].type];
-				order = 4;
-				return (hand[^1], playerTable[4], null);
-			case 2:
-				SortOrders("ceramic");
-				last = GlobalState.Instance.TypeMap[hand[^1].type];
-				order = orders[last][0];
-				return (hand[^1], playerTable[order], null);
-			default:
-				SortOrders("basic");
-				SortHand();
-				
-				last = GlobalState.Instance.TypeMap[hand[^1].type];
-				freq[last]--;
-				order = orders[last][0];
-				return (hand[^1], playerTable[order], null);
+		if (round >= 3) {
+			SortOrders();
+			SortHand();
+			
+			last = GlobalState.Instance.TypeMap[hand[^1].type];
+			freq[last]--;
+			order = orders[last][0];
+			return (hand[^1], playerTable[order], null);
+		} else {
+			orders[0].Sort((x, y) => {
+				if (enemyTable[x].visible && !enemyTable[y].visible) return 1;
+				if (!enemyTable[x].visible && enemyTable[y].visible) return -1;
+				return enemyTable[y].durability.CompareTo(enemyTable[x].durability);
+			});
+			
+			order = orders[0][0];
+			
+			return (hand[^1], enemyTable[orders[0][0]], null);
 		}
 	}
 	
 	public override void Backward() {
-		// update part of rank from using frequency of flipped player table cards
-		int sum = tableFreq.Sum();
-		if (sum == 0) return;
-		
-		double[] oldProb = Enumerable.Range(0, 3)
-			.Select(i => tableFreq[(i + 2) % 3] / (double)sum)
-			.ToArray();
+		if (round >= 3) {
+			// update part of rank from using frequency of flipped player table cards
+			int sum = tableFreq.Sum();
+			if (sum == 0) return;
 			
-		tableFreq = Enumerable.Range(0, 3)
-			.Select(type => playerTable.Count(card =>
-				!card.visible && GlobalState.Instance.TypeMap[card.type] == type
-			)).ToArray();
-		sum = tableFreq.Sum();
-		if (sum == 0) return;
+			double[] oldProb = Enumerable.Range(0, 3)
+				.Select(i => tableFreq[(i + 2) % 3] / (double)sum)
+				.ToArray();
+				
+			tableFreq = Enumerable.Range(0, 3)
+				.Select(type => playerTable.Count(card =>
+					!card.visible && GlobalState.Instance.TypeMap[card.type] == type
+				)).ToArray();
+			sum = tableFreq.Sum();
+			if (sum == 0) return;
+				
+			double[] newProb = Enumerable.Range(0, 3)
+				.Select(i => tableFreq[(i + 2) % 3] / (double)sum)
+				.ToArray();
+
+			ranks = ranks.Select(row => 
+				Enumerable.Range(0, 3).Select(x =>
+					oldProb[x] != 0 ? (row[x] / oldProb[x]) * newProb[x] : 0
+				).ToList()
+			).ToList();
 			
-		double[] newProb = Enumerable.Range(0, 3)
-			.Select(i => tableFreq[(i + 2) % 3] / (double)sum)
-			.ToArray();
+			// prioritize unflipped table cards
+			for (int i = 0; i < playerTable.Count; i++) {
+				if (playerTable[i].visible) {
+					ranks[i] = new List<double> {-1e5, -1e5, -1e5};
+				}
+			}
 			
-		ranks = ranks.Select(row => 
-			Enumerable.Range(0, 3).Select(x =>
-				oldProb[x] != 0 ? (row[x] / oldProb[x]) * newProb[x] : 0
-			).ToList()
-		).ToList();
-		
-		// prioritize unflipped table cards
-		for (int i = 0; i < playerTable.Count; i++) {
-			if (playerTable[i].visible) {
-				ranks[i] = new List<double> {-1e5, -1e5, -1e5};
-			}
-		}
-		
-		// apply rank modifier if last throw failed
-		if (!playerTable[order].visible) {
-			for (int i = 0; i < freq.Length; i++) {
-				ranks[order][i] *= rankMod[last][i];
-			}
-		}
-		
-		// apply rank modifier for left card if last throw failed and was ceramic
-		if (order > 0 && round < 3 && !playerTable[order-1].visible) {
-			for (int i = 0; i < freq.Length; i++) {
-				ranks[order-1][i] *= adjRankMod[last][i];
-			}
-		}
-		
-		// apply rank modifier for right card if last throw failed and was ceramic
-		if (order < 5 && round < 3 && !playerTable[order+1].visible) {
-			for (int i = 0; i < freq.Length; i++) {
-				ranks[order+1][i] *= adjRankMod[last][i];
+			// apply rank modifier if last throw failed
+			if (!playerTable[order].visible) {
+				for (int i = 0; i < freq.Length; i++) {
+					ranks[order][i] *= rankMod[last][i];
+				}
 			}
 		}
 		

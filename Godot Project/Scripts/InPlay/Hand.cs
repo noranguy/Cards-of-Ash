@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class Hand : Control {
 	private List<Card> cards = new();
@@ -36,11 +37,16 @@ public partial class Hand : Control {
 			cards.Add(card);
 		}
 
-		UpdateCardPositions(true);
+		await UpdateCardPositions(true);
+		if (!visible) {
+			foreach (Card card in cards) {
+				card.ZIndex = 4;
+			}
+		}
 	}
 	
 	// card fan
-	public async virtual void UpdateCardPositions(bool first) {
+	public async virtual Task UpdateCardPositions(bool first) {
 		int numCards = cards.Count;
 		int cardSize = (int)(Card.SIZE.X * scaleV.X);
 		if (numCards == 1) {
@@ -80,11 +86,13 @@ public partial class Hand : Control {
 			card.RotationDegrees = max_rotation_degrees * rot_multiplier;
 			card.upperPosition = finalV + -10 * Vector2.FromAngle((card.RotationDegrees + 90) * (float)Math.PI / 180);
 			card.lowerPosition = finalV;
+			card.ready = true;
 		}
 	}
 
-	public void RemoveCard(Card card) {
+	public async void RemoveCard(Card card) {
 		if (cards.Contains(card)) {
+			await card.UpdatePosition(card.Position + new Vector2(0, 40));
 			cards.Remove(card);
 			card.QueueFree();
 			Size -= new Vector2(26.5f * scaleV.X, 0);
@@ -101,10 +109,10 @@ public partial class Hand : Control {
 
 	public PackedScene cardScene;
 	public Card activeCard = null;
-	public HashSet<Card> restrictAllow;
+	public HashSet<Card> restrictAllow = new HashSet<Card>();
 	
 	public virtual void OnCardClicked(Card card) {
-		if (activeCard == card || (restrictAllow != null && !restrictAllow.Contains(card)) || (!card.isPlayer && card.index == -1)) {
+		if (activeCard == card || (restrictAllow.Count > 0 && !restrictAllow.Contains(card)) || (!card.isPlayer && card.index == -1)) {
 			return;
 		}
 		
