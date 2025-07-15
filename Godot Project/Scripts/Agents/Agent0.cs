@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class Agent0 : Agent {
-	private Random rand;
+	private readonly Random Rand = new Random();
+	
 	private List<Card> hand;
 	private List<Card> playerTable;
 	private List<Card> enemyTable;
@@ -62,7 +63,6 @@ public class Agent0 : Agent {
 	
 	public override void Init(List<Card> hand, List<Card> playerTable, List<Card> enemyTable) {
 		round = 0;
-		rand = new Random();
 		
 		this.hand = hand;
 		this.playerTable = playerTable;
@@ -76,8 +76,8 @@ public class Agent0 : Agent {
 	// Rounds 0-2: Mode 1.
 	// Rounds 3-5: Mode 2. If enemy table has no flipped cards, Mode 1.
 	// Rounds 6-8: Mode 1. If player table has only flipped cards, Mode 3.
-	public override (Card, Card) Move() {
-		Card throwingCard = hand[rand.Next(hand.Count)];
+	public override (Card, Card, Card) Move() {
+		Card throwingCard = hand[Rand.Next(hand.Count)];
 		
 		List<Card> unflippedPlayerTable = playerTable.Where(x => !x.visible).ToList();
 		List<Card> flippedEnemyTable = enemyTable.Where(x => x.visible).ToList();
@@ -85,13 +85,13 @@ public class Agent0 : Agent {
 		Card tableCard;
 		
 		if (round >= 3 && round < 6 && flippedEnemyTable.Count > 0) {
-			tableCard = flippedEnemyTable[rand.Next(flippedEnemyTable.Count)];
+			tableCard = flippedEnemyTable[Rand.Next(flippedEnemyTable.Count)];
 		} else if (unflippedPlayerTable.Count > 0) {
-			tableCard = unflippedPlayerTable[rand.Next(unflippedPlayerTable.Count)];
+			tableCard = unflippedPlayerTable[Rand.Next(unflippedPlayerTable.Count)];
 		} else {
-			tableCard = enemyTable[rand.Next(enemyTable.Count)];
+			tableCard = enemyTable[Rand.Next(enemyTable.Count)];
 		}
-		return (throwingCard, tableCard);
+		return (throwingCard, tableCard, null);
 	}
 	
 	public override void Backward() {

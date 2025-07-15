@@ -11,7 +11,7 @@ public partial class InfoPage : Node2D {
 		
 		foreach (string type in types) {
 			var sprite = GetNode<Sprite2D>(type);
-			var texture = GD.Load<Texture2D>($"res://Assets/Cards/{type}_{clas}.png");
+			var texture = GD.Load<Texture2D>($"res://Assets/Cards/{type.ToLower()}_{clas}.png");
 			sprite.Texture = texture;
 		}
 		

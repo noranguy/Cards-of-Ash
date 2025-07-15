@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 public partial class GameManager : Node2D {
 	[Export] public PackedScene cardScene;
@@ -15,6 +16,9 @@ public partial class GameManager : Node2D {
 	private BetterButton infoButton;
 	private Panel rulebook;
 	private Label roundLabel;
+	
+	private List<Card> playerTableCards;
+	private List<Card> enemyTableCards;
 	
 	private Agent enemy;
 	
@@ -71,9 +75,12 @@ public partial class GameManager : Node2D {
 		enemyHand.Init(cardScene, yEnemyHand, 0.75f, false, enemyHandTypes, enemyHandClasses);
 		table.Init(cardScene, playerTableTypes, playerTableClasses, enemyTableTypes,
 		enemyTableClasses);
-		playerHand.Init(cardScene, yPlayerHand, 1.125f, true, playerHandTypes, playerHandClasses);
+		playerHand.Init(cardScene, yPlayerHand, 1.5f, true, playerHandTypes, playerHandClasses);
 		
-		enemy.Init(enemyHand.GetCards(), table.GetPlayerCards(), table.GetEnemyCards());
+		playerTableCards = table.GetPlayerCards();
+		enemyTableCards = table.GetEnemyCards();
+		
+		enemy.Init(enemyHand.GetCards(), playerTableCards, enemyTableCards);
 		
 		playerHand.Connect(Hand.SignalName.ActiveCard, new Callable(this, nameof(UpdateActiveHandCard)));
 		table.Connect(CardTableContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActiveTableCard)));
@@ -81,7 +88,7 @@ public partial class GameManager : Node2D {
 		anim.Play($"agent_{GlobalState.Instance.GetDay()}");
 
 		var playerFirst = playerHand.GetCards()[0];
-		var tableFirst = table.GetEnemyCards()[0];
+		var tableFirst = enemyTableCards[0];
 		
 		if (GlobalState.Instance.GetDay() == 0) {
 			playerHand.restrictAllow = new HashSet<Card> { playerFirst };
@@ -115,10 +122,13 @@ public partial class GameManager : Node2D {
 	public void ThrowToggle(bool active) {
 		bool res = active && table.activeCard != null && playerHand.activeCard != null;
 		if (!active && allowThrow) {
-			playerHand.RemoveCard(playerHand.activeCard);
+			if (!playerHand.restrictAllow.Contains(playerHand.activeCard)) {
+				playerHand.RemoveCard(playerHand.activeCard);
+				playerHand.activeCard = null;
+			}
 			table.activeCard.locked = false;
 			table.activeCard.Unhighlight();
-			table.activeCard = playerHand.activeCard = null;
+			table.activeCard = null;
 		}
 		allowThrow = res;
 		throwButton.Disabled = !res;
@@ -135,12 +145,12 @@ public partial class GameManager : Node2D {
 		ThrowToggle(true);
 	}
 	
-	private void ThrowCard(Card throwingCard, List<Card> tableCards) {
+	private async Task ThrowCard(Card throwingCard, List<Card> tableCards) {
 		int throwingCardType = GlobalState.Instance.TypeMap[throwingCard.type];
 		int tableCardType;
 		double threshold;
 		double rnd;
-		List<Card> active = tableCards[0].isPlayer ? table.GetPlayerCards() : table.GetEnemyCards();
+		List<Card> active = tableCards[0].isPlayer ? playerTableCards : enemyTableCards;
 		
 		if (throwingCard.clas == "ceramic") {
 			if (tableCards[0].index > 0) {
@@ -149,6 +159,21 @@ public partial class GameManager : Node2D {
 			if (tableCards[0].index < 5) {
 				tableCards.Add(active[tableCards[0].index + 1]);
 			}
+		} else if (throwingCard.clas == "elastic") {
+			if (playerHand.restrictAllow.Contains(throwingCard)) {
+				playerHand.restrictAllow.Remove(throwingCard);
+			} else {
+				playerHand.restrictAllow.Add(throwingCard);
+			}
+		} else if (throwingCard.clas == "vision") {
+			tableCards[0].Flip();
+			await ToSignal(GetTree().CreateTimer(1), "timeout");
+			tableCards[0].Flip();
+			return;
+		} else if (throwingCard.clas == "defense") {
+			tableCards[0].ReduceDurability();
+			tableCards[0].Shake();
+			return;
 		}
 		
 		for (int i = 0; i < tableCards.Count; i++) {
@@ -159,10 +184,13 @@ public partial class GameManager : Node2D {
 				rnd = 0;
 			}
 			
-			if (i != 0) threshold *= 0.25;
+			if (i != 0) threshold *= GlobalState.Instance.CeramicProb;
+			if (throwingCard.clas == "elastic") threshold *= GlobalState.Instance.ElasticProb;
+			if (tableCards[i].clas == "defense") threshold *= GlobalState.Instance.DefenseProb;
 			
 			if (rnd < threshold) {
 				tableCards[i].Flip();
+				tableCards[i].ReduceDurability();
 				
 				if (tableCards[i].clas == "ceramic") {
 					if (tableCards[i].index > 0) {
@@ -171,30 +199,55 @@ public partial class GameManager : Node2D {
 					if (tableCards[i].index < 5) {
 						active[tableCards[i].index + 1].ReduceDurability();
 					}
+				} else if (tableCards[i].clas == "elastic") {
+					List<Card> unFlippedCards =
+						(throwingCard.isPlayer ? playerTableCards : enemyTableCards)
+						.Where(x => !x.visible).ToList();
+					
+					List<Card> eTableCards = new List<Card> {unFlippedCards[Rand.Next(unFlippedCards.Count)]};
+					await ThrowCard(tableCards[i], eTableCards);
 				}
+			} else {
+				tableCards[i].Shake();
 			}
 		}
 	}
 	
 	private async void Round() {
 		if (!allowThrow) return;
-		table.activeCard.Unfocus();
+		if (GlobalState.Instance.GetDay() == 0 && round == 0) {
+			playerHand.restrictAllow.Clear();
+			table.restrictAllow.Clear();
+			table.activeCard.Unfocus();
+		}
 		
 		// player turn
-		ThrowCard(playerHand.activeCard, new List<Card> {table.activeCard});
+		await ThrowCard(playerHand.activeCard, new List<Card> {table.activeCard});
 		ThrowToggle(false);
+		
+		// second throw with elastic card
+		if (playerHand.restrictAllow.Contains(playerHand.activeCard)) {
+			return;
+		}
 		
 		await ToSignal(GetTree().CreateTimer(1), "timeout");
 		
 		// enemy turn
-		var (throwingCard, tableCard) = enemy.Move();
-		ThrowCard(throwingCard, new List<Card> {tableCard});
+		var (throwingCard, tableCard1, tableCard2) = enemy.Move();
+		ThrowCard(throwingCard, new List<Card> {tableCard1});
+		if (throwingCard.clas == "elastic" || throwingCard.clas == "vision") {
+			await ThrowCard(throwingCard, new List<Card> {tableCard2});
+		}
+		if (throwingCard.clas == "vision") {
+			enemy.RevealCard(tableCard1, playerTableCards.IndexOf(tableCard1));
+			enemy.RevealCard(tableCard2, playerTableCards.IndexOf(tableCard2));
+		}
 		enemy.Backward();
 		enemyHand.RemoveCard(throwingCard);
+		await ToSignal(GetTree().CreateTimer(1), "timeout");
 		
 		// round end
 		round++;
-		playerHand.restrictAllow = table.restrictAllow = null;
 		
 		// tutorial dialogue
 		if (GlobalState.Instance.GetDay() == 0) {
@@ -213,8 +266,8 @@ public partial class GameManager : Node2D {
 		}
 		
 		// track player and enemy score
-		int playerCount = table.GetEnemyCards().Count(card => card.visible);
-		int enemyCount = table.GetPlayerCards().Count(card => card.visible);
+		int playerCount = enemyTableCards.Count(card => card.visible);
+		int enemyCount = playerTableCards.Count(card => card.visible);
 		
 		// game end
 		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
@@ -230,7 +283,50 @@ public partial class GameManager : Node2D {
 			}
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		} else {
+			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision"))) {
+				roundLabel.Text = $"Vision Cards Are Swapping";
+				await ToSignal(GetTree().CreateTimer(0.5), "timeout");
+				if (GlobalState.Instance.GetInfo().Class == "vision") {
+					await SwapVision(enemyTableCards);
+				} else {
+					await SwapVision(playerTableCards);
+				}
+			}
 			roundLabel.Text = $"Round {round+1}";
 		}
+	}
+	
+	private async Task SwapVision(List<Card> cards) {
+		List<Vector2> start = cards.Select(card => card.Position).ToList();
+		List<Vector2> end = cards.Select(card => new Vector2(-(card.sprite.Polygon[0] + card.sprite.Polygon[1]).X / 2, 0)).ToList();
+		
+		for (int i = 0; i < cards.Count; i++) {
+			cards[i].UpdatePosition(end[i]);
+		}
+		
+		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
+		
+		List<Card> visionCards = cards.Where(card => card.clas == "vision").ToList();
+		List<Card> nonVisionCards = cards.Where(card => card.clas != "vision").ToList();
+		
+		foreach (Card visionCard in visionCards) {
+			Card nonVisionCard = nonVisionCards[Rand.Next(nonVisionCards.Count)];
+			SwapCardFields(visionCard, nonVisionCard);
+			visionCard.UpdateTexture();
+			nonVisionCard.UpdateTexture();
+			nonVisionCards.Remove(nonVisionCard);
+		}
+		
+		for (int i = 0; i < cards.Count; i++) {
+			cards[i].UpdatePosition(start[i]);
+		}
+	}
+	
+	void SwapCardFields(Card a, Card b) {
+		(a.type, b.type) = (b.type, a.type);
+		(a.clas, b.clas) = (b.clas, a.clas);
+		(a.visible, b.visible) = (b.visible, a.visible);
+		(a.durability, b.durability) = (b.durability, a.durability);
+		(a.durabilityBar.Value, b.durabilityBar.Value) = (b.durabilityBar.Value, a.durabilityBar.Value);
 	}
 }

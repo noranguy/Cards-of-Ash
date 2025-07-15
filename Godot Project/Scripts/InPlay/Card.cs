@@ -24,6 +24,7 @@ public partial class Card : Control {
 	public int index;
 	public Polygon2D sprite;
 	public ProgressBar durabilityBar;
+	public bool ready = false;
 	
 	private Tween tween;
 	public Vector2 upperPosition;
@@ -92,15 +93,16 @@ public partial class Card : Control {
 		UpdateTexture();
 	}
 	
-	public async Task UpdatePosition(Vector2 position) {
-		tween = GetTree().CreateTween();
-		tween.TweenProperty(this, "position", position, 0.1f);
-	}
-	
 	public async Task UpdatePosition(Vector2 position, Vector2 scale) {
 		tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "position", position, 0.1f);
 		tween.TweenProperty(this, "scale", scale, 0.1f);
+		await ToSignal(tween, "finished");
+	}
+	
+	public async Task UpdatePosition(Vector2 position) {
+		tween = GetTree().CreateTween();
+		tween.TweenProperty(this, "position", position, 0.1f);
 		await ToSignal(tween, "finished");
 	}
 	
@@ -114,10 +116,56 @@ public partial class Card : Control {
 		}
 	}
 	
-	public void Flip() {
+	public async Task Flip() {
+		Vector2[] start = sprite.Polygon;
+		Vector2 top = new Vector2((start[0].X + start[1].X) / 2f, start[0].Y - 15);
+		Vector2 bot = new Vector2((start[2].X + start[3].X) / 2f, start[2].Y - 15);
+		Vector2[] end = new Vector2[] {
+			top, top, bot, bot
+		};
+		await UpdatePolygon(start, end, 0.1f);
 		visible = !visible;
 		UpdateTexture();
-		ReduceDurability();
+		await UpdatePolygon(end, start, 0.1f);
+	}
+	
+	public async Task Shake() {
+		Vector2[] mid = sprite.Polygon;
+		Vector2[] left = (Vector2[])mid.Clone();
+		Vector2[] right = (Vector2[])mid.Clone();
+		
+		for (int i = 0; i < 4; i++) {
+			left[i] += new Vector2(-2, 0);
+			right[i] += new Vector2(2, 0);
+		}
+		
+		for (int i = 0; i < 3; i++) {
+			await UpdatePolygon(mid, left, 0.02f);
+			await UpdatePolygon(left, mid, 0.02f);
+			await UpdatePolygon(mid, right, 0.02f);
+			await UpdatePolygon(right, mid, 0.02f);
+		}
+	}
+	
+	private Vector2[] _start, _end;
+	
+	private async Task UpdatePolygon(Vector2[] start, Vector2[] end, float duration) {
+		tween = CreateTween();
+		_start = start;
+		_end = end;
+		tween.TweenMethod(
+			new Callable(this, nameof(UpdatePolygonHelper)),
+			0.0f, 1.0f, duration
+			);
+		await ToSignal(tween, "finished");
+	}
+	
+	private void UpdatePolygonHelper(float t) {
+		Vector2[] current = new Vector2[4];
+		for (int i = 0; i < 4; i++) {
+			current[i] = _start[i].Lerp(_end[i], t);
+		}
+		sprite.Polygon = current;
 	}
 
 	public void OnInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
@@ -131,7 +179,7 @@ public partial class Card : Control {
 	}
 	
 	public void Highlight() {
-		if (index == -1 && !isPlayer) return;
+		if ((index == -1 && !isPlayer) || !ready) return;
 		Shader shader = GD.Load<Shader>("res://Shaders/card_highlight.gdshader");
 		ShaderMaterial mat = new ShaderMaterial { Shader = shader };
 		sprite.Material = mat;
@@ -146,7 +194,7 @@ public partial class Card : Control {
 	}
 	
 	public void Unhighlight() {
-		if ((index == -1 && !isPlayer) || locked) return;
+		if ((index == -1 && !isPlayer) || locked || !ready) return;
 		sprite.Material = null;
 		
 		if (index != -1) return;
