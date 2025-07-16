@@ -137,6 +137,16 @@ When flipped, this card causes adjacent cards to deteriorate, reducing the proba
 {spacer}
 Press SPACE to continue.
 "),
+new Info("Defense Class", "defense",
+$@"Throwing Ability: (3 in opponent’s hand)
+Instead of attempting to flip the target, this card deteriorates it, reducing its future flip chance by 20%.
+{spacer}
+
+Table Ability: (2 on opponent’s table)
+Has 75% of the normal chance to be flipped.
+{spacer}
+Press SPACE to continue.
+"),
 new Info("Elastic Class", "elastic",
 $@"Throwing Ability: (3 in opponent’s hand)
 Targets two table cards instead of one, each at 75% of the original flip chance.
@@ -154,16 +164,6 @@ Flips a table card twice (without deterioration) to reveal its type.
 
 Table Ability: (2 on opponent’s table)
 After 3 rounds, each Vision card randomly swaps places with another table card.
-{spacer}
-Press SPACE to continue.
-"),
-new Info("Defense Class", "defense",
-$@"Throwing Ability: (3 in opponent’s hand)
-Instead of attempting to flip the target, this card deteriorates it, reducing its future flip chance by 20%.
-{spacer}
-
-Table Ability: (2 on opponent’s table)
-Has 75% of the normal chance to be flipped.
 {spacer}
 Press SPACE to continue.
 "),
@@ -213,11 +213,11 @@ Press SPACE to continue.
 		if (day > 0)
 		{
 			var clas = GetInfo().Class;
-			AddHandCard("tsunami", clas);
-			AddHandCard("volcano", clas);
-			AddHandCard("earthquake", clas);
-			AddTableCard(clas);
-			AddTableCard(clas);
+			//AddHandCard("tsunami", clas);
+			//AddHandCard("volcano", clas);
+			//AddHandCard("earthquake", clas);
+			//AddTableCard(clas);
+			//AddTableCard(clas);
 		}
 		day++;
 	}

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Agent2 : Agent {
+public class Agent4 : Agent {
 	private List<Card> hand;
 	private List<Card> playerTable;
 	private List<Card> enemyTable;
@@ -28,9 +28,9 @@ public class Agent2 : Agent {
 			"basic",
 			"basic",
 			"basic",
-			"elastic",
-			"elastic",
-			"elastic"
+			"defense",
+			"defense",
+			"defense"
 		};
 		
 		return (types, classes);
@@ -47,8 +47,8 @@ public class Agent2 : Agent {
 		};
 		
 		List<string> classes = new List<string> {
-			"elastic",
-			"elastic",
+			"defense",
+			"defense",
 			"basic",
 			"basic",
 			"basic",
@@ -68,9 +68,6 @@ public class Agent2 : Agent {
 	//              failing a throw with card of type x
 	private double[][] rankMod;
 	
-	// similar to rankMod but throwing an elastic card
-	private double[][] elasticRankMod;
-	
 	// frequency of enemy basic hand cards by type
 	private int[] freq;
 	
@@ -78,19 +75,19 @@ public class Agent2 : Agent {
 	private int[] tableFreq;
 	
 	private int round;
-	private (int, int) order;
+	private int order;
 	private int last;
 	
 	public override void Init(List<Card> hand, List<Card> playerTable, List<Card> enemyTable) {
-		freq = new int[] {2, 2, 2};
-		tableFreq = new int[] {2, 2, 2};
-		round = 0;
-		order = (-1, -1);
-		last = -1;
-		
 		this.hand = hand;
 		this.playerTable = playerTable;
 		this.enemyTable = enemyTable;
+		
+		freq = new int[] {2, 2, 2};
+		tableFreq = new int[] {2, 2, 2};
+		round = 0;
+		order = -1;
+		last = -1;
 		
 		// start with equal chance of unflipped cards being each type
 		ranks = Enumerable.Range(0, 6)
@@ -112,18 +109,6 @@ public class Agent2 : Agent {
 			new double[] { h, l, m },
 			new double[] { m, h, l }
 		};
-		
-		var elasticProb = GlobalState.Instance.ElasticProb;
-		
-		h = (1 - typeProb[0] * elasticProb) / 3;
-		m = (1 - typeProb[1] * elasticProb) / 3;
-		l = (1 - typeProb[2] * elasticProb) / 3;
-
-		elasticRankMod = new double[][] {
-			new double[] { l, m, h },
-			new double[] { h, l, m },
-			new double[] { m, h, l }
-		};
 	}
 	
 	private void SortOrders() {
@@ -138,13 +123,10 @@ public class Agent2 : Agent {
 	
 	private void SortHand() {
 		hand.Sort((x, y) => {
-			if (x.clas == "elastic" && y.clas == "basic") return 1;
-			if (x.clas == "basic" && y.clas == "elastic") return -1;
-			
 			int xType = GlobalState.Instance.TypeMap[x.type];
-			double xRank = ranks[orders[xType][0]][xType] + (x.clas == "elastic" ? ranks[orders[xType][1]][xType] : 0);
+			double xRank = ranks[orders[xType][0]][xType];
 			int yType = GlobalState.Instance.TypeMap[y.type];
-			double yRank = ranks[orders[yType][0]][yType] + (y.clas == "elastic" ? ranks[orders[yType][1]][yType] : 0);
+			double yRank = ranks[orders[yType][0]][yType];
 			
 			if (xRank != yRank) {
 				return xRank.CompareTo(yRank);
@@ -155,70 +137,65 @@ public class Agent2 : Agent {
 	}
 	
 	public override (Card, Card, Card) Move() {
-		SortOrders();
-		SortHand();
-		
-		last = GlobalState.Instance.TypeMap[hand[^1].type];
-		freq[last]--;
-		if (hand[^1].clas == "basic") {
-			order = (orders[last][0], -1);
-			return (hand[^1], playerTable[order.Item1], null);
+		if (round >= 3) {
+			SortOrders();
+			SortHand();
+			
+			last = GlobalState.Instance.TypeMap[hand[^1].type];
+			freq[last]--;
+			order = orders[last][0];
+			return (hand[^1], playerTable[order], null);
 		} else {
-			order = (orders[last][0], orders[last][1]);
-			return (hand[^1], playerTable[order.Item1], playerTable[order.Item2]);
+			orders[0].Sort((x, y) => {
+				if (enemyTable[x].visible && !enemyTable[y].visible) return 1;
+				if (!enemyTable[x].visible && enemyTable[y].visible) return -1;
+				return enemyTable[y].durability.CompareTo(enemyTable[x].durability);
+			});
+			
+			order = orders[0][0];
+			
+			return (hand[^1], enemyTable[orders[0][0]], null);
 		}
 	}
 	
 	public override void Backward() {
-		// update part of rank from using frequency of flipped player table cards
-		int sum = tableFreq.Sum();
-		if (sum == 0) return;
-		
-		double[] oldProb = Enumerable.Range(0, 3)
-			.Select(i => tableFreq[(i + 2) % 3] / (double)sum)
-			.ToArray();
+		if (round >= 3) {
+			// update part of rank from using frequency of flipped player table cards
+			int sum = tableFreq.Sum();
+			if (sum == 0) return;
 			
-		tableFreq = Enumerable.Range(0, 3)
-			.Select(type => playerTable.Count(card =>
-				!card.visible && GlobalState.Instance.TypeMap[card.type] == type
-			)).ToArray();
-		sum = tableFreq.Sum();
-		if (sum == 0) return;
-			
-		double[] newProb = Enumerable.Range(0, 3)
-			.Select(i => tableFreq[(i + 2) % 3] / (double)sum)
-			.ToArray();
+			double[] oldProb = Enumerable.Range(0, 3)
+				.Select(i => tableFreq[(i + 2) % 3] / (double)sum)
+				.ToArray();
+				
+			tableFreq = Enumerable.Range(0, 3)
+				.Select(type => playerTable.Count(card =>
+					!card.visible && GlobalState.Instance.TypeMap[card.type] == type
+				)).ToArray();
+			sum = tableFreq.Sum();
+			if (sum == 0) return;
+				
+			double[] newProb = Enumerable.Range(0, 3)
+				.Select(i => tableFreq[(i + 2) % 3] / (double)sum)
+				.ToArray();
 
-		ranks = ranks.Select(row => 
-			Enumerable.Range(0, 3).Select(x =>
-				oldProb[x] != 0 ? (row[x] / oldProb[x]) * newProb[x] : 0
-			).ToList()
-		).ToList();
-		
-		// prioritize unflipped table cards
-		for (int i = 0; i < playerTable.Count; i++) {
-			if (playerTable[i].visible) {
-				ranks[i] = new List<double> {-1e5, -1e5, -1e5};
-			}
-		}
-		
-		// apply rank modifier if last throw failed
-		if (order.Item2 == -1) {
-			if (!playerTable[order.Item1].visible) {
-				for (int i = 0; i < freq.Length; i++) {
-					ranks[order.Item1][i] *= rankMod[last][i];
+			ranks = ranks.Select(row => 
+				Enumerable.Range(0, 3).Select(x =>
+					oldProb[x] != 0 ? (row[x] / oldProb[x]) * newProb[x] : 0
+				).ToList()
+			).ToList();
+			
+			// prioritize unflipped table cards
+			for (int i = 0; i < playerTable.Count; i++) {
+				if (playerTable[i].visible) {
+					ranks[i] = new List<double> {-1e5, -1e5, -1e5};
 				}
 			}
-		} else {
-			if (!playerTable[order.Item1].visible) {
+			
+			// apply rank modifier if last throw failed
+			if (!playerTable[order].visible) {
 				for (int i = 0; i < freq.Length; i++) {
-					ranks[order.Item1][i] *= elasticRankMod[last][i];
-				}
-			}
-			if (!playerTable[order.Item2].visible) {
-				for (int i = 0; i < freq.Length; i++) {
-					ranks[order.Item2][i] *= elasticRankMod[last][i];
-					ranks[order.Item2][i] *= elasticRankMod[last][i];
+					ranks[order][i] *= rankMod[last][i];
 				}
 			}
 		}

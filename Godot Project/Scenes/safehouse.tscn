@@ -324,6 +324,7 @@ script = ExtResource("1_6l742")
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(0.5, 0.5)
 anchor_mode = 0
+zoom = Vector2(2, 2)
 process_callback = 0
 
 [node name="Background" parent="." instance=ExtResource("3_6l742")]
@@ -692,10 +693,10 @@ expand_mode = 1
 
 [node name="Interact" type="TextureRect" parent="MenkoCards"]
 z_index = 7
-offset_left = -40.0
-offset_top = 12.0
-offset_right = -16.0
-offset_bottom = 36.0
+offset_left = -30.0
+offset_top = -50.0
+offset_right = -6.0
+offset_bottom = -26.0
 texture = ExtResource("7_gxkjp")
 expand_mode = 1
 
