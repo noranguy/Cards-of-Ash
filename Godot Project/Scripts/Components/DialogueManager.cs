@@ -32,6 +32,8 @@ public partial class DialogueManager : Control {
 	
 	private TaskCompletionSource<string> nextNodeSource;
 	private string currentSpeaker;
+	
+	private bool _inPlay = false;
 
 	public override void _Ready() {
 		Instance = this;
@@ -41,11 +43,13 @@ public partial class DialogueManager : Control {
 		panel.Visible = false;
 	}
 	
-	public async Task StartDialogue(string name) {
-		await StartDialogue(name, "start");
+	public async Task StartDialogue(string name, bool inPlay) {
+		await StartDialogue(name, inPlay, "start");
 	}
 	
-	public async Task StartDialogue(string name, string startNode) {
+	public async Task StartDialogue(string name, bool inPlay, string startNode) {
+		GD.Print(name);
+		_inPlay = inPlay;
 		dialogueTree = new();
 		dialogueText = GetNode<Label>("DialoguePanel/DialogueText");
 		optionsContainer = GetNode<VBoxContainer>("DialoguePanel/OptionsContainer");
@@ -65,20 +69,40 @@ public partial class DialogueManager : Control {
 		var sprite = GetNode<Sprite2D>("DialoguePanel/Person");
 			
 		// display speaker portrait if not player
-		if (currentSpeaker == "self") {
-			sprite.Visible = false;
-			dialogueText.Size = new Vector2(490, dialogueText.Size.Y);
-			dialogueText.Position = new Vector2(5, dialogueText.Position.Y);
-			optionsContainer.Size = new Vector2(450, optionsContainer.Size.Y);
-			optionsContainer.Position = new Vector2(5, optionsContainer.Position.Y);
+		if (inPlay) {
+			GD.Print($"1 {Position.X} {Position.Y}");
+			dialogueText.Scale = new Vector2(0.5f, 0.5f);
+			optionsContainer.Scale = new Vector2(1, 1);
+			sprite.Scale = new Vector2(1.4f, 1.4f);
+			Position = new Vector2(70, 224);
+			panel.Size = new Vector2(500, 120);
+			sprite.Position = new Vector2(55, 55);
+			dialogueText.Position = new Vector2(110, 5);
+			optionsContainer.Position = new Vector2(110, 80);
 		} else {
-			sprite.Visible = true;
-			dialogueText.Size = new Vector2(390, dialogueText.Size.Y);
-			dialogueText.Position = new Vector2(105, dialogueText.Position.Y);
-			optionsContainer.Size = new Vector2(350, optionsContainer.Size.Y);
-			optionsContainer.Position = new Vector2(105, optionsContainer.Position.Y);
-			var texture = GD.Load<Texture2D>($"res://Assets/Character Designs/{dialogue.speaker}/portrait.png");
-			sprite.Texture = texture;
+			panel.Size = new Vector2(250, 60);
+			Position = new Vector2(35, 112);
+			dialogueText.Scale = new Vector2(0.25f, 0.25f);
+			optionsContainer.Scale = new Vector2(0.5f, 0.5f);
+			sprite.Scale = new Vector2(0.65f, 0.65f);
+			sprite.Position = new Vector2(30, 30);
+			if (currentSpeaker == "self") {
+				sprite.Visible = false;
+				dialogueText.Size = new Vector2(980, 5);
+				dialogueText.Position = new Vector2(5, 5);
+				dialogueText.AddThemeFontSizeOverride("font_size", 32);
+				optionsContainer.Size = new Vector2(445, 20);
+				optionsContainer.Position = new Vector2(5, 40);
+			} else {
+				sprite.Visible = true;
+				dialogueText.Size = new Vector2(780, 5);
+				dialogueText.Position = new Vector2(60, 5);
+				dialogueText.AddThemeFontSizeOverride("font_size", 32);
+				optionsContainer.Size = new Vector2(325, 20);
+				optionsContainer.Position = new Vector2(60, 40);
+				var texture = GD.Load<Texture2D>($"res://Assets/Character Designs/{dialogue.speaker}/portrait.png");
+				sprite.Texture = texture;
+			}
 		}
 		
 		// build dialogue tree
@@ -103,12 +127,22 @@ public partial class DialogueManager : Control {
 			nextNodeSource = new TaskCompletionSource<string>();
 			
 			if (node.options.Count == 1) {
-				skipButton = new Button {
-					Text = "Skip",
-					Visible = true,
-					Size = new Vector2(40, 30),
-					Position = new Vector2(460, 70)
-				};
+				if (_inPlay) {
+					skipButton = new Button {
+						Text = "Skip",
+						Visible = true,
+						Size = new Vector2(40, 30),
+						Position = new Vector2(456, 86)
+					};
+				} else {
+					skipButton = new Button {
+						Text = "Skip",
+						Visible = true,
+						Size = new Vector2(40, 30),
+						Position = new Vector2(228, 43),
+						Scale = new Vector2(0.5f, 0.5f)
+					};
+				}
 				string targetId = node.options[0].next;
 				skipButton.Pressed += () => nextNodeSource.TrySetResult("end");
 				panel.AddChild(skipButton);
@@ -128,10 +162,22 @@ public partial class DialogueManager : Control {
 
 			for (int i = 0; i < node.options.Count; i++) {
 				var option = node.options[i];
-				var button = new Button {
-					Text = option.text,
-					Name = i.ToString()
-				};
+				Button button;
+				
+				if (_inPlay) {
+					button = new Button {
+						Text = option.text,
+						Name = i.ToString()
+					};
+				} else {
+					button = new Button {
+						Text = option.text,
+						Name = i.ToString(),
+						Size = new Vector2(40, 30),
+						Scale = new Vector2(0.25f, 0.25f)
+					};
+					button.AddThemeFontSizeOverride("font_size", 16);
+				}
 				
 				string targetId = option.next;
 				button.Pressed += () => nextNodeSource.TrySetResult(targetId);

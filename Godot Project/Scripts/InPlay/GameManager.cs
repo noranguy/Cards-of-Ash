@@ -90,7 +90,9 @@ public partial class GameManager : Node2D {
 		
 		anim.Play($"agent_{GlobalState.Instance.GetDay()}");
 
+		GD.Print(playerHand.GetCards().Count);
 		var playerFirst = playerHand.GetCards()[0];
+		GD.Print(playerFirst == null);
 		var tableFirst = enemyTableCards[0];
 		
 		if (GlobalState.Instance.GetDay() == 0) {
@@ -100,7 +102,7 @@ public partial class GameManager : Node2D {
 		
 		await ToSignal(GetTree().CreateTimer(2), "timeout");
 		
-		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start");
+		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start", true);
 		
 		if (GlobalState.Instance.GetDay() == 0) {
 			playerFirst.Focus();
@@ -163,7 +165,7 @@ public partial class GameManager : Node2D {
 			if (tableCards[0].index < 5) {
 				tableCards.Add(active[tableCards[0].index + 1]);
 			}
-		} else if (throwingCard.clas == "elastic") {
+		} else if (throwingCard.clas == "elastic" && throwingCard.isPlayer == true) {
 			if (playerHand.restrictAllow.Contains(throwingCard)) {
 				playerHand.restrictAllow.Remove(throwingCard);
 			} else {
@@ -263,12 +265,12 @@ public partial class GameManager : Node2D {
 			switch (round) {
 				case 1: case 3:
 					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
-					await DialogueManager.Instance.StartDialogue($"agent_0/{round}");
+					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
 					break;
 				case 2:
 					infoButton.Focus();
 					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
-					await DialogueManager.Instance.StartDialogue($"agent_0/{round}");
+					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
 					infoButton.Unfocus();
 					break;
 			}
@@ -282,13 +284,13 @@ public partial class GameManager : Node2D {
 		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
 			if (playerCount > enemyCount) {
 				roundLabel.Text = "You Win";
-				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "win");
+				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "win");
 			} else if (playerCount < enemyCount) {
 				roundLabel.Text = "You Lose";
-				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "lose");
+				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "lose");
 			} else {
 				roundLabel.Text = "Tie";
-				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", "tie");
+				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "tie");
 			}
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		} else {

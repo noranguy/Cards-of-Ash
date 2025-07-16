@@ -6278,6 +6278,75 @@ animations = [{
 "loop": true,
 "name": &"agent_1",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_rn477")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbxoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fduc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stntk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgitd")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_eavdf")
+}],
+"loop": true,
+"name": &"agent_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_rn477")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbxoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fduc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stntk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgitd")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_eavdf")
+}],
+"loop": true,
+"name": &"agent_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_rn477")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbxoi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fduc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stntk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgitd")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_eavdf")
+}],
+"loop": true,
+"name": &"agent_4",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwe8v"]
@@ -6507,6 +6576,7 @@ z_index = 4
 position = Vector2(0, -73.2927)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_qn0kl")
+
 animation = &"agent_0"
 autoplay = "agent_0"
 
