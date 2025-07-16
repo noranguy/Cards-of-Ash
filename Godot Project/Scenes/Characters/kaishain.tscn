@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bko0esr8u34gj" path="res://Assets/Character Designs/Kaishain/kaishain mini sprite.png" id="1_iv8ry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0tdx"]
-size = Vector2(14, 17)
+size = Vector2(14, 25)
 
 [node name="Kaishaiin" type="CharacterBody2D"]
 
@@ -11,5 +11,5 @@ size = Vector2(14, 17)
 texture = ExtResource("1_iv8ry")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7.5)
+position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_f0tdx")
