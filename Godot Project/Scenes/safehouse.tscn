@@ -213,7 +213,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxkjp"]
-size = Vector2(100, 72)
+size = Vector2(76, 77)
 
 [sub_resource type="Animation" id="Animation_vpc17"]
 length = 0.001
@@ -530,6 +530,7 @@ layout_mode = 2
 text = "Cancel"
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_qcbrc")]
+visible = true
 top_level = true
 z_index = 6
 position = Vector2(230, 100)
@@ -561,6 +562,13 @@ scale = Vector2(2, 2)
 collision_layer = 0
 
 [node name="Kid" parent="." instance=ExtResource("5_algie")]
+visible = false
+z_index = 7
+position = Vector2(210, 120)
+scale = Vector2(2, 2)
+collision_layer = 0
+
+[node name="Foreigner" parent="." instance=ExtResource("5_algie")]
 visible = false
 z_index = 7
 position = Vector2(210, 120)
@@ -734,17 +742,64 @@ libraries = {
 }
 
 [node name="Kaishain Area" type="Area2D" parent="."]
-visible = false
-position = Vector2(-18, -2)
+position = Vector2(-250, -2)
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kaishain Area"]
 z_index = 5
-position = Vector2(446, 304)
+position = Vector2(453, 304)
 shape = SubResource("RectangleShape2D_gxkjp")
 
 [node name="Kaishain" parent="Kaishain Area" instance=ExtResource("5_algie")]
+z_index = 7
+position = Vector2(450, 305)
+scale = Vector2(2, 2)
+collision_layer = 0
+
+[node name="Mom Area" type="Area2D" parent="."]
+position = Vector2(-135, -2)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mom Area"]
+z_index = 5
+position = Vector2(453, 304)
+shape = SubResource("RectangleShape2D_gxkjp")
+
+[node name="Kaishain" parent="Mom Area" instance=ExtResource("5_algie")]
+z_index = 7
+position = Vector2(450, 305)
+scale = Vector2(2, 2)
+collision_layer = 0
+
+[node name="Kid Area" type="Area2D" parent="."]
+position = Vector2(-20, -2)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kid Area"]
+z_index = 5
+position = Vector2(452, 301.5)
+shape = SubResource("RectangleShape2D_gxkjp")
+
+[node name="Kaishain" parent="Kid Area" instance=ExtResource("5_algie")]
+z_index = 7
+position = Vector2(450, 305)
+scale = Vector2(2, 2)
+collision_layer = 0
+
+[node name="Foreigner Area" type="Area2D" parent="."]
+position = Vector2(-270, -100)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreigner Area"]
+z_index = 5
+position = Vector2(461, 309)
+shape = SubResource("RectangleShape2D_gxkjp")
+
+[node name="Kaishain" parent="Foreigner Area" instance=ExtResource("5_algie")]
 z_index = 7
 position = Vector2(450, 305)
 scale = Vector2(2, 2)

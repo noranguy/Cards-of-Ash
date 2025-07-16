@@ -23,8 +23,8 @@ public partial class Safehouse : StaticBody2D
 	public bool in_prompt;
 
 	//List that follows the day order for when characters show up
-	private String[] _character_order = ["OldManTutorial", "Kaishain", "Mom", "Kid", "OldManEndGame"];
-	private String[] _dialogue_order = ["old_man_tutorial", "kaishain", "mom", "kid", "old_man_end_game"];
+	private String[] _character_order = ["OldManTutorial", "Kaishain", "Mom", "Kid", "Foreigner", "OldManEndGame"];
+	private String[] _dialogue_order = ["old_man_tutorial", "kaishain", "mom", "kid", "foreigner", "old_man_end_game"];
 	private bool[] _inhabitants;
 
 	// Flags to keep track of safehouse state
