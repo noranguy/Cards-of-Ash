@@ -95,9 +95,17 @@ public partial class GlobalState : Node {
 	// Probability multiplier when throwing at a defense card
 	public readonly double DefenseProb = 0.75;
 	
+	// Keep track of in game day
 	private int day = 0;
+
+	// Keep track of where in the day the game is in, either pre or post game
 	private bool post_game = false;
+
+	// Flag for the begining when the player takes the cards off the table
 	private bool player_has_cards = false;
+
+	// List to keep track of which npcs are in the safehouse
+	private bool[] inhabitants = new bool[5] {false, false, false, false, false};
 	
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
@@ -188,10 +196,22 @@ Press SPACE to continue.
 	{
 		player_has_cards = true;
 	}
+
+	public void NewInhabitant(int day)
+	{
+		inhabitants[day] = true;
+	}
+
+	public bool[] GetInhabitants()
+	{
+		return inhabitants;
+	}
 	
 	// Updates the player's decks and increments day counter
-	public void NextDay() {
-		if (day > 0) {
+	public void NextDay()
+	{
+		if (day > 0)
+		{
 			var clas = GetInfo().Class;
 			AddHandCard("tsunami", clas);
 			AddHandCard("volcano", clas);

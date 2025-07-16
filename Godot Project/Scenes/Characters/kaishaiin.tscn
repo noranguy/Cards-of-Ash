@@ -1,16 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvxtlx4tedhx4"]
 
-[ext_resource type="Texture2D" uid="uid://bko0esr8u34gj" path="res://Assets/CharacterDesigns/Kaishain/kaishain mini sprite.png" id="1_iv8ry"]
+[ext_resource type="Texture2D" uid="uid://bko0esr8u34gj" path="res://Assets/Character Designs/Kaishain/kaishain mini sprite.png" id="1_iv8ry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0tdx"]
+size = Vector2(14, 17)
 
 [node name="Kaishaiin" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_iv8ry")
-offset = Vector2(16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(24, 38)
+position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_f0tdx")
