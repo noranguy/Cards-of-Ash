@@ -11,6 +11,8 @@ public partial class GameManager : Node2D {
 	private Hand enemyHand;
 	private CardTableContainer table;
 	private AnimatedSprite2D anim;
+	private AnimatedSprite2D playerCardThrow;
+	private AnimatedSprite2D oppCardThrow;
 	
 	private BetterButton throwButton;
 	private BetterButton infoButton;
@@ -40,7 +42,8 @@ public partial class GameManager : Node2D {
 
 	public async override void _Ready() {
 		anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		
+		playerCardThrow = GetNode<AnimatedSprite2D>("Player_CardThrowAnimate");
+		oppCardThrow = GetNode<AnimatedSprite2D>("Opp_CardThrowAnimate");
 		throwButton = GetNode<BetterButton>("ThrowButton");
 		infoButton = GetNode<BetterButton>("InfoButton");
 		rulebook = GetNode<Panel>("Rulebook");
@@ -131,6 +134,7 @@ public partial class GameManager : Node2D {
 			table.activeCard.locked = false;
 			table.activeCard.Unhighlight();
 			table.activeCard = null;
+	
 		}
 		allowThrow = res;
 		throwButton.Disabled = !res;
@@ -222,9 +226,11 @@ public partial class GameManager : Node2D {
 			table.restrictAllow.Clear();
 			table.activeCard.Unfocus();
 		}
-		
+
 		// player turn
-		await ThrowCard(playerHand.activeCard, new List<Card> {table.activeCard});
+		playerCardThrow.Visible = true;
+		playerCardThrow.Play("player_card_throw");
+		await ThrowCard(playerHand.activeCard, new List<Card> { table.activeCard });
 		ThrowToggle(false);
 		
 		// second throw with elastic card
@@ -236,6 +242,8 @@ public partial class GameManager : Node2D {
 		
 		// enemy turn
 		var (throwingCard, tableCard1, tableCard2) = enemy.Move();
+		oppCardThrow.Visible = true;
+		oppCardThrow.Play("opp_card_throw");
 		ThrowCard(throwingCard, new List<Card> {tableCard1});
 		if (throwingCard.clas == "elastic" || throwingCard.clas == "vision") {
 			await ThrowCard(throwingCard, new List<Card> {tableCard2});
@@ -246,6 +254,7 @@ public partial class GameManager : Node2D {
 		}
 		enemy.Backward();
 		enemyHand.RemoveCard(throwingCard);
+
 		await ToSignal(GetTree().CreateTimer(1), "timeout");
 		
 		// round end
