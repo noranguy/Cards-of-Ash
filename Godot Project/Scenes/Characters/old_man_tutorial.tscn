@@ -3,14 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://cbf7r2klo73sb" path="res://Assets/Character Designs/Old Man/old man mini sprite.png" id="1_0w4cl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0tdx"]
+size = Vector2(14, 15)
 
 [node name="OldManTutorial" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_0w4cl")
-offset = Vector2(16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(24, 38)
+position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_f0tdx")

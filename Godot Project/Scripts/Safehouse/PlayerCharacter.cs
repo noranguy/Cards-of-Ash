@@ -9,7 +9,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	bool _moveable = false;
 
 	// Player speed
-	public const float Speed = 150.0f;
+	public const float Speed = 80;
 	public RayCast2D _ray; // Ignore ray for now
 
 	public override void _Ready()
