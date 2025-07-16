@@ -43,7 +43,6 @@ public partial class Safehouse : StaticBody2D
 	{
 		// Set all flags
 		_player_has_cards = GlobalState.Instance.DoesPlayerHaveCards();
-		GD.Print(_player_has_cards);
 		_npc_waiting = false;
 		_game_ready = false;
 		_day_over = GlobalState.Instance.GetPostGame();
@@ -238,7 +237,6 @@ public partial class Safehouse : StaticBody2D
 
 	private async Task Dialogue_setupAsync()
 	{
-		GD.Print("Dialgoue starting");
 		string _character = _character_order[_day_num];
 		string dialogue = _dialogue_order[_day_num];
 		_open_door_prompt.Visible = false;
@@ -246,7 +244,7 @@ public partial class Safehouse : StaticBody2D
 		GetNode<CharacterBody2D>(_character).CollisionLayer = 1;
 		_player.Position = new Vector2(105, 85);
 
-		await DialogueManager.Instance.StartDialogue(dialogue);
+		await DialogueManager.Instance.StartDialogue(dialogue, false);
 
 		if (_day_num == 0)
 		{
@@ -269,22 +267,22 @@ public partial class Safehouse : StaticBody2D
 			switch (_day_num)
 			{
 				case 0:
-					await DialogueManager.Instance.StartDialogue("StartDay/pick_up_card_prompt");
+					await DialogueManager.Instance.StartDialogue("StartDay/pick_up_card_prompt", false);
 					break;
 				case 1:
-					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt");
+					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt", false);
 					Knock_at_door();
 					break;
 				case 2:
-					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt");
+					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt", false);
 					Knock_at_door();
 					break;
 				case 3:
-					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt");
+					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt", false);
 					Knock_at_door();
 					break;
 				case 4:
-					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt");
+					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt", false);
 					Knock_at_door();
 					break;
 			}
@@ -294,19 +292,19 @@ public partial class Safehouse : StaticBody2D
 			switch (_day_num)
 			{
 				case 0:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
 					break;
 				case 1:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
 					break;
 				case 2:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
 					break;
 				case 3:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
 					break;
 				case 4:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt");
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
 					break;
 			}
 		}
