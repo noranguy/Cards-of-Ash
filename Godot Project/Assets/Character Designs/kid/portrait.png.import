@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cea2nbfnapywq"
-path="res://.godot/imported/kid mini sprite.png-d37500324df52f3679b80424da945464.ctex"
+uid="uid://c45dpderqfaq2"
+path="res://.godot/imported/portrait.png-1dc519cefcb8a3a107474d5bda40ecb2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Kid/kid mini sprite.png"
-dest_files=["res://.godot/imported/kid mini sprite.png-d37500324df52f3679b80424da945464.ctex"]
+source_file="res://Assets/Character Designs/Kid/portrait.png"
+dest_files=["res://.godot/imported/portrait.png-1dc519cefcb8a3a107474d5bda40ecb2.ctex"]
 
 [params]
 
