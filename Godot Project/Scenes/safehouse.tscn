@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bvd7sgi6dix5n"]
+[gd_scene load_steps=40 format=3 uid="uid://bvd7sgi6dix5n"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dcpwly3u48me3" path="res://Scenes/Characters/old_man_tutorial.tscn" id="3_v5lnp"]
 [ext_resource type="Texture2D" uid="uid://u1eorlu248cw" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
 [ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishaiin.tscn" id="5_algie"]
+[ext_resource type="PackedScene" uid="uid://c31jjoe1c61rk" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
@@ -554,7 +555,7 @@ position = Vector2(210, 120)
 scale = Vector2(2, 2)
 collision_layer = 0
 
-[node name="Mom" parent="." instance=ExtResource("5_algie")]
+[node name="Mom" parent="." instance=ExtResource("6_mt6l6")]
 visible = false
 z_index = 7
 position = Vector2(210, 120)
@@ -757,10 +758,6 @@ collision_layer = 0
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -9.0
-offset_top = -1.0
-offset_right = -9.0
-offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
