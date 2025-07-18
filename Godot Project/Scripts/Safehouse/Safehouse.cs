@@ -12,12 +12,18 @@ public partial class Safehouse : StaticBody2D
 
 	//RayCast2D _ray; - May come back to this, for now ignore all the ray stuff
 
-	private int _day_num; // Keep track of day, mornings will be whole numbers, nights will be X.5
+	private int _day_num; // Keep track of day number, gotten from global state
 
 	// Flags to see if the player is in an interactable area 
 	private bool _in_bed;
 	private bool _at_door;
 	private bool _at_table;
+
+	// Flags to see if the player is trying to talk to an npc
+	private bool _at_kaishain;
+	private bool _at_mom;
+	private bool _at_kid;
+	private bool _at_foreigner;
 
 	// If the character is in a prompt screen
 	public bool in_prompt;
@@ -56,6 +62,7 @@ public partial class Safehouse : StaticBody2D
 		{
 			GD.Print(_inhabitants[i]);
 		}
+		InhabitSafehouse();
 
 		// Get all the prompt nodes
 		_end_day_prompt = GetNode<Control>("EndDayPrompt");
@@ -120,6 +127,33 @@ public partial class Safehouse : StaticBody2D
 				_open_door_prompt.Visible = true;
 				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 			}
+
+			else if (_at_kaishain)
+			{
+				
+			}
+
+			else if (_at_mom)
+			{
+
+			}
+
+			else if (_at_kid)
+			{
+
+			}
+
+			else if (_at_kaishain)
+			{
+
+			}
+			
+			else if (_at_kaishain)
+			{
+				
+			}
+
+			// If the player is at an npc, start the dialogue, maybe different (smaller) dialogues for each day 
 		}
 	}
 
@@ -181,6 +215,46 @@ public partial class Safehouse : StaticBody2D
 	private void _on_menko_table_body_exited(Node2D body)
 	{
 		_at_table = false;
+	}
+
+	private void _on_kaishain_area_body_entered(Node2D body)
+	{
+		_in_bed = true;
+	}
+
+	private void _on_kaishain_area_body_exited(Node2D body)
+	{
+		_in_bed = false;
+	}
+
+	private void _on_mom_area_body_entered(Node2D body)
+	{
+		_in_bed = true;
+	}
+
+	private void _on_mom_area_body_exited(Node2D body)
+	{
+		_in_bed = false;
+	}
+
+	private void _on_kid_area_body_entered(Node2D body)
+	{
+		_in_bed = true;
+	}
+
+	private void _on_kid_area_body_exited(Node2D body)
+	{
+		_in_bed = false;
+	}
+
+	private void _on_foreigner_area_body_entered(Node2D body)
+	{
+		_in_bed = true;
+	}
+
+	private void _on_foreigner_area_body_exited(Node2D body)
+	{
+		_in_bed = false;
 	}
 
 	// Get rid of all prompts
@@ -256,7 +330,7 @@ public partial class Safehouse : StaticBody2D
 	private async Task Dialogue_setupAsync()
 	{
 		string _character = _character_order[_day_num];
-		string dialogue = _dialogue_order[_day_num];
+		string dialogue = $"BeforeGame/{_dialogue_order[_day_num]}";
 		_open_door_prompt.Visible = false;
 		GetNode<CharacterBody2D>(_character).Visible = true;
 		GetNode<CharacterBody2D>(_character).CollisionLayer = 1;

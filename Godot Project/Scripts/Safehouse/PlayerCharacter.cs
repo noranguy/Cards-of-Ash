@@ -9,7 +9,7 @@ public partial class PlayerCharacter : CharacterBody2D
 	bool _moveable = false;
 
 	// Player speed
-	public const float Speed = 80;
+	public const float Speed = 70;
 	public RayCast2D _ray; // Ignore ray for now
 
 	public override void _Ready()
@@ -31,9 +31,9 @@ public partial class PlayerCharacter : CharacterBody2D
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
-		if (_moveable && direction.X != 0)
+		if (_moveable && (direction.X != 0 || direction.Y != 0))
 		{
-			velocity.Y = 0;
+			//velocity.Y = 0;
 			velocity.X = direction.X * Speed;
 
 			if (direction.X > 0)
@@ -48,11 +48,7 @@ public partial class PlayerCharacter : CharacterBody2D
 				_ray.RotationDegrees = 90;
 
 			}
-		}
 
-		else if (_moveable && direction.Y != 0)
-		{
-			velocity.X = 0;
 			velocity.Y = direction.Y * Speed;
 
 			if (direction.Y > 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bvd7sgi6dix5n"]
+[gd_scene load_steps=39 format=3 uid="uid://bvd7sgi6dix5n"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
+[ext_resource type="AudioStream" uid="uid://gt654obtm1q1" path="res://Assets/SFX/triple-knock-on-door.mp3" id="10_mt6l6"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
 a = Vector2(38, -10)
@@ -185,7 +186,7 @@ tracks/0/path = NodePath("Ko:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0666667, 0.316667, 0.566667, 0.816667, 1.06667, 1.31667),
+"times": PackedFloat32Array(0, 0.316667, 0.566667, 0.816667, 1.06667, 1.31667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -197,11 +198,26 @@ tracks/1/path = NodePath("N:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0666667, 0.316667, 0.566667, 0.816667, 1.06667, 1.31667),
+"times": PackedFloat32Array(0, 0.316667, 0.566667, 0.816667, 1.06667, 1.31667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("10_mt6l6")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uq6vu"]
 _data = {
@@ -735,6 +751,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_uq6vu")
 }
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Knock"]
+
 [node name="KaishainArea" type="Area2D" parent="."]
 visible = false
 position = Vector2(-200, -2)
@@ -815,8 +833,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -9.0
 offset_top = -1.0
-offset_right = -9.0
-offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -848,4 +864,12 @@ text = "Day 1"
 [connection signal="body_exited" from="Bed" to="." method="_on_bed_body_exited"]
 [connection signal="body_entered" from="MenkoTable" to="." method="_on_menko_table_body_entered"]
 [connection signal="body_exited" from="MenkoTable" to="." method="_on_menko_table_body_exited"]
+[connection signal="body_entered" from="KaishainArea" to="." method="_on_kaishain_area_body_entered"]
+[connection signal="body_exited" from="KaishainArea" to="." method="_on_kaishain_area_body_exited"]
+[connection signal="body_entered" from="MomArea" to="." method="_on_mom_area_body_entered"]
+[connection signal="body_exited" from="MomArea" to="." method="_on_mom_area_body_exited"]
+[connection signal="body_entered" from="KidArea" to="." method="_on_kid_area_body_entered"]
+[connection signal="body_exited" from="KidArea" to="." method="_on_kid_area_body_exited"]
+[connection signal="body_entered" from="ForeignerArea" to="." method="_on_foreigner_area_body_entered"]
+[connection signal="body_exited" from="ForeignerArea" to="." method="_on_foreigner_area_body_exited"]
 [connection signal="animation_finished" from="FadeToBlack/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
