@@ -23,8 +23,8 @@ public partial class Safehouse : StaticBody2D
 	public bool in_prompt;
 
 	//List that follows the day order for when characters show up
-	private String[] _character_order = ["OldManTutorial", "Kaishain", "Mom", "Kid", "OldManEndGame"];
-	private String[] _dialogue_order = ["old_man_tutorial", "kaishain", "mom", "kid", "old_man_end_game"];
+	private String[] _character_order = ["OldManTutorial", "Kaishain", "Mom", "Kid", "Foreigner", "OldManEndGame"];
+	private String[] _dialogue_order = ["old_man_tutorial", "kaishain", "mom", "kid", "foreigner", "old_man_end_game"];
 	private bool[] _inhabitants;
 
 	// Flags to keep track of safehouse state
@@ -51,6 +51,11 @@ public partial class Safehouse : StaticBody2D
 		_at_table = false;
 
 		_inhabitants = GlobalState.Instance.GetInhabitants();
+		GD.Print("Ihabitants:");
+		for (int i = 0; i < 5; i++)
+		{
+			GD.Print(_inhabitants[i]);
+		}
 
 		// Get all the prompt nodes
 		_end_day_prompt = GetNode<Control>("EndDayPrompt");
@@ -120,17 +125,30 @@ public partial class Safehouse : StaticBody2D
 
 	private void InhabitSafehouse()
 	{
-		if (_inhabitants[1] == true)
+		if (_inhabitants[1])
 		{
-			// Show Kaishain
+			GetNode<Area2D>("KaishainArea").Visible = true;
+			GetNode<Area2D>("KaishainArea").CollisionLayer = 3;
+			GetNode<CharacterBody2D>("KaishainArea/Kaishain").CollisionLayer = 1;
+
 		}
-		if (_inhabitants[2] == true)
+		if (_inhabitants[2])
 		{
-			// Show Mom
+			GetNode<Area2D>("MomArea").Visible = true;
+			GetNode<Area2D>("MomArea").CollisionLayer = 3;
+			GetNode<CharacterBody2D>("MomArea/Kaishain").CollisionLayer = 1;
 		}
-		if (_inhabitants[3] == true)
+		if (_inhabitants[3])
 		{
-			// Show Kid
+			GetNode<Area2D>("KidArea").Visible = true;
+			GetNode<Area2D>("KidArea").CollisionLayer = 3;
+			GetNode<CharacterBody2D>("KidArea/Kaishain").CollisionLayer = 1;
+		}
+		if (_inhabitants[4])
+		{
+			GetNode<Area2D>("ForeignerArea").Visible = true;
+			GetNode<Area2D>("ForeignerArea").CollisionLayer = 3;
+			GetNode<CharacterBody2D>("ForeignerArea/Kaishain").CollisionLayer = 1;
 		}
 	}
 
@@ -242,7 +260,7 @@ public partial class Safehouse : StaticBody2D
 		_open_door_prompt.Visible = false;
 		GetNode<CharacterBody2D>(_character).Visible = true;
 		GetNode<CharacterBody2D>(_character).CollisionLayer = 1;
-		_player.Position = new Vector2(105, 85);
+		_player.Position = new Vector2(105, 77);
 
 		await DialogueManager.Instance.StartDialogue(dialogue, false);
 

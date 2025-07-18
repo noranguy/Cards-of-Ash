@@ -284,6 +284,7 @@ public partial class GameManager : Node2D {
 		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
 			if (playerCount > enemyCount) {
 				roundLabel.Text = "You Win";
+				GlobalState.Instance.NewInhabitant();
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "win");
 			} else if (playerCount < enemyCount) {
 				roundLabel.Text = "You Lose";
