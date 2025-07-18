@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cfyc8k4gjjnmr" path="res://Scenes/out_play_safehouse.tscn" id="3_6l742"]
 [ext_resource type="PackedScene" uid="uid://dcpwly3u48me3" path="res://Scenes/Characters/old_man_tutorial.tscn" id="3_v5lnp"]
 [ext_resource type="Texture2D" uid="uid://u1eorlu248cw" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
-[ext_resource type="PackedScene" path="res://Scenes/Characters/kaishain.tscn" id="5_b4d46"]
+[ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishain.tscn" id="5_b4d46"]
 [ext_resource type="PackedScene" uid="uid://c31jjoe1c61rk" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
 [ext_resource type="PackedScene" uid="uid://bbmm0hjrhws3h" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
