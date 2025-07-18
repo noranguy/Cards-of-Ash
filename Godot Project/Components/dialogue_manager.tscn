@@ -57,41 +57,67 @@ cache/0/12/0/descent = 0.0
 cache/0/12/0/underline_position = 0.0
 cache/0/12/0/underline_thickness = 0.0
 cache/0/12/0/scale = 1.0
+cache/0/13/0/ascent = 0.0
+cache/0/13/0/descent = 0.0
+cache/0/13/0/underline_position = 0.0
+cache/0/13/0/underline_thickness = 0.0
+cache/0/13/0/scale = 1.0
+cache/0/11/0/ascent = 0.0
+cache/0/11/0/descent = 0.0
+cache/0/11/0/underline_position = 0.0
+cache/0/11/0/underline_thickness = 0.0
+cache/0/11/0/scale = 1.0
+cache/0/9/0/ascent = 0.0
+cache/0/9/0/descent = 0.0
+cache/0/9/0/underline_position = 0.0
+cache/0/9/0/underline_thickness = 0.0
+cache/0/9/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
 
 [node name="DialogueManager" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 70.0
-offset_top = 224.0
-offset_right = 70.0
-offset_bottom = 224.0
+offset_left = 35.0
+offset_top = 112.0
+offset_right = 35.0
+offset_bottom = 112.0
 script = ExtResource("1_1dsj7")
 
 [node name="DialoguePanel" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 500.0
-offset_bottom = 100.0
+offset_right = 250.0
+offset_bottom = 60.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1dsj7")
 
 [node name="DialogueText" type="Label" parent="DialoguePanel"]
 layout_mode = 0
-offset_left = 104.0
-offset_top = 4.0
-offset_right = 494.0
-offset_bottom = 58.0
+offset_left = 46.0
+offset_top = 3.0
+offset_right = 195.0
+offset_bottom = 39.0
+scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = SubResource("FontFile_6rt2l")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 64
 autowrap_mode = 3
 
 [node name="OptionsContainer" type="VBoxContainer" parent="DialoguePanel"]
 layout_mode = 0
-offset_left = 110.0
-offset_top = 60.0
-offset_right = 460.0
-offset_bottom = 94.0
+offset_left = 61.0
+offset_top = 38.0
+offset_right = 161.0
+offset_bottom = 57.0
 mouse_filter = 0
 
 [node name="Person" type="Sprite2D" parent="DialoguePanel"]
-position = Vector2(50, 50)
-scale = Vector2(1.3, 1.3)
+position = Vector2(30, 30)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_g0piw")
