@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishaiin.tscn" id="5_algie"]
 [ext_resource type="PackedScene" uid="uid://c31jjoe1c61rk" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
 [ext_resource type="PackedScene" uid="uid://bbmm0hjrhws3h" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
+[ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishain.tscn" id="5_algie"]
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
@@ -554,14 +555,14 @@ position = Vector2(210, 110)
 scale = Vector2(2, 2)
 collision_layer = 0
 
-[node name="Mom" parent="." instance=ExtResource("6_mt6l6")]
+[node name="Mom" parent="." instance=ExtResource("5_algie")]
 visible = false
 z_index = 7
 position = Vector2(210, 110)
 scale = Vector2(2, 2)
 collision_layer = 0
 
-[node name="Kid" parent="." instance=ExtResource("7_b4d46")]
+[node name="Kid" parent="." instance=ExtResource("5_algie")]
 visible = false
 z_index = 7
 position = Vector2(210, 110)
@@ -661,6 +662,10 @@ libraries = {
 z_index = 5
 collision_mask = 0
 
+[node name="CouchBody" type="CollisionPolygon2D" parent="Furniture"]
+position = Vector2(317.5, 332)
+build_mode = 1
+polygon = PackedVector2Array(-49.5, -5, -53.5, -15, -57.5, 6, 57.5, 6, 53.5, -14, 48.5, -5, -3.5, -5)
 
 [node name="Boxes" type="CollisionShape2D" parent="Furniture"]
 position = Vector2(450, 99.5)
