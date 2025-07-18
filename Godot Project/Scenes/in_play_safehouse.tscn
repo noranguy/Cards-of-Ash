@@ -6615,9 +6615,8 @@ z_index = 4
 position = Vector2(0, -73.2927)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_qn0kl")
-animation = &"agent_2"
+animation = &"agent_0"
 autoplay = "agent_0"
-frame_progress = 0.843916
 
 [node name="Player_CardThrowAnimate" type="AnimatedSprite2D" parent="."]
 visible = false
