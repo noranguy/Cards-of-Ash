@@ -9,6 +9,9 @@ public partial class Safehouse : StaticBody2D
 {
 
 	private CharacterBody2D _player;
+	private TileMapLayer window_day; //safehouse object
+	private TileMapLayer window_night;
+	private Node2D night_safehouse_lighting;
 
 	//RayCast2D _ray; - May come back to this, for now ignore all the ray stuff
 
@@ -71,12 +74,16 @@ public partial class Safehouse : StaticBody2D
 		_mission_completed = GlobalState.Instance.GetCompletedMission();
 		
 		// Get all the prompt nodes
-		_end_day_prompt = GetNode<Control>("EndDayPrompt");
-		_open_door_prompt = GetNode<Control>("OpenDoorPrompt");
-		_start_game_prompt = GetNode<Control>("StartGamePrompt");
+		_end_day_prompt = GetNode<Control>("CanvasLayer/EndDayPrompt");
+		_open_door_prompt = GetNode<Control>("CanvasLayer/OpenDoorPrompt");
+		_start_game_prompt = GetNode<Control>("CanvasLayer/StartGamePrompt");
 
 		_player = GetNode<CharacterBody2D>("PlayerCharacter");
 		_player.Visible = true;
+
+		window_day = GetNode<TileMapLayer>("Background/TileMap/window/day");
+		window_night = GetNode<TileMapLayer>("Background/TileMap/window/night");
+		night_safehouse_lighting = GetNode<Node2D>("Background/night_lighting");
 
 		if (!_player_has_cards)
 		{
@@ -381,6 +388,9 @@ public partial class Safehouse : StaticBody2D
 	{
 		if (!_day_over)
 		{
+			window_day.Visible = true;
+			window_night.Visible = false;
+			night_safehouse_lighting.Visible = false;
 			switch (_day_num)
 			{
 				case 0:
@@ -406,22 +416,25 @@ public partial class Safehouse : StaticBody2D
 		}
 		else
 		{
+			window_day.Visible = false;
+			window_night.Visible = true;
+			night_safehouse_lighting.Visible = true;
 			switch (_day_num)
 			{
 				case 0:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_0", false);
 					break;
 				case 1:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_1", false);
 					break;
 				case 2:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_2", false);
 					break;
 				case 3:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_3", false);
 					break;
 				case 4:
-					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt", false);
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_4", false);
 					break;
 			}
 		}

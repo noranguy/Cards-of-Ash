@@ -1,0 +1,12 @@
+{
+	"speaker": "self",
+	"dialogue": [
+		{
+		  "id": "start",
+		  "text": "Whew... Im beat. I should head to bed",
+		  "options": [
+			{ "text": "Continue", "next": "end" }
+		  ]
+		}
+	]
+}

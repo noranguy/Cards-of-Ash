@@ -1,11 +1,11 @@
 {
-	"speaker": "Kaishain",
+	"speaker": "Kid",
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "You got a smoke?",
+			"text": "C'mon!! Let's play!",
 			"options": [
-				{ "text": "Continue", "next": "end" }
+				{ "text": "...", "next": "end" }
 			]
 		}
 	]

@@ -1,23 +1,23 @@
 {
-	"speaker": "Kaishain",
+	"speaker": "Kid",
 	"dialogue": [
 		{
 			"id": "win",
-			"text": "Don't even think about taking my cigs.",
+			"text": "No way! You cheated!",
 			"options": [
 			  { "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "lose",
-			"text": "Who would've thought I'd survive another day.",
+			"text": "Loser!!",
 			"options": [
 			  { "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "tie",
-			"text": "I guess we're both losers.",
+			"text": "Ah... Can we play again?",
 			"options": [
 			  { "text": "Back to Safe House", "next": "end" }
 			]

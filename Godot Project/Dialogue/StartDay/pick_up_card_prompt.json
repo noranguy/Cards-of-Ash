@@ -3,16 +3,9 @@
 	"dialogue": [
 		{
 		  "id": "start",
-		  "text": "\"Huh ... Have those cards been here this whole time? I should check them out\"",
+		  "text": "Huh ... Have those cards been here this whole time? I should check them out",
 		  "options": [
 			{ "text": "Continue", "next": "a" }
-		  ]
-		},
-		{
-		  "id": "a",
-		  "text": "Press E to interact",
-		  "options": [
-			{ "text": "Continue", "next": "end" }
 		  ]
 		}
 	]
