@@ -1,11 +1,11 @@
 {
-	"speaker": "Kaishain",
+	"speaker": "Mom",
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "You got a smoke?",
+			"text": "Little Haru is getting tired so let's hurry this up, shall we?",
 			"options": [
-				{ "text": "Continue", "next": "end" }
+				{ "text": "...", "next": "end" }
 			]
 		}
 	]
