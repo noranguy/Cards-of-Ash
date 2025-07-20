@@ -10,7 +10,7 @@
 		},
 		{
 			"id": "a",
-			"text": "To be honest, I’ve been kinda down on my luck recently.",
+			"text": "To be honest, I’ve been kinda down on my luck recently. No work, no friends, no food...",
 			"options": [
 				{ "text": "...", "next": "b" }
 		  	]

@@ -136,19 +136,19 @@ public partial class Safehouse : StaticBody2D
 		{
 			GetNode<Area2D>("MomArea").Visible = true;
 			GetNode<Area2D>("MomArea").CollisionLayer = 3;
-			GetNode<CharacterBody2D>("MomArea/Kaishain").CollisionLayer = 1;
+			GetNode<CharacterBody2D>("MomArea/Mom").CollisionLayer = 1;
 		}
 		if (_inhabitants[3])
 		{
 			GetNode<Area2D>("KidArea").Visible = true;
 			GetNode<Area2D>("KidArea").CollisionLayer = 3;
-			GetNode<CharacterBody2D>("KidArea/Kaishain").CollisionLayer = 1;
+			GetNode<CharacterBody2D>("KidArea/Kid").CollisionLayer = 1;
 		}
 		if (_inhabitants[4])
 		{
 			GetNode<Area2D>("ForeignerArea").Visible = true;
 			GetNode<Area2D>("ForeignerArea").CollisionLayer = 3;
-			GetNode<CharacterBody2D>("ForeignerArea/Kaishain").CollisionLayer = 1;
+			GetNode<CharacterBody2D>("ForeignerArea/Foreigner").CollisionLayer = 1;
 		}
 	}
 
