@@ -111,7 +111,7 @@
 			"id": "q",
 			"text": "But I’ll teach you my own ways. I have never been defeated - not once.",
 			"options": [
-				{ "text": "Isn’t taking resources from other people kinda…", "next": "r" }
+				{ "text": "Do I have to take from others?", "next": "r" }
 		  	]
 		},
 	  {

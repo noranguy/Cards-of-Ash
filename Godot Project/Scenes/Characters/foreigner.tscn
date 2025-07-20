@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgapps2simqch"]
 
-[ext_resource type="Texture2D" uid="uid://62p5ed87pb70" path="res://Assets/Character Designs/foreigner/foreigner mini sprite.png" id="1_omfxh"]
+[ext_resource type="Texture2D" uid="uid://62p5ed87pb70" path="res://Assets/Character Designs/Foreigner/foreigner mini sprite.png" id="1_omfxh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xjch"]
 size = Vector2(14, 16)
