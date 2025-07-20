@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://die6lwa8185jm"]
+
+[ext_resource type="Texture2D" uid="uid://cea2nbfnapywq" path="res://Assets/Character Designs/kid/kid mini sprite.png" id="1_u7y0k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0tdx"]
+size = Vector2(14, 20)
+
+[node name="Kaishaiin" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u7y0k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_f0tdx")

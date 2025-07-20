@@ -19,11 +19,14 @@ public partial class Safehouse : StaticBody2D
 	private bool _at_door;
 	private bool _at_table;
 
-	// Flags to see if the player is trying to talk to an npc
-	private bool _at_kaishain;
-	private bool _at_mom;
-	private bool _at_kid;
-	private bool _at_foreigner;
+	// Flags to see if the player is trying to talk to an npc, order [kaishain, mom, kid, foreigner]
+	private bool[] _talking_to = {false, false, false, false};
+
+	// Flags for what dialogue should be shown to the player
+	private bool[] _mission_completed;
+	private bool[] _dialogue_exhausted = {false, false, false, false};
+
+	private string[] characters = ["kaishain", "mom", "kid", "foreigner"];
 
 	// If the character is in a prompt screen
 	public bool in_prompt;
@@ -57,13 +60,16 @@ public partial class Safehouse : StaticBody2D
 		_at_table = false;
 
 		_inhabitants = GlobalState.Instance.GetInhabitants();
-		GD.Print("Ihabitants:");
-		for (int i = 0; i < 5; i++)
-		{
-			GD.Print(_inhabitants[i]);
-		}
 		InhabitSafehouse();
 
+		for (int i = 0; i < 4; i++)
+		{
+			_dialogue_exhausted[i] = false;
+			_talking_to[i] = false;
+		}
+
+		_mission_completed = GlobalState.Instance.GetCompletedMission();
+		
 		// Get all the prompt nodes
 		_end_day_prompt = GetNode<Control>("EndDayPrompt");
 		_open_door_prompt = GetNode<Control>("OpenDoorPrompt");
@@ -79,13 +85,13 @@ public partial class Safehouse : StaticBody2D
 		}
 
 		_day_num = GlobalState.Instance.GetDay();
+		Label dayLabel = GetNode<Label>("DayLabel");
+		dayLabel.Text = $"Day {GlobalState.Instance.GetDay() + 1}";
 
 		_ = Start_dayAsync();
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
 
 		//_ray = GetNode<RayCast2D>("PlayerCharacter/RayCast2D");
-		Label dayLabel = GetNode<Label>("DayLabel");
-		dayLabel.Text = $"Day {GlobalState.Instance.GetDay() + 1}";
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -128,32 +134,40 @@ public partial class Safehouse : StaticBody2D
 				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 			}
 
-			else if (_at_kaishain)
+			// If the player is trying to talk to an npc, start the dialogue, maybe different (smaller) dialogues for each day 
+			for (int i = 0; i < 4; i++)
 			{
-				
+				if (_talking_to[i])
+				{
+					string partial_dialogue_path = $"Day{_day_num + 1}/{characters[i]}";
+					if (_mission_completed[i])
+					{
+						if (_dialogue_exhausted[i])
+						{
+							_ = InSafeHouse_Dialogue_setupAsync($"ExhaustedMission/{partial_dialogue_path}", i);
+							_dialogue_exhausted[i] = true;
+						}
+
+						else
+						{
+							_ = InSafeHouse_Dialogue_setupAsync($"Mission/{partial_dialogue_path}", i);
+						}
+					}
+
+					else if (_dialogue_exhausted[i])
+					{
+						_ = InSafeHouse_Dialogue_setupAsync($"ExhaustedInSH/{partial_dialogue_path}", i);
+					}
+
+					else
+					{
+						_ = InSafeHouse_Dialogue_setupAsync($"InSafeHouse/{partial_dialogue_path}", i);
+						_dialogue_exhausted[i] = true;
+					}
+
+					break;
+				}
 			}
-
-			else if (_at_mom)
-			{
-
-			}
-
-			else if (_at_kid)
-			{
-
-			}
-
-			else if (_at_kaishain)
-			{
-
-			}
-			
-			else if (_at_kaishain)
-			{
-				
-			}
-
-			// If the player is at an npc, start the dialogue, maybe different (smaller) dialogues for each day 
 		}
 	}
 
@@ -170,19 +184,19 @@ public partial class Safehouse : StaticBody2D
 		{
 			GetNode<Area2D>("MomArea").Visible = true;
 			GetNode<Area2D>("MomArea").CollisionLayer = 3;
-			GetNode<CharacterBody2D>("MomArea/Kaishain").CollisionLayer = 1;
+			GetNode<CharacterBody2D>("MomArea/Mom").CollisionLayer = 1;
 		}
 		if (_inhabitants[3])
 		{
 			GetNode<Area2D>("KidArea").Visible = true;
 			GetNode<Area2D>("KidArea").CollisionLayer = 3;
-			GetNode<CharacterBody2D>("KidArea/Kaishain").CollisionLayer = 1;
+			GetNode<CharacterBody2D>("KidArea/Kid").CollisionLayer = 1;
 		}
 		if (_inhabitants[4])
 		{
 			GetNode<Area2D>("ForeignerArea").Visible = true;
 			GetNode<Area2D>("ForeignerArea").CollisionLayer = 3;
-			GetNode<CharacterBody2D>("ForeignerArea/Kaishain").CollisionLayer = 1;
+			GetNode<CharacterBody2D>("ForeignerArea/Foreigner").CollisionLayer = 1;
 		}
 	}
 
@@ -219,42 +233,42 @@ public partial class Safehouse : StaticBody2D
 
 	private void _on_kaishain_area_body_entered(Node2D body)
 	{
-		_in_bed = true;
+		_talking_to[0] = true;
 	}
 
 	private void _on_kaishain_area_body_exited(Node2D body)
 	{
-		_in_bed = false;
+		_talking_to[0] = false;
 	}
 
 	private void _on_mom_area_body_entered(Node2D body)
 	{
-		_in_bed = true;
+		_talking_to[1] = true;
 	}
 
 	private void _on_mom_area_body_exited(Node2D body)
 	{
-		_in_bed = false;
+		_talking_to[1] = false;
 	}
 
 	private void _on_kid_area_body_entered(Node2D body)
 	{
-		_in_bed = true;
+		_talking_to[2] = true;
 	}
 
 	private void _on_kid_area_body_exited(Node2D body)
 	{
-		_in_bed = false;
+		_talking_to[2] = false;
 	}
 
 	private void _on_foreigner_area_body_entered(Node2D body)
 	{
-		_in_bed = true;
+		_talking_to[3] = true;
 	}
 
 	private void _on_foreigner_area_body_exited(Node2D body)
 	{
-		_in_bed = false;
+		_talking_to[3] = false;
 	}
 
 	// Get rid of all prompts
@@ -300,7 +314,7 @@ public partial class Safehouse : StaticBody2D
 
 		else if (anim_name == "fade_to_black_dialogue")
 		{
-			_ = Dialogue_setupAsync();
+			_ = DayStart_Dialogue_setupAsync();
 			GetNode<AnimationPlayer>("FadeToBlack/AnimationPlayer").Play("fade_to_dialogue");
 		}
 
@@ -327,7 +341,7 @@ public partial class Safehouse : StaticBody2D
 		_game_ready = false;
 	}
 
-	private async Task Dialogue_setupAsync()
+	private async Task DayStart_Dialogue_setupAsync()
 	{
 		string _character = _character_order[_day_num];
 		string dialogue = $"BeforeGame/{_dialogue_order[_day_num]}";
@@ -350,6 +364,17 @@ public partial class Safehouse : StaticBody2D
 		_game_ready = true;
 		
 		//GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Dialogue/{_dialogue_order[(int)_day_num]}.tscn"); for when theres a whole scene for dialogue
+	}
+
+	private async Task InSafeHouse_Dialogue_setupAsync(string dialogue_path, int character_num)
+	{
+		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
+
+		await DialogueManager.Instance.StartDialogue(dialogue_path, false);
+
+		_dialogue_exhausted[character_num] = true;
+
+		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
 	}
 
 	private async Task Start_dayAsync()

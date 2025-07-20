@@ -5,7 +5,8 @@ using System.Security.Cryptography.X509Certificates;
 public partial class PlayerCharacter : CharacterBody2D
 {
 	// Flag to see if the player should be able to move, false when a prompt is on screen
-
+	
+	[Export]
 	bool _moveable = false;
 
 	// Player speed

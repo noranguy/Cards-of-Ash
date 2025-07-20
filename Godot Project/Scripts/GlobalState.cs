@@ -106,6 +106,9 @@ public partial class GlobalState : Node {
 
 	// List to keep track of which npcs are in the safehouse
 	private bool[] inhabitants = new bool[5] {false, false, false, false, false};
+
+	// Keep track of mission progress, which determines what characters dialogue is
+	private bool[] mission_completed = new bool[4] { false, false, false, false };
 	
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
@@ -205,6 +208,16 @@ Press SPACE to continue.
 	public bool[] GetInhabitants()
 	{
 		return inhabitants;
+	}
+
+	public void MissionCompleted(int character_num)
+	{
+		mission_completed[character_num] = true;
+	}
+
+	public bool[] GetCompletedMission()
+	{
+		return mission_completed;
 	}
 	
 	// Updates the player's decks and increments day counter

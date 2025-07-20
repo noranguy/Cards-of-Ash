@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvxtlx4tedhx4"]
+[gd_scene load_steps=3 format=3 uid="uid://dlinb6e8l724s"]
 
-[ext_resource type="Texture2D" uid="uid://bko0esr8u34gj" path="res://Assets/Character Designs/kaishain/kaishain mini sprite.png" id="1_iv8ry"]
+[ext_resource type="Texture2D" uid="uid://c2dt1yvnq5vg3" path="res://Assets/Character Designs/Mom & Son/mom & son mini sprite.png" id="1_0clr0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0tdx"]
 size = Vector2(14, 25)
@@ -8,7 +8,7 @@ size = Vector2(14, 25)
 [node name="Kaishaiin" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_iv8ry")
+texture = ExtResource("1_0clr0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)

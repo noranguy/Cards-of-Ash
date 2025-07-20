@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpr6w3c5u3cnp"
-path="res://.godot/imported/portrait.png-7ab64a33e905c56fc43734ff32a621fa.ctex"
+path="res://.godot/imported/portrait.png-617e426d8bb55514821b28a7e4cca3b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Kaishain/portrait.png"
-dest_files=["res://.godot/imported/portrait.png-7ab64a33e905c56fc43734ff32a621fa.ctex"]
+source_file="res://Assets/Character Designs/kaishain/portrait.png"
+dest_files=["res://.godot/imported/portrait.png-617e426d8bb55514821b28a7e4cca3b8.ctex"]
 
 [params]
 
