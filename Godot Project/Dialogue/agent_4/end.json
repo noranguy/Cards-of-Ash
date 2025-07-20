@@ -1,23 +1,23 @@
 {
-	"speaker": "Kaishain",
+	"speaker": "Foriegner",
 	"dialogue": [
 		{
 			"id": "win",
-			"text": "Don't even think about taking my cigs.",
+			"text": "Oh wow, this is easy!",
 			"options": [
 			  { "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "lose",
-			"text": "Who would've thought I'd survive another day.",
+			"text": "Ah, well. What did I expect.",
 			"options": [
 			  { "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "tie",
-			"text": "I guess we're both losers.",
+			"text": "Close enough!",
 			"options": [
 			  { "text": "Back to Safe House", "next": "end" }
 			]

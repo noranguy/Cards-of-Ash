@@ -48,7 +48,6 @@ public partial class DialogueManager : Control {
 	}
 	
 	public async Task StartDialogue(string name, bool inPlay, string startNode) {
-		GD.Print(name);
 		_inPlay = inPlay;
 		dialogueTree = new();
 		dialogueText = GetNode<Label>("DialoguePanel/DialogueText");
@@ -70,7 +69,6 @@ public partial class DialogueManager : Control {
 			
 		// display speaker portrait if not player
 		if (inPlay) {
-			GD.Print($"1 {Position.X} {Position.Y}");
 			dialogueText.Scale = new Vector2(0.5f, 0.5f);
 			optionsContainer.Scale = new Vector2(1, 1);
 			sprite.Scale = new Vector2(1.4f, 1.4f);
@@ -91,14 +89,14 @@ public partial class DialogueManager : Control {
 				dialogueText.Size = new Vector2(960, 5);
 				dialogueText.Position = new Vector2(5, 5);
 				dialogueText.AddThemeFontSizeOverride("font_size", 32);
-				optionsContainer.Size = new Vector2(445, 20);
+				optionsContainer.Size = new Vector2(440, 20);
 				optionsContainer.Position = new Vector2(5, 40);
 			} else {
 				sprite.Visible = true;
 				dialogueText.Size = new Vector2(760, 5);
 				dialogueText.Position = new Vector2(60, 5);
 				dialogueText.AddThemeFontSizeOverride("font_size", 32);
-				optionsContainer.Size = new Vector2(325, 20);
+				optionsContainer.Size = new Vector2(320, 20);
 				optionsContainer.Position = new Vector2(60, 40);
 				var texture = GD.Load<Texture2D>($"res://Assets/Character Designs/{dialogue.speaker}/portrait.png");
 				sprite.Texture = texture;
