@@ -111,6 +111,5 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rn477")
-animation = &"kaishain_idle"
+animation = &"old_man_idle"
 autoplay = "old_man_idle"
-frame_progress = 0.485373

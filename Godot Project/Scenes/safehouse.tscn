@@ -1,16 +1,27 @@
+<<<<<<< HEAD
 [gd_scene load_steps=42 format=3 uid="uid://bvd7sgi6dix5n"]
+=======
+[gd_scene load_steps=41 format=3 uid="uid://bvd7sgi6dix5n"]
+>>>>>>> origin/main
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
 [ext_resource type="PackedScene" uid="uid://cfyc8k4gjjnmr" path="res://Scenes/out_play_safehouse.tscn" id="3_6l742"]
 [ext_resource type="PackedScene" uid="uid://dcpwly3u48me3" path="res://Scenes/Characters/old_man_tutorial.tscn" id="3_v5lnp"]
 [ext_resource type="Texture2D" uid="uid://u1eorlu248cw" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishain.tscn" id="5_algie"]
 [ext_resource type="PackedScene" uid="uid://dlinb6e8l724s" path="res://Scenes/Characters/mom.tscn" id="6_b4d46"]
 [ext_resource type="PackedScene" uid="uid://die6lwa8185jm" path="res://Scenes/Characters/kid.tscn" id="6_uq6vu"]
 [ext_resource type="PackedScene" uid="uid://b7xugre417hwm" path="res://Scenes/Characters/foreigner.tscn" id="7_0yw7c"]
+=======
+[ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishain.tscn" id="5_b4d46"]
+[ext_resource type="PackedScene" uid="uid://c31jjoe1c61rk" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
+[ext_resource type="PackedScene" uid="uid://bbmm0hjrhws3h" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
+>>>>>>> origin/main
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
+[ext_resource type="PackedScene" uid="uid://cgapps2simqch" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
 [ext_resource type="AudioStream" uid="uid://gt654obtm1q1" path="res://Assets/SFX/triple-knock-on-door.mp3" id="10_mt6l6"]
 
@@ -556,31 +567,55 @@ collision_mask = 5
 motion_mode = 1
 slide_on_ceiling = false
 
+<<<<<<< HEAD
 [node name="Kaishain" parent="." instance=ExtResource("5_algie")]
+=======
+[node name="OldManTutorial" parent="." instance=ExtResource("3_v5lnp")]
 visible = false
 z_index = 7
-position = Vector2(210, 110)
+position = Vector2(210, 95)
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Kaishain" parent="." instance=ExtResource("5_b4d46")]
+>>>>>>> origin/main
+visible = false
+z_index = 7
+position = Vector2(210, 95)
 scale = Vector2(2, 2)
 collision_layer = 0
 
+<<<<<<< HEAD
 [node name="Mom" parent="." instance=ExtResource("6_b4d46")]
+=======
+[node name="Mom" parent="." instance=ExtResource("6_mt6l6")]
+>>>>>>> origin/main
 visible = false
 z_index = 7
-position = Vector2(210, 110)
+position = Vector2(210, 95)
 scale = Vector2(2, 2)
 collision_layer = 0
 
+<<<<<<< HEAD
 [node name="Kid" parent="." instance=ExtResource("6_uq6vu")]
+=======
+[node name="Kid" parent="." instance=ExtResource("7_b4d46")]
+>>>>>>> origin/main
 visible = false
 z_index = 7
-position = Vector2(210, 110)
+position = Vector2(210, 95)
 scale = Vector2(2, 2)
 collision_layer = 0
 
+<<<<<<< HEAD
 [node name="Foreigner" parent="." instance=ExtResource("7_0yw7c")]
+=======
+[node name="Foreigner" parent="." instance=ExtResource("8_krigs")]
+>>>>>>> origin/main
 visible = false
 z_index = 7
-position = Vector2(210, 110)
+position = Vector2(210, 95)
 scale = Vector2(2, 2)
 collision_layer = 0
 
@@ -766,7 +801,7 @@ z_index = 5
 position = Vector2(452, 304)
 shape = SubResource("RectangleShape2D_gxkjp")
 
-[node name="Kaishain" parent="KaishainArea" instance=ExtResource("5_algie")]
+[node name="Kaishain" parent="KaishainArea" instance=ExtResource("5_b4d46")]
 z_index = 7
 position = Vector2(450, 305)
 scale = Vector2(2, 2)
@@ -784,7 +819,12 @@ z_index = 5
 position = Vector2(453, 304)
 shape = SubResource("RectangleShape2D_gxkjp")
 
+<<<<<<< HEAD
 [node name="Mom" parent="MomArea" instance=ExtResource("6_b4d46")]
+=======
+[node name="Mom" parent="MomArea" instance=ExtResource("6_mt6l6")]
+visible = false
+>>>>>>> origin/main
 z_index = 7
 position = Vector2(455, 305)
 scale = Vector2(2, 2)
@@ -800,7 +840,12 @@ z_index = 5
 position = Vector2(452, 305)
 shape = SubResource("RectangleShape2D_gxkjp")
 
+<<<<<<< HEAD
 [node name="Kid" parent="KidArea" instance=ExtResource("6_uq6vu")]
+=======
+[node name="Kid" parent="KidArea" instance=ExtResource("7_b4d46")]
+visible = false
+>>>>>>> origin/main
 z_index = 7
 position = Vector2(455, 305)
 scale = Vector2(2, 2)
@@ -816,7 +861,11 @@ z_index = 5
 position = Vector2(450, 307.25)
 shape = SubResource("RectangleShape2D_gxkjp")
 
+<<<<<<< HEAD
 [node name="Foreigner" parent="ForeignerArea" instance=ExtResource("7_0yw7c")]
+=======
+[node name="Foreigner" parent="ForeignerArea" instance=ExtResource("8_krigs")]
+>>>>>>> origin/main
 z_index = 7
 position = Vector2(450, 305)
 scale = Vector2(2, 2)
@@ -827,8 +876,11 @@ scale = Vector2(2, 2)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+<<<<<<< HEAD
 offset_left = -9.0
 offset_top = -1.0
+=======
+>>>>>>> origin/main
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
