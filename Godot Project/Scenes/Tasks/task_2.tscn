@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://csyiu2mb2tbc0"]
+[gd_scene load_steps=26 format=4 uid="uid://csyiu2mb2tbc0"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_7cyyu"]
 [ext_resource type="Script" uid="uid://dspmkjkmh4a4p" path="res://Scripts/Tasks/Task2_minigame.cs" id="1_vadw1"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://cw04fpeq5lehi" path="res://Assets/In Play Safe House/Tasks/tile01.png" id="10_r54dn"]
 [ext_resource type="Texture2D" uid="uid://bhi7phhamv4lh" path="res://Assets/In Play Safe House/Tasks/tile02.png" id="11_e0c1r"]
 [ext_resource type="Texture2D" uid="uid://bfe60wrct3imm" path="res://Assets/In Play Safe House/Tasks/tile03.png" id="12_tixnu"]
+[ext_resource type="Texture2D" uid="uid://bb4fly7n266hl" path="res://Assets/In Play Safe House/Tasks/wood_plank_0.png" id="13_e0c1r"]
+[ext_resource type="Texture2D" uid="uid://cx04tooyhrwm0" path="res://Assets/In Play Safe House/Tasks/wood_plank_1.png" id="14_tixnu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_po57i"]
 texture = ExtResource("1_7cyyu")
@@ -6344,7 +6346,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="wood_panels_0" parent="placed_wood" instance=ExtResource("6_6rq2s")]
-z_index = 4
+z_index = 1001
 layout_mode = 0
 offset_top = -83.0
 offset_right = 145.0
@@ -6366,16 +6368,18 @@ offset_top = -81.0
 offset_right = 50.0
 offset_bottom = -41.0
 scale = Vector2(3, 3)
+isPlank = true
 
 [node name="wood_planks_1" parent="placed_wood" instance=ExtResource("8_vadw1")]
 visible = false
 z_index = 7
 layout_mode = 0
 offset_left = 10.0
-offset_top = -83.0
+offset_top = -84.0
 offset_right = 50.0
-offset_bottom = -43.0
+offset_bottom = -44.0
 scale = Vector2(3, 3)
+isPlank = true
 
 [node name="wood_planks_2" parent="placed_wood" instance=ExtResource("8_vadw1")]
 visible = false
@@ -6386,6 +6390,7 @@ offset_top = -83.0
 offset_right = -95.0
 offset_bottom = -43.0
 scale = Vector2(3, 3)
+isPlank = true
 
 [node name="wood_planks_3" parent="placed_wood" instance=ExtResource("8_vadw1")]
 visible = false
@@ -6396,3 +6401,32 @@ offset_top = -83.0
 offset_right = -95.0
 offset_bottom = -43.0
 scale = Vector2(3, 3)
+isPlank = true
+
+[node name="wood_plank_0" type="Sprite2D" parent="."]
+visible = false
+z_index = 7
+position = Vector2(70, -17)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("13_e0c1r")
+
+[node name="wood_plank_1" type="Sprite2D" parent="."]
+visible = false
+z_index = 7
+position = Vector2(70, -17)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("14_tixnu")
+
+[node name="wood_plank_2" type="Sprite2D" parent="."]
+visible = false
+z_index = 7
+position = Vector2(-69, -18)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("13_e0c1r")
+
+[node name="wood_plank_3" type="Sprite2D" parent="."]
+visible = false
+z_index = 7
+position = Vector2(-71, -18)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("14_tixnu")

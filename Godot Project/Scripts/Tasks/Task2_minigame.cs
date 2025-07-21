@@ -71,17 +71,17 @@ public partial class Task2_minigame : Node2D
 					child.Visible = false;
 				}
 			}
-			foreach(WoodPanels child in wood_planks_placer)
+			for (int i = 0; i < num_planks; i++)
 			{
+				WoodPanels child = wood_planks_placer[i];
 				if (child.Texture != null && child.can_drag)
 				{
-					child.ZIndex = 5;
-					child.MouseFilter = Control.MouseFilterEnum.Stop;
-					child.Texture = GD.Load<Texture2D>($"res://Assets/In Play Safe House/Tasks/wood_plank_{child.GetIndex() % 2}.png");
+					Sprite2D cross = GetNode<Sprite2D>($"wood_plank_{i}");
+					cross.Visible = true;
 					child.can_drag = false;
+					child.Visible = false;
 				}
 			}
-
 		}
 
 	}

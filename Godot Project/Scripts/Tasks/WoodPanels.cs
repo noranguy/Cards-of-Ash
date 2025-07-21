@@ -9,6 +9,9 @@ public partial class WoodPanels : TextureRect
 	public delegate void DragStartEventHandler();
 	[Signal]
 	public delegate void DragEndedEventHandler();
+	[Export]
+	public bool isPlank;
+
 	private Texture2D og_texture;
 	private Vector2 og_position;
 
@@ -36,14 +39,17 @@ public partial class WoodPanels : TextureRect
 	}
 	public override bool _CanDropData(Vector2 atPosition, Variant data)
 	{
-
+		GD.Print(data.As<WoodPanels>() != null);
+		GD.Print(data.VariantType == Variant.Type.Object && data.AsGodotObject() is Texture2D);
 		return data.VariantType == Variant.Type.Object && data.AsGodotObject() is Texture2D;
 	}
 	public override void _DropData(Vector2 atPosition, Variant data)
 	{
-
 		Texture = (Texture2D)data;
 		EmitSignal(SignalName.DragEnded);
-	}
 
+		if (isPlank) {
+			GetParent().RemoveChild(this);
+		}
+	}
 }

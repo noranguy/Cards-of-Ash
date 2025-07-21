@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://df4jj5hd6x8il" path="res://Scripts/Tasks/WoodPanels.cs" id="2_a63gg"]
 
-[node name="wood_panels" type="TextureRect"]
+[node name="WoodPanel" type="TextureRect"]
 custom_minimum_size = Vector2(50, 50)
 expand_mode = 1
 script = ExtResource("2_a63gg")
