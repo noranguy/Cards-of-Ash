@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6sxdf6yxgndi"
-path="res://.godot/imported/foreigner-Sheet.png-8f4378cac6d5c9eaaf1c528879522cf1.ctex"
+path="res://.godot/imported/foreigner-Sheet.png-9c2ef7e1e522cf14579b1539539114f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Foreigner/foreigner-Sheet.png"
-dest_files=["res://.godot/imported/foreigner-Sheet.png-8f4378cac6d5c9eaaf1c528879522cf1.ctex"]
+source_file="res://Assets/Character Designs/foreigner/foreigner-Sheet.png"
+dest_files=["res://.godot/imported/foreigner-Sheet.png-9c2ef7e1e522cf14579b1539539114f4.ctex"]
 
 [params]
 
