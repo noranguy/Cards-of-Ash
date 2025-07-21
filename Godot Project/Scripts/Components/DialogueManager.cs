@@ -60,12 +60,12 @@ public partial class DialogueManager : Control {
 		var file = FileAccess.Open($"res://Dialogue/{name}.json", FileAccess.ModeFlags.Read);
 		var jsonText = file.GetAsText();
 		file.Close();
-
+		
 		var dialogue = JsonSerializer.Deserialize<Dialogue>(jsonText);
 		currentSpeaker = dialogue.speaker;
 		
 		var sprite = GetNode<Sprite2D>("CanvasLayer/DialoguePanel/Person");
-			
+		
 		// display speaker portrait if not player
 		if (inPlay) {
 			dialogueText.Scale = new Vector2(0.5f, 0.5f);
@@ -77,8 +77,8 @@ public partial class DialogueManager : Control {
 			dialogueText.Position = new Vector2(110, 5);
 			optionsContainer.Position = new Vector2(110, 80);
 		} else {
+			panel.Position = new Vector2(35, 112);
 			panel.Size = new Vector2(250, 60);
-			//Position = new Vector2(35, 112);
 			dialogueText.Scale = new Vector2(0.25f, 0.25f);
 			optionsContainer.Scale = new Vector2(0.5f, 0.5f);
 			sprite.Scale = new Vector2(0.65f, 0.65f);
