@@ -199,7 +199,7 @@ Press SPACE to continue.
 		player_has_cards = true;
 	}
 
-	public void NewInhabitant(int day)
+	public void NewInhabitant()
 	{
 		inhabitants[day] = true;
 	}

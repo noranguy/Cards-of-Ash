@@ -1,9 +1,9 @@
 {
-	"speaker": "Kaishain",
+	"speaker": "Foreigner",
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "You got a smoke?",
+			"text": "So how does this work again?",
 			"options": [
 				{ "text": "Continue", "next": "end" }
 			]

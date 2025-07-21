@@ -86,17 +86,17 @@ public partial class DialogueManager : Control {
 			sprite.Position = new Vector2(30, 30);
 			if (currentSpeaker == "self") {
 				sprite.Visible = false;
-				dialogueText.Size = new Vector2(980, 5);
+				dialogueText.Size = new Vector2(960, 5);
 				dialogueText.Position = new Vector2(5, 5);
 				dialogueText.AddThemeFontSizeOverride("font_size", 32);
-				optionsContainer.Size = new Vector2(445, 20);
+				optionsContainer.Size = new Vector2(440, 20);
 				optionsContainer.Position = new Vector2(5, 40);
 			} else {
 				sprite.Visible = true;
-				dialogueText.Size = new Vector2(780, 5);
+				dialogueText.Size = new Vector2(760, 5);
 				dialogueText.Position = new Vector2(60, 5);
 				dialogueText.AddThemeFontSizeOverride("font_size", 32);
-				optionsContainer.Size = new Vector2(325, 20);
+				optionsContainer.Size = new Vector2(320, 20);
 				optionsContainer.Position = new Vector2(60, 40);
 				var texture = GD.Load<Texture2D>($"res://Assets/Character Designs/{dialogue.speaker}/portrait.png");
 				sprite.Texture = texture;
