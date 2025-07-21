@@ -26,7 +26,7 @@ public partial class InfoPage : Node2D {
 	
 	public override void _Input(InputEvent @event) {
 		if (@event is InputEventKey keyEvent && keyEvent.Pressed && keyEvent.Keycode == Key.Space) {
-			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("deck_builder.tscn");
+			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("menko_game.tscn");
 		}
 	}
 }

@@ -37,7 +37,9 @@ public partial class DialogueManager : Control {
 
 	public override void _Ready() {
 		Instance = this;
-		panel = GetNode<Panel>("DialoguePanel");
+		dialogueText = GetNode<Label>("CanvasLayer/DialoguePanel/DialogueText");
+		optionsContainer = GetNode<VBoxContainer>("CanvasLayer/DialoguePanel/OptionsContainer");
+		panel = GetNode<Panel>("CanvasLayer/DialoguePanel");
 		panel.ZIndex = 100;
 		panel.SetZAsRelative(false);
 		panel.Visible = false;
@@ -50,11 +52,8 @@ public partial class DialogueManager : Control {
 	public async Task StartDialogue(string name, bool inPlay, string startNode) {
 		_inPlay = inPlay;
 		dialogueTree = new();
-		dialogueText = GetNode<Label>("DialoguePanel/DialogueText");
-		optionsContainer = GetNode<VBoxContainer>("DialoguePanel/OptionsContainer");
-
+		
 		// show dialogue box
-		panel = GetNode<Panel>("DialoguePanel");
 		panel.Visible = true;
 		
 		// load dialogue from json
@@ -65,21 +64,21 @@ public partial class DialogueManager : Control {
 		var dialogue = JsonSerializer.Deserialize<Dialogue>(jsonText);
 		currentSpeaker = dialogue.speaker;
 		
-		var sprite = GetNode<Sprite2D>("DialoguePanel/Person");
+		var sprite = GetNode<Sprite2D>("CanvasLayer/DialoguePanel/Person");
 			
 		// display speaker portrait if not player
 		if (inPlay) {
 			dialogueText.Scale = new Vector2(0.5f, 0.5f);
 			optionsContainer.Scale = new Vector2(1, 1);
 			sprite.Scale = new Vector2(1.4f, 1.4f);
-			Position = new Vector2(70, 224);
+			panel.Position = new Vector2(70, 224);
 			panel.Size = new Vector2(500, 120);
 			sprite.Position = new Vector2(55, 55);
 			dialogueText.Position = new Vector2(110, 5);
 			optionsContainer.Position = new Vector2(110, 80);
 		} else {
 			panel.Size = new Vector2(250, 60);
-			Position = new Vector2(35, 112);
+			//Position = new Vector2(35, 112);
 			dialogueText.Scale = new Vector2(0.25f, 0.25f);
 			optionsContainer.Scale = new Vector2(0.5f, 0.5f);
 			sprite.Scale = new Vector2(0.65f, 0.65f);

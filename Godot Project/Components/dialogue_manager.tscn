@@ -92,12 +92,17 @@ offset_right = 35.0
 offset_bottom = 112.0
 script = ExtResource("1_1dsj7")
 
-[node name="DialoguePanel" type="Panel" parent="."]
-offset_right = 250.0
-offset_bottom = 60.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="DialoguePanel" type="Panel" parent="CanvasLayer"]
+offset_left = 35.0
+offset_top = 112.0
+offset_right = 285.0
+offset_bottom = 172.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1dsj7")
 
-[node name="DialogueText" type="Label" parent="DialoguePanel"]
+[node name="DialogueText" type="Label" parent="CanvasLayer/DialoguePanel"]
 layout_mode = 0
 offset_left = 46.0
 offset_top = 3.0
@@ -108,7 +113,7 @@ theme_override_fonts/font = SubResource("FontFile_6rt2l")
 theme_override_font_sizes/font_size = 64
 autowrap_mode = 3
 
-[node name="OptionsContainer" type="VBoxContainer" parent="DialoguePanel"]
+[node name="OptionsContainer" type="VBoxContainer" parent="CanvasLayer/DialoguePanel"]
 layout_mode = 0
 offset_left = 61.0
 offset_top = 38.0
@@ -116,7 +121,7 @@ offset_right = 161.0
 offset_bottom = 57.0
 mouse_filter = 0
 
-[node name="Person" type="Sprite2D" parent="DialoguePanel"]
+[node name="Person" type="Sprite2D" parent="CanvasLayer/DialoguePanel"]
 position = Vector2(30, 30)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_g0piw")
