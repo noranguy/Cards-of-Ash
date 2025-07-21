@@ -1,31 +1,15 @@
-<<<<<<< HEAD
-[gd_scene load_steps=3 format=3 uid="uid://b7xugre417hwm"]
+[gd_scene load_steps=3 format=3 uid="uid://c8yf6fsttlpb0"]
 
 [ext_resource type="Texture2D" uid="uid://62p5ed87pb70" path="res://Assets/Character Designs/foreigner/foreigner mini sprite.png" id="1_omfxh"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0tdx"]
-size = Vector2(14, 25)
-
-[node name="Kaishaiin" type="CharacterBody2D"]
-=======
-[gd_scene load_steps=3 format=3 uid="uid://cgapps2simqch"]
-
-[ext_resource type="Texture2D" uid="uid://62p5ed87pb70" path="res://Assets/Character Designs/Foreigner/foreigner mini sprite.png" id="1_omfxh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xjch"]
 size = Vector2(14, 16)
 
 [node name="Foreigner" type="CharacterBody2D"]
->>>>>>> origin/main
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_omfxh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-<<<<<<< HEAD
-position = Vector2(0, 3.5)
-shape = SubResource("RectangleShape2D_f0tdx")
-=======
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_3xjch")
->>>>>>> origin/main

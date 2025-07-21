@@ -91,8 +91,14 @@ public partial class Safehouse : StaticBody2D
 			GetNode<AnimationPlayer>("MenkoCards/AnimationPlayer").Play("bounce");
 		}
 
+		if (_day_over && _day_num == 0)
+		{
+			GetNode<TextureRect>("Bed/Interact").Visible = true;
+			GetNode<AnimationPlayer>("Bed/AnimationPlayer").Play("bounce");
+		}
+
 		_day_num = GlobalState.Instance.GetDay();
-		Label dayLabel = GetNode<Label>("DayLabel");
+		Label dayLabel = GetNode<Label>("CanvasLayer/DayLabel");
 		dayLabel.Text = $"Day {GlobalState.Instance.GetDay() + 1}";
 
 		_ = Start_dayAsync();
