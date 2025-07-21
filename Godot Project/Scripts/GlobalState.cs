@@ -22,59 +22,58 @@ public partial class GlobalState : Node {
 	
 	public override void _Ready() {
 		Instance = this;
+		handCards = handDeck;
+		tableCards = tableDeck;
 	}
 	
-	// Tracks the types of the cards in the player's hand deck
-	private List<string> humanHandTypes = new List<string> {
-		"tsunami",
-		"volcano",
-		"earthquake",
-		"tsunami",
-		"volcano",
-		"earthquake",
-		"tsunami",
-		"volcano",
-		"earthquake"
+	private List<(string, string)> handDeck = new List<(string, string)> {
+		("tsunami", "basic"),
+		("volcano", "basic"),
+		("earthquake", "basic"),
+		("tsunami", "basic"),
+		("volcano", "basic"),
+		("earthquake", "basic"),
+		("tsunami", "basic"),
+		("volcano", "basic"),
+		("earthquake", "basic"),
 	};
 	
-	// Tracks the classes of the cards in the player's hand deck
-	private List<string> humanHandClasses = new List<string> {
-		"basic",
-		"basic",
-		"basic",
-		"basic",
-		"basic",
-		"basic",
-		"basic",
-		"basic",
-		"basic"
+	
+	private List<(string, string)> tableDeck = new List<(string, string)> {
+		("tsunami", "basic"),
+		("volcano", "basic"),
+		("earthquake", "basic"),
+		("tsunami", "basic"),
+		("volcano", "basic"),
+		("earthquake", "basic"),
 	};
 	
-	// Tracks the classes of the cards in the player's table deck
-	private List<string> humanTableClasses = new List<string> {
-		"basic",
-		"basic",
-		"basic",
-		"basic",
-		"basic",
-		"basic"
-	};
+	private List<(string, string)> handCards;
 	
-	public (List<string>, List<string>) GetHandCards() {
-		return (humanHandTypes, humanHandClasses);
+	private List<(string, string)> tableCards;
+	
+	public List<(string, string)> GetHandCards() {
+		return handCards;
 	}
 	
-	public List<string> GetTableClasses() {
-		return humanTableClasses;
+	public List<(string, string)> GetTableCards() {
+		return tableCards;
 	}
 	
-	private void AddHandCard(string type, string clas) {
-		humanHandTypes.Add(type);
-		humanHandClasses.Add(clas);
+	public List<(string, string)> GetHandDeck() {
+		return handDeck;
 	}
 	
-	private void AddTableCard(string clas) {
-		humanTableClasses.Add(clas);
+	public List<(string, string)> GetTableDeck() {
+		return tableDeck;
+	}
+	
+	public void UpdateHandCards(List<(string, string)> cards) {
+		handCards = cards;
+	}
+	
+	public void UpdateTableCards(List<(string, string)> cards) {
+		tableCards = cards;
 	}
 	
 	// Base probabilities of flipping a card against [stronger, equal, weaker] type
@@ -94,6 +93,9 @@ public partial class GlobalState : Node {
 	
 	// Probability multiplier when throwing at a defense card
 	public readonly double DefenseProb = 0.75;
+	
+	public readonly int NumHandCards = 9;
+	public readonly int NumTableCards = 6;
 	
 	// Keep track of in game day
 	private int day = 0;
@@ -208,16 +210,15 @@ Press SPACE to continue.
 	}
 	
 	// Updates the player's decks and increments day counter
-	public void NextDay()
-	{
-		if (day > 0)
-		{
+	public void NextDay() {
+		if (day > 0) {
 			var clas = GetInfo().Class;
-			//AddHandCard("tsunami", clas);
-			//AddHandCard("volcano", clas);
-			//AddHandCard("earthquake", clas);
-			//AddTableCard(clas);
-			//AddTableCard(clas);
+			handDeck.Add(("tsunami", clas));
+			handDeck.Add(("volcano", clas));
+			handDeck.Add(("earthquake", clas));
+			tableDeck.Add(("tsunami", clas));
+			tableDeck.Add(("volcano", clas));
+			tableDeck.Add(("earthquake", clas));
 		}
 		day++;
 	}

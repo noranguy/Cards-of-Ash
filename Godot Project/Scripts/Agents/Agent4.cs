@@ -3,59 +3,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Agent3 : Agent {
+public class Agent4 : Agent {
 	private List<Card> hand;
 	private List<Card> playerTable;
 	private List<Card> enemyTable;
 	
-	public override (List<string>, List<string>) GetHandCards() {
-		List<string> types = new List<string> {
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake"
+	public override List<(string, string)> GetHandCards() {
+		return new List<(string, string)> {
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic"),
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic"),
+			("tsunami", "vision"),
+			("volcano", "vision"),
+			("earthquake", "vision")
 		};
-		
-		List<string> classes = new List<string> {
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"vision",
-			"vision",
-			"vision"
-		};
-		
-		return (types, classes);
 	}
 	
-	public override (List<string>, List<string>) GetTableCards() {
-		List<string> types = new List<string> {
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake",
+	public override List<(string, string)> GetTableCards() {
+		return new List<(string, string)> {
+			("tsunami", "vision"),
+			("volcano", "vision"),
+			("earthquake", "basic"),
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic")
 		};
-		
-		List<string> classes = new List<string> {
-			"vision",
-			"vision",
-			"basic",
-			"basic",
-			"basic",
-			"basic"
-		};
-		
-		return (types, classes);
 	}
 	
 	// range for table indices to be sorted, shape 3x6

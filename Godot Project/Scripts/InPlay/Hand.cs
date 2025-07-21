@@ -14,23 +14,22 @@ public partial class Hand : Control {
 	private int y_max;
 	private Vector2 scaleV;
 	
-	public void Init(PackedScene scene, int y, float scale, bool visible, List<string> types, List<string> classes) {
+	public void Init(PackedScene scene, int y, float scale, bool visible, List<(string, string)> cardInfo) {
 		SetMouseFilter(Control.MouseFilterEnum.Ignore);
 		cardScene = scene;
 		y_max = y;
 		y_min = y + 100;
 		Size = new Vector2(250 * scale, 100 * scale);
 		scaleV = new Vector2(scale, scale);
-		SpawnCards(visible, types, classes);
+		SpawnCards(visible, cardInfo);
 	}
 
-	public async virtual void SpawnCards(bool visible, List<string> types, List<string> classes) {
-		for (int i = 0; i < startingAmount; i++) {
+	public async virtual void SpawnCards(bool visible, List<(string, string)> cardInfo) {
+		foreach ((string type, string clas) in cardInfo) {
 			Card card = cardScene.Instantiate<Card>();
-			card.Name = $"Card{i}";
 			card.Position = Vector2.Zero;
 			card.ZIndex = 15;
-			card.Init(Card.DEFAULT_VERTICES, types[i], classes[i], visible, visible, -1);
+			card.Init(Card.DEFAULT_VERTICES, type, clas, visible, visible, -1);
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 
 			AddChild(card);

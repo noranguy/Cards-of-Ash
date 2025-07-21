@@ -48,7 +48,6 @@ public partial class DialogueManager : Control {
 	}
 	
 	public async Task StartDialogue(string name, bool inPlay, string startNode) {
-		GD.Print(name);
 		_inPlay = inPlay;
 		dialogueTree = new();
 		dialogueText = GetNode<Label>("DialoguePanel/DialogueText");
@@ -70,7 +69,6 @@ public partial class DialogueManager : Control {
 			
 		// display speaker portrait if not player
 		if (inPlay) {
-			GD.Print($"1 {Position.X} {Position.Y}");
 			dialogueText.Scale = new Vector2(0.5f, 0.5f);
 			optionsContainer.Scale = new Vector2(1, 1);
 			sprite.Scale = new Vector2(1.4f, 1.4f);
