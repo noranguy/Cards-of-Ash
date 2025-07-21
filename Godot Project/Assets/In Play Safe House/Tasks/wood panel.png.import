@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4b5c3ksmylyf"
-path="res://.godot/imported/phone-Sheet.png-81502d19f28a204eb5f35e22bb6c9b8d.ctex"
+uid="uid://4ofq4wt82idr"
+path="res://.godot/imported/wood panel.png-d09c0c2a49355f8076f4a4e0a118b470.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/In Play Safe House/phone-Sheet.png"
-dest_files=["res://.godot/imported/phone-Sheet.png-81502d19f28a204eb5f35e22bb6c9b8d.ctex"]
+source_file="res://Assets/In Play Safe House/Tasks/wood panel.png"
+dest_files=["res://.godot/imported/wood panel.png-d09c0c2a49355f8076f4a4e0a118b470.ctex"]
 
 [params]
 

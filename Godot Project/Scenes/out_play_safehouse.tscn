@@ -8073,6 +8073,7 @@ autoplay = true
 parameters/looping = true
 
 [node name="night_lighting" type="Node2D" parent="."]
+visible = false
 
 [node name="night" type="CanvasModulate" parent="night_lighting"]
 color = Color(0.0924401, 0.180107, 0.28704, 1)

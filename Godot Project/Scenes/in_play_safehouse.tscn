@@ -6695,7 +6695,6 @@ scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_qn0kl")
 animation = &"agent_4"
 autoplay = "agent_0"
-frame_progress = 0.883463
 
 [node name="Player_CardThrowAnimate" type="AnimatedSprite2D" parent="."]
 visible = false

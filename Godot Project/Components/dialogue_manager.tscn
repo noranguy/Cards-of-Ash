@@ -93,6 +93,7 @@ offset_bottom = 112.0
 script = ExtResource("1_1dsj7")
 
 [node name="DialoguePanel" type="Panel" parent="."]
+layout_mode = 0
 offset_right = 250.0
 offset_bottom = 60.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1dsj7")
