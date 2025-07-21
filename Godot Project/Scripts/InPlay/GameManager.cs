@@ -278,32 +278,45 @@ public partial class GameManager : Node2D {
 		// track player and enemy score
 		int playerCount = enemyTableCards.Count(card => card.visible);
 		int enemyCount = playerTableCards.Count(card => card.visible);
-		
+
 		// game end
-		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
-			if (playerCount > enemyCount) {
+		GlobalState.Instance.NewInhabitant();
+		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6)
+		{
+			if (playerCount > enemyCount)
+			{
 				roundLabel.Text = "You Win";
 				GlobalState.Instance.NewInhabitant();
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "win");
-			} else if (playerCount < enemyCount) {
+			}
+			else if (playerCount < enemyCount)
+			{
 				roundLabel.Text = "You Lose";
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "lose");
-			} else {
+			}
+			else
+			{
 				roundLabel.Text = "Tie";
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "tie");
 			}
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
-		} else {
-			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision"))) {
+		}
+		else
+		{
+			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision")))
+			{
 				roundLabel.Text = $"Vision Cards Are Swapping";
 				await ToSignal(GetTree().CreateTimer(0.5), "timeout");
-				if (GlobalState.Instance.GetInfo().Class == "vision") {
+				if (GlobalState.Instance.GetInfo().Class == "vision")
+				{
 					await SwapVision(enemyTableCards);
-				} else {
+				}
+				else
+				{
 					await SwapVision(playerTableCards);
 				}
 			}
-			roundLabel.Text = $"Round {round+1}";
+			roundLabel.Text = $"Round {round + 1}";
 		}
 	}
 	

@@ -1,0 +1,12 @@
+{
+	"speaker": "Kaishain",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "I dont want to talk",
+			"options": [
+				{ "text": "Thanks.", "next": "end" }
+			]
+		}
+	]
+}
