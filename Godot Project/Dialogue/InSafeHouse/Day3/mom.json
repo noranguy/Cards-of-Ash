@@ -1,124 +1,90 @@
 {
-	"speaker": "Old Man",
+	"speaker": "Mom & Son",
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Excuse my intrusion, but I saw the lights on and was curious.",
+			"text": "Hi! Little Haru and I wanted to say thank you for the hospitable stay. I hope we can be useful here.",
 			"options": [
-				{ "text": "I’ve been here since the earthquake", "next": "b" }
+				{ "text": "I never got your name.", "next": "b" }
 			]
 		},
 		{
 			"id": "b",
-			"text": "I see. I’m sorry to say, but you won't survive by solely secluding yourself away in a “safehouse”.",
+			"text": "Oh! Apologies, My name is An Nomura and I think you know who this is.",
 			"options": [
-				{ "text": "I didn't know what to do...", "next": "d" }
+				{ "text": "...", "next": "c" }
+		  	]
+		},
+		{
+			"id": "c",
+			"text": "*Gestures to the baby sleeping*",
+			"options": [
+				{ "text": "...", "next": "d" }
 		  	]
 		},
 	 
-	  {
+	   {
 			"id": "d",
-			"text": "I see... You know you remind me of my daughter.",
+			"text": "Adorable, isn't he!",
 			"options": [
-				{ "text": "Your daughter?", "next": "e" }
+				{ "text": "So cute", "next": "e" }
 		  	]
 		},
 		{
 			"id": "e",
-			"text": "She didn’t look out for herself. She cared too much for others.",
+			"text": "Say, It’s awfully noisy…",
 			"options": [
 				{ "text": "...", "next": "f" }
 		  	]
 		},
 	  {
 			"id": "f",
-			"text": "She was... gone. In an instant. She panicked and didn't know what to do.",
+			"text": "You know, those windows should be boarded up by now.",
 			"options": [
-				{ "text": "I'm sorry...", "next": "z" }
+				{ "text": "Really, why?", "next": "g" }
 		  	]
 		},
 	  {
-			"id": "z",
-			"text": "*Sigh* I suppose I can give you a few tips on how to handle yourself.",
+			"id": "g",
+			"text": "Well, most buildings here can handle the violent shakes. However, this safehouse is old. We’re lucky those windows haven’t broken.",
 			"options": [
-				{ "text": "Really?", "next": "g" }
+				{ "text": "Ah... I see", "next": "h" }
 		  	]
 		},
 		{
-			"id": "g",
-			"text": "That is if you promise to not share the same fate.",
+			"id": "h",
+			"text": "Boarding up the windows and securing the furniture minimizes dangers and injuries if there was another earthquake again.",
 			"options": [
-				{ "text": "I promise", "next": "i" }
+				{ "text": "I will", "next": "i" }
 		  	]
 		},
-	  {
+				{
 			"id": "i",
-			"text": "First off, you can't let the earthquake break you down.",
+			"text": "Remember that for the next time before it’s too late.",
 			"options": [
-				{ "text": "...", "next": "j" }
+				{ "text": "I will", "next": "j" }
+		  	]
+		},
+		
+	  {
+			"id": "j",
+			"text": "Can never be too safe! Especially when you have a little guy with you.",
+			"options": [
+				{ "text": "...", "next": "k" }
 		  	]
 		},
 		 {
-			"id": "j",
-			"text": "Remember to hold on to any decent structure and find cover.",
-			"options": [
-				{ "text": "So under tables and desks?", "next": "k" }
-		  	]
-		},
-	  {
 			"id": "k",
-			"text": "Yes, exactly. *peers down at the cards in your hand* Are those menko cards?",
+			"text": "Ah! He's starting to wake up...",
 			"options": [
-				{ "text": "These? I'm not sure", "next": "l" }
+				{ "text": "...", "next": "l" }
 		  	]
 		},
 	  {
 			"id": "l",
-			"text": "They are! Pay attention, I’m going to teach you the most important skills you'll need.",
+			"text": "Ah! Quick, go board up those windows. I’ll have a surprise for you when you get back.",
 			"options": [
-				{ "text": "Through a card game?", "next": "m" }
-		  	]
-		},
-		{
-			"id": "m",
-			"text": "Look out for only yourself, and you might be able to make it out of this.",
-			"options": [
-				{ "text": "...", "next": "n" }
-		  	]
-		},
-	  {
-			"id": "n",
-			"text": "Menko’s a game where you put everything on the line.",
-			"options": [
-				{ "text": "Menko?", "next": "o" }
-		  	]
-		},
-		{
-			"id": "o",
-			"text": "Risk your own resources, and you'll get the chance to take your opponent’s.",
-			"options": [
-				{ "text": "I see...", "next": "p" }
-		  	]
-		},
-	  {
-			"id": "p",
-			"text": "Of course, losing means disastrous consequences.",
-			"options": [
-				{ "text": "...", "next": "q" }
-		  	]
-		},
-		{
-			"id": "q",
-			"text": "But I’ll teach you my own ways. I have never been defeated - not once.",
-			"options": [
-				{ "text": "Isn’t taking resources from other people kinda…", "next": "r" }
-		  	]
-		},
-	  {
-			"id": "r",
-			"text": "*Sigh* So naive… Go to the table and we can start a game.",
-			"options": [
-				{ "text": "Okay...", "next": "a" }
+				{ "text": "Okay!", "next": "end" }
 		  	]
 		}
   	]

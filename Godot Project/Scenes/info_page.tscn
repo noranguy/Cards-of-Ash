@@ -268,10 +268,8 @@ rotation = 4.21148
 scale = Vector2(0.0921548, 0.0482547)
 texture = ExtResource("5_pi2h0")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="Sprite2D" parent="."]
 z_index = -1
-offset_left = -322.0
-offset_top = -180.0
-offset_right = 320.0
-offset_bottom = 180.0
+position = Vector2(-7.62939e-06, 3.8147e-06)
+scale = Vector2(2, 2.017)
 texture = ExtResource("6_fp1kd")

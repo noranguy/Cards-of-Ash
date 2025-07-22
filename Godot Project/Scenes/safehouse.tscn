@@ -6,11 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dcpwly3u48me3" path="res://Scenes/Characters/old_man_tutorial.tscn" id="3_v5lnp"]
 [ext_resource type="Texture2D" uid="uid://u1eorlu248cw" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
 [ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishain.tscn" id="5_b4d46"]
-[ext_resource type="PackedScene" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
-[ext_resource type="PackedScene" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
+[ext_resource type="PackedScene" uid="uid://c31jjoe1c61rk" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
+[ext_resource type="PackedScene" uid="uid://bbmm0hjrhws3h" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
-[ext_resource type="PackedScene" uid="uid://c8yf6fsttlpb0" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
+[ext_resource type="PackedScene" uid="uid://cgapps2simqch" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
 [ext_resource type="AudioStream" uid="uid://gt654obtm1q1" path="res://Assets/SFX/triple-knock-on-door.mp3" id="10_mt6l6"]
 
@@ -117,6 +117,21 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5cdq"]
 size = Vector2(76, 92)
 
+[sub_resource type="Animation" id="Animation_ks0xv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interact:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 12)]
+}
+
 [sub_resource type="Animation" id="Animation_40vev"]
 resource_name = "bounce"
 loop_mode = 1
@@ -131,21 +146,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-40, 12), Vector2(-35, 12)]
-}
-
-[sub_resource type="Animation" id="Animation_ks0xv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Interact:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-40, 12)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fiq5u"]
