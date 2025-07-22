@@ -64,21 +64,16 @@ public partial class GameManager : Node2D {
 		enemy = GlobalState.Instance.GetNextAgent();
 		
 		// loads enemy hand/table
-		var (enemyHandTypes, enemyHandClasses) = enemy.GetHandCards();
-		var (enemyTableTypes, enemyTableClasses) = enemy.GetTableCards();
+		var enemyHandInfo = enemy.GetHandCards();
+		var enemyTableInfo = enemy.GetTableCards();
 		
 		// loads player decks as hand (will be replaced with deck builder scene)
-		var (playerHandTypes, playerHandClasses) = GlobalState.Instance.GetHandCards();
-		var playerTableClasses = GlobalState.Instance.GetTableClasses();
-		var playerTableTypes = new List<string> {
-			"tsunami", "volcano", "earthquake",
-			"tsunami", "volcano", "earthquake"
-		};
+		var playerHandInfo = GlobalState.Instance.GetHandCards();
+		var playerTableInfo = GlobalState.Instance.GetTableCards();
 		
-		enemyHand.Init(cardScene, yEnemyHand, 0.75f, false, enemyHandTypes, enemyHandClasses);
-		table.Init(cardScene, playerTableTypes, playerTableClasses, enemyTableTypes,
-		enemyTableClasses);
-		playerHand.Init(cardScene, yPlayerHand, 1.5f, true, playerHandTypes, playerHandClasses);
+		enemyHand.Init(cardScene, yEnemyHand, 0.75f, false, enemyHandInfo);
+		table.Init(cardScene, playerTableInfo, enemyTableInfo);
+		playerHand.Init(cardScene, yPlayerHand, 1.5f, true, playerHandInfo);
 		
 		playerTableCards = table.GetPlayerCards();
 		enemyTableCards = table.GetEnemyCards();
@@ -90,9 +85,7 @@ public partial class GameManager : Node2D {
 		
 		anim.Play($"agent_{GlobalState.Instance.GetDay()}");
 
-		GD.Print(playerHand.GetCards().Count);
 		var playerFirst = playerHand.GetCards()[0];
-		GD.Print(playerFirst == null);
 		var tableFirst = enemyTableCards[0];
 		
 		if (GlobalState.Instance.GetDay() == 0) {
@@ -107,6 +100,12 @@ public partial class GameManager : Node2D {
 		if (GlobalState.Instance.GetDay() == 0) {
 			playerFirst.Focus();
 			tableFirst.Focus();
+		}
+	}
+	
+	public override void _Process(double delta) {
+		if (Input.IsActionJustPressed("info")) {
+			RulebookToggle();
 		}
 	}
 	

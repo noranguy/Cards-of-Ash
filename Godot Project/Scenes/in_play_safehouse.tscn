@@ -19,8 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://d4mtpqxw6nrhw" path="res://Assets/In Play Safe House/Animations/throw-Sheet.png" id="15_docdc"]
 [ext_resource type="Texture2D" uid="uid://cp60bovcuqqfs" path="res://Assets/Character Designs/Mom & Son/mom_kid-Sheet.png" id="15_drq8l"]
 [ext_resource type="Texture2D" uid="uid://cvi3k5bmupfms" path="res://Assets/In Play Safe House/Animations/opponent throw-Sheet.png" id="15_n48vj"]
-[ext_resource type="Texture2D" uid="uid://4wy3oivyvgrj" path="res://Assets/Character Designs/Kid/kid-Sheet.png" id="16_drq8l"]
-[ext_resource type="Texture2D" uid="uid://6sxdf6yxgndi" path="res://Assets/Character Designs/Foreigner/foreigner-Sheet.png" id="17_kaojq"]
+[ext_resource type="Texture2D" uid="uid://4wy3oivyvgrj" path="res://Assets/Character Designs/kid/kid-Sheet.png" id="16_drq8l"]
+[ext_resource type="Texture2D" uid="uid://6sxdf6yxgndi" path="res://Assets/Character Designs/foreigner/foreigner-Sheet.png" id="17_kaojq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
