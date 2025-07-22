@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwj72mveseo4r"]
+[gd_scene load_steps=9 format=3 uid="uid://cwj72mveseo4r"]
 
 [ext_resource type="Script" uid="uid://buy2alspb62at" path="res://Scripts/InPlay/InfoPage.cs" id="1_iwbsr"]
 [ext_resource type="Texture2D" uid="uid://1ivdonv17ahd" path="res://Assets/Cards/earthquake_basic.png" id="1_jhmf5"]
 [ext_resource type="Texture2D" uid="uid://cm6o02qusl4qr" path="res://Assets/Cards/tsunami_basic.png" id="2_pi2h0"]
 [ext_resource type="Texture2D" uid="uid://bsyook4jja5ra" path="res://Assets/Cards/volcano_basic.png" id="3_fp1kd"]
 [ext_resource type="Texture2D" uid="uid://rixpxm2y0xxy" path="res://Assets/Rulebook/arrow.png" id="5_pi2h0"]
+[ext_resource type="Texture2D" uid="uid://cq6ete1wcqdyi" path="res://Assets/table_screen_background.png" id="6_fp1kd"]
 
 [sub_resource type="FontFile" id="FontFile_celcy"]
 subpixel_positioning = 0
@@ -266,3 +267,11 @@ position = Vector2(-236, 20)
 rotation = 4.21148
 scale = Vector2(0.0921548, 0.0482547)
 texture = ExtResource("5_pi2h0")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+offset_left = -322.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("6_fp1kd")
