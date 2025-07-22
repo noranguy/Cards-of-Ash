@@ -8,54 +8,29 @@ public class Agent1 : Agent {
 	private List<Card> playerTable;
 	private List<Card> enemyTable;
 	
-	public override (List<string>, List<string>) GetHandCards() {
-		List<string> types = new List<string> {
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake"
+	public override List<(string, string)> GetHandCards() {
+		return new List<(string, string)> {
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic"),
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic"),
+			("tsunami", "ceramic"),
+			("volcano", "ceramic"),
+			("earthquake", "ceramic")
 		};
-		
-		List<string> classes = new List<string> {
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"ceramic",
-			"ceramic",
-			"ceramic"
-		};
-		
-		return (types, classes);
 	}
 	
-	public override (List<string>, List<string>) GetTableCards() {
-		List<string> types = new List<string> {
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake",
+	public override List<(string, string)> GetTableCards() {
+		return new List<(string, string)> {
+			("tsunami", "ceramic"),
+			("volcano", "ceramic"),
+			("earthquake", "basic"),
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic")
 		};
-		
-		List<string> classes = new List<string> {
-			"ceramic",
-			"ceramic",
-			"basic",
-			"basic",
-			"basic",
-			"basic"
-		};
-		
-		return (types, classes);
 	}
 	
 	// probability of each table card being each type, shape 6x3

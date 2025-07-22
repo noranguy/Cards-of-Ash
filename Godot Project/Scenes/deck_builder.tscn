@@ -1,0 +1,130 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlby3gxlcfwyx"]
+
+[ext_resource type="Script" uid="uid://6m4cvwak2i81" path="res://Scripts/InPlay/DeckBuilder.cs" id="1_ngatf"]
+[ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="2_gegkt"]
+[ext_resource type="PackedScene" uid="uid://dl0ob60a8xmko" path="res://Components/card_slot.tscn" id="3_xqtbr"]
+[ext_resource type="Texture2D" uid="uid://crd32t8cnwimk" path="res://Assets/In Play Safe House/done_button.png" id="4_muq8c"]
+
+[node name="DeckBuilder" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ngatf")
+CardScene = ExtResource("2_gegkt")
+
+[node name="Hand" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -200.0
+offset_top = -125.0
+offset_right = 200.0
+offset_bottom = -19.0
+
+[node name="HandSlots" type="HBoxContainer" parent="Hand"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+alignment = 1
+
+[node name="HandSlot" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="HandSlot2" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="HandSlot3" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="HandSlot4" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="HandSlot5" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="HandSlot6" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="HandSlot7" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="HandSlot8" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="HandSlot9" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="Bench" type="ScrollContainer" parent="Hand"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="BenchCards" type="HBoxContainer" parent="Hand/Bench"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+alignment = 1
+
+[node name="Table" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -200.0
+offset_top = 50.0
+offset_right = 200.0
+offset_bottom = 156.0
+
+[node name="TableSlots" type="HBoxContainer" parent="Table"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+alignment = 1
+
+[node name="TableSlot" parent="Table/TableSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="TableSlot2" parent="Table/TableSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="TableSlot3" parent="Table/TableSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="TableSlot4" parent="Table/TableSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="TableSlot5" parent="Table/TableSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="TableSlot6" parent="Table/TableSlots" instance=ExtResource("3_xqtbr")]
+layout_mode = 2
+
+[node name="Bench" type="ScrollContainer" parent="Table"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="BenchCards" type="HBoxContainer" parent="Table/Bench"]
+custom_minimum_size = Vector2(400, 50)
+layout_mode = 2
+alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TableLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -100.0
+offset_top = 10.0
+offset_right = 100.0
+offset_bottom = 33.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Table Cards (2 of each type)"
+horizontal_alignment = 1
+
+[node name="HandLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -100.0
+offset_top = -170.0
+offset_right = 100.0
+offset_bottom = -147.0
+text = "Hand Cards"
+horizontal_alignment = 1
+
+[node name="DoneButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = -20.0
+offset_right = 260.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_muq8c")

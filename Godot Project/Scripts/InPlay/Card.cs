@@ -32,9 +32,11 @@ public partial class Card : Control {
 	
 	public override void _Ready() {
 		sprite = GetNode<Polygon2D>("CardImage");
-		indicator.Visible = false;
-		indicatorX = indicator.Position.X;
-		indicator.Position = new Vector2(indicatorX, indicatorMin);
+		if (indicator != null) {
+			indicator.Visible = false;
+			indicatorX = indicator.Position.X;
+			indicator.Position = new Vector2(indicatorX, indicatorMin);
+		}
 	}
 	
 	private Sprite2D indicator;
@@ -44,11 +46,13 @@ public partial class Card : Control {
 	private float indicatorX;
 	
 	public override void _Process(double delta) {
-		indicator.Position += new Vector2(0, 1 / (2 * (float)delta) * indicatorDir * (float)delta);
-		if (indicator.Position.Y > indicatorMax) {
-			indicatorDir = -1;
-		} else if (indicator.Position.Y < indicatorMin) {
-			indicatorDir = 1;
+		if (indicator != null) {
+			indicator.Position += new Vector2(0, 1 / (2 * (float)delta) * indicatorDir * (float)delta);
+			if (indicator.Position.Y > indicatorMax) {
+				indicatorDir = -1;
+			} else if (indicator.Position.Y < indicatorMin) {
+				indicatorDir = 1;
+			}
 		}
 	}
 	
@@ -178,6 +182,15 @@ public partial class Card : Control {
 		}
 	}
 	
+	public override void _GuiInput(InputEvent @event) {
+		if (@event is InputEventMouseButton mouseEvent &&
+			mouseEvent.Pressed &&
+			mouseEvent.ButtonIndex == MouseButton.Left)
+		{
+			EmitSignal(SignalName.CardClicked, this);
+		}
+	}
+	
 	public void Highlight() {
 		if ((index == -1 && !isPlayer) || !ready) return;
 		Shader shader = GD.Load<Shader>("res://Shaders/card_highlight.gdshader");
@@ -209,5 +222,13 @@ public partial class Card : Control {
 	
 	public void OnMouseExited() {
 		Unhighlight();
+	}
+	
+	public override Variant _GetDragData(Vector2 atPosition) {
+		var dragPreview = Duplicate() as Control;
+		if (dragPreview != null) {
+			SetDragPreview(dragPreview);
+		}
+		return this;
 	}
 }

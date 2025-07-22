@@ -3,59 +3,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Agent4 : Agent {
+public class Agent2 : Agent {
 	private List<Card> hand;
 	private List<Card> playerTable;
 	private List<Card> enemyTable;
 	
-	public override (List<string>, List<string>) GetHandCards() {
-		List<string> types = new List<string> {
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake"
+	public override List<(string, string)> GetHandCards() {
+		return new List<(string, string)> {
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic"),
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic"),
+			("tsunami", "defense"),
+			("volcano", "defense"),
+			("earthquake", "defense")
 		};
-		
-		List<string> classes = new List<string> {
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"defense",
-			"defense",
-			"defense"
-		};
-		
-		return (types, classes);
 	}
 	
-	public override (List<string>, List<string>) GetTableCards() {
-		List<string> types = new List<string> {
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake",
+	public override List<(string, string)> GetTableCards() {
+		return new List<(string, string)> {
+			("tsunami", "defense"),
+			("volcano", "defense"),
+			("earthquake", "basic"),
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic")
 		};
-		
-		List<string> classes = new List<string> {
-			"defense",
-			"defense",
-			"basic",
-			"basic",
-			"basic",
-			"basic"
-		};
-		
-		return (types, classes);
 	}
 	
 	// probability of each table card being each type, shape 6x3

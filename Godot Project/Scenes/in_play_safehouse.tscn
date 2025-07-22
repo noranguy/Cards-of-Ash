@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="7_rt2xm"]
 [ext_resource type="Script" uid="uid://bccacdk35bwor" path="res://Scripts/InPlay/GameManager.cs" id="9_dyk6q"]
 [ext_resource type="Texture2D" uid="uid://c37kylsjn3iyu" path="res://Assets/In Play Safe House/throw_button.png" id="11_5y0wf"]
-[ext_resource type="Texture2D" uid="uid://bnphgfq0s4mbh" path="res://Assets/Character Designs/Kaishain/agent_1.png" id="11_efang"]
+[ext_resource type="Texture2D" uid="uid://bnphgfq0s4mbh" path="res://Assets/Character Designs/kaishain/agent_1.png" id="11_efang"]
 [ext_resource type="PackedScene" uid="uid://c8k8fivslbsf0" path="res://Components/better_button.tscn" id="11_ivp4u"]
 [ext_resource type="Texture2D" uid="uid://dhivoubu7rp5c" path="res://Assets/In Play Safe House/info_button.png" id="12_60qq6"]
 [ext_resource type="Texture2D" uid="uid://bikssbixl4p0c" path="res://Assets/Character Designs/Old Man/agent_0.png" id="12_juooh"]
@@ -19,8 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://d4mtpqxw6nrhw" path="res://Assets/In Play Safe House/Animations/throw-Sheet.png" id="15_docdc"]
 [ext_resource type="Texture2D" uid="uid://cp60bovcuqqfs" path="res://Assets/Character Designs/Mom & Son/mom_kid-Sheet.png" id="15_drq8l"]
 [ext_resource type="Texture2D" uid="uid://cvi3k5bmupfms" path="res://Assets/In Play Safe House/Animations/opponent throw-Sheet.png" id="15_n48vj"]
-[ext_resource type="Texture2D" uid="uid://4wy3oivyvgrj" path="res://Assets/Character Designs/Kid/kid-Sheet.png" id="16_drq8l"]
-[ext_resource type="Texture2D" uid="uid://6sxdf6yxgndi" path="res://Assets/Character Designs/Foreigner/foreigner-Sheet.png" id="17_kaojq"]
+[ext_resource type="Texture2D" uid="uid://4wy3oivyvgrj" path="res://Assets/Character Designs/kid/kid-Sheet.png" id="16_drq8l"]
+[ext_resource type="Texture2D" uid="uid://6sxdf6yxgndi" path="res://Assets/Character Designs/foreigner/foreigner-Sheet.png" id="17_kaojq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
