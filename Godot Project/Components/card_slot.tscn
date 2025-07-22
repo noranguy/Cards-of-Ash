@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl0ob60a8xmko"]
+
+[ext_resource type="Texture2D" uid="uid://b3w1fvset11m6" path="res://Assets/In Play Safe House/tableslot.png" id="1_6ti2r"]
+[ext_resource type="Script" uid="uid://cndgxelpy6d1k" path="res://Scripts/InPlay/CardSlot.cs" id="2_dhwp0"]
+
+[node name="CardSlot" type="CenterContainer"]
+custom_minimum_size = Vector2(36, 52)
+offset_right = 36.0
+offset_bottom = 52.0
+mouse_filter = 0
+script = ExtResource("2_dhwp0")
+
+[node name="Panel" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_6ti2r")

@@ -15,9 +15,8 @@ public partial class CardTableContainer : Node2D {
 	private Vector2 offset;
 
 	public void Init(
-		PackedScene scene, List<string> playerTypes,
-		List<string> playerClasses,
-		List<string> enemyTypes, List<string> enemyClasses
+		PackedScene scene, List<(string, string)> playerTable,
+		List<(string, string)> enemyTable
 	) {
 		rand = new Random();
 		cardScene = scene;
@@ -29,8 +28,8 @@ public partial class CardTableContainer : Node2D {
 		
 		offset = new Vector2(-(vectorX[0].X + vectorX[^1].X) / 2, 175);
 		
-		enemyCards = SpawnCards(enemyTypes, enemyClasses, false);
-		playerCards = SpawnCards(playerTypes, playerClasses, true);
+		enemyCards = SpawnCards(enemyTable, false);
+		playerCards = SpawnCards(playerTable, true);
 	}
 	
 	// randomize order of table cards
@@ -53,10 +52,7 @@ public partial class CardTableContainer : Node2D {
 	}
 	
 	// instantiate cards using vectors to a vanishing point for perspective distortion
-	public virtual List<Card> SpawnCards(
-		List<string> types, List<string> classes,
-		bool isPlayer
-	) {
+	public virtual List<Card> SpawnCards(List<(string, string)> table, bool isPlayer) {
 		List<int> order = GenRandomOrder();
 		List<Card> cards = new List<Card>();
 		
@@ -86,7 +82,7 @@ public partial class CardTableContainer : Node2D {
 				bottomRight + offset,
 				bottomLeft + offset
 			};
-			card.Init(vertices, types[order[i]], classes[order[i]], false, isPlayer, i);
+			card.Init(vertices, table[order[i]].Item1, table[order[i]].Item2, false, isPlayer, i);
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 			
 			Vector2 dPos = new Vector2((topLeft.X + topRight.X) / 2f + offset.X - 16, topLeft.Y + offset.Y - 3);

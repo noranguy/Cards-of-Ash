@@ -11,54 +11,29 @@ public class Agent0 : Agent {
 	private List<Card> enemyTable;
 	private int round;
 	
-	public override (List<string>, List<string>) GetHandCards() {
-		List<string> types = new List<string> {
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake"
+	public override List<(string, string)> GetHandCards() {
+		return new List<(string, string)> {
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic"),
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic"),
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic")
 		};
-		
-		List<string> classes = new List<string> {
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic"
-		};
-		
-		return (types, classes);
 	}
 	
-	public override (List<string>, List<string>) GetTableCards() {
-		List<string> types = new List<string> {
-			"volcano",
-			"tsunami",
-			"earthquake",
-			"tsunami",
-			"volcano",
-			"earthquake",
+	public override List<(string, string)> GetTableCards() {
+		return new List<(string, string)> {
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic"),
+			("tsunami", "basic"),
+			("volcano", "basic"),
+			("earthquake", "basic")
 		};
-		
-		List<string> classes = new List<string> {
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic",
-			"basic"
-		};
-		
-		return (types, classes);
 	}
 	
 	public override void Init(List<Card> hand, List<Card> playerTable, List<Card> enemyTable) {
