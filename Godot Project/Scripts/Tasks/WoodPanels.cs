@@ -3,53 +3,37 @@ using Microsoft.VisualBasic;
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class WoodPanels : TextureRect
-{
+public partial class WoodPanels : TextureRect {
 	[Signal]
-	public delegate void DragStartEventHandler();
-	[Signal]
-	public delegate void DragEndedEventHandler();
-	[Export]
-	public bool isPlank;
-
-	private Texture2D og_texture;
-	private Vector2 og_position;
-
-	public bool can_drag = true;
-	public bool can_drop = true;
-	public override Variant _GetDragData(Vector2 atPosition)
-	{
-		if (!can_drag)
-		{
-			return new Variant();
+	public delegate void DroppedEventHandler();
+	
+	int count = 0;
+	
+	public override bool _CanDropData(Vector2 position, Variant data) {
+		WoodPlanks plank = data.As<WoodPlanks>();
+		if (GlobalState.Instance.phase < 2) {
+			return count < 1 && plank != null && !plank.isPlank;
+		} else {
+			return count < 3 && plank != null && plank.isPlank;
 		}
-		og_position = atPosition;
-		EmitSignal(SignalName.DragStart);
-		var preview_text = new TextureRect();
-		preview_text.Texture = Texture;
-		og_texture = preview_text.Texture;
-		preview_text.ExpandMode = ExpandModeEnum.IgnoreSize;
-		preview_text.Size = new Vector2(30, 30);
-		Control preview = new Control();
-		preview.ZIndex = 5;
-		preview.AddChild(preview_text);
-		SetDragPreview(preview);
-		Texture = null;
-		return preview_text.Texture;
 	}
-	public override bool _CanDropData(Vector2 atPosition, Variant data)
-	{
-		GD.Print(data.As<WoodPanels>() != null);
-		GD.Print(data.VariantType == Variant.Type.Object && data.AsGodotObject() is Texture2D);
-		return data.VariantType == Variant.Type.Object && data.AsGodotObject() is Texture2D;
-	}
-	public override void _DropData(Vector2 atPosition, Variant data)
-	{
-		Texture = (Texture2D)data;
-		EmitSignal(SignalName.DragEnded);
 
-		if (isPlank) {
-			GetParent().RemoveChild(this);
+	public override void _DropData(Vector2 position, Variant data) {
+		var plank = data.As<WoodPlanks>();
+		if (plank != null) {
+			plank.GetParent().RemoveChild(plank);
+			AddChild(plank);
+			if (count > 0) {
+				plank.Texture = GD.Load<Texture2D>($"res://Assets/In Play Safe House/Tasks/wood_plank_{count-1}.png");
+				plank.Position = new Vector2(10, 15);
+			} else {
+				plank.Position = Vector2.Zero;
+			}
+			plank.MouseFilter = Control.MouseFilterEnum.Ignore;
+			plank.ZIndex = 1;
+			EmitSignal(SignalName.Dropped);
+			count++;
+			GlobalState.Instance.phase++;
 		}
 	}
 }

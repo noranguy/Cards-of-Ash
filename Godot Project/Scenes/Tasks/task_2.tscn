@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://csyiu2mb2tbc0"]
+[gd_scene load_steps=27 format=4 uid="uid://csyiu2mb2tbc0"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_7cyyu"]
 [ext_resource type="Script" uid="uid://dspmkjkmh4a4p" path="res://Scripts/Tasks/Task2_minigame.cs" id="1_vadw1"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bo7f5l20s816i" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_E.png" id="3_6rq2s"]
 [ext_resource type="Texture2D" uid="uid://bdugnjwd5gcdt" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Props.png" id="4_vadw1"]
 [ext_resource type="Texture2D" uid="uid://ckfgjv3b7nhid" path="res://Assets/Out of Play Safe House/wall border and floor tilesheet 16.png" id="5_o07ir"]
-[ext_resource type="PackedScene" uid="uid://djy8flulv13w3" path="res://Scenes/Tasks/task_2_scenes/wood_panels.tscn" id="6_6rq2s"]
+[ext_resource type="PackedScene" uid="uid://qa8na0inpo2g" path="res://Scenes/Tasks/task_2_scenes/wood_panels.tscn" id="6_6rq2s"]
+[ext_resource type="Texture2D" uid="uid://4ofq4wt82idr" path="res://Assets/In Play Safe House/Tasks/wood panel.png" id="8_osf1r"]
 [ext_resource type="PackedScene" uid="uid://d15qx82cuvpj" path="res://Scenes/Tasks/task_2_scenes/wood_planks.tscn" id="8_vadw1"]
 [ext_resource type="Texture2D" uid="uid://lsi6cwej2ef1" path="res://Assets/In Play Safe House/Tasks/tile00.png" id="9_o07ir"]
 [ext_resource type="Texture2D" uid="uid://cw04fpeq5lehi" path="res://Assets/In Play Safe House/Tasks/tile01.png" id="10_r54dn"]
@@ -6282,24 +6283,9 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="wood_panels_0" parent="stored_wood" instance=ExtResource("6_6rq2s")]
-z_index = 5
-layout_mode = 0
-offset_left = -157.0
-offset_top = 24.0
-offset_right = -12.0
-offset_bottom = 151.0
-
-[node name="wood_panels_1" parent="stored_wood" instance=ExtResource("6_6rq2s")]
-z_index = 6
-layout_mode = 0
-offset_left = -135.0
-offset_top = 24.0
-offset_right = 10.0
-offset_bottom = 151.0
-
-[node name="wood_planks_0" parent="stored_wood" instance=ExtResource("8_vadw1")]
+[node name="WoodPlanks1" parent="stored_wood" instance=ExtResource("8_vadw1")]
 z_index = 8
+z_as_relative = false
 clip_contents = true
 layout_mode = 0
 offset_left = -139.0
@@ -6307,37 +6293,70 @@ offset_top = -4.0
 offset_right = -89.0
 offset_bottom = 46.0
 scale = Vector2(2.5, 2)
+mouse_filter = 0
 texture = ExtResource("9_o07ir")
+isPlank = true
 
-[node name="wood_planks_1" parent="stored_wood" instance=ExtResource("8_vadw1")]
+[node name="WoodPlanks2" parent="stored_wood" instance=ExtResource("8_vadw1")]
 z_index = 9
+z_as_relative = false
 layout_mode = 0
 offset_left = -140.0
 offset_top = -7.0
 offset_right = -90.0
 offset_bottom = 43.0
 scale = Vector2(2.5, 2)
+mouse_filter = 0
 texture = ExtResource("10_r54dn")
+isPlank = true
 
-[node name="wood_planks_2" parent="stored_wood" instance=ExtResource("8_vadw1")]
+[node name="WoodPlanks3" parent="stored_wood" instance=ExtResource("8_vadw1")]
 z_index = 10
+z_as_relative = false
 layout_mode = 0
 offset_left = -140.0
 offset_top = -7.0
 offset_right = -90.0
 offset_bottom = 43.0
 scale = Vector2(2.5, 2)
+mouse_filter = 0
 texture = ExtResource("11_e0c1r")
+isPlank = true
 
-[node name="wood_planks_3" parent="stored_wood" instance=ExtResource("8_vadw1")]
+[node name="WoodPlanks4" parent="stored_wood" instance=ExtResource("8_vadw1")]
 z_index = 11
+z_as_relative = false
 layout_mode = 0
 offset_left = -140.0
 offset_top = -7.0
 offset_right = -90.0
 offset_bottom = 43.0
 scale = Vector2(2.5, 2)
+mouse_filter = 0
 texture = ExtResource("12_tixnu")
+isPlank = true
+
+[node name="WoodBoard1" parent="stored_wood" instance=ExtResource("8_vadw1")]
+z_index = 15
+z_as_relative = false
+layout_mode = 0
+offset_left = -159.0
+offset_top = 23.0
+offset_right = -14.0
+offset_bottom = 150.0
+mouse_filter = 0
+texture = ExtResource("8_osf1r")
+
+[node name="WoodBoard2" parent="stored_wood" instance=ExtResource("8_vadw1")]
+z_index = 16
+z_as_relative = false
+layout_mode = 0
+offset_left = -136.0
+offset_top = 23.0
+offset_right = 9.0
+offset_bottom = 150.0
+mouse_filter = 0
+texture = ExtResource("8_osf1r")
 
 [node name="placed_wood" type="Control" parent="."]
 layout_mode = 3
@@ -6345,63 +6364,19 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="wood_panels_0" parent="placed_wood" instance=ExtResource("6_6rq2s")]
-z_index = 1001
+[node name="WoodPanels1" parent="placed_wood" instance=ExtResource("6_6rq2s")]
+z_index = 12
 layout_mode = 0
 offset_top = -83.0
 offset_right = 145.0
 offset_bottom = 44.0
 
-[node name="wood_panels_1" parent="placed_wood" instance=ExtResource("6_6rq2s")]
-z_index = 4
+[node name="WoodPanels2" parent="placed_wood" instance=ExtResource("6_6rq2s")]
+z_index = 12
 layout_mode = 0
 offset_left = -145.0
 offset_top = -83.0
 offset_bottom = 44.0
-
-[node name="wood_planks_0" parent="placed_wood" instance=ExtResource("8_vadw1")]
-visible = false
-z_index = 8
-layout_mode = 0
-offset_left = 10.0
-offset_top = -81.0
-offset_right = 50.0
-offset_bottom = -41.0
-scale = Vector2(3, 3)
-isPlank = true
-
-[node name="wood_planks_1" parent="placed_wood" instance=ExtResource("8_vadw1")]
-visible = false
-z_index = 7
-layout_mode = 0
-offset_left = 10.0
-offset_top = -84.0
-offset_right = 50.0
-offset_bottom = -44.0
-scale = Vector2(3, 3)
-isPlank = true
-
-[node name="wood_planks_2" parent="placed_wood" instance=ExtResource("8_vadw1")]
-visible = false
-z_index = 8
-layout_mode = 0
-offset_left = -135.0
-offset_top = -83.0
-offset_right = -95.0
-offset_bottom = -43.0
-scale = Vector2(3, 3)
-isPlank = true
-
-[node name="wood_planks_3" parent="placed_wood" instance=ExtResource("8_vadw1")]
-visible = false
-z_index = 7
-layout_mode = 0
-offset_left = -135.0
-offset_top = -83.0
-offset_right = -95.0
-offset_bottom = -43.0
-scale = Vector2(3, 3)
-isPlank = true
 
 [node name="wood_plank_0" type="Sprite2D" parent="."]
 visible = false
