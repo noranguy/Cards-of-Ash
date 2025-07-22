@@ -91,7 +91,7 @@ public partial class Safehouse : StaticBody2D
 			GetNode<AnimationPlayer>("MenkoCards/AnimationPlayer").Play("bounce");
 		}
 
-		if (_day_over && _day_num == 0)
+		else if (_day_over && _day_num == 0)
 		{
 			GetNode<TextureRect>("Bed/Interact").Visible = true;
 			GetNode<AnimationPlayer>("Bed/AnimationPlayer").Play("bounce");

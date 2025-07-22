@@ -117,6 +117,21 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5cdq"]
 size = Vector2(76, 92)
 
+[sub_resource type="Animation" id="Animation_ks0xv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interact:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 12)]
+}
+
 [sub_resource type="Animation" id="Animation_40vev"]
 resource_name = "bounce"
 loop_mode = 1
@@ -131,21 +146,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-40, 12), Vector2(-35, 12)]
-}
-
-[sub_resource type="Animation" id="Animation_ks0xv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Interact:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-40, 12)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fiq5u"]
@@ -491,9 +491,9 @@ shape = SubResource("RectangleShape2D_1njoc")
 [node name="Interact" type="TextureRect" parent="Door"]
 visible = false
 offset_left = 197.0
-offset_top = 20.0
+offset_top = 8.70909
 offset_right = 221.0
-offset_bottom = 44.0
+offset_bottom = 32.7091
 texture = ExtResource("7_gxkjp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
@@ -516,6 +516,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Interact" type="TextureRect" parent="Bed"]
+visible = false
 z_index = 5
 anchors_preset = 8
 anchor_left = 0.5
@@ -523,9 +524,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 440.0
-offset_top = 110.0
+offset_top = 108.519
 offset_right = 464.0
-offset_bottom = 134.0
+offset_bottom = 132.519
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_gxkjp")
@@ -614,10 +615,10 @@ expand_mode = 1
 
 [node name="Interact" type="TextureRect" parent="MenkoCards"]
 z_index = 7
-offset_left = -40.0
-offset_top = 12.0
-offset_right = -16.0
-offset_bottom = 36.0
+offset_left = -30.0
+offset_top = -50.0
+offset_right = -6.0
+offset_bottom = -26.0
 texture = ExtResource("7_gxkjp")
 expand_mode = 1
 
