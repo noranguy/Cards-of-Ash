@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://d15qx82cuvpj"]
 
-[ext_resource type="Script" uid="uid://df4jj5hd6x8il" path="res://Scripts/Tasks/WoodPanels.cs" id="1_fpxqc"]
+[ext_resource type="Script" uid="uid://lbsoeocntu3u" path="res://Scripts/Tasks/WoodPlanks.cs" id="1_4ymjp"]
 
 [node name="WoodPlanks" type="TextureRect"]
 custom_minimum_size = Vector2(40, 40)
 expand_mode = 1
-script = ExtResource("1_fpxqc")
+script = ExtResource("1_4ymjp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
