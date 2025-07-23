@@ -14,6 +14,8 @@ public partial class DeckBuilder : Control {
 	
 	List<(string, string)> handCards;
 	List<(string, string)> tableCards;
+	List<(string, string)> handDeck;
+	List<(string, string)> tableDeck;
 
 	public override void _Ready() {
 		handBench = GetNode<HBoxContainer>("Hand/Bench/BenchCards");
@@ -24,13 +26,32 @@ public partial class DeckBuilder : Control {
 		tableLabel = GetNode<Label>("TableLabel");
 		handLabel = GetNode<Label>("HandLabel");
 		
-		var hand = GlobalState.Instance.GetHandDeck();
-		var table = GlobalState.Instance.GetTableDeck();
+		handDeck = GlobalState.Instance.GetHandDeck();
+		tableDeck = GlobalState.Instance.GetTableDeck();
+		
+		handCards = GlobalState.Instance.GetHandCards();
+		tableCards = GlobalState.Instance.GetTableCards();
 		
 		int numHandCards = GlobalState.Instance.NumHandCards;
 		int numTableCards = GlobalState.Instance.NumTableCards;
 		
-		foreach ((string type, string clas) in hand) {
+		for (int i = 0; i < numHandCards; i++) {
+			var card = CardScene.Instantiate<Card>();
+			card.Init(Card.DEFAULT_VERTICES, handCards[i].Item1, handCards[i].Item2, true, true, 0);
+			card.CardClicked += OnCardReturnRequested;
+			card.MouseFilter = Control.MouseFilterEnum.Ignore;
+			handSlots.GetNode<CenterContainer>($"HandSlot{i+1}").AddChild(card);
+		}
+		
+		for (int i = 0; i < numTableCards; i++) {
+			var card = CardScene.Instantiate<Card>();
+			card.Init(Card.DEFAULT_VERTICES, tableCards[i].Item1, tableCards[i].Item2, true, true, 1);
+			card.CardClicked += OnCardReturnRequested;
+			card.MouseFilter = Control.MouseFilterEnum.Ignore;
+			tableSlots.GetNode<CenterContainer>($"TableSlot{i+1}").AddChild(card);
+		}
+		
+		foreach ((string type, string clas) in handDeck) {
 			var card = CardScene.Instantiate<Card>();
 			card.Init(Card.DEFAULT_VERTICES, type, clas, true, true, 0);
 			card.CardClicked += OnCardReturnRequested;
@@ -38,7 +59,7 @@ public partial class DeckBuilder : Control {
 			handBench.AddChild(card);
 		}
 		
-		foreach ((string type, string clas) in table) {
+		foreach ((string type, string clas) in tableDeck) {
 			var card = CardScene.Instantiate<Card>();
 			card.Init(Card.DEFAULT_VERTICES, type, clas, true, true, 1);
 			card.CardClicked += OnCardReturnRequested;
@@ -47,8 +68,6 @@ public partial class DeckBuilder : Control {
 		}
 		
 		doneButton.Pressed += Done;
-		doneButton.Disabled = true;
-		doneButton.Modulate = new Color(1, 1, 1, 0.4f);
 		
 		foreach (Node child in handSlots.GetChildren()) {
 			if (child is CardSlot slot) {
@@ -80,8 +99,26 @@ public partial class DeckBuilder : Control {
 	}
 	
 	public void Done() {
+		handDeck = new List<(string, string)>();
+		tableDeck = new List<(string, string)>();
+		
+		foreach (Node child in handBench.GetChildren()) {
+			if (child is Card card) {
+				handDeck.Add((card.type, card.clas));
+			}
+		}
+		
+		foreach (Node child in tableBench.GetChildren()) {
+			if (child is Card card) {
+				tableDeck.Add((card.type, card.clas));
+			}
+		}
+		
 		GlobalState.Instance.UpdateHandCards(handCards);
 		GlobalState.Instance.UpdateTableCards(tableCards);
+		GlobalState.Instance.UpdateHandDeck(handDeck);
+		GlobalState.Instance.UpdateTableDeck(tableDeck);
+		
 		GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("menko_game.tscn");
 	}
 	
