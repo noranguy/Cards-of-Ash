@@ -29,8 +29,8 @@ public class Agent0 : Agent {
 		return new List<(string, string)> {
 			("tsunami", "basic"),
 			("volcano", "basic"),
-			("earthquake", "basic"),
 			("tsunami", "basic"),
+			("earthquake", "basic"),
 			("volcano", "basic"),
 			("earthquake", "basic")
 		};
@@ -59,7 +59,9 @@ public class Agent0 : Agent {
 			
 		Card tableCard;
 		
-		if (round >= 3 && round < 6 && flippedEnemyTable.Count > 0) {
+		if (round == 0) {
+			tableCard = playerTable[0];
+		} else if (round >= 3 && round < 6 && flippedEnemyTable.Count > 0) {
 			tableCard = flippedEnemyTable[Rand.Next(flippedEnemyTable.Count)];
 		} else if (unflippedPlayerTable.Count > 0) {
 			tableCard = unflippedPlayerTable[Rand.Next(unflippedPlayerTable.Count)];
