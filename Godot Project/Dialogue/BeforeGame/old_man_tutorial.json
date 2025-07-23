@@ -10,7 +10,7 @@
 		},
 		{
 			"id": "b",
-			"text": "I see. I’m sorry to say, but you won't survive by solely secluding yourself away in a “safehouse”.",
+			"text": "I see. I’m sorry to say, but you won't survive by solely secluding yourself away in a safehouse.",
 			"options": [
 				{ "text": "I didn't know what to do...", "next": "d" }
 		  	]

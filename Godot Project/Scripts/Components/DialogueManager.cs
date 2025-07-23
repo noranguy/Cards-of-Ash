@@ -34,6 +34,8 @@ public partial class DialogueManager : Control {
 	private string currentSpeaker;
 	
 	private bool _inPlay = false;
+	
+	private FontFile font;
 
 	public override void _Ready() {
 		Instance = this;
@@ -43,6 +45,8 @@ public partial class DialogueManager : Control {
 		panel.ZIndex = 100;
 		panel.SetZAsRelative(false);
 		panel.Visible = false;
+		font = new FontFile();
+		font.LoadDynamicFont("res://Fonts/m5x7.ttf");
 	}
 	
 	public async Task StartDialogue(string name, bool inPlay) {
@@ -87,16 +91,14 @@ public partial class DialogueManager : Control {
 				sprite.Visible = false;
 				dialogueText.Size = new Vector2(960, 5);
 				dialogueText.Position = new Vector2(5, 5);
-				dialogueText.AddThemeFontSizeOverride("font_size", 32);
 				optionsContainer.Size = new Vector2(440, 20);
-				optionsContainer.Position = new Vector2(5, 40);
+				optionsContainer.Position = new Vector2(5, 45);
 			} else {
 				sprite.Visible = true;
 				dialogueText.Size = new Vector2(760, 5);
 				dialogueText.Position = new Vector2(60, 5);
-				dialogueText.AddThemeFontSizeOverride("font_size", 32);
 				optionsContainer.Size = new Vector2(320, 20);
-				optionsContainer.Position = new Vector2(60, 40);
+				optionsContainer.Position = new Vector2(60, 42);
 				var texture = GD.Load<Texture2D>($"res://Assets/Character Designs/{dialogue.speaker}/portrait.png");
 				sprite.Texture = texture;
 			}
@@ -131,6 +133,7 @@ public partial class DialogueManager : Control {
 						Size = new Vector2(40, 30),
 						Position = new Vector2(456, 86)
 					};
+					skipButton.AddThemeFontOverride("font", font);
 				} else {
 					skipButton = new Button {
 						Text = "Skip",
@@ -139,6 +142,7 @@ public partial class DialogueManager : Control {
 						Position = new Vector2(228, 43),
 						Scale = new Vector2(0.5f, 0.5f)
 					};
+					skipButton.AddThemeFontOverride("font", font);
 				}
 				string targetId = node.options[0].next;
 				skipButton.Pressed += () => nextNodeSource.TrySetResult("end");
@@ -173,6 +177,7 @@ public partial class DialogueManager : Control {
 						Size = new Vector2(40, 30),
 						Scale = new Vector2(0.25f, 0.25f)
 					};
+					button.AddThemeFontOverride("font", font);
 					button.AddThemeFontSizeOverride("font_size", 16);
 				}
 				

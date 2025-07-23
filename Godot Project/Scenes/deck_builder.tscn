@@ -24,7 +24,7 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 alignment = 1
 
-[node name="HandSlot" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
+[node name="HandSlot1" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
 layout_mode = 2
 
 [node name="HandSlot2" parent="Hand/HandSlots" instance=ExtResource("3_xqtbr")]
@@ -73,7 +73,7 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 alignment = 1
 
-[node name="TableSlot" parent="Table/TableSlots" instance=ExtResource("3_xqtbr")]
+[node name="TableSlot1" parent="Table/TableSlots" instance=ExtResource("3_xqtbr")]
 layout_mode = 2
 
 [node name="TableSlot2" parent="Table/TableSlots" instance=ExtResource("3_xqtbr")]
