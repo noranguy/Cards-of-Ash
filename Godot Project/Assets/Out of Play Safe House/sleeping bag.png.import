@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfmautmt4ebhl"
-path="res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"
+uid="uid://dmalr458j4bdg"
+path="res://.godot/imported/sleeping bag.png-6f2399bf50bb14f3b83ea3625924d137.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Foreigner/portrait.png"
-dest_files=["res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"]
+source_file="res://Assets/Out of Play Safe House/sleeping bag.png"
+dest_files=["res://.godot/imported/sleeping bag.png-6f2399bf50bb14f3b83ea3625924d137.ctex"]
 
 [params]
 

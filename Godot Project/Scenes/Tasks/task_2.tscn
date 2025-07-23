@@ -1,67 +1,23 @@
-[gd_scene load_steps=25 format=4 uid="uid://ogn0svttcr8a"]
+[gd_scene load_steps=27 format=4 uid="uid://csyiu2mb2tbc0"]
 
-[ext_resource type="Texture2D" uid="uid://b4b5c3ksmylyf" path="res://Assets/In Play Safe House/Tasks/phone-Sheet.png" id="1_4hxa7"]
-[ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_ckrol"]
-[ext_resource type="Texture2D" uid="uid://ckfgjv3b7nhid" path="res://Assets/Out of Play Safe House/wall border and floor tilesheet 16.png" id="1_ix88k"]
-[ext_resource type="Texture2D" uid="uid://bv5yvqogy7bjt" path="res://Assets/In Play Safe House/Tasks/stereo_outline.png" id="1_li0ec"]
-[ext_resource type="Texture2D" uid="uid://i0shetx0bao8" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_D.png" id="2_rid5m"]
-[ext_resource type="Texture2D" uid="uid://bo7f5l20s816i" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_E.png" id="3_4hxa7"]
-[ext_resource type="Texture2D" uid="uid://bdugnjwd5gcdt" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Props.png" id="4_rid5m"]
+[ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_7cyyu"]
+[ext_resource type="Script" uid="uid://dspmkjkmh4a4p" path="res://Scripts/Tasks/Task2_minigame.cs" id="1_vadw1"]
+[ext_resource type="Texture2D" uid="uid://i0shetx0bao8" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_D.png" id="2_gdi3g"]
+[ext_resource type="Texture2D" uid="uid://bo7f5l20s816i" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_E.png" id="3_6rq2s"]
+[ext_resource type="Texture2D" uid="uid://bdugnjwd5gcdt" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Props.png" id="4_vadw1"]
+[ext_resource type="Texture2D" uid="uid://ckfgjv3b7nhid" path="res://Assets/Out of Play Safe House/wall border and floor tilesheet 16.png" id="5_o07ir"]
+[ext_resource type="PackedScene" uid="uid://qa8na0inpo2g" path="res://Scenes/Tasks/task_2_scenes/wood_panels.tscn" id="6_6rq2s"]
+[ext_resource type="Texture2D" uid="uid://4ofq4wt82idr" path="res://Assets/In Play Safe House/Tasks/wood panel.png" id="8_osf1r"]
+[ext_resource type="PackedScene" uid="uid://d15qx82cuvpj" path="res://Scenes/Tasks/task_2_scenes/wood_planks.tscn" id="8_vadw1"]
+[ext_resource type="Texture2D" uid="uid://lsi6cwej2ef1" path="res://Assets/In Play Safe House/Tasks/tile00.png" id="9_o07ir"]
+[ext_resource type="Texture2D" uid="uid://cw04fpeq5lehi" path="res://Assets/In Play Safe House/Tasks/tile01.png" id="10_r54dn"]
+[ext_resource type="Texture2D" uid="uid://bhi7phhamv4lh" path="res://Assets/In Play Safe House/Tasks/tile02.png" id="11_e0c1r"]
+[ext_resource type="Texture2D" uid="uid://bfe60wrct3imm" path="res://Assets/In Play Safe House/Tasks/tile03.png" id="12_tixnu"]
+[ext_resource type="Texture2D" uid="uid://bb4fly7n266hl" path="res://Assets/In Play Safe House/Tasks/wood_plank_0.png" id="13_e0c1r"]
+[ext_resource type="Texture2D" uid="uid://cx04tooyhrwm0" path="res://Assets/In Play Safe House/Tasks/wood_plank_1.png" id="14_tixnu"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_li0ec"]
-texture = ExtResource("1_li0ec")
-0:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_51h0v"]
-sources/1 = SubResource("TileSetAtlasSource_li0ec")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bl4aw"]
-texture = ExtResource("1_4hxa7")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3uugt"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_owsx8"]
-texture = SubResource("CompressedTexture2D_3uugt")
-0:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_6f6uv"]
-sources/0 = SubResource("TileSetAtlasSource_bl4aw")
-sources/1 = SubResource("TileSetAtlasSource_owsx8")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_od4wg"]
-texture = ExtResource("1_ckrol")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_po57i"]
+texture = ExtResource("1_7cyyu")
 35:0/0 = 0
 36:0/0 = 0
 39:0/0 = 0
@@ -1476,8 +1432,8 @@ texture = ExtResource("1_ckrol")
 28:47/0 = 0
 29:47/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4mopu"]
-texture = ExtResource("2_rid5m")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lrcgw"]
+texture = ExtResource("2_gdi3g")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2402,8 +2358,8 @@ texture = ExtResource("2_rid5m")
 38:0/0 = 0
 34:41/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qqf3i"]
-texture = ExtResource("3_4hxa7")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r54dn"]
+texture = ExtResource("3_6rq2s")
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
@@ -2986,8 +2942,8 @@ texture = ExtResource("3_4hxa7")
 45:44/0 = 0
 46:44/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4oxso"]
-texture = ExtResource("4_rid5m")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0c1r"]
+texture = ExtResource("4_vadw1")
 14:0/0 = 0
 15:0/0 = 0
 24:0/0 = 0
@@ -3343,14 +3299,14 @@ texture = ExtResource("4_rid5m")
 19:31/0 = 0
 13:15/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_4oxso"]
-sources/0 = SubResource("TileSetAtlasSource_od4wg")
-sources/1 = SubResource("TileSetAtlasSource_4mopu")
-sources/2 = SubResource("TileSetAtlasSource_qqf3i")
-sources/3 = SubResource("TileSetAtlasSource_4oxso")
+[sub_resource type="TileSet" id="TileSet_tixnu"]
+sources/0 = SubResource("TileSetAtlasSource_po57i")
+sources/1 = SubResource("TileSetAtlasSource_lrcgw")
+sources/2 = SubResource("TileSetAtlasSource_r54dn")
+sources/3 = SubResource("TileSetAtlasSource_e0c1r")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6f6uv"]
-texture = ExtResource("1_ckrol")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_osf1r"]
+texture = ExtResource("1_7cyyu")
 35:0/0 = 0
 36:0/0 = 0
 39:0/0 = 0
@@ -4765,8 +4721,8 @@ texture = ExtResource("1_ckrol")
 28:47/0 = 0
 29:47/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_51h0v"]
-texture = ExtResource("2_rid5m")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hbfu0"]
+texture = ExtResource("2_gdi3g")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -5690,8 +5646,8 @@ texture = ExtResource("2_rid5m")
 42:47/0 = 0
 43:47/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3uugt"]
-texture = ExtResource("3_4hxa7")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t3g1w"]
+texture = ExtResource("3_6rq2s")
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
@@ -6274,13 +6230,13 @@ texture = ExtResource("3_4hxa7")
 45:44/0 = 0
 46:44/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_od4wg"]
-sources/0 = SubResource("TileSetAtlasSource_6f6uv")
-sources/1 = SubResource("TileSetAtlasSource_51h0v")
-sources/2 = SubResource("TileSetAtlasSource_3uugt")
+[sub_resource type="TileSet" id="TileSet_2eadv"]
+sources/0 = SubResource("TileSetAtlasSource_osf1r")
+sources/1 = SubResource("TileSetAtlasSource_hbfu0")
+sources/2 = SubResource("TileSetAtlasSource_t3g1w")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wf3xn"]
-texture = ExtResource("1_ix88k")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5os5o"]
+texture = ExtResource("5_o07ir")
 0:0/0 = 0
 1:0/0 = 0
 3:0/0 = 0
@@ -6290,10 +6246,11 @@ texture = ExtResource("1_ix88k")
 3:1/0 = 0
 4:1/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_ip2rk"]
-sources/4 = SubResource("TileSetAtlasSource_wf3xn")
+[sub_resource type="TileSet" id="TileSet_c70kw"]
+sources/4 = SubResource("TileSetAtlasSource_5os5o")
 
-[node name="Task1" type="Node2D"]
+[node name="Task2" type="Node2D"]
+script = ExtResource("1_vadw1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 10
@@ -6302,32 +6259,149 @@ zoom = Vector2(2, 2)
 [node name="TileMap" type="TileMap" parent="."]
 format = 2
 
-[node name="stereo" type="TileMapLayer" parent="TileMap"]
-z_index = 4
-position = Vector2(6, -3)
-tile_map_data = PackedByteArray("AAAAAP//AQAAAAAAAAAAAAAAAQAAAAEAAAAAAAEAAQAAAAIAAAAAAAIAAQAAAAMAAAABAAAAAQABAAEAAAABAAEAAQABAAIAAAABAAIAAQABAAMAAAACAAAAAQACAAEAAAACAAEAAQACAAIAAAACAAIAAQACAAMAAAADAAAAAQADAAEAAAADAAEAAQADAAIAAAADAAIAAQADAAMAAAA=")
-tile_set = SubResource("TileSet_51h0v")
-
-[node name="phone" type="TileMapLayer" parent="TileMap"]
-z_index = 4
-position = Vector2(-16, 0)
-scale = Vector2(1.5, 1.5)
-tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD+/wEAAAAAAAEAAAD//wAAAAABAAAAAAD//wEAAAABAAEAAAA=")
-tile_set = SubResource("TileSet_6f6uv")
-
 [node name="Box" type="TileMapLayer" parent="TileMap"]
 z_index = 3
 scale = Vector2(2.5, 2.5)
-tile_map_data = PackedByteArray("AAD//wAAAwALAAUAAAD//wEAAwALAAYAAAD//wIAAwALAAcAAAAAAAAAAwAKAAEAAAAAAAEAAwAKAAIAAAAAAAIAAwAKAAMAAAABAAAAAwALAAEAAAABAAEAAwALAAIAAAABAAIAAwALAAMAAAD+/wAAAwAKAAUAAAD+/wEAAwAKAAYAAAD+/wIAAwAKAAcAAAA=")
-tile_set = SubResource("TileSet_4oxso")
+tile_map_data = PackedByteArray("AAABAAIAAwALAAYAAAABAAMAAwALAAcAAAACAAIAAwAKAAIAAAACAAMAAwAKAAMAAAADAAIAAwALAAIAAAADAAMAAwALAAMAAAAAAAEAAwAKAAUAAAAAAAIAAwAKAAYAAAAAAAMAAwAKAAcAAAABAAEAAwALAAUAAAACAAEAAwAKAAEAAAADAAEAAwALAAEAAAA=")
+tile_set = SubResource("TileSet_tixnu")
 
 [node name="Window" type="TileMapLayer" parent="TileMap"]
 z_index = 1
-scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAD9//3/AAAJAAEAAAD9//7/AAAJAAIAAAD9////AAAJAAMAAAD9/wAAAAAJAAQAAAD+//3/AAAJAAEAAAD+//7/AAAJAAIAAAD+////AAAJAAMAAAD+/wAAAAAJAAQAAAD///3/AAAJAAEAAAD///7/AAAJAAIAAAD/////AAAJAAMAAAD//wAAAAAJAAQAAAAAAP3/AAAJAAEAAAAAAP//AAAJAAMAAAAAAAAAAAAJAAQAAAAAAP7/AAAJAAIAAAABAP3/AAAKAAEAAAABAP7/AAAKAAIAAAABAP//AAAKAAMAAAABAAAAAAAKAAQAAAD8//3/AAAJAAEAAAD8//7/AAAJAAIAAAD8////AAAJAAMAAAD8/wAAAAAJAAQAAAD7//3/AAAIAAEAAAD7//7/AAAIAAIAAAD7////AAAIAAMAAAD7/wAAAAAIAAQAAAD6//3/AAAHAAEAAAD6//7/AAAHAAIAAAD6////AAAHAAMAAAD6/wAAAAAHAAQAAAA=")
-tile_set = SubResource("TileSet_od4wg")
+position = Vector2(0, -20)
+scale = Vector2(2.3, 2.3)
+tile_map_data = PackedByteArray("AAD8//7/AAAHAAEAAAD8////AAAHAAIAAAD8/wAAAAAHAAMAAAD9//7/AAAIAAEAAAD9////AAAIAAIAAAD9/wAAAAAIAAMAAAD+//7/AAAJAAEAAAD+////AAAJAAIAAAD+/wAAAAAJAAMAAAD///7/AAAJAAEAAAD/////AAAJAAIAAAD//wAAAAAJAAMAAAAAAP7/AAAJAAEAAAAAAP//AAAJAAIAAAAAAAAAAAAJAAMAAAABAP7/AAAJAAEAAAABAP//AAAJAAIAAAABAAAAAAAJAAMAAAACAP7/AAAJAAEAAAACAP//AAAJAAIAAAACAAAAAAAJAAMAAAADAP7/AAAKAAEAAAADAP//AAAKAAIAAAADAAAAAAAKAAMAAAD8/wEAAAAHAAQAAAD9/wEAAAAIAAQAAAD+/wEAAAAJAAQAAAD//wEAAAAJAAQAAAAAAAEAAAAJAAQAAAABAAEAAAAJAAQAAAACAAEAAAAJAAQAAAADAAEAAAAKAAQAAAA=")
+tile_set = SubResource("TileSet_2eadv")
 
 [node name="Background" type="TileMapLayer" parent="TileMap"]
 scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAD7//3/BAABAAEAAAD7//7/BAABAAEAAAD7////BAABAAEAAAD7/wAABAABAAEAAAD7/wEABAABAAEAAAD7/wIABAAEAAAAAAD8//3/BAABAAEAAAD8//7/BAABAAEAAAD8////BAABAAEAAAD8/wAABAABAAEAAAD8/wEABAABAAEAAAD8/wIABAAEAAAAAAD9//3/BAABAAEAAAD9//7/BAABAAEAAAD9////BAABAAEAAAD9/wAABAABAAEAAAD9/wEABAABAAEAAAD9/wIABAAEAAAAAAD+//3/BAABAAEAAAD+//7/BAABAAEAAAD+////BAABAAEAAAD+/wAABAABAAEAAAD+/wEABAABAAEAAAD+/wIABAAEAAAAAAD///3/BAABAAEAAAD///7/BAABAAEAAAD/////BAABAAEAAAD//wAABAABAAEAAAD//wEABAABAAEAAAD//wIABAAEAAAAAAAAAP3/BAABAAEAAAAAAP7/BAABAAEAAAAAAP//BAABAAEAAAAAAAAABAABAAEAAAAAAAEABAABAAEAAAAAAAIABAAEAAAAAAABAP3/BAABAAEAAAABAP7/BAABAAEAAAABAP//BAABAAEAAAABAAAABAABAAEAAAABAAEABAABAAEAAAABAAIABAAEAAAAAAACAP3/BAABAAEAAAACAP7/BAABAAEAAAACAP//BAABAAEAAAACAAAABAABAAEAAAACAAEABAABAAEAAAACAAIABAAEAAAAAAADAP3/BAABAAEAAAADAP7/BAABAAEAAAADAP//BAABAAEAAAADAAAABAABAAEAAAADAAEABAABAAEAAAADAAIABAAEAAAAAAAEAP3/BAABAAEAAAAEAP7/BAABAAEAAAAEAP//BAABAAEAAAAEAAAABAABAAEAAAAEAAEABAABAAEAAAAEAAIABAAEAAAAAAA=")
-tile_set = SubResource("TileSet_ip2rk")
+tile_map_data = PackedByteArray("AAD7//7/BAABAAEAAAD7////BAABAAEAAAD7/wAABAABAAEAAAD7/wEABAABAAEAAAD7/wIABAABAAEAAAD8//7/BAABAAEAAAD8////BAABAAEAAAD8/wAABAABAAEAAAD8/wEABAABAAEAAAD8/wIABAABAAEAAAD9//7/BAABAAEAAAD9////BAABAAEAAAD9/wAABAABAAEAAAD9/wEABAABAAEAAAD9/wIABAABAAEAAAD+//7/BAABAAEAAAD+////BAABAAEAAAD+/wAABAABAAEAAAD+/wEABAABAAEAAAD+/wIABAABAAEAAAD///7/BAABAAEAAAD/////BAABAAEAAAD//wAABAABAAEAAAD//wEABAABAAEAAAD//wIABAABAAEAAAAAAP7/BAABAAEAAAAAAP//BAABAAEAAAAAAAAABAABAAEAAAAAAAEABAABAAEAAAAAAAIABAABAAEAAAABAP7/BAABAAEAAAABAP//BAABAAEAAAABAAAABAABAAEAAAABAAEABAABAAEAAAABAAIABAABAAEAAAACAP7/BAABAAEAAAACAP//BAABAAEAAAACAAAABAABAAEAAAACAAEABAABAAEAAAACAAIABAABAAEAAAADAP7/BAABAAEAAAADAP//BAABAAEAAAADAAAABAABAAEAAAADAAEABAABAAEAAAADAAIABAABAAEAAAAEAP7/BAABAAEAAAAEAP//BAABAAEAAAAEAAAABAABAAEAAAAEAAEABAABAAEAAAAEAAIABAABAAEAAAD7/wMABAAEAAAAAAD8/wMABAAEAAAAAAD9/wMABAAEAAAAAAD+/wMABAAEAAAAAAD//wMABAAEAAAAAAAAAAMABAAEAAAAAAABAAMABAAEAAAAAAACAAMABAAEAAAAAAADAAMABAAEAAAAAAAEAAMABAAEAAAAAAD7//3/BAABAAEAAAD8//3/BAABAAEAAAD9//3/BAABAAEAAAD+//3/BAABAAEAAAD///3/BAABAAEAAAAAAP3/BAABAAEAAAABAP3/BAABAAEAAAACAP3/BAABAAEAAAADAP3/BAABAAEAAAAEAP3/BAABAAEAAAA=")
+tile_set = SubResource("TileSet_c70kw")
+
+[node name="stored_wood" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WoodPlanks1" parent="stored_wood" instance=ExtResource("8_vadw1")]
+z_index = 8
+z_as_relative = false
+clip_contents = true
+layout_mode = 0
+offset_left = -139.0
+offset_top = -4.0
+offset_right = -89.0
+offset_bottom = 46.0
+scale = Vector2(2.5, 2)
+mouse_filter = 0
+texture = ExtResource("9_o07ir")
+isPlank = true
+
+[node name="WoodPlanks2" parent="stored_wood" instance=ExtResource("8_vadw1")]
+z_index = 9
+z_as_relative = false
+layout_mode = 0
+offset_left = -140.0
+offset_top = -7.0
+offset_right = -90.0
+offset_bottom = 43.0
+scale = Vector2(2.5, 2)
+mouse_filter = 0
+texture = ExtResource("10_r54dn")
+isPlank = true
+
+[node name="WoodPlanks3" parent="stored_wood" instance=ExtResource("8_vadw1")]
+z_index = 10
+z_as_relative = false
+layout_mode = 0
+offset_left = -140.0
+offset_top = -7.0
+offset_right = -90.0
+offset_bottom = 43.0
+scale = Vector2(2.5, 2)
+mouse_filter = 0
+texture = ExtResource("11_e0c1r")
+isPlank = true
+
+[node name="WoodPlanks4" parent="stored_wood" instance=ExtResource("8_vadw1")]
+z_index = 11
+z_as_relative = false
+layout_mode = 0
+offset_left = -140.0
+offset_top = -7.0
+offset_right = -90.0
+offset_bottom = 43.0
+scale = Vector2(2.5, 2)
+mouse_filter = 0
+texture = ExtResource("12_tixnu")
+isPlank = true
+
+[node name="WoodBoard1" parent="stored_wood" instance=ExtResource("8_vadw1")]
+z_index = 15
+z_as_relative = false
+layout_mode = 0
+offset_left = -159.0
+offset_top = 23.0
+offset_right = -14.0
+offset_bottom = 150.0
+mouse_filter = 0
+texture = ExtResource("8_osf1r")
+
+[node name="WoodBoard2" parent="stored_wood" instance=ExtResource("8_vadw1")]
+z_index = 16
+z_as_relative = false
+layout_mode = 0
+offset_left = -136.0
+offset_top = 23.0
+offset_right = 9.0
+offset_bottom = 150.0
+mouse_filter = 0
+texture = ExtResource("8_osf1r")
+
+[node name="placed_wood" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WoodPanels1" parent="placed_wood" instance=ExtResource("6_6rq2s")]
+z_index = 12
+layout_mode = 0
+offset_top = -83.0
+offset_right = 145.0
+offset_bottom = 44.0
+
+[node name="WoodPanels2" parent="placed_wood" instance=ExtResource("6_6rq2s")]
+z_index = 12
+layout_mode = 0
+offset_left = -145.0
+offset_top = -83.0
+offset_bottom = 44.0
+
+[node name="wood_plank_0" type="Sprite2D" parent="."]
+visible = false
+z_index = 7
+position = Vector2(70, -17)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("13_e0c1r")
+
+[node name="wood_plank_1" type="Sprite2D" parent="."]
+visible = false
+z_index = 7
+position = Vector2(70, -17)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("14_tixnu")
+
+[node name="wood_plank_2" type="Sprite2D" parent="."]
+visible = false
+z_index = 7
+position = Vector2(-69, -18)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("13_e0c1r")
+
+[node name="wood_plank_3" type="Sprite2D" parent="."]
+visible = false
+z_index = 7
+position = Vector2(-71, -18)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("14_tixnu")

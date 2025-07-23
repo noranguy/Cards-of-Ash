@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfmautmt4ebhl"
-path="res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"
+uid="uid://bv5yvqogy7bjt"
+path="res://.godot/imported/stereo_outline.png-ee81b4aa8f60e8f39c88fd1f55f60d9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Foreigner/portrait.png"
-dest_files=["res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"]
+source_file="res://Assets/In Play Safe House/Tasks/stereo_outline.png"
+dest_files=["res://.godot/imported/stereo_outline.png-ee81b4aa8f60e8f39c88fd1f55f60d9c.ctex"]
 
 [params]
 

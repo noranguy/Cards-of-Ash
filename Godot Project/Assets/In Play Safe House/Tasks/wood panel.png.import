@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfmautmt4ebhl"
-path="res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"
+uid="uid://4ofq4wt82idr"
+path="res://.godot/imported/wood panel.png-d09c0c2a49355f8076f4a4e0a118b470.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Foreigner/portrait.png"
-dest_files=["res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"]
+source_file="res://Assets/In Play Safe House/Tasks/wood panel.png"
+dest_files=["res://.godot/imported/wood panel.png-d09c0c2a49355f8076f4a4e0a118b470.ctex"]
 
 [params]
 

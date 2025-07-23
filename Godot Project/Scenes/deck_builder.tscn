@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlby3gxlcfwyx"]
+[gd_scene load_steps=6 format=3 uid="uid://j1k1psjbyolh"]
 
 [ext_resource type="Script" uid="uid://6m4cvwak2i81" path="res://Scripts/InPlay/DeckBuilder.cs" id="1_ngatf"]
 [ext_resource type="PackedScene" uid="uid://bnhe4fr21bwyc" path="res://Components/card.tscn" id="2_gegkt"]
 [ext_resource type="PackedScene" uid="uid://dl0ob60a8xmko" path="res://Components/card_slot.tscn" id="3_xqtbr"]
 [ext_resource type="Texture2D" uid="uid://crd32t8cnwimk" path="res://Assets/In Play Safe House/done_button.png" id="4_muq8c"]
+[ext_resource type="Texture2D" uid="uid://cq6ete1wcqdyi" path="res://Assets/table_screen_background.png" id="5_gegkt"]
 
 [node name="DeckBuilder" type="Control"]
 layout_mode = 3
@@ -128,3 +129,8 @@ offset_top = -20.0
 offset_right = 260.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("4_muq8c")
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(2, 2)
+texture = ExtResource("5_gegkt")

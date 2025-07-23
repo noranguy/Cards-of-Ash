@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv5yvqogy7bjt"
-path="res://.godot/imported/stereo_outline.png-a9345348ba4af0772061e464d331503b.ctex"
+uid="uid://dld1u3w0n4xln"
+path="res://.godot/imported/wood_plank_shadow_1.png-0536c10843db9f656eee32a348f9ce07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/In Play Safe House/stereo_outline.png"
-dest_files=["res://.godot/imported/stereo_outline.png-a9345348ba4af0772061e464d331503b.ctex"]
+source_file="res://Assets/In Play Safe House/Tasks/wood_plank_shadow_1.png"
+dest_files=["res://.godot/imported/wood_plank_shadow_1.png-0536c10843db9f656eee32a348f9ce07.ctex"]
 
 [params]
 

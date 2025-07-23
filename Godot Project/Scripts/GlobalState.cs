@@ -239,4 +239,6 @@ Press SPACE to continue.
 	public Info GetInfo() {
 		return Infos[day];
 	}
+	
+	public int phase = 0;
 }

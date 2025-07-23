@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl0ob60a8xmko"]
+[gd_scene load_steps=3 format=3 uid="uid://bs65t1o0e6xb1"]
 
 [ext_resource type="Texture2D" uid="uid://b3w1fvset11m6" path="res://Assets/In Play Safe House/tableslot.png" id="1_6ti2r"]
 [ext_resource type="Script" uid="uid://cndgxelpy6d1k" path="res://Scripts/InPlay/CardSlot.cs" id="2_dhwp0"]
