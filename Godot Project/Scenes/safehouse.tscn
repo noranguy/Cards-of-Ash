@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=4 uid="uid://bvd7sgi6dix5n"]
+[gd_scene load_steps=80 format=4 uid="uid://bvd7sgi6dix5n"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://bdugnjwd5gcdt" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Props.png" id="13_7jf0i"]
 [ext_resource type="AudioStream" uid="uid://c4m4vsbc0c3s2" path="res://Assets/Music/out_play.mp3" id="14_0yw7c"]
 [ext_resource type="Texture2D" uid="uid://dmalr458j4bdg" path="res://Assets/Out of Play Safe House/sleeping bag.png" id="14_ks0xv"]
+[ext_resource type="FontFile" uid="uid://ckvv2r38wlgnn" path="res://Assets/Font/KappasPororoca-B83G.ttf" id="19_7jf0i"]
+[ext_resource type="Texture2D" uid="uid://1lxbh1divmcx" path="res://Assets/Out of Play Safe House/hud_design.png" id="19_fiq5u"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
 a = Vector2(38, -10)
@@ -17241,12 +17243,15 @@ libraries = {
 follow_viewport_enabled = true
 
 [node name="DayLabel" type="Label" parent="CanvasLayer"]
+modulate = Color(0, 0.192157, 0.443137, 1)
 z_index = 5
-offset_left = 290.5
-offset_top = -1.0
-offset_right = 333.5
-offset_bottom = 22.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 105.0
+offset_bottom = 46.0
 scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 38
 text = "Day 1"
 
 [node name="EndDayPrompt" type="Control" parent="CanvasLayer"]
@@ -17408,6 +17413,57 @@ text = "Start Game"
 [node name="Cancel" type="Button" parent="CanvasLayer/StartGamePrompt/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Cancel"
+
+[node name="Hud" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(160, 90)
+texture = ExtResource("19_fiq5u")
+
+[node name="TaskLabel" type="Label" parent="CanvasLayer"]
+modulate = Color(0, 0.192157, 0.443137, 1)
+z_index = 5
+offset_left = 269.0
+offset_top = 2.0
+offset_right = 368.0
+offset_bottom = 22.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 20
+text = "Objectives"
+
+[node name="Tasks" type="Label" parent="CanvasLayer"]
+modulate = Color(0, 0.192157, 0.443137, 1)
+z_index = 5
+offset_left = 268.0
+offset_top = 12.0
+offset_right = 372.0
+offset_bottom = 66.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 12
+text = "- survive"
+
+[node name="ResourcesLabel" type="Label" parent="CanvasLayer"]
+modulate = Color(0.788235, 0.121569, 0.215686, 1)
+z_index = 5
+offset_left = 267.0
+offset_top = 153.0
+offset_right = 366.0
+offset_bottom = 173.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 20
+text = "Resources"
+
+[node name="Resources" type="Label" parent="CanvasLayer"]
+modulate = Color(0.788235, 0.121569, 0.215686, 1)
+z_index = 5
+offset_left = 261.0
+offset_top = 162.0
+offset_right = 375.0
+offset_bottom = 196.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 12
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 editor_description = "\"Solo Jazz Guitar - Riverline\" by Tri-Tachyon - https://soundcloud.com/tri-tachyon/albums"
