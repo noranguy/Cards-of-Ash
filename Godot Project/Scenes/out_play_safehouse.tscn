@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cfyc8k4gjjnmr"]
+[gd_scene load_steps=37 format=4 uid="uid://cfyc8k4gjjnmr"]
 
 [ext_resource type="Texture2D" uid="uid://ckfgjv3b7nhid" path="res://Assets/Out of Play Safe House/wall border and floor tilesheet 16.png" id="2_rq048"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="3_aoges"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://fxiwo7ukluj0" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Tileset Stone Ground.png" id="9_fyvbu"]
 [ext_resource type="Texture2D" uid="uid://c54vfs3s5wuhh" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Struct.png" id="10_3dj7d"]
 [ext_resource type="Texture2D" uid="uid://q13m6b7q3gil" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Plant.png" id="11_xpeuc"]
-[ext_resource type="AudioStream" uid="uid://c4m4vsbc0c3s2" path="res://Assets/Music/out_play.mp3" id="12_h5bus"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4lti2"]
 texture = ExtResource("2_rq048")
@@ -2957,7 +2956,7 @@ sources/0 = SubResource("TileSetAtlasSource_h5bus")
 sources/1 = SubResource("TileSetAtlasSource_68c5i")
 sources/2 = SubResource("TileSetAtlasSource_bieal")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tqhn2"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y6546"]
 texture = ExtResource("3_aoges")
 35:0/0 = 0
 36:0/0 = 0
@@ -4373,7 +4372,7 @@ texture = ExtResource("3_aoges")
 28:47/0 = 0
 29:47/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lq5l2"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dj7d"]
 texture = ExtResource("4_ewof4")
 0:0/0 = 0
 1:0/0 = 0
@@ -5299,7 +5298,7 @@ texture = ExtResource("4_ewof4")
 38:0/0 = 0
 34:41/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pw343"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xpeuc"]
 texture = ExtResource("5_sipud")
 0:1/0 = 0
 1:1/0 = 0
@@ -6240,9 +6239,9 @@ texture = ExtResource("5_y6546")
 19:31/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_y6546"]
-sources/0 = SubResource("TileSetAtlasSource_tqhn2")
-sources/1 = SubResource("TileSetAtlasSource_lq5l2")
-sources/2 = SubResource("TileSetAtlasSource_pw343")
+sources/0 = SubResource("TileSetAtlasSource_y6546")
+sources/1 = SubResource("TileSetAtlasSource_3dj7d")
+sources/2 = SubResource("TileSetAtlasSource_xpeuc")
 sources/3 = SubResource("TileSetAtlasSource_cxnu6")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fyvbu"]
@@ -8038,7 +8037,7 @@ tile_set = SubResource("TileSet_fyvbu")
 [node name="Detailed furniture layer 3" type="TileMapLayer" parent="TileMap"]
 z_index = 4
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAAAPr/AAAIABMAAAAAAPv/AAAIABQAAAD///r/AAAHABMAAAD///v/AAAHABQAAAD+//r/AAAGABMAAAD+//v/AAAGABQAAAACAPv/AAANABQAAFACAPz/AAANABUAAFABAPv/AAAMABYAAFABAPz/AAANABYAAFACAPr/AAAMABQAAFADAPr/AAAMABMAAFADAPv/AAANABMAAFACAAgAAAAVABMAAAD9//7/AAAJACIAAAD9////AAAJACIAAAD9/wAAAAAJACMAAAD9/wEAAAAJACQAAAD9/wIAAAAJACUAAAD+//7/AAAKACIAAAD+////AAAKACIAAAD+/wAAAAAKACMAAAD+/wEAAAAKACQAAAD+/wIAAAAKACUAAAD///7/AAAKACIAAAD/////AAAKACIAAAD//wEAAAAKACQAAAD//wIAAAAKACUAAAAAAP7/AAAKACIAAAAAAP//AAAKACIAAAAAAAAAAAAKACMAAAAAAAEAAAAKACQAAAAAAAIAAAAKACUAAAABAP//AAAKACIAAAABAAAAAAAKACMAAAACAP7/AAALACIAAAACAP//AAALACIAAAACAAAAAAALACMAAAACAAEAAAALACQAAAACAAIAAAALACUAAAABAP7/AAAKACIAAAABAAEAAAAKACQAAAABAAIAAAAKACUAAAD7//j/AQAnAB4AAAD7//n/AQAnAB8AAAD7//r/AQAnACAAAAD8//j/AQAoAB4AAAD8//n/AQAoAB8AAAD8//r/AQAoACAAAAD9//j/AQApAB4AAAD9//n/AQApAB8AAAD9//r/AQApACAAAAAIAPn/AwAKAAEAAAAIAPr/AwAKAAIAAAAIAPv/AwAKAAMAAAAJAPn/AwALAAEAAAAJAPr/AwALAAIAAAAJAPv/AwALAAMAAAAGAPn/AwAKAAUAAAAGAPr/AwAKAAYAAAAGAPv/AwAKAAcAAAAHAPn/AwALAAUAAAAHAPr/AwALAAYAAAAHAPv/AwALAAcAAAD9//3/AAAJACEAAAD+//3/AAAKACEAAAD///3/AAAKACEAAAAAAP3/AAAKACEAAAABAP3/AAAKACEAAAACAP3/AAALACEAAAD//wAAAAAKACMAAAA=")
+tile_map_data = PackedByteArray("AAAAAPr/AAAIABMAAAAAAPv/AAAIABQAAAD///r/AAAHABMAAAD///v/AAAHABQAAAD+//r/AAAGABMAAAD+//v/AAAGABQAAAACAPv/AAANABQAAFACAPz/AAANABUAAFABAPv/AAAMABYAAFABAPz/AAANABYAAFACAPr/AAAMABQAAFADAPr/AAAMABMAAFADAPv/AAANABMAAFD9//7/AAAJACIAAAD9////AAAJACIAAAD9/wAAAAAJACMAAAD9/wEAAAAJACQAAAD9/wIAAAAJACUAAAD+//7/AAAKACIAAAD+////AAAKACIAAAD+/wAAAAAKACMAAAD+/wEAAAAKACQAAAD+/wIAAAAKACUAAAD///7/AAAKACIAAAD/////AAAKACIAAAD//wEAAAAKACQAAAD//wIAAAAKACUAAAAAAP7/AAAKACIAAAAAAP//AAAKACIAAAAAAAAAAAAKACMAAAAAAAEAAAAKACQAAAAAAAIAAAAKACUAAAABAP//AAAKACIAAAABAAAAAAAKACMAAAACAP7/AAALACIAAAACAP//AAALACIAAAACAAAAAAALACMAAAACAAEAAAALACQAAAACAAIAAAALACUAAAABAP7/AAAKACIAAAABAAEAAAAKACQAAAABAAIAAAAKACUAAAD7//j/AQAnAB4AAAD7//n/AQAnAB8AAAD7//r/AQAnACAAAAD8//j/AQAoAB4AAAD8//n/AQAoAB8AAAD8//r/AQAoACAAAAD9//j/AQApAB4AAAD9//n/AQApAB8AAAD9//r/AQApACAAAAAIAPn/AwAKAAEAAAAIAPr/AwAKAAIAAAAIAPv/AwAKAAMAAAAJAPn/AwALAAEAAAAJAPr/AwALAAIAAAAJAPv/AwALAAMAAAAGAPn/AwAKAAUAAAAGAPr/AwAKAAYAAAAGAPv/AwAKAAcAAAAHAPn/AwALAAUAAAAHAPr/AwALAAYAAAAHAPv/AwALAAcAAAD9//3/AAAJACEAAAD+//3/AAAKACEAAAD///3/AAAKACEAAAAAAP3/AAAKACEAAAABAP3/AAAKACEAAAACAP3/AAALACEAAAD//wAAAAAKACMAAAA=")
 tile_set = SubResource("TileSet_y6546")
 
 [node name="Furniture layer 2" type="TileMapLayer" parent="TileMap"]
@@ -8065,14 +8064,10 @@ tile_map_data = PackedByteArray("AADs//T/AQAAAAAAAADs//X/AQAAAAEAAADs//b/AQAGAAc
 tile_set = SubResource("TileSet_2drdq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-editor_description = "\"Solo Jazz Guitar - Riverline\" by Tri-Tachyon - https://soundcloud.com/tri-tachyon/albums"
-stream = ExtResource("12_h5bus")
-autoplay = true
-parameters/looping = true
+visible = false
 
 [node name="night_lighting" type="Node2D" parent="."]
+visible = false
 
 [node name="night" type="CanvasModulate" parent="night_lighting"]
 color = Color(0.0924401, 0.180107, 0.28704, 1)

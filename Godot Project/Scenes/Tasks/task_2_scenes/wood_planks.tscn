@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://d15qx82cuvpj"]
+
+[ext_resource type="Script" uid="uid://lbsoeocntu3u" path="res://Scripts/Tasks/WoodPlanks.cs" id="1_4ymjp"]
+
+[node name="WoodPlanks" type="TextureRect"]
+custom_minimum_size = Vector2(40, 40)
+expand_mode = 1
+script = ExtResource("1_4ymjp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(20, 20)
+scale = Vector2(1.25, 1.25)
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0)
+show_behind_parent = true
+z_index = 6
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

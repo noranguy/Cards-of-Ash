@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://qa8na0inpo2g"]
+
+[ext_resource type="Script" uid="uid://df4jj5hd6x8il" path="res://Scripts/Tasks/WoodPanels.cs" id="2_a63gg"]
+
+[node name="WoodPanel" type="TextureRect"]
+custom_minimum_size = Vector2(50, 50)
+expand_mode = 1
+script = ExtResource("2_a63gg")
+
+[node name="Panel" type="Panel" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 145.0
+offset_bottom = 127.0
+mouse_filter = 2
