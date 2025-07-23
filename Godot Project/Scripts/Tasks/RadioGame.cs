@@ -8,7 +8,7 @@ public partial class RadioGame: Control
     float lerped_angle;
     float channel;
 
-    public float PlayGame(float goal_channel)
+    public bool PlayGame(float goal_channel)
     {
         if (Input.IsActionJustPressed("click"))
         {
@@ -44,20 +44,20 @@ public partial class RadioGame: Control
             GetNode<TextureRect>("OnLight").Visible = true;
         }
 
-        else if (Math.Abs(channel - goal_channel) < .5)
+        /*else if (Math.Abs(channel - goal_channel) < .5)
         {
             GetNode<TextureRect>("KindaOnLight").Visible = true;
             GetNode<TextureRect>("OnLight").Visible = false;
-        }
+        }*/
 
-        else if (Math.Abs(channel - goal_channel) < .85)
+        else if (Math.Abs(channel - goal_channel) < .5)
         {
             GetNode<TextureRect>("BarelyOnLight").Visible = true;
             GetNode<TextureRect>("KindaOnLight").Visible = false;
             GetNode<TextureRect>("OnLight").Visible = false;
         }
 
-        else if (Math.Abs(channel - goal_channel) < 1.10)
+        else if (Math.Abs(channel - goal_channel) < 1)
         {
             GetNode<TextureRect>("KindaOffLight").Visible = true;
             GetNode<TextureRect>("BarelyOnLight").Visible = false;
@@ -74,7 +74,15 @@ public partial class RadioGame: Control
             GetNode<TextureRect>("OnLight").Visible = false;
         }
 
-        return channel;
+        if (channel == goal_channel)
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
     }
 
     private float RangeLerp(float val, float min1, float max1, float min2, float max2)

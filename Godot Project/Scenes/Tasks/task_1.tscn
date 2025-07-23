@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://ogn0svttcr8a"]
+[gd_scene load_steps=42 format=4 uid="uid://ogn0svttcr8a"]
 
 [ext_resource type="Texture2D" uid="uid://b4b5c3ksmylyf" path="res://Assets/In Play Safe House/phone-Sheet.png" id="1_4hxa7"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_ckrol"]
@@ -15,6 +15,11 @@
 [ext_resource type="Texture2D" uid="uid://ce6w7aqxw46rv" path="res://Assets/Out of Play Safe House/on_light.png" id="11_qqf3i"]
 [ext_resource type="Texture2D" uid="uid://b287m2qpxk47h" path="res://Assets/Out of Play Safe House/barely_on_light.png" id="12_51h0v"]
 [ext_resource type="Texture2D" uid="uid://0uqbjjoyqeyr" path="res://Assets/Out of Play Safe House/kinda_on_light.png" id="13_3uugt"]
+[ext_resource type="Script" uid="uid://cj2mo7kuetfxf" path="res://Scripts/Tasks/PhoneGame.cs" id="16_3uugt"]
+[ext_resource type="Texture2D" uid="uid://wwg07af5tqxm" path="res://Assets/Out of Play Safe House/Red_wire.png" id="17_ghe47"]
+[ext_resource type="Texture2D" uid="uid://c582ultt1rbpo" path="res://Assets/Out of Play Safe House/Yellow_wire.png" id="18_44dbn"]
+[ext_resource type="Texture2D" uid="uid://birxeq3ktg2xi" path="res://Assets/Out of Play Safe House/Green_wire.png" id="19_1gtqw"]
+[ext_resource type="Texture2D" uid="uid://eeprnoxukf8o" path="res://Assets/Out of Play Safe House/Blue_wire.png" id="20_sbhhq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6f6uv"]
 texture = ExtResource("1_li0ec")
@@ -46,27 +51,8 @@ texture = ExtResource("1_4hxa7")
 2:1/0 = 0
 3:1/0 = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3uugt"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wf3xn"]
-texture = SubResource("CompressedTexture2D_3uugt")
-0:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-
 [sub_resource type="TileSet" id="TileSet_6f6uv"]
 sources/0 = SubResource("TileSetAtlasSource_4oxso")
-sources/1 = SubResource("TileSetAtlasSource_wf3xn")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hxa7"]
 texture = ExtResource("1_ckrol")
@@ -6307,11 +6293,24 @@ size = Vector2(68, 45)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qqf3i"]
 size = Vector2(56, 40)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51h0v"]
+size = Vector2(13, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3uugt"]
+size = Vector2(13, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wf3xn"]
+size = Vector2(13, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ye1wt"]
+size = Vector2(13, 13)
+
 [node name="Task1" type="Node2D"]
 script = ExtResource("1_owsx8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 10
+scale = Vector2(0.5, 0.5)
 zoom = Vector2(2, 2)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -6350,14 +6349,14 @@ tile_set = SubResource("TileSet_ip2rk")
 [node name="Radio" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radio"]
-z_index = 6
+z_index = 5
 position = Vector2(40, 21.5)
 shape = SubResource("RectangleShape2D_4mopu")
 
 [node name="Phone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Phone"]
-z_index = 6
+z_index = 5
 position = Vector2(-41, 26)
 shape = SubResource("RectangleShape2D_qqf3i")
 
@@ -6378,18 +6377,6 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_51h0v")
-
-[node name="Exit" type="Button" parent="RadioGame"]
-z_index = 6
-layout_mode = 2
-offset_left = 52.0
-offset_top = -47.0
-offset_right = 67.0
-offset_bottom = -25.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 10
-text = "X"
-flat = true
 
 [node name="CenterContainer" type="CenterContainer" parent="RadioGame"]
 z_index = 4
@@ -6419,6 +6406,20 @@ offset_right = 87.0
 offset_bottom = 48.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "XX.XX FM"
+
+[node name="RadioExit" type="Button" parent="RadioGame"]
+z_index = 7
+layout_mode = 2
+offset_left = 52.0
+offset_top = -50.0
+offset_right = 70.0
+offset_bottom = -25.0
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(0.494245, 1.40181e-06, 2.40654e-07, 1)
+theme_override_font_sizes/font_size = 12
+action_mode = 0
+text = "X"
+flat = true
 
 [node name="Dial" type="Node2D" parent="RadioGame"]
 position = Vector2(-2, 50)
@@ -6539,10 +6540,234 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("11_qqf3i")
 stretch_mode = 3
 
+[node name="PhoneGame" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("16_3uugt")
+
+[node name="RedStartArea" type="Area2D" parent="PhoneGame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhoneGame/RedStartArea"]
+z_index = 7
+position = Vector2(-80, -45)
+shape = SubResource("RectangleShape2D_51h0v")
+
+[node name="RedStart" type="TextureRect" parent="PhoneGame/RedStartArea"]
+z_index = 6
+offset_left = -94.0
+offset_top = -59.0
+offset_right = -54.0
+offset_bottom = -19.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("17_ghe47")
+stretch_mode = 3
+
+[node name="RedEndArea" type="Area2D" parent="PhoneGame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhoneGame/RedEndArea"]
+z_index = 7
+position = Vector2(80.5, 44.5)
+shape = SubResource("RectangleShape2D_51h0v")
+
+[node name="RedEnd" type="TextureRect" parent="PhoneGame/RedEndArea"]
+z_index = 6
+offset_left = 66.0
+offset_top = 31.0
+offset_right = 106.0
+offset_bottom = 71.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("17_ghe47")
+stretch_mode = 3
+
+[node name="YellowStartArea" type="Area2D" parent="PhoneGame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhoneGame/YellowStartArea"]
+z_index = 7
+position = Vector2(-80, -15)
+shape = SubResource("RectangleShape2D_3uugt")
+
+[node name="YellowStart" type="TextureRect" parent="PhoneGame/YellowStartArea"]
+z_index = 6
+offset_left = -94.0
+offset_top = -30.0
+offset_right = -54.0
+offset_bottom = 10.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("18_44dbn")
+stretch_mode = 3
+
+[node name="YellowEndArea" type="Area2D" parent="PhoneGame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhoneGame/YellowEndArea"]
+z_index = 7
+position = Vector2(79.5, -14.5)
+shape = SubResource("RectangleShape2D_3uugt")
+
+[node name="YellowEnd" type="TextureRect" parent="PhoneGame/YellowEndArea"]
+z_index = 6
+offset_left = 66.0
+offset_top = -29.0
+offset_right = 106.0
+offset_bottom = 11.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("18_44dbn")
+stretch_mode = 3
+
+[node name="GreenStartArea" type="Area2D" parent="PhoneGame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhoneGame/GreenStartArea"]
+z_index = 7
+position = Vector2(-80, 15)
+shape = SubResource("RectangleShape2D_wf3xn")
+
+[node name="GreenStart" type="TextureRect" parent="PhoneGame/GreenStartArea"]
+z_index = 6
+offset_left = -94.0
+offset_right = -54.0
+offset_bottom = 40.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_1gtqw")
+stretch_mode = 3
+
+[node name="GreenEndArea" type="Area2D" parent="PhoneGame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhoneGame/GreenEndArea"]
+z_index = 7
+position = Vector2(79.5, -44.5)
+shape = SubResource("RectangleShape2D_wf3xn")
+
+[node name="GreenEnd" type="TextureRect" parent="PhoneGame/GreenEndArea"]
+z_index = 6
+offset_left = 66.0
+offset_top = -59.0
+offset_right = 106.0
+offset_bottom = -19.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("19_1gtqw")
+stretch_mode = 3
+
+[node name="BlueStartArea" type="Area2D" parent="PhoneGame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhoneGame/BlueStartArea"]
+z_index = 7
+position = Vector2(-80, 45)
+shape = SubResource("RectangleShape2D_ye1wt")
+
+[node name="BlueStart" type="TextureRect" parent="PhoneGame/BlueStartArea"]
+z_index = 6
+offset_left = -94.0
+offset_top = 31.0
+offset_right = -54.0
+offset_bottom = 71.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("20_sbhhq")
+stretch_mode = 3
+
+[node name="BlueEndArea" type="Area2D" parent="PhoneGame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PhoneGame/BlueEndArea"]
+z_index = 7
+position = Vector2(79.5, 14.5)
+shape = SubResource("RectangleShape2D_ye1wt")
+
+[node name="BlueEnd" type="TextureRect" parent="PhoneGame/BlueEndArea"]
+z_index = 6
+offset_left = 66.0
+offset_right = 106.0
+offset_bottom = 40.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("20_sbhhq")
+stretch_mode = 3
+
+[node name="RedLine" type="Line2D" parent="PhoneGame"]
+top_level = true
+z_index = 6
+y_sort_enabled = true
+position = Vector2(-80, -45)
+points = PackedVector2Array(0, 0)
+width = 3.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="YellowLine" type="Line2D" parent="PhoneGame"]
+z_index = 6
+position = Vector2(-80, -15)
+points = PackedVector2Array(0, 0)
+width = 3.0
+default_color = Color(1, 0.964706, 0, 1)
+
+[node name="GreenLine" type="Line2D" parent="PhoneGame"]
+z_index = 6
+position = Vector2(-80, 15)
+points = PackedVector2Array(0, 0)
+width = 3.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="BlueLine" type="Line2D" parent="PhoneGame"]
+z_index = 6
+position = Vector2(-80, 45)
+points = PackedVector2Array(0, 0)
+width = 3.0
+default_color = Color(0, 0, 1, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="PhoneGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -95.0
+offset_right = 80.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PhoneGame/CenterContainer"]
+z_index = 5
+custom_minimum_size = Vector2(200, 160)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[node name="PhoneExit" type="Button" parent="PhoneGame"]
+z_index = 6
+layout_mode = 2
+offset_left = -100.0
+offset_top = -75.0
+offset_right = -92.0
+offset_bottom = -67.0
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(0.756863, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "X"
+flat = true
+
 [connection signal="mouse_entered" from="Radio" to="." method="_on_radio_mouse_entered"]
 [connection signal="mouse_exited" from="Radio" to="." method="_on_radio_mouse_exited"]
 [connection signal="mouse_entered" from="Phone" to="." method="_on_phone_mouse_entered"]
 [connection signal="mouse_exited" from="Phone" to="." method="_on_phone_mouse_exited"]
-[connection signal="pressed" from="RadioGame/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="RadioGame/RadioExit" to="." method="_on_radio_exit_pressed"]
 [connection signal="mouse_entered" from="RadioGame/Dial/DialTexture" to="RadioGame" method="_on_dial_texture_mouse_entered"]
 [connection signal="mouse_exited" from="RadioGame/Dial/DialTexture" to="RadioGame" method="_on_dial_texture_mouse_exited"]
+[connection signal="mouse_entered" from="PhoneGame/RedStartArea" to="PhoneGame" method="_on_red_start_area_mouse_entered"]
+[connection signal="mouse_exited" from="PhoneGame/RedStartArea" to="PhoneGame" method="_on_red_start_area_mouse_exited"]
+[connection signal="mouse_entered" from="PhoneGame/RedEndArea" to="PhoneGame" method="_on_red_end_area_mouse_entered"]
+[connection signal="mouse_exited" from="PhoneGame/RedEndArea" to="PhoneGame" method="_on_red_end_area_mouse_exited"]
+[connection signal="mouse_entered" from="PhoneGame/YellowStartArea" to="PhoneGame" method="_on_yellow_start_area_mouse_entered"]
+[connection signal="mouse_exited" from="PhoneGame/YellowStartArea" to="PhoneGame" method="_on_yellow_start_area_mouse_exited"]
+[connection signal="mouse_entered" from="PhoneGame/YellowEndArea" to="PhoneGame" method="_on_yellow_end_area_mouse_entered"]
+[connection signal="mouse_exited" from="PhoneGame/YellowEndArea" to="PhoneGame" method="_on_yellow_end_area_mouse_exited"]
+[connection signal="mouse_entered" from="PhoneGame/GreenStartArea" to="PhoneGame" method="_on_green_start_area_mouse_entered"]
+[connection signal="mouse_exited" from="PhoneGame/GreenStartArea" to="PhoneGame" method="_on_green_start_area_mouse_exited"]
+[connection signal="mouse_entered" from="PhoneGame/GreenEndArea" to="PhoneGame" method="_on_green_end_area_mouse_entered"]
+[connection signal="mouse_exited" from="PhoneGame/GreenEndArea" to="PhoneGame" method="_on_green_end_area_mouse_exited"]
+[connection signal="mouse_entered" from="PhoneGame/BlueStartArea" to="PhoneGame" method="_on_blue_start_area_mouse_entered"]
+[connection signal="mouse_exited" from="PhoneGame/BlueStartArea" to="PhoneGame" method="_on_blue_start_area_mouse_exited"]
+[connection signal="mouse_entered" from="PhoneGame/BlueEndArea" to="PhoneGame" method="_on_blue_end_area_mouse_entered"]
+[connection signal="mouse_exited" from="PhoneGame/BlueEndArea" to="PhoneGame" method="_on_blue_end_area_mouse_exited"]
+[connection signal="pressed" from="PhoneGame/PhoneExit" to="." method="_on_phone_exit_pressed"]

@@ -22,6 +22,7 @@ GlobalState="*res://Scripts/GlobalState.cs"
 DialogueManager="*res://Components/dialogue_manager.tscn"
 PlayerCharacter="*res://Scenes/Characters/player_character.tscn"
 RadioGame="*res://Scripts/Tasks/RadioGame.cs"
+PhoneGame="*res://Scripts/Tasks/PhoneGame.cs"
 
 [dialogue_manager]
 
