@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://6i6smfc1mrri"]
+
+[ext_resource type="PackedScene" uid="uid://cfyc8k4gjjnmr" path="res://Scenes/out_play_safehouse.tscn" id="1_3qtpo"]
+
+[node name="Task3" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Background" parent="." instance=ExtResource("1_3qtpo")]
+position = Vector2(320, 180)

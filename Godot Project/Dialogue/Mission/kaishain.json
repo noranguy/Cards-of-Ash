@@ -3,60 +3,75 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Hey kid, This is a nice place you got here.",
+			"text": "That was a good match, kid. I have to thank you for letting me crash here. It’s much better than the subway floor after missing the last train.",
 			"options": [
-				{ "text": "Thanks.", "next": "a" }
+				{ "text": "The more the merrier.", "next": "a" }
 			]
 		},
 		{
 			"id": "a",
-			"text": "To be honest, I’ve been kinda down on my luck recently.",
+			"text": "Ah, where are my manners? My name is Naoki Fukuda. Nice to meet you… properly.",
 			"options": [
-				{ "text": "...", "next": "b" }
+				{ "text": "Does this mean we're friends", "next": "b" }
 		  	]
 		},
 	  {
 			"id": "b",
-			"text": "I mean I’m even down to my last pack of cigs...",
+			"text": "I guess it does. Damn, I miss my buddies. Late night karaoke was the best… I really hope they’re doing okay…",
 			"options": [
 				{ "text": "...", "next": "c" }
 		  	]
 		},
 	  {
 			"id": "c",
-			"text": "But from the looks of it, my luck’s turning around.",
+			"text": "*Peers behind you*",
 			"options": [
-				{ "text": "Oh?", "next": "d" }
+				{ "text": "...", "next": "d" }
 		  	]
 		},
 	  {
 			"id": "d",
-			"text": "I'm assuming you know how things work around here?",
+			"text": "Hey, that phone over on those boxes… Is it working?",
 			"options": [
-				{ "text": "A little...", "next": "e" }
+				{ "text": "I’m haven’t checked", "next": "e" }
 		  	]
 		},
 	  {
 			"id": "e",
-			"text": "Simple, you and I in a game of Menko, with our resources on the line.",
+			"text": "I haven't been able to talk to them in a while, I wish I could call them…",
 			"options": [
-				{ "text": "Can't believe people actually do this", "next": "g" }
+				{ "text": "I could take a look", "next": "f" }
 		  	]
 		},
 
 	  {
-			"id": "g",
-			"text": "Forget whatever you've seen about menko, I've got some cards that'll blow you away. ",
+			"id": "f",
+			"text": "Really?! That'd be great!",
 			"options": [
-				{ "text": "Continue", "next": "h" }
+				{ "text": "It's no problem", "next": "g" }
 		  	]
 		},
 	  {
-			"id": "h",
-			"text": "Get ready to part with your stuff kid, we're settling this at the table",
+			"id": "g",
+			"text": "Check out that radio too, see if you can find the emergency channel. That's how we can get important information.",
 			"options": [
-				{ "text": "Continue", "next": "end" }
+				{ "text": "...", "next": "h" }
+		  	]
+		},
+		{
+			"id": "h",
+			"text": "We’ll have a better chance of making it out in one piece.",
+			"options": [
+				{ "text": "...", "next": "i" }
+		  	]
+		},
+		{
+			"id": "i",
+			"text": "After you're done come see me and I’ll give you something. My treat.",
+			"options": [
+				{ "text": "Deal.", "next": "end" }
 		  	]
 		}
+		
 	]
 }
