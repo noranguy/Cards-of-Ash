@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://62p5ed87pb70"
-path="res://.godot/imported/foreigner mini sprite.png-606a3fe0c86bd0faa1c20fed3f75a309.ctex"
+uid="uid://c37m74n130hvc"
+path="res://.godot/imported/types.png-b58cad877291b406e40f494ec36c1a2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/foreigner/foreigner mini sprite.png"
-dest_files=["res://.godot/imported/foreigner mini sprite.png-606a3fe0c86bd0faa1c20fed3f75a309.ctex"]
+source_file="res://Assets/Rulebook/types.png"
+dest_files=["res://.godot/imported/types.png-b58cad877291b406e40f494ec36c1a2a.ctex"]
 
 [params]
 

@@ -101,7 +101,7 @@ public partial class Safehouse : StaticBody2D
 		Label dayLabel = GetNode<Label>("CanvasLayer/DayLabel");
 		dayLabel.Text = $"Day {GlobalState.Instance.GetDay() + 1}";
 
-		_ = Start_dayAsync();
+		Start_dayAsync();
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
 
 		//_ray = GetNode<RayCast2D>("PlayerCharacter/RayCast2D");

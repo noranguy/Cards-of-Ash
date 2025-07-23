@@ -1,41 +1,148 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn8arlwkev5by"]
+[gd_scene load_steps=10 format=3 uid="uid://dn8arlwkev5by"]
+
+[ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="1_4qpkj"]
+[ext_resource type="Script" uid="uid://elwigvcet0ny" path="res://Scenes/RuleBook.cs" id="1_gvio6"]
+[ext_resource type="Texture2D" uid="uid://bsyook4jja5ra" path="res://Assets/Cards/volcano_basic.png" id="3_aknm7"]
+[ext_resource type="Texture2D" uid="uid://cm6o02qusl4qr" path="res://Assets/Cards/tsunami_basic.png" id="4_550ur"]
+[ext_resource type="Texture2D" uid="uid://1ivdonv17ahd" path="res://Assets/Cards/earthquake_basic.png" id="5_kngfx"]
+[ext_resource type="Texture2D" uid="uid://cd4vvl7w64b1c" path="res://Assets/Rulebook/white_arrow.png" id="6_ixs28"]
+[ext_resource type="Texture2D" uid="uid://blj04aeyq47b0" path="res://Assets/Cards/indicator.png" id="7_550ur"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvio6"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loefu"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="Rulebook" type="Panel"]
 z_index = 20
+theme_override_styles/panel = SubResource("StyleBoxFlat_gvio6")
+script = ExtResource("1_gvio6")
 
-[node name="DialoguePanel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(500, 300)
 layout_mode = 0
 offset_right = 500.0
-offset_bottom = 100.0
+offset_bottom = 400.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_loefu")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Info" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(480, 280)
 layout_mode = 0
-offset_left = 9.0
-offset_top = 11.0
-offset_right = 489.0
-offset_bottom = 291.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 970.0
+offset_bottom = 670.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("1_4qpkj")
+theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center]Menko Rulebook[/center]
 
-Each player starts with 9 throwing cards and 6 table cards. The objective is to flip more of the opponent’s cards. The game ends after 9 rounds, or earlier if a player flips all 6 of the opponent’s table cards. The outcome (win, lose, or tie) affects your resources in the safe house.
-
-You can throw at any table card to defend / attack. Once a card is thrown, it is discarded and can’t be thrown again.
-
-Each card will have a type of Tsunami, Volcano, or Earthquake, forming a rock-paper-scissors relationship which affects the chance of flipping the table card:
-
-[center][img={400}]res://Assets/Rulebook/types.jpeg[/img][/center]
-
-You will see the types of your throwing cards but the types of table cards remain hidden until flipped.
-
-Throwing a card:
-- Strong against the table card → 95% flip chance
-- Same type → 50% flip chance
-- Weak against → 5% flip chance
-
 If a table card has been flipped, it can be flipped again to “unflip” it. However, each successful flip causes the card to deteriorate, making it 20% harder to flip in future attempts. For example, the chance of flipping a table card that is of the same type and has been flipped twice is 50% * 60% = 30%."
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(250, 230)
+scale = Vector2(2, 2)
+texture = ExtResource("3_aknm7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(180, 120)
+scale = Vector2(2, 2)
+texture = ExtResource("4_550ur")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(320, 120)
+scale = Vector2(2, 2)
+texture = ExtResource("5_kngfx")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(250, 120)
+rotation = -1.5708
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("6_ixs28")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(313, 203)
+rotation = 0.63912
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("6_ixs28")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(189, 207)
+rotation = 2.37994
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("6_ixs28")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 120.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("1_4qpkj")
+theme_override_font_sizes/font_size = 32
+text = "Tsunami"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 260.0
+offset_top = 40.0
+offset_right = 380.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("1_4qpkj")
+theme_override_font_sizes/font_size = 32
+text = "Earthquake"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 190.0
+offset_top = 280.0
+offset_right = 310.0
+offset_bottom = 306.0
+theme_override_fonts/font = ExtResource("1_4qpkj")
+theme_override_font_sizes/font_size = 32
+text = "Volcano"
+horizontal_alignment = 1
+
+[node name="RightButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 393.0
+offset_right = 276.0
+offset_bottom = 409.0
+rotation = -1.5708
+scale = Vector2(3, 3)
+texture_normal = ExtResource("7_550ur")
+
+[node name="LeftButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 345.0
+offset_right = 256.0
+offset_bottom = 361.0
+rotation = 1.5708
+scale = Vector2(3, 3)
+texture_normal = ExtResource("7_550ur")
+
+[node name="PageNumber" type="Label" parent="."]
+layout_mode = 0
+offset_left = 227.0
+offset_top = 339.0
+offset_right = 277.0
+offset_bottom = 390.0
+theme_override_fonts/font = ExtResource("1_4qpkj")
+theme_override_font_sizes/font_size = 64
+text = "1"
+horizontal_alignment = 1

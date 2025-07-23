@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://62p5ed87pb70"
-path="res://.godot/imported/foreigner mini sprite.png-606a3fe0c86bd0faa1c20fed3f75a309.ctex"
+uid="uid://cd4vvl7w64b1c"
+path="res://.godot/imported/white_arrow.png-caf6f5a777d569772612baa2ad7bd6a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/foreigner/foreigner mini sprite.png"
-dest_files=["res://.godot/imported/foreigner mini sprite.png-606a3fe0c86bd0faa1c20fed3f75a309.ctex"]
+source_file="res://Assets/Rulebook/white_arrow.png"
+dest_files=["res://.godot/imported/white_arrow.png-caf6f5a777d569772612baa2ad7bd6a6.ctex"]
 
 [params]
 

@@ -93,14 +93,18 @@ public partial class GameManager : Node2D {
 			table.restrictAllow = new HashSet<Card> { tableFirst };
 		}
 		
+		try {
+			if (GlobalState.Instance.GetDay() == 0) {
+				playerFirst.Focus();
+				tableFirst.Focus();
+			}
+		} catch (Exception e) {
+			GD.Print(e);
+		}
+		
 		await ToSignal(GetTree().CreateTimer(2), "timeout");
 		
 		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start", true);
-		
-		if (GlobalState.Instance.GetDay() == 0) {
-			playerFirst.Focus();
-			tableFirst.Focus();
-		}
 	}
 	
 	public override void _Process(double delta) {
@@ -141,11 +145,17 @@ public partial class GameManager : Node2D {
 	}
 	
 	public void UpdateActiveHandCard(Card card) {
+		if (GlobalState.Instance.GetDay() == 0) {
+			card.Unfocus();
+		}
 		playerHand.activeCard = card;
 		ThrowToggle(true);
 	}
 	
 	public void UpdateActiveTableCard(Card card) {
+		if (GlobalState.Instance.GetDay() == 0) {
+			card.Unfocus();
+		}
 		table.activeCard = card;
 		ThrowToggle(true);
 	}
@@ -243,7 +253,7 @@ public partial class GameManager : Node2D {
 		var (throwingCard, tableCard1, tableCard2) = enemy.Move();
 		oppCardThrow.Visible = true;
 		oppCardThrow.Play("opp_card_throw");
-		ThrowCard(throwingCard, new List<Card> {tableCard1});
+		await ThrowCard(throwingCard, new List<Card> {tableCard1});
 		if (throwingCard.clas == "elastic" || throwingCard.clas == "vision") {
 			await ThrowCard(throwingCard, new List<Card> {tableCard2});
 		}
@@ -281,38 +291,27 @@ public partial class GameManager : Node2D {
 
 		// game end
 		GlobalState.Instance.NewInhabitant();
-		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6)
-		{
-			if (playerCount > enemyCount)
-			{
+		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
+			if (playerCount > enemyCount) {
 				roundLabel.Text = "You Win";
 				GlobalState.Instance.NewInhabitant();
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "win");
 			}
-			else if (playerCount < enemyCount)
-			{
+			else if (playerCount < enemyCount) {
 				roundLabel.Text = "You Lose";
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "lose");
-			}
-			else
-			{
+			} else {
 				roundLabel.Text = "Tie";
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "tie");
 			}
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
-		}
-		else
-		{
-			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision")))
-			{
+		} else {
+			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision"))) {
 				roundLabel.Text = $"Vision Cards Are Swapping";
 				await ToSignal(GetTree().CreateTimer(0.5), "timeout");
-				if (GlobalState.Instance.GetInfo().Class == "vision")
-				{
+				if (GlobalState.Instance.GetInfo().Class == "vision") {
 					await SwapVision(enemyTableCards);
-				}
-				else
-				{
+				} else {
 					await SwapVision(playerTableCards);
 				}
 			}
