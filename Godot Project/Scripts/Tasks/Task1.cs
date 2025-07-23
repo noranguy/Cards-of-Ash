@@ -15,7 +15,7 @@ public partial class Task1 : Node2D
 
 	float channel;
 
-	float goal_channel = 93.1f;
+	float goal_channel = 81.3f;
 
 	RadioGame radio_game;
 	PhoneGame phone_game;
@@ -31,8 +31,6 @@ public partial class Task1 : Node2D
 
 		in_radio_game = false;
 		in_phone_game = false;
-
-		channel = 85.6f;
 
 		radio_game = GetNode<RadioGame>("RadioGame");
 		phone_game = GetNode<PhoneGame>("PhoneGame");
@@ -118,7 +116,8 @@ public partial class Task1 : Node2D
 	{
 		if (radio_fixed && phone_fixed)
 		{
-			_ = playDialogueAsync();
+			GlobalState.Instance.MissionCompleted(1);
+			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		}
 	}
 

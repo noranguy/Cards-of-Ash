@@ -106,11 +106,14 @@ public partial class GlobalState : Node {
 	// Flag for the begining when the player takes the cards off the table
 	private bool player_has_cards = false;
 
+	// Used in safehouse to check if coming back from a minigame, so it wont treat it as a new day
+	private bool in_minigame = false;
+
 	// List to keep track of which npcs are in the safehouse
-	private bool[] inhabitants = new bool[5] {false, false, false, false, false};
+	private bool[] inhabitants = new bool[5] { false, false, false, false, false };
 
 	// Keep track of mission progress, which determines what characters dialogue is
-	private bool[] mission_completed = new bool[4] { false, false, false, false };
+	private bool[] mission_completed = new bool[5] {false, false, false, false, false };
 	
 	private List<Func<Agent>> AgentFactories = new List<Func<Agent>> {
 		() => new Agent0(),
@@ -221,10 +224,22 @@ Press SPACE to continue.
 	{
 		return mission_completed;
 	}
+
+	public void SetInMinigame(bool in_game)
+	{
+		in_minigame = in_game;
+	}
+
+	public bool GetInMinigame()
+	{
+		return in_minigame;
+	}
 	
 	// Updates the player's decks and increments day counter
-	public void NextDay() {
-		if (day > 0) {
+	public void NextDay()
+	{
+		if (day > 0)
+		{
 			var clas = GetInfo().Class;
 			handDeck.Add(("tsunami", clas));
 			handDeck.Add(("volcano", clas));

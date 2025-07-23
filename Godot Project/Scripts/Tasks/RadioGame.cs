@@ -6,7 +6,7 @@ public partial class RadioGame: Control
     bool dial_moving;
     bool tracking;
     float lerped_angle;
-    float channel;
+    float channel = 82.5f;
 
     public bool PlayGame(float goal_channel)
     {
@@ -30,7 +30,7 @@ public partial class RadioGame: Control
 
             Vector2 distance = GetNode<Node2D>("Dial/DialTexture/DialPoint").Position.Rotated(GetNode<TextureRect>("Dial/DialTexture").Rotation);
             float angle_to = GetNode<Node2D>("Dial/MiddlePoint").Position.AngleTo(distance);
-            channel = RangeLerp(angle_to, -3.14f, 3.14f, 90, 96);
+            channel = RangeLerp(angle_to, -3.14f, 3.14f, 80, 85);
             channel = (float)Math.Round(channel, 1);
             //channel = (float)Math.Clamp(channel, 76.1, 94.9);
         }

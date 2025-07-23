@@ -6369,6 +6369,7 @@ tile_set = SubResource("TileSet_ip2rk")
 [node name="Radio" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Radio"]
+visible = false
 z_index = 5
 position = Vector2(40, 21.5)
 shape = SubResource("RectangleShape2D_4mopu")

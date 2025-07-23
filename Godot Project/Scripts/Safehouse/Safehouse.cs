@@ -21,9 +21,10 @@ public partial class Safehouse : StaticBody2D
 	private bool _in_bed;
 	private bool _at_door;
 	private bool _at_table;
+	private bool _at_boxes;
 
 	// Flags to see if the player is trying to talk to an npc, order [kaishain, mom, kid, foreigner]
-	private bool[] _talking_to = {false, false, false, false};
+	private bool[] _talking_to = {false, false, false, false };
 
 	// Flags for what dialogue should be shown to the player
 	private bool[] _mission_completed;
@@ -33,6 +34,7 @@ public partial class Safehouse : StaticBody2D
 
 	// If the character is in a prompt screen
 	public bool in_prompt;
+	private bool _in_minigame;
 
 	//List that follows the day order for when characters show up
 	private String[] _character_order = ["OldManTutorial", "Kaishain", "Mom", "Kid", "Foreigner", "OldManEndGame"];
@@ -61,6 +63,10 @@ public partial class Safehouse : StaticBody2D
 		_in_bed = false;
 		_at_door = false;
 		_at_table = false;
+		_at_boxes = false;
+		_in_minigame = GlobalState.Instance.GetInMinigame();
+	
+		GetNode<TextureRect>("Bed/Interact").Visible = false;
 
 		_inhabitants = GlobalState.Instance.GetInhabitants();
 		InhabitSafehouse();
@@ -101,7 +107,19 @@ public partial class Safehouse : StaticBody2D
 		Label dayLabel = GetNode<Label>("CanvasLayer/DayLabel");
 		dayLabel.Text = $"Day {GlobalState.Instance.GetDay() + 1}";
 
-		_ = Start_dayAsync();
+		if (!_in_minigame)
+		{
+			_ = Start_dayAsync();
+
+		}
+
+		else
+		{
+			_in_minigame = false;
+			GlobalState.Instance.SetInMinigame(false);
+			_ = ThoughtsDialogueAsync($"Tasks/Task{_day_num}/completed");
+		}
+
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
 
 		//_ray = GetNode<RayCast2D>("PlayerCharacter/RayCast2D");
@@ -145,6 +163,12 @@ public partial class Safehouse : StaticBody2D
 			{
 				_open_door_prompt.Visible = true;
 				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
+			}
+
+			else if (_at_boxes && _inhabitants[1] && !_mission_completed[1])
+			{
+				GlobalState.Instance.SetInMinigame(true);
+				GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("Tasks/task_1.tscn");
 			}
 
 			// If the player is trying to talk to an npc, start the dialogue, maybe different (smaller) dialogues for each day 
@@ -284,6 +308,16 @@ public partial class Safehouse : StaticBody2D
 		_talking_to[3] = false;
 	}
 
+	private void _on_boxes_body_entered(Node2D body)
+	{
+		_at_boxes = true;
+	}
+
+	private void _on_boxes_body_exited(Node2D body)
+	{
+		_at_boxes = false;
+	}
+
 	// Get rid of all prompts
 	private void _on_cancel_pressed()
 	{
@@ -386,6 +420,15 @@ public partial class Safehouse : StaticBody2D
 		await DialogueManager.Instance.StartDialogue(dialogue_path, false);
 
 		_dialogue_exhausted[character_num] = true;
+
+		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
+	}
+
+	private async Task ThoughtsDialogueAsync(string dialogue_path)
+	{
+		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
+
+		await DialogueManager.Instance.StartDialogue(dialogue_path, false);
 
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
 	}
