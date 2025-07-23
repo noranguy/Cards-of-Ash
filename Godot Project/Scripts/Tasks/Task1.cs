@@ -97,6 +97,8 @@ public partial class Task1 : Node2D
 	private void _on_radio_exit_pressed()
 	{
 		GetNode<Control>("RadioGame").Visible = false;
+		GetNode<AudioStreamPlayer>("RadioGame/RadioSound").Stop();
+        GetNode<AudioStreamPlayer>("RadioGame/StaticSound").Stop();
 		in_radio_game = false;
 	}
 

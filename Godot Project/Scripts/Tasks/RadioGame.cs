@@ -39,22 +39,55 @@ public partial class RadioGame: Control
 
         GetNode<Label>("CenterContainer/ColorRect/ChannelLabel").Text = $"{channel.ToString()} FM";
 
+        AudioStreamPlayer radio_sound = GetNode<AudioStreamPlayer>("RadioSound");
+        AudioStreamPlayer static_sound = GetNode<AudioStreamPlayer>("StaticSound");
+
+        if (!radio_sound.Playing)
+        {
+            radio_sound.Play();
+        }
+
+        if (!static_sound.Playing)
+        {
+            static_sound.Play();
+        }
+
+
         if (channel == goal_channel)
         {
             GetNode<TextureRect>("OnLight").Visible = true;
+            radio_sound.VolumeDb = -10;
+            static_sound.VolumeDb = -80;
         }
 
-        /*else if (Math.Abs(channel - goal_channel) < .5)
+        else if (Math.Abs(channel - goal_channel) < .1)
+        {
+            GetNode<TextureRect>("OnLight").Visible = false;
+            radio_sound.VolumeDb = -12;
+            static_sound.VolumeDb = -9;
+        }
+
+        else if (Math.Abs(channel - goal_channel) < .2)
         {
             GetNode<TextureRect>("KindaOnLight").Visible = true;
             GetNode<TextureRect>("OnLight").Visible = false;
-        }*/
+            radio_sound.VolumeDb = -13;
+            static_sound.VolumeDb = -7;
+        }
+
+        else if (Math.Abs(channel - goal_channel) < .3)
+        {
+            radio_sound.VolumeDb = -15;
+            static_sound.VolumeDb = -6;
+        }
 
         else if (Math.Abs(channel - goal_channel) < .5)
         {
             GetNode<TextureRect>("BarelyOnLight").Visible = true;
             GetNode<TextureRect>("KindaOnLight").Visible = false;
             GetNode<TextureRect>("OnLight").Visible = false;
+            radio_sound.VolumeDb = -17;
+            static_sound.VolumeDb = -5;
         }
 
         else if (Math.Abs(channel - goal_channel) < 1)
@@ -63,6 +96,21 @@ public partial class RadioGame: Control
             GetNode<TextureRect>("BarelyOnLight").Visible = false;
             GetNode<TextureRect>("KindaOnLight").Visible = false;
             GetNode<TextureRect>("OnLight").Visible = false;
+
+            radio_sound.VolumeDb = -20;
+            static_sound.VolumeDb = -4;
+        }
+
+        else if (Math.Abs(channel - goal_channel) < 1.5)
+        {
+            radio_sound.VolumeDb = -23;
+            static_sound.VolumeDb = -3;
+        }
+
+        else if (Math.Abs(channel - goal_channel) < 2)
+        {
+            radio_sound.VolumeDb = -25;
+            static_sound.VolumeDb = 0;
         }
 
         else
@@ -72,6 +120,9 @@ public partial class RadioGame: Control
             GetNode<TextureRect>("BarelyOnLight").Visible = false;
             GetNode<TextureRect>("KindaOnLight").Visible = false;
             GetNode<TextureRect>("OnLight").Visible = false;
+
+            static_sound.VolumeDb = 3;
+            radio_sound.VolumeDb = -80;
         }
 
         if (channel == goal_channel)

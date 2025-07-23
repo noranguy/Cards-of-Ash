@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "\"I think that's everything, I should go talk to the Kaishain.\"",
+			"text": "\"I think that's everything, I should go talk to the Naoki.\"",
 			"options": [
 				{ "text": "Go Back", "next": "end" }
 			]

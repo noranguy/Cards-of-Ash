@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c8yf6fsttlpb0" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="10_40vev"]
-[ext_resource type="AudioStream" uid="uid://gt654obtm1q1" path="res://Assets/SFX/triple-knock-on-door.mp3" id="10_mt6l6"]
+[ext_resource type="AudioStream" uid="uid://bqv27d7aumo2r" path="res://Assets/SFX/triple-knock-on-door.mp3" id="10_mt6l6"]
 [ext_resource type="Texture2D" uid="uid://i0shetx0bao8" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_D.png" id="11_ks0xv"]
 [ext_resource type="Texture2D" uid="uid://bo7f5l20s816i" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_E.png" id="12_fiq5u"]
 [ext_resource type="Texture2D" uid="uid://bdugnjwd5gcdt" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Props.png" id="13_7jf0i"]
