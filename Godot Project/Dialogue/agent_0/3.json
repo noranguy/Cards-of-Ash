@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "You can also unflip table cards that your opponent flipped.",
+			"text": "You can access the rulebook at any point in the game.",
 			"options": [
 			  { "text": "Continue Game", "next": "end" }
 			]
