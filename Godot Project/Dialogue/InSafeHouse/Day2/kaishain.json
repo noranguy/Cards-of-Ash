@@ -3,75 +3,17 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "That was a good match, kid. I have to thank you for letting me crash here. It’s much better than the subway floor after missing the last train.",
+			"text": "Thanks for doing all that for me! I'll call my buddies tonight",
 			"options": [
-				{ "text": "The more the merrier.", "next": "a" }
+				{ "text": "...", "next": "a" }
 			]
 		},
 		{
 			"id": "a",
-			"text": "Ah, where are my manners? My name is Naoki Fukuda. Nice to meet you… properly.",
+			"text": "Maybe staying here won't be so bad after all",
 			"options": [
-				{ "text": "Does this mean we're friends", "next": "b" }
-		  	]
-		},
-	  {
-			"id": "b",
-			"text": "I guess it does. Damn, I miss my buddies. Late night karaoke was the best… I really hope they’re doing okay…",
-			"options": [
-				{ "text": "...", "next": "c" }
-		  	]
-		},
-	  {
-			"id": "c",
-			"text": "*Peers behind you*",
-			"options": [
-				{ "text": "...", "next": "d" }
-		  	]
-		},
-	  {
-			"id": "d",
-			"text": "Hey, that phone over on those boxes… Is it working?",
-			"options": [
-				{ "text": "I’m haven’t checked", "next": "e" }
-		  	]
-		},
-	  {
-			"id": "e",
-			"text": "Oh yes, they’ll definitely find us if we just sit here.",
-			"options": [
-				{ "text": "...haha", "next": "f" }
-		  	]
-		},
-
-	  {
-			"id": "f",
-			"text": "Haha. Seriously though, whenever you’re lost, you should always call emergency services. Especially after an earthquake like this.",
-			"options": [
-				{ "text": "...", "next": "g" }
-		  	]
-		},
-	  {
-			"id": "g",
-			"text": "Here, take this and dial 119. That will alert emergency services. Call them and tell them we’re here.",
-			"options": [
-				{ "text": "...", "next": "h" }
-		  	]
-		},
-		{
-			"id": "h",
-			"text": "We’ll have a better chance of making it out in one piece.",
-			"options": [
-				{ "text": "...", "next": "i" }
-		  	]
-		},
-		{
-			"id": "i",
-			"text": "Do this for me, and I’ll give you something. My treat.",
-			"options": [
-				{ "text": "Deal.", "next": "end" }
+				{ "text": "Good to have some company", "next": "end" }
 		  	]
 		}
-		
 	]
 }

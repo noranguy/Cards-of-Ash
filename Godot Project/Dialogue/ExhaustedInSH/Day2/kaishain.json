@@ -3,10 +3,10 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "I dont want to talk",
+			"text": "Maybe staying here won't be so bad after all",
 			"options": [
-				{ "text": "Thanks.", "next": "end" }
-			]
+				{ "text": "...", "next": "end" }
+		  	]
 		}
 	]
 }

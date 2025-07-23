@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnphgfq0s4mbh"
-path="res://.godot/imported/agent_1.png-1a9f8805908bad10780627138be4fe78.ctex"
+uid="uid://wwg07af5tqxm"
+path="res://.godot/imported/Red_wire.png-05f6cfb53e50036e7ee885af2d49b9ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/kaishain/agent_1.png"
-dest_files=["res://.godot/imported/agent_1.png-1a9f8805908bad10780627138be4fe78.ctex"]
+source_file="res://Assets/Out of Play Safe House/Red_wire.png"
+dest_files=["res://.godot/imported/Red_wire.png-05f6cfb53e50036e7ee885af2d49b9ab.ctex"]
 
 [params]
 
