@@ -54,46 +54,11 @@ public class Agent4 : Agent {
 		
 		order = Enumerable.Range(0, 6).ToList();
 		knownCards = Enumerable.Repeat((Card)null, 6).ToArray();
-		
-		//assumedTypes = Enumerable.Repeat(-1, 6).ToArray();
 	}
 	
 	public override void RevealCard(Card card, int idx) {
 		knownCards[idx] = card;
 	}
-	
-	/*
-	private void FixAssumption(int type) {
-		int idx = Enumerable.Range(0, 6)
-			.FirstOrDefault(i >= knownCards[i] == null && assumedTypes[i] = type);
-		
-		int prevType = (type + 2) % 3;
-		int nextType = (type + 1) % 3;
-		
-		if (tableFreq[prevType] == 0) {
-			int knownPrevTypeCount = knownCards.Count(card =>
-				card != null && GlobalState.Instance.TypeMap[card.type] == prevType);
-			
-			if (knownPrevTypeCount == 2) {
-				assumedTypes[idx] = nextType;
-				tableFreq[type] += 1;
-				tableFreq[nextType] -= 1;
-			} else {
-				int idx2 = Enumerable.Range(0, 6)
-					.FirstOrDefault(i => knownCards[i] == null && assumedTypes[i] == prevType);
-				
-				assumedTypes[idx2] = nextType;
-				assumedTypes[idx] = prevType;
-				tableFreq[type] += 1;
-				tableFreq[prevType] -= 1;
-			}
-		} else {
-			assumedTypes[idx] = prevType;
-			tableFreq[type] += 1;
-			tableFreq[prevType] -= 1;
-		}
-	}
-	*/
 	
 	public override (Card, Card, Card) Move() {
 		if (round < 3) {

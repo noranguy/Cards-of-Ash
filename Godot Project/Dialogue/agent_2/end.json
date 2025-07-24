@@ -3,23 +3,23 @@
 	"dialogue": [
 		{
 			"id": "win",
-			"text": "Atleast we have a safe place to sleep tonight.",
+			"text": "At least we have a safe place to sleep tonight.",
 			"options": [
-			  { "text": "Back to Safe House", "next": "end" }
+				{ "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "lose",
 			"text": "Looks like we're eating good tonight.",
 			"options": [
-			  { "text": "Back to Safe House", "next": "end" }
+				{ "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "tie",
 			"text": "Yay! Everyone wins!",
 			"options": [
-			  { "text": "Back to Safe House", "next": "end" }
+				{ "text": "Back to Safe House", "next": "end" }
 			]
 		}
   	]

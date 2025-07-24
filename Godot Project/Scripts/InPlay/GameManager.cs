@@ -192,17 +192,13 @@ public partial class GameManager : Node2D {
 			if (GlobalState.Instance.GetDay() == 0) {
 				if (round == 0 || (round == 2 && throwingCard.isPlayer)) {
 					rnd = 0;
-				} else if (round == 1 && throwingCard.isPlayer) {
+				} else if ((round == 1 && throwingCard.isPlayer) ||
+					(!throwingCard.isPlayer &&
+					playerTableCards.Count(card => card.visible) >=
+					enemyTableCards.Count(card => card.visible) - 1)
+				) {
 					rnd = 1;
 				}
-			}
-			
-			if (
-				GlobalState.Instance.GetDay() == 0 && !throwingCard.isPlayer &&
-				enemyTableCards.Count(card => card.visible) >=
-				playerTableCards.Count(card => card.visible) - 1
-			) {
-				threshold = 0;
 			}
 			
 			if (i != 0) threshold *= GlobalState.Instance.CeramicProb;

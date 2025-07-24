@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dn8arlwkev5by"]
 
 [ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="1_4qpkj"]
-[ext_resource type="Script" uid="uid://elwigvcet0ny" path="res://Scenes/RuleBook.cs" id="1_gvio6"]
+[ext_resource type="Script" uid="uid://elwigvcet0ny" path="res://Scripts/InPlay/RuleBook.cs" id="1_gvio6"]
 [ext_resource type="Texture2D" uid="uid://bsyook4jja5ra" path="res://Assets/Cards/volcano_basic.png" id="3_aknm7"]
 [ext_resource type="Texture2D" uid="uid://cm6o02qusl4qr" path="res://Assets/Cards/tsunami_basic.png" id="4_550ur"]
 [ext_resource type="Texture2D" uid="uid://1ivdonv17ahd" path="res://Assets/Cards/earthquake_basic.png" id="5_kngfx"]

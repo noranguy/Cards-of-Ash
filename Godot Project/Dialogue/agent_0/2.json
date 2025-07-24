@@ -3,16 +3,16 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Well at least you know it can't be a Tsunami card.",
+			"text": "Well at least you know it's probably not a Tsunami card.",
 			"options": [
-			  { "text": "Continue", "next": "a" }
+				{ "text": "Continue", "next": "a" }
 			]
 		},
 		{
 			"id": "a",
 			"text": "You can also unflip table cards that your opponent flipped.",
 			"options": [
-			  { "text": "Continue Game", "next": "end" }
+				{ "text": "Continue Game", "next": "end" }
 			]
 		}
   	]

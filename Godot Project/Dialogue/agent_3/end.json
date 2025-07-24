@@ -5,21 +5,21 @@
 			"id": "win",
 			"text": "No way! You cheated!",
 			"options": [
-			  { "text": "Back to Safe House", "next": "end" }
+				{ "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "lose",
 			"text": "Loser!!",
 			"options": [
-			  { "text": "Back to Safe House", "next": "end" }
+				{ "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "tie",
 			"text": "Ah... Can we play again?",
 			"options": [
-			  { "text": "Back to Safe House", "next": "end" }
+				{ "text": "Back to Safe House", "next": "end" }
 			]
 		}
   	]
