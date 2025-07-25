@@ -17,6 +17,7 @@ offset_bottom = 112.0
 script = ExtResource("1_1dsj7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
 follow_viewport_enabled = true
 
 [node name="DialoguePanel" type="Panel" parent="CanvasLayer"]
