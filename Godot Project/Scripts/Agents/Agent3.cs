@@ -129,7 +129,7 @@ public class Agent3 : Agent {
 		});
 	}
 	
-	public override (Card, Card, Card) Move() {
+	public override (Card, Card, Card) Move(bool blinded) {
 		SortOrders();
 		SortHand();
 		

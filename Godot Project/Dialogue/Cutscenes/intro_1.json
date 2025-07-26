@@ -10,7 +10,7 @@
 		},
 		{
 		  "id": "b",
-		  "text": "Maybe I can stop by the kobini before I head to class.",
+		  "text": "Maybe I can stop by the konbini before I head to class.",
 		  "options": [
 			{ "text": "Continue", "next": "end" }
 		  ]

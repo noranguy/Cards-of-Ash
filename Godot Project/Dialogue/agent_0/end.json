@@ -5,21 +5,21 @@
 			"id": "win",
 			"text": "You're picking up this game pretty fast.",
 			"options": [
-			  { "text": "Back to Safe House", "next": "end" }
+				{ "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "lose",
 			"text": "Can't win them all.",
 			"options": [
-			  { "text": "Back to Safe House", "next": "end" }
+				{ "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "tie",
 			"text": "You're picking up this game pretty fast.",
 			"options": [
-			  { "text": "Back to Safe House", "next": "end" }
+				{ "text": "Back to Safe House", "next": "end" }
 			]
 		}
   	]

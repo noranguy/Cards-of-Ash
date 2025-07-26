@@ -5,7 +5,7 @@
 			"id": "start",
 			"text": "You can access the rulebook at any point in the game.",
 			"options": [
-			  { "text": "Continue Game", "next": "end" }
+				{ "text": "Continue Game", "next": "end" }
 			]
 		}
   	]

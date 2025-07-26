@@ -25,6 +25,9 @@ public partial class RuleBook : Panel {
 		curPage = 0;
 		lastPage = GlobalState.Instance.GetDay() + 4;
 		if (GlobalState.Instance.GetDay() == 5) lastPage--;
+		
+		info.Text = GlobalState.Instance.RulebookPages[curPage];
+		pageNumberLabel.Text = $"{curPage + 1}";
 	}
 	
 	public override void _Process(double delta) {

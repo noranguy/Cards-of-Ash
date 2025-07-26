@@ -12,14 +12,14 @@
 			"id": "a",
 			"text": "The first player to flip all 6 of their table cards wins.",
 			"options": [
-			  { "text": "Continue", "next": "b" }
+				{ "text": "Continue", "next": "b" }
 			]
 		},
 		{
 			"id": "b",
 			"text": "But remember, table card types are hidden until they are revealed.",
 			"options": [
-			  { "text": "Continue", "next": "c" }
+				{ "text": "Continue", "next": "c" }
 			]
 		},
 		{

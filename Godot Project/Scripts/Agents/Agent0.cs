@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class Agent0 : Agent {
-	private readonly Random Rand = new Random();
+	private Random Rand = new Random();
 	
 	private List<Card> hand;
 	private List<Card> playerTable;
@@ -51,7 +51,7 @@ public class Agent0 : Agent {
 	// Rounds 0-2: Mode 1.
 	// Rounds 3-5: Mode 2. If enemy table has no flipped cards, Mode 1.
 	// Rounds 6-8: Mode 1. If player table has only flipped cards, Mode 3.
-	public override (Card, Card, Card) Move() {
+	public override (Card, Card, Card) Move(bool blinded) {
 		Card throwingCard = hand[Rand.Next(hand.Count)];
 		
 		List<Card> unflippedPlayerTable = playerTable.Where(x => !x.visible).ToList();

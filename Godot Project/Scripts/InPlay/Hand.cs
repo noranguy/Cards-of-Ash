@@ -111,9 +111,6 @@ public partial class Hand : Control {
 	public HashSet<Card> restrictAllow = new HashSet<Card>();
 	
 	public virtual void OnCardClicked(Card card) {
-		GD.Print(activeCard == card);
-		GD.Print($"{restrictAllow.Count > 0} {!restrictAllow.Contains(card)}");
-		GD.Print(!card.isPlayer && card.index == -1);
 		if (activeCard == card || (restrictAllow.Count > 0 && !restrictAllow.Contains(card)) || (!card.isPlayer && card.index == -1)) {
 			return;
 		}

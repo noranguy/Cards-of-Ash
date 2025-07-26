@@ -25,6 +25,8 @@ public partial class Card : Control {
 	public Polygon2D sprite;
 	public ProgressBar durabilityBar;
 	public bool ready = false;
+	public double repeatMult = 1;
+	public int lastRound = -2;
 	
 	private Tween tween;
 	public Vector2 upperPosition;
@@ -56,8 +58,8 @@ public partial class Card : Control {
 		}
 	}
 	
-	public void ReduceDurability() {
-		durability -= 0.2;
+	public void ReduceDurability(double amount) {
+		durability -= amount;
 		durabilityBar.Value = durability * 100;
 	}
 	

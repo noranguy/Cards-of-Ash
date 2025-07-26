@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=102 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -19,8 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://d4mtpqxw6nrhw" path="res://Assets/In Play Safe House/Animations/throw-Sheet.png" id="15_docdc"]
 [ext_resource type="Texture2D" uid="uid://cp60bovcuqqfs" path="res://Assets/Character Designs/Mom & Son/mom_kid-Sheet.png" id="15_drq8l"]
 [ext_resource type="Texture2D" uid="uid://cvi3k5bmupfms" path="res://Assets/In Play Safe House/Animations/opponent throw-Sheet.png" id="15_n48vj"]
-[ext_resource type="Texture2D" uid="uid://4wy3oivyvgrj" path="res://Assets/Character Designs/Kid/kid-Sheet.png" id="16_drq8l"]
-[ext_resource type="Texture2D" uid="uid://6sxdf6yxgndi" path="res://Assets/Character Designs/Foreigner/foreigner-Sheet.png" id="17_kaojq"]
+[ext_resource type="Texture2D" uid="uid://4wy3oivyvgrj" path="res://Assets/Character Designs/kid/kid-Sheet.png" id="16_drq8l"]
+[ext_resource type="Texture2D" uid="uid://6sxdf6yxgndi" path="res://Assets/Character Designs/foreigner/foreigner-Sheet.png" id="17_kaojq"]
+[ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="22_mdhqq"]
+[ext_resource type="Texture2D" uid="uid://dvqhy0eqsbt6f" path="res://Assets/Omamori/aftershock.png" id="22_t6xv6"]
+[ext_resource type="Texture2D" uid="uid://bow7c4pr1q805" path="res://Assets/Omamori/omamori_slot.png" id="23_mdhqq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
@@ -6672,7 +6675,6 @@ shadow_filter = 1
 texture = SubResource("GradientTexture2D_rt2xm")
 
 [node name="ThrowButton" parent="." instance=ExtResource("11_ivp4u")]
-z_index = 10
 offset_left = 351.0
 offset_top = 8.03207
 offset_right = 351.0
@@ -6680,7 +6682,6 @@ offset_bottom = 8.03207
 texture = ExtResource("11_5y0wf")
 
 [node name="InfoButton" parent="." instance=ExtResource("11_ivp4u")]
-z_index = 10
 offset_left = 369.0
 offset_top = -157.629
 offset_right = 369.0
@@ -6731,6 +6732,35 @@ offset_left = -300.0
 offset_top = -230.0
 offset_right = 300.0
 offset_bottom = -188.0
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("22_mdhqq")
+theme_override_font_sizes/font_size = 64
 text = "Round 1"
 horizontal_alignment = 1
+
+[node name="OmamoriBox" type="TextureRect" parent="."]
+z_index = 5
+offset_left = 292.0
+offset_top = 83.3327
+offset_right = 332.0
+offset_bottom = 123.333
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("23_mdhqq")
+
+[node name="OmamoriButton" type="TextureButton" parent="OmamoriBox"]
+z_index = 19
+layout_mode = 0
+offset_left = 8.66667
+offset_top = 3.3467
+offset_right = 28.6667
+offset_bottom = 33.3467
+scale = Vector2(1.1, 1.1)
+texture_normal = ExtResource("22_t6xv6")
+
+[node name="HoverOverlay" type="ColorRect" parent="OmamoriBox/OmamoriButton"]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 0
+offset_left = -4.84848
+offset_right = 25.1515
+offset_bottom = 30.0
+color = Color(0.517647, 0.517647, 0.517647, 0.341176)
