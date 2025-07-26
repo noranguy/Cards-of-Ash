@@ -29,6 +29,9 @@ public partial class DialogueManager : Control {
 	private PackedScene optionButtonScene;
 	private Button skipButton;
 	private Panel panel;
+	private RichTextLabel nameText;
+	private TextureRect portrait;
+	private TextureRect namePlate;
 	
 	private TaskCompletionSource<string> nextNodeSource;
 	private string currentSpeaker;
@@ -42,6 +45,9 @@ public partial class DialogueManager : Control {
 		dialogueText = GetNode<Label>("CanvasLayer/DialoguePanel/DialogueText");
 		optionsContainer = GetNode<VBoxContainer>("CanvasLayer/DialoguePanel/OptionsContainer");
 		panel = GetNode<Panel>("CanvasLayer/DialoguePanel");
+		nameText = GetNode<RichTextLabel>("CanvasLayer/DialoguePanel/namePlate/NameText");
+		namePlate = GetNode<TextureRect>("CanvasLayer/DialoguePanel/namePlate");
+		portrait = GetNode<TextureRect>("CanvasLayer/DialoguePanel/portrait");
 		panel.ZIndex = 100;
 		panel.SetZAsRelative(false);
 		panel.Visible = false;
@@ -68,33 +74,44 @@ public partial class DialogueManager : Control {
 		var dialogue = JsonSerializer.Deserialize<Dialogue>(jsonText);
 		currentSpeaker = dialogue.speaker;
 		
-		var sprite = GetNode<Sprite2D>("CanvasLayer/DialoguePanel/Person");
+		var sprite = GetNode<Sprite2D>("CanvasLayer/DialoguePanel/portrait/Person");
 		
 		// display speaker portrait if not player
-		if (inPlay) {
+		if (inPlay)
+		{
 			dialogueText.Scale = new Vector2(0.5f, 0.5f);
 			optionsContainer.Scale = new Vector2(1, 1);
-			sprite.Scale = new Vector2(1.4f, 1.4f);
+			portrait.Scale = new Vector2(1.4f, 1.4f);
 			panel.Position = new Vector2(70, 224);
 			panel.Size = new Vector2(500, 120);
-			sprite.Position = new Vector2(55, 55);
+			portrait.Position = new Vector2(55, 55);
 			dialogueText.Position = new Vector2(110, 5);
 			optionsContainer.Position = new Vector2(110, 80);
-		} else {
+		}
+		else
+		{
 			panel.Position = new Vector2(35, 112);
 			panel.Size = new Vector2(250, 60);
 			dialogueText.Scale = new Vector2(0.25f, 0.25f);
 			optionsContainer.Scale = new Vector2(0.5f, 0.5f);
-			sprite.Scale = new Vector2(0.65f, 0.65f);
-			sprite.Position = new Vector2(30, 30);
-			if (currentSpeaker == "self") {
-				sprite.Visible = false;
+			portrait.Scale = new Vector2(0.65f, 0.65f);
+			//portrait.Position = new Vector2(30, 30);
+
+			if (currentSpeaker == "self")
+			{
+				//sprite.Visible = false;
+				portrait.Visible = false;
+				namePlate.Visible = false;
 				dialogueText.Size = new Vector2(960, 5);
 				dialogueText.Position = new Vector2(5, 5);
 				optionsContainer.Size = new Vector2(440, 20);
 				optionsContainer.Position = new Vector2(5, 45);
-			} else {
-				sprite.Visible = true;
+			}
+			else
+			{
+				//sprite.Visible = true;
+				portrait.Visible = true;
+				namePlate.Visible = true;
 				dialogueText.Size = new Vector2(760, 5);
 				dialogueText.Position = new Vector2(60, 5);
 				optionsContainer.Size = new Vector2(320, 20);
@@ -103,9 +120,16 @@ public partial class DialogueManager : Control {
 				sprite.Texture = texture;
 			}
 		}
+
+		if (currentSpeaker != "self") {
+			nameText.Text = currentSpeaker;
+			await ToSignal(GetTree().CreateTimer(0.05), "timeout");
+			namePlate.Size = nameText.Size + new Vector2(8,0);
+		}
 		
 		// build dialogue tree
-		foreach (var node in dialogue.dialogue) {
+		foreach (var node in dialogue.dialogue)
+		{
 			node.options ??= new List<DialogueOption>();
 			dialogueTree[node.id] = node;
 		}
