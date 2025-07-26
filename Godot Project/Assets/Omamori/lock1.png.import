@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://62p5ed87pb70"
-path="res://.godot/imported/foreigner mini sprite.png-606a3fe0c86bd0faa1c20fed3f75a309.ctex"
+uid="uid://3tphp6fo80bk"
+path="res://.godot/imported/lock1.png-efa1b9a05888ba39865fa87b7faf21d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/foreigner/foreigner mini sprite.png"
-dest_files=["res://.godot/imported/foreigner mini sprite.png-606a3fe0c86bd0faa1c20fed3f75a309.ctex"]
+source_file="res://Assets/Omamori/lock1.png"
+dest_files=["res://.godot/imported/lock1.png-efa1b9a05888ba39865fa87b7faf21d8.ctex"]
 
 [params]
 

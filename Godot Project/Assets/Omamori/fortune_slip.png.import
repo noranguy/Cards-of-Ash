@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://62p5ed87pb70"
-path="res://.godot/imported/foreigner mini sprite.png-606a3fe0c86bd0faa1c20fed3f75a309.ctex"
+uid="uid://chmq0y578wgvd"
+path="res://.godot/imported/fortune_slip.png-c45cc7f462c2d4f96333463f80aee399.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/foreigner/foreigner mini sprite.png"
-dest_files=["res://.godot/imported/foreigner mini sprite.png-606a3fe0c86bd0faa1c20fed3f75a309.ctex"]
+source_file="res://Assets/Omamori/fortune_slip.png"
+dest_files=["res://.godot/imported/fortune_slip.png-c45cc7f462c2d4f96333463f80aee399.ctex"]
 
 [params]
 

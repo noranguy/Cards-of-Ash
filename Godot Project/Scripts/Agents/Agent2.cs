@@ -111,7 +111,7 @@ public class Agent2 : Agent {
 		});
 	}
 	
-	public override (Card, Card, Card) Move() {
+	public override (Card, Card, Card) Move(bool blinded) {
 		if (round >= 3) {
 			SortOrders();
 			SortHand();

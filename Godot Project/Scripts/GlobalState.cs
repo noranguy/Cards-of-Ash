@@ -48,6 +48,32 @@ public partial class GlobalState : Node {
 		("earthquake", "basic")
 	};
 	
+	public readonly List<string> Omamories = new List<string> {
+		"none",
+		"aftershock",
+		"stone_cast",
+		"bag_of_sand",
+		"fortune_slip"
+	};
+	
+	public readonly Dictionary<string, string> OmamoriDescriptions = new Dictionary<string, string> {
+		{"none", "No Omamori"},
+		{"aftershock", "Aftershock: Hitting the same card consecutively boosts flip chance by 20%"},
+		{"stone_cast", "Stone Cast: If the opponent fails to flip one of your table cards, it deteriorates by 5%"},
+		{"bag_of_sand", "Bag of Sand (one-time use): The opponent loses visibility of card info"},
+		{"fortune_slip", "Fortune Slip: Gain a random bonus each round"}
+	};
+	
+	private string currentOmamori = "none";
+	
+	public string GetOmamori() {
+		return currentOmamori;
+	}
+	
+	public void UpdateOmamori(string next) {
+		currentOmamori = next;
+	}
+	
 	public List<(string, string)> GetHandCards() {
 		return handCards;
 	}
