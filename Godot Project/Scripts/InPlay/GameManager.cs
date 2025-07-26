@@ -132,7 +132,7 @@ public partial class GameManager : Node2D {
 		
 		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start", true);
 		
-		NextRound();
+		await NextRound();
 	}
 	
 	public override void _Process(double delta) {
@@ -141,11 +141,10 @@ public partial class GameManager : Node2D {
 		}
 	}
 	
-	private void NextRound() {
+	private async Task NextRound() {
 		if (omamori == "fortune_slip") {
 			await FortuneSlipOmamori();
 		}
-	}
 	}
 	
 	private async Task FortuneSlipOmamori() {
@@ -434,7 +433,7 @@ public partial class GameManager : Node2D {
 		
 		lastFortune = -1;
 		
-		NextRound();
+		await NextRound();
 	}
 	
 	private async Task SwapVision(List<Card> cards) {
