@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cnut3ftaqgbo"
+path="res://.godot/imported/A Cloudy Morning (2012).mp3-99d3c5e0cc6426ee611ef61c48b0abe0.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/A Cloudy Morning (2012).mp3"
+dest_files=["res://.godot/imported/A Cloudy Morning (2012).mp3-99d3c5e0cc6426ee611ef61c48b0abe0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
