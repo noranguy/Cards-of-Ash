@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://vp5o7861ouaq"]
+[gd_scene load_steps=24 format=3 uid="uid://vp5o7861ouaq"]
 
 [ext_resource type="Script" uid="uid://jgalshpi42tw" path="res://Scripts/IntroCutscene.cs" id="1_7iewc"]
 [ext_resource type="Texture2D" uid="uid://bihawhjnja2t0" path="res://Assets/Cutscenes/shibuya_pre.png" id="1_485iv"]
 [ext_resource type="AudioStream" uid="uid://cy1mdp6eqvt0r" path="res://Assets/Music/train_open_audio_1.mp3" id="3_7iewc"]
 [ext_resource type="Texture2D" uid="uid://80o4ps3afuv" path="res://Assets/Cutscenes/train_door_animation-Sheet.png" id="4_do3jr"]
 [ext_resource type="AudioStream" uid="uid://cnut3ftaqgbo" path="res://Assets/Music/A Cloudy Morning (2012).mp3" id="4_fr0y8"]
+[ext_resource type="AudioStream" uid="uid://dwsvxc302glnm" path="res://Assets/SFX/Earthquake sound effect no copyright.mp3" id="6_0ghf5"]
 
 [sub_resource type="Gradient" id="Gradient_485iv"]
 
@@ -176,6 +177,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_fr0y8"]
+
 [node name="IntroCutscene" type="Node2D"]
 script = ExtResource("1_7iewc")
 
@@ -231,3 +234,19 @@ visible = false
 position = Vector2(160, 90)
 sprite_frames = SubResource("SpriteFrames_1mw3s")
 animation = &"train_open"
+
+[node name="roadOutofBounds" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+offset_left = -47.0
+offset_top = -20.0
+offset_right = 359.0
+offset_bottom = 208.0
+texture = SubResource("CanvasTexture_fr0y8")
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_0ghf5")
+pitch_scale = 4.15
+
+[connection signal="finished" from="trainSound" to="." method="_on_train_sound_finished"]
+[connection signal="animation_finished" from="TrainPlayer" to="." method="_on_train_player_animation_finished"]

@@ -3,16 +3,9 @@
 	"dialogue": [
 		{
 		  "id": "start",
-		  "text": "Ahh.. I've been running forever...",
+		  "text": "Oh my god... I need to get out of here...",
 		  "options": [
 			{ "text": "Continue", "next": "b" }
-		  ]
-		},
-		{
-		  "id": "b",
-		  "text": "Wait, is that... It's a safehouse!",
-		  "options": [
-			{ "text": "Continue", "next": "end" }
 		  ]
 		}
 	]

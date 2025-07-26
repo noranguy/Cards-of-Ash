@@ -14,13 +14,6 @@
 		  "options": [
 			{ "text": "Continue", "next": "c" }
 		  ]
-		},
-		{
-		  "id": "b",
-		  "text": "Oh my god... I need to get out of here...",
-		  "options": [
-			{ "text": "Continue", "next": "end" }
-		  ]
 		}
 	]
 }
