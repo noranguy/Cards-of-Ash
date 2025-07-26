@@ -1,0 +1,26 @@
+{
+	"speaker": "self",
+	"dialogue": [
+		{
+		  "id": "start",
+		  "text": "I've been running forever...",
+		  "options": [
+			{ "text": "Continue", "next": "b" }
+		  ]
+		},
+        {
+		  "id": "b",
+		  "text": "Wait, is that...",
+		  "options": [
+			{ "text": "Continue", "next": "c" }
+		  ]
+		},
+        {
+		  "id": "c",
+		  "text": "It's a house! A safehouse!!",
+		  "options": [
+			{ "text": "Continue", "next": "end" }
+		  ]
+		}
+	]
+}

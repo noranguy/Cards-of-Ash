@@ -1,0 +1,19 @@
+{
+	"speaker": "self",
+	"dialogue": [
+		{
+		  "id": "start",
+		  "text": "Ugh, my head... I can barely move.",
+		  "options": [
+			{ "text": "Continue", "next": "b" }
+		  ]
+		},
+		{
+		  "id": "b",
+		  "text": "The last thing I remember was the ground collapsing under me...",
+		  "options": [
+			{ "text": "Continue", "next": "c" }
+		  ]
+		}
+	]
+}
