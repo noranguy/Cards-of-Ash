@@ -18,9 +18,19 @@ public partial class CardSlot : CenterContainer {
 	public override void _DropData(Vector2 position, Variant data) {
 		var card = data.As<Card>();
 		if (card != null) {
-			card.GetParent().RemoveChild(card);
+			var bench = card.GetParent();
+			Card oldCard = (Card)GetChildren()[1];
+			
+			RemoveChild(oldCard);
+			bench.AddChild(oldCard);
+			
+			bench.RemoveChild(card);
 			AddChild(card);
-			card.Position = Vector2.Zero;
+			
+			//card.Position = Vector2.Zero;
+			card.MouseFilter = Control.MouseFilterEnum.Ignore;
+			oldCard.MouseFilter = Control.MouseFilterEnum.Stop;
+
 			EmitSignal(SignalName.CardDropped);
 		}
 	}

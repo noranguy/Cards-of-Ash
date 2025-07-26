@@ -2,86 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bry0rb4f5o7ub" path="res://Scripts/Components/DialogueManager.cs" id="1_1dsj7"]
 [ext_resource type="Texture2D" uid="uid://bmiwowijb7e5e" path="res://Assets/Character Designs/Default/portrait.png" id="2_g0piw"]
+[ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="2_hsvmp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dsj7"]
 bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="FontFile" id="FontFile_6rt2l"]
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/2/0/ascent = 0.0
-cache/0/2/0/descent = 0.0
-cache/0/2/0/underline_position = 0.0
-cache/0/2/0/underline_thickness = 0.0
-cache/0/2/0/scale = 1.0
-cache/0/3/0/ascent = 0.0
-cache/0/3/0/descent = 0.0
-cache/0/3/0/underline_position = 0.0
-cache/0/3/0/underline_thickness = 0.0
-cache/0/3/0/scale = 1.0
-cache/0/4/0/ascent = 0.0
-cache/0/4/0/descent = 0.0
-cache/0/4/0/underline_position = 0.0
-cache/0/4/0/underline_thickness = 0.0
-cache/0/4/0/scale = 1.0
-cache/0/20/0/ascent = 0.0
-cache/0/20/0/descent = 0.0
-cache/0/20/0/underline_position = 0.0
-cache/0/20/0/underline_thickness = 0.0
-cache/0/20/0/scale = 1.0
-cache/0/15/0/ascent = 0.0
-cache/0/15/0/descent = 0.0
-cache/0/15/0/underline_position = 0.0
-cache/0/15/0/underline_thickness = 0.0
-cache/0/15/0/scale = 1.0
-cache/0/10/0/ascent = 0.0
-cache/0/10/0/descent = 0.0
-cache/0/10/0/underline_position = 0.0
-cache/0/10/0/underline_thickness = 0.0
-cache/0/10/0/scale = 1.0
-cache/0/14/0/ascent = 0.0
-cache/0/14/0/descent = 0.0
-cache/0/14/0/underline_position = 0.0
-cache/0/14/0/underline_thickness = 0.0
-cache/0/14/0/scale = 1.0
-cache/0/8/0/ascent = 0.0
-cache/0/8/0/descent = 0.0
-cache/0/8/0/underline_position = 0.0
-cache/0/8/0/underline_thickness = 0.0
-cache/0/8/0/scale = 1.0
-cache/0/12/0/ascent = 0.0
-cache/0/12/0/descent = 0.0
-cache/0/12/0/underline_position = 0.0
-cache/0/12/0/underline_thickness = 0.0
-cache/0/12/0/scale = 1.0
-cache/0/13/0/ascent = 0.0
-cache/0/13/0/descent = 0.0
-cache/0/13/0/underline_position = 0.0
-cache/0/13/0/underline_thickness = 0.0
-cache/0/13/0/scale = 1.0
-cache/0/11/0/ascent = 0.0
-cache/0/11/0/descent = 0.0
-cache/0/11/0/underline_position = 0.0
-cache/0/11/0/underline_thickness = 0.0
-cache/0/11/0/scale = 1.0
-cache/0/9/0/ascent = 0.0
-cache/0/9/0/descent = 0.0
-cache/0/9/0/underline_position = 0.0
-cache/0/9/0/underline_thickness = 0.0
-cache/0/9/0/scale = 1.0
-cache/0/32/0/ascent = 0.0
-cache/0/32/0/descent = 0.0
-cache/0/32/0/underline_position = 0.0
-cache/0/32/0/underline_thickness = 0.0
-cache/0/32/0/scale = 1.0
-cache/0/64/0/ascent = 0.0
-cache/0/64/0/descent = 0.0
-cache/0/64/0/underline_position = 0.0
-cache/0/64/0/underline_thickness = 0.0
-cache/0/64/0/scale = 1.0
 
 [node name="DialogueManager" type="Control"]
 layout_mode = 3
@@ -93,6 +17,7 @@ offset_bottom = 112.0
 script = ExtResource("1_1dsj7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
 follow_viewport_enabled = true
 
 [node name="DialoguePanel" type="Panel" parent="CanvasLayer"]
@@ -109,8 +34,8 @@ offset_top = 3.0
 offset_right = 195.0
 offset_bottom = 39.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = SubResource("FontFile_6rt2l")
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("2_hsvmp")
+theme_override_font_sizes/font_size = 32
 autowrap_mode = 3
 
 [node name="OptionsContainer" type="VBoxContainer" parent="CanvasLayer/DialoguePanel"]

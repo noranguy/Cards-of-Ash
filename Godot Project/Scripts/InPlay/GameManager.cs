@@ -72,7 +72,7 @@ public partial class GameManager : Node2D {
 		var playerTableInfo = GlobalState.Instance.GetTableCards();
 		
 		enemyHand.Init(cardScene, yEnemyHand, 0.75f, false, enemyHandInfo);
-		table.Init(cardScene, playerTableInfo, enemyTableInfo);
+		table.Init(cardScene, playerTableInfo, enemyTableInfo, GlobalState.Instance.GetDay() == 0);
 		playerHand.Init(cardScene, yPlayerHand, 1.5f, true, playerHandInfo);
 		
 		playerTableCards = table.GetPlayerCards();
@@ -87,20 +87,22 @@ public partial class GameManager : Node2D {
 
 		var playerFirst = playerHand.GetCards()[0];
 		var tableFirst = enemyTableCards[0];
-		
+			
 		if (GlobalState.Instance.GetDay() == 0) {
 			playerHand.restrictAllow = new HashSet<Card> { playerFirst };
 			table.restrictAllow = new HashSet<Card> { tableFirst };
+			
+			try {
+				playerFirst.Focus();
+				tableFirst.Focus();
+			} catch (Exception e) {
+				GD.Print(e);
+			}
 		}
 		
 		await ToSignal(GetTree().CreateTimer(2), "timeout");
 		
 		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start", true);
-		
-		if (GlobalState.Instance.GetDay() == 0) {
-			playerFirst.Focus();
-			tableFirst.Focus();
-		}
 	}
 	
 	public override void _Process(double delta) {
@@ -141,11 +143,13 @@ public partial class GameManager : Node2D {
 	}
 	
 	public void UpdateActiveHandCard(Card card) {
+		card.Unfocus();
 		playerHand.activeCard = card;
 		ThrowToggle(true);
 	}
 	
 	public void UpdateActiveTableCard(Card card) {
+		card.Unfocus();
 		table.activeCard = card;
 		ThrowToggle(true);
 	}
@@ -185,8 +189,20 @@ public partial class GameManager : Node2D {
 			tableCardType = GlobalState.Instance.TypeMap[tableCards[i].type];
 			threshold = GlobalState.Instance.FlipProb[FlipRank[throwingCardType][tableCardType]] * tableCards[i].durability;
 			rnd = Rand.NextDouble();
-			if (GlobalState.Instance.GetDay() == 0 && round == 0) {
-				rnd = 0;
+			if (GlobalState.Instance.GetDay() == 0) {
+				if (round == 0 || (round == 2 && throwingCard.isPlayer)) {
+					rnd = 0;
+				} else if (round == 1 && throwingCard.isPlayer) {
+					rnd = 1;
+				}
+			}
+			
+			if (
+				GlobalState.Instance.GetDay() == 0 && !throwingCard.isPlayer &&
+				enemyTableCards.Count(card => card.visible) >=
+				playerTableCards.Count(card => card.visible) - 1
+			) {
+				threshold = 0;
 			}
 			
 			if (i != 0) threshold *= GlobalState.Instance.CeramicProb;
@@ -220,10 +236,9 @@ public partial class GameManager : Node2D {
 	
 	private async void Round() {
 		if (!allowThrow) return;
-		if (GlobalState.Instance.GetDay() == 0 && round == 0) {
+		if (GlobalState.Instance.GetDay() == 0 && round < 3) {
 			playerHand.restrictAllow.Clear();
 			table.restrictAllow.Clear();
-			table.activeCard.Unfocus();
 		}
 
 		// player turn
@@ -243,7 +258,7 @@ public partial class GameManager : Node2D {
 		var (throwingCard, tableCard1, tableCard2) = enemy.Move();
 		oppCardThrow.Visible = true;
 		oppCardThrow.Play("opp_card_throw");
-		ThrowCard(throwingCard, new List<Card> {tableCard1});
+		await ThrowCard(throwingCard, new List<Card> {tableCard1});
 		if (throwingCard.clas == "elastic" || throwingCard.clas == "vision") {
 			await ThrowCard(throwingCard, new List<Card> {tableCard2});
 		}
@@ -261,12 +276,37 @@ public partial class GameManager : Node2D {
 		
 		// tutorial dialogue
 		if (GlobalState.Instance.GetDay() == 0) {
+			Card playerCard;
+			Card tableCard;
+			
 			switch (round) {
-				case 1: case 3:
+				case 1:
+					playerCard = playerHand.GetCards()[0];
+					tableCard = enemyTableCards[1];
+					
+					playerHand.restrictAllow = new HashSet<Card> { playerCard };
+					table.restrictAllow = new HashSet<Card> { tableCard };
+					
+					playerCard.Focus();
+					tableCard.Focus();
+					
 					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
 					break;
 				case 2:
+					playerCard = playerHand.GetCards()[0];
+					tableCard = playerTableCards[0];
+					
+					playerHand.restrictAllow = new HashSet<Card> { playerCard };
+					table.restrictAllow = new HashSet<Card> { tableCard };
+					
+					playerCard.Focus();
+					tableCard.Focus();
+					
+					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
+					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
+					break;
+				case 3:
 					infoButton.Focus();
 					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
@@ -281,38 +321,27 @@ public partial class GameManager : Node2D {
 
 		// game end
 		GlobalState.Instance.NewInhabitant();
-		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6)
-		{
-			if (playerCount > enemyCount)
-			{
+		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
+			if (playerCount > enemyCount) {
 				roundLabel.Text = "You Win";
 				GlobalState.Instance.NewInhabitant();
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "win");
 			}
-			else if (playerCount < enemyCount)
-			{
+			else if (playerCount < enemyCount) {
 				roundLabel.Text = "You Lose";
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "lose");
-			}
-			else
-			{
+			} else {
 				roundLabel.Text = "Tie";
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "tie");
 			}
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
-		}
-		else
-		{
-			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision")))
-			{
+		} else {
+			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision"))) {
 				roundLabel.Text = $"Vision Cards Are Swapping";
 				await ToSignal(GetTree().CreateTimer(0.5), "timeout");
-				if (GlobalState.Instance.GetInfo().Class == "vision")
-				{
+				if (GlobalState.Instance.GetInfo().Class == "vision") {
 					await SwapVision(enemyTableCards);
-				}
-				else
-				{
+				} else {
 					await SwapVision(playerTableCards);
 				}
 			}

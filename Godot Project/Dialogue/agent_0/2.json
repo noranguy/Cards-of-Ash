@@ -3,7 +3,14 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "You can access the rulebook at any point in the game.",
+			"text": "Well at least you know it can't be a Tsunami card.",
+			"options": [
+			  { "text": "Continue", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "You can also unflip table cards that your opponent flipped.",
 			"options": [
 			  { "text": "Continue Game", "next": "end" }
 			]

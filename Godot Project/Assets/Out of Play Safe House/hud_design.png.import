@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfmautmt4ebhl"
-path="res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"
+uid="uid://1lxbh1divmcx"
+path="res://.godot/imported/hud_design.png-30fd51156a0abca20a8a9e1985e0c8d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Foreigner/portrait.png"
-dest_files=["res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"]
+source_file="res://Assets/Out of Play Safe House/hud_design.png"
+dest_files=["res://.godot/imported/hud_design.png-30fd51156a0abca20a8a9e1985e0c8d3.ctex"]
 
 [params]
 

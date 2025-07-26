@@ -1,197 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwj72mveseo4r"]
+[gd_scene load_steps=8 format=3 uid="uid://cwj72mveseo4r"]
 
 [ext_resource type="Script" uid="uid://buy2alspb62at" path="res://Scripts/InPlay/InfoPage.cs" id="1_iwbsr"]
 [ext_resource type="Texture2D" uid="uid://1ivdonv17ahd" path="res://Assets/Cards/earthquake_basic.png" id="1_jhmf5"]
 [ext_resource type="Texture2D" uid="uid://cm6o02qusl4qr" path="res://Assets/Cards/tsunami_basic.png" id="2_pi2h0"]
 [ext_resource type="Texture2D" uid="uid://bsyook4jja5ra" path="res://Assets/Cards/volcano_basic.png" id="3_fp1kd"]
+[ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="5_o88k8"]
 [ext_resource type="Texture2D" uid="uid://rixpxm2y0xxy" path="res://Assets/Rulebook/arrow.png" id="5_pi2h0"]
 [ext_resource type="Texture2D" uid="uid://cq6ete1wcqdyi" path="res://Assets/table_screen_background.png" id="6_fp1kd"]
-
-[sub_resource type="FontFile" id="FontFile_celcy"]
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/2/0/ascent = 0.0
-cache/0/2/0/descent = 0.0
-cache/0/2/0/underline_position = 0.0
-cache/0/2/0/underline_thickness = 0.0
-cache/0/2/0/scale = 1.0
-cache/0/3/0/ascent = 0.0
-cache/0/3/0/descent = 0.0
-cache/0/3/0/underline_position = 0.0
-cache/0/3/0/underline_thickness = 0.0
-cache/0/3/0/scale = 1.0
-cache/0/4/0/ascent = 0.0
-cache/0/4/0/descent = 0.0
-cache/0/4/0/underline_position = 0.0
-cache/0/4/0/underline_thickness = 0.0
-cache/0/4/0/scale = 1.0
-cache/0/5/0/ascent = 0.0
-cache/0/5/0/descent = 0.0
-cache/0/5/0/underline_position = 0.0
-cache/0/5/0/underline_thickness = 0.0
-cache/0/5/0/scale = 1.0
-cache/0/6/0/ascent = 0.0
-cache/0/6/0/descent = 0.0
-cache/0/6/0/underline_position = 0.0
-cache/0/6/0/underline_thickness = 0.0
-cache/0/6/0/scale = 1.0
-cache/0/7/0/ascent = 0.0
-cache/0/7/0/descent = 0.0
-cache/0/7/0/underline_position = 0.0
-cache/0/7/0/underline_thickness = 0.0
-cache/0/7/0/scale = 1.0
-cache/0/8/0/ascent = 0.0
-cache/0/8/0/descent = 0.0
-cache/0/8/0/underline_position = 0.0
-cache/0/8/0/underline_thickness = 0.0
-cache/0/8/0/scale = 1.0
-cache/0/9/0/ascent = 0.0
-cache/0/9/0/descent = 0.0
-cache/0/9/0/underline_position = 0.0
-cache/0/9/0/underline_thickness = 0.0
-cache/0/9/0/scale = 1.0
-cache/0/10/0/ascent = 0.0
-cache/0/10/0/descent = 0.0
-cache/0/10/0/underline_position = 0.0
-cache/0/10/0/underline_thickness = 0.0
-cache/0/10/0/scale = 1.0
-cache/0/11/0/ascent = 0.0
-cache/0/11/0/descent = 0.0
-cache/0/11/0/underline_position = 0.0
-cache/0/11/0/underline_thickness = 0.0
-cache/0/11/0/scale = 1.0
-cache/0/12/0/ascent = 0.0
-cache/0/12/0/descent = 0.0
-cache/0/12/0/underline_position = 0.0
-cache/0/12/0/underline_thickness = 0.0
-cache/0/12/0/scale = 1.0
-cache/0/13/0/ascent = 0.0
-cache/0/13/0/descent = 0.0
-cache/0/13/0/underline_position = 0.0
-cache/0/13/0/underline_thickness = 0.0
-cache/0/13/0/scale = 1.0
-cache/0/14/0/ascent = 0.0
-cache/0/14/0/descent = 0.0
-cache/0/14/0/underline_position = 0.0
-cache/0/14/0/underline_thickness = 0.0
-cache/0/14/0/scale = 1.0
-cache/0/15/0/ascent = 0.0
-cache/0/15/0/descent = 0.0
-cache/0/15/0/underline_position = 0.0
-cache/0/15/0/underline_thickness = 0.0
-cache/0/15/0/scale = 1.0
-cache/0/17/0/ascent = 0.0
-cache/0/17/0/descent = 0.0
-cache/0/17/0/underline_position = 0.0
-cache/0/17/0/underline_thickness = 0.0
-cache/0/17/0/scale = 1.0
-cache/0/18/0/ascent = 0.0
-cache/0/18/0/descent = 0.0
-cache/0/18/0/underline_position = 0.0
-cache/0/18/0/underline_thickness = 0.0
-cache/0/18/0/scale = 1.0
-cache/0/19/0/ascent = 0.0
-cache/0/19/0/descent = 0.0
-cache/0/19/0/underline_position = 0.0
-cache/0/19/0/underline_thickness = 0.0
-cache/0/19/0/scale = 1.0
-cache/0/20/0/ascent = 0.0
-cache/0/20/0/descent = 0.0
-cache/0/20/0/underline_position = 0.0
-cache/0/20/0/underline_thickness = 0.0
-cache/0/20/0/scale = 1.0
-cache/0/21/0/ascent = 0.0
-cache/0/21/0/descent = 0.0
-cache/0/21/0/underline_position = 0.0
-cache/0/21/0/underline_thickness = 0.0
-cache/0/21/0/scale = 1.0
-cache/0/22/0/ascent = 0.0
-cache/0/22/0/descent = 0.0
-cache/0/22/0/underline_position = 0.0
-cache/0/22/0/underline_thickness = 0.0
-cache/0/22/0/scale = 1.0
-cache/0/23/0/ascent = 0.0
-cache/0/23/0/descent = 0.0
-cache/0/23/0/underline_position = 0.0
-cache/0/23/0/underline_thickness = 0.0
-cache/0/23/0/scale = 1.0
-cache/0/24/0/ascent = 0.0
-cache/0/24/0/descent = 0.0
-cache/0/24/0/underline_position = 0.0
-cache/0/24/0/underline_thickness = 0.0
-cache/0/24/0/scale = 1.0
-cache/0/25/0/ascent = 0.0
-cache/0/25/0/descent = 0.0
-cache/0/25/0/underline_position = 0.0
-cache/0/25/0/underline_thickness = 0.0
-cache/0/25/0/scale = 1.0
-cache/0/26/0/ascent = 0.0
-cache/0/26/0/descent = 0.0
-cache/0/26/0/underline_position = 0.0
-cache/0/26/0/underline_thickness = 0.0
-cache/0/26/0/scale = 1.0
-cache/0/27/0/ascent = 0.0
-cache/0/27/0/descent = 0.0
-cache/0/27/0/underline_position = 0.0
-cache/0/27/0/underline_thickness = 0.0
-cache/0/27/0/scale = 1.0
-cache/0/28/0/ascent = 0.0
-cache/0/28/0/descent = 0.0
-cache/0/28/0/underline_position = 0.0
-cache/0/28/0/underline_thickness = 0.0
-cache/0/28/0/scale = 1.0
-cache/0/64/0/ascent = 0.0
-cache/0/64/0/descent = 0.0
-cache/0/64/0/underline_position = 0.0
-cache/0/64/0/underline_thickness = 0.0
-cache/0/64/0/scale = 1.0
-
-[sub_resource type="FontFile" id="FontFile_o88k8"]
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/200/0/ascent = 0.0
-cache/0/200/0/descent = 0.0
-cache/0/200/0/underline_position = 0.0
-cache/0/200/0/underline_thickness = 0.0
-cache/0/200/0/scale = 1.0
-cache/0/20/0/ascent = 0.0
-cache/0/20/0/descent = 0.0
-cache/0/20/0/underline_position = 0.0
-cache/0/20/0/underline_thickness = 0.0
-cache/0/20/0/scale = 1.0
-cache/0/80/0/ascent = 0.0
-cache/0/80/0/descent = 0.0
-cache/0/80/0/underline_position = 0.0
-cache/0/80/0/underline_thickness = 0.0
-cache/0/80/0/scale = 1.0
 
 [node name="InfoPage" type="Node2D"]
 script = ExtResource("1_iwbsr")
 
 [node name="Tsunami" type="Sprite2D" parent="."]
-position = Vector2(-250, -60)
+position = Vector2(-230, -45)
 scale = Vector2(2, 2)
 texture = ExtResource("2_pi2h0")
 
 [node name="Volcano" type="Sprite2D" parent="."]
-position = Vector2(-180, 80)
+position = Vector2(-170, 63)
 scale = Vector2(2, 2)
 texture = ExtResource("3_fp1kd")
 
 [node name="Earthquake" type="Sprite2D" parent="."]
-position = Vector2(-110, -60)
+position = Vector2(-110, -45)
 scale = Vector2(2, 2)
 texture = ExtResource("1_jhmf5")
 
@@ -204,7 +35,7 @@ offset_top = -104.0
 offset_right = 1154.0
 offset_bottom = 946.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/normal_font = SubResource("FontFile_celcy")
+theme_override_fonts/normal_font = ExtResource("5_o88k8")
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "OMG"
@@ -216,54 +47,57 @@ offset_top = -166.0
 offset_right = 319.0
 offset_bottom = -126.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/normal_font = SubResource("FontFile_o88k8")
-theme_override_font_sizes/normal_font_size = 80
+theme_override_fonts/normal_font = ExtResource("5_o88k8")
+theme_override_font_sizes/normal_font_size = 120
 text = "Card Info"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TsunamiText" type="Label" parent="."]
-offset_left = -284.0
-offset_top = -130.0
-offset_right = -216.0
-offset_bottom = -110.0
-theme_override_font_sizes/font_size = 12
+offset_left = -265.0
+offset_top = -110.0
+offset_right = -195.0
+offset_bottom = -90.0
+theme_override_fonts/font = ExtResource("5_o88k8")
+theme_override_font_sizes/font_size = 16
 text = "Tsunami"
 horizontal_alignment = 1
 
 [node name="VolcanoText" type="Label" parent="."]
-offset_left = -214.0
-offset_top = 130.0
-offset_right = -146.0
-offset_bottom = 150.0
-theme_override_font_sizes/font_size = 12
+offset_left = -205.0
+offset_top = 112.0
+offset_right = -137.0
+offset_bottom = 132.0
+theme_override_fonts/font = ExtResource("5_o88k8")
+theme_override_font_sizes/font_size = 16
 text = "Volcano"
 horizontal_alignment = 1
 
 [node name="EarthquakeText" type="Label" parent="."]
-offset_left = -144.0
-offset_top = -130.0
-offset_right = -76.0
-offset_bottom = -110.0
-theme_override_font_sizes/font_size = 12
+offset_left = -145.0
+offset_top = -110.0
+offset_right = -75.0
+offset_bottom = -90.0
+theme_override_fonts/font = ExtResource("5_o88k8")
+theme_override_font_sizes/font_size = 16
 text = "Earthquake"
 horizontal_alignment = 1
 
 [node name="Arrow1" type="Sprite2D" parent="."]
-position = Vector2(-180, -60)
+position = Vector2(-170, -49)
 scale = Vector2(0.092, 0.048)
 skew = 0.000805259
 texture = ExtResource("5_pi2h0")
 
 [node name="Arrow2" type="Sprite2D" parent="."]
-position = Vector2(-126, 24)
+position = Vector2(-117, 28)
 rotation = 2.05251
 scale = Vector2(0.092, 0.048)
 skew = 0.204414
 texture = ExtResource("5_pi2h0")
 
 [node name="Arrow3" type="Sprite2D" parent="."]
-position = Vector2(-236, 20)
+position = Vector2(-224, 29)
 rotation = 4.21148
 scale = Vector2(0.0921548, 0.0482547)
 texture = ExtResource("5_pi2h0")
@@ -271,5 +105,5 @@ texture = ExtResource("5_pi2h0")
 [node name="TextureRect" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(-7.62939e-06, 3.8147e-06)
-scale = Vector2(2, 2.017)
+scale = Vector2(2, 2)
 texture = ExtResource("6_fp1kd")

@@ -1,9 +1,21 @@
 using Godot;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Text.Json;
+	//classes to parse json
 
+public class dayNode
+{
+	public string day_num { get; set; }
+	public string task { get; set; }
+}
+public class Tasks
+{
+	public List<dayNode> tasks { get; set; }
+
+}
 // Safehouse area
 public partial class Safehouse : StaticBody2D
 {
@@ -54,6 +66,13 @@ public partial class Safehouse : StaticBody2D
 	private Control _open_door_prompt;
 	private Control _start_game_prompt;
 
+	//tasks
+	private Label tasks;
+
+	private Dictionary<string, string> dayTaskTree;
+	private Dictionary<string, string> nightTaskTree; 
+
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -72,7 +91,32 @@ public partial class Safehouse : StaticBody2D
 
 		Label dayLabel = GetNode<Label>("CanvasLayer/DayLabel");
 		dayLabel.Text = $"Day {GlobalState.Instance.GetDay() + 1}";
-	
+
+		tasks = GetNode<Label>("CanvasLayer/Tasks");
+
+		dayTaskTree = new();
+		nightTaskTree = new();
+
+		var file1 = FileAccess.Open($"res://Dialogue/objective_day.json", FileAccess.ModeFlags.Read);
+		var jsonText1 = file1.GetAsText();
+		file1.Close();
+
+		var file2 = FileAccess.Open($"res://Dialogue/objective_night.json", FileAccess.ModeFlags.Read);
+		var jsonText2 = file2.GetAsText();
+		file2.Close();
+
+		var objective1 = JsonSerializer.Deserialize<Tasks>(jsonText1);
+		var objective2 = JsonSerializer.Deserialize<Tasks>(jsonText2);
+
+		foreach (var node in objective1.tasks)
+		{
+			dayTaskTree[node.day_num] = node.task;
+		}
+		foreach (var node in objective2.tasks)
+		{
+			nightTaskTree[node.day_num] = node.task;
+		}
+
 		GetNode<TextureRect>("Bed/Interact").Visible = false;
 
 		_inhabitants = GlobalState.Instance.GetInhabitants();
@@ -85,7 +129,7 @@ public partial class Safehouse : StaticBody2D
 		}
 
 		_mission_completed = GlobalState.Instance.GetCompletedMission();
-		
+
 		// Get all the prompt nodes
 		_end_day_prompt = GetNode<Control>("CanvasLayer/EndDayPrompt");
 		_open_door_prompt = GetNode<Control>("CanvasLayer/OpenDoorPrompt");
@@ -180,6 +224,7 @@ public partial class Safehouse : StaticBody2D
 			{
 				if (_talking_to[i])
 				{
+					tasks.Text = "";
 					string partial_dialogue_path = $"Day{_day_num + 1}/{characters[i]}";
 					GD.Print(_mission_completed[i+1]);
 					if (!_mission_completed[i+1])
@@ -194,6 +239,7 @@ public partial class Safehouse : StaticBody2D
 						{
 							_task_ready = true;
 							_ = InSafeHouse_Dialogue_setupAsync($"Mission/{_dialogue_order[i + 1]}");
+							tasks.Text += nightTaskTree[$"{i + 1}a"];
 						}
 					}
 
@@ -216,30 +262,35 @@ public partial class Safehouse : StaticBody2D
 
 	private void InhabitSafehouse()
 	{
+		tasks.Text = "";
+		
 		if (_inhabitants[1])
 		{
 			GetNode<Area2D>("KaishainArea").Visible = true;
 			GetNode<Area2D>("KaishainArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("KaishainArea/Kaishain").CollisionLayer = 1;
-
+			
 		}
 		if (_inhabitants[2])
 		{
 			GetNode<Area2D>("MomArea").Visible = true;
 			GetNode<Area2D>("MomArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("MomArea/Mom").CollisionLayer = 1;
+			tasks.Text += "- Talk to Mom";
 		}
 		if (_inhabitants[3])
 		{
 			GetNode<Area2D>("KidArea").Visible = true;
 			GetNode<Area2D>("KidArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("KidArea/Kid").CollisionLayer = 1;
+			tasks.Text += "- Talk to Kid";
 		}
 		if (_inhabitants[4])
 		{
 			GetNode<Area2D>("ForeignerArea").Visible = true;
 			GetNode<Area2D>("ForeignerArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("ForeignerArea/Foreigner").CollisionLayer = 1;
+			tasks.Text += "- Talk to Foreigner";
 		}
 	}
 
@@ -404,6 +455,9 @@ public partial class Safehouse : StaticBody2D
 		_player.Position = new Vector2(105, 77);
 
 		await DialogueManager.Instance.StartDialogue(dialogue, false);
+		tasks.Text = "";
+		tasks.Text += $"{dayTaskTree["0b"]}";
+
 
 		if (_day_num == 0)
 		{
@@ -444,10 +498,12 @@ public partial class Safehouse : StaticBody2D
 			window_day.Visible = true;
 			window_night.Visible = false;
 			night_safehouse_lighting.Visible = false;
+			tasks.Text = "Survive\n";
 			switch (_day_num)
 			{
 				case 0:
 					await DialogueManager.Instance.StartDialogue("StartDay/pick_up_card_prompt", false);
+					tasks.Text += $"{dayTaskTree["0a"]}";
 					break;
 				case 1:
 					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt", false);
@@ -472,13 +528,16 @@ public partial class Safehouse : StaticBody2D
 			window_day.Visible = false;
 			window_night.Visible = true;
 			night_safehouse_lighting.Visible = true;
+			
 			switch (_day_num)
 			{
 				case 0:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_0", false);
+					tasks.Text = "Go to sleep";
 					break;
 				case 1:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_1", false);
+					tasks.Text += "- Talk to Kaishain";
 					break;
 				case 2:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_2", false);

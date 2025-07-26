@@ -6721,9 +6721,9 @@ parameters/looping = true
 [node name="Rulebook" parent="." instance=ExtResource("13_qn0kl")]
 visible = false
 offset_left = -250.0
-offset_top = -150.0
+offset_top = -175.0
 offset_right = -250.0
-offset_bottom = -150.0
+offset_bottom = -175.0
 
 [node name="RoundLabel" type="Label" parent="."]
 z_index = 20

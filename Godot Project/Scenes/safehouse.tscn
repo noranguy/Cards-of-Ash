@@ -6,11 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dcpwly3u48me3" path="res://Scenes/Characters/old_man_tutorial.tscn" id="3_v5lnp"]
 [ext_resource type="Texture2D" uid="uid://u1eorlu248cw" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
 [ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishain.tscn" id="5_b4d46"]
-[ext_resource type="PackedScene" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
-[ext_resource type="PackedScene" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
+[ext_resource type="PackedScene" uid="uid://c31jjoe1c61rk" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
+[ext_resource type="PackedScene" uid="uid://bbmm0hjrhws3h" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
-[ext_resource type="PackedScene" uid="uid://c8yf6fsttlpb0" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
+[ext_resource type="PackedScene" uid="uid://cgapps2simqch" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="10_40vev"]
 [ext_resource type="AudioStream" uid="uid://bqv27d7aumo2r" path="res://Assets/SFX/triple-knock-on-door.mp3" id="10_mt6l6"]
@@ -17311,12 +17311,15 @@ libraries = {
 follow_viewport_enabled = true
 
 [node name="DayLabel" type="Label" parent="CanvasLayer"]
+modulate = Color(0, 0.192157, 0.443137, 1)
 z_index = 5
-offset_left = 290.5
-offset_top = -1.0
-offset_right = 333.5
-offset_bottom = 22.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 105.0
+offset_bottom = 46.0
 scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 38
 text = "Day 1"
 
 [node name="EndDayPrompt" type="Control" parent="CanvasLayer"]
@@ -17478,6 +17481,58 @@ text = "Start Game"
 [node name="Cancel" type="Button" parent="CanvasLayer/StartGamePrompt/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Cancel"
+
+[node name="Hud" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(160, 90)
+texture = ExtResource("19_fiq5u")
+
+[node name="TaskLabel" type="Label" parent="CanvasLayer"]
+modulate = Color(0, 0.192157, 0.443137, 1)
+z_index = 5
+offset_left = 269.0
+offset_top = 2.0
+offset_right = 368.0
+offset_bottom = 22.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 20
+text = "Objectives"
+
+[node name="Tasks" type="Label" parent="CanvasLayer"]
+modulate = Color(0, 0.192157, 0.443137, 1)
+z_index = 5
+offset_left = 268.0
+offset_top = 12.0
+offset_right = 372.0
+offset_bottom = 66.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 12
+text = "- survive"
+autowrap_mode = 3
+
+[node name="ResourcesLabel" type="Label" parent="CanvasLayer"]
+modulate = Color(0.788235, 0.121569, 0.215686, 1)
+z_index = 5
+offset_left = 267.0
+offset_top = 153.0
+offset_right = 366.0
+offset_bottom = 173.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 20
+text = "Resources"
+
+[node name="Resources" type="Label" parent="CanvasLayer"]
+modulate = Color(0.788235, 0.121569, 0.215686, 1)
+z_index = 5
+offset_left = 261.0
+offset_top = 162.0
+offset_right = 375.0
+offset_bottom = 196.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("19_7jf0i")
+theme_override_font_sizes/font_size = 12
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 editor_description = "\"Solo Jazz Guitar - Riverline\" by Tri-Tachyon - https://soundcloud.com/tri-tachyon/albums"

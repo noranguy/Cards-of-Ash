@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfmautmt4ebhl"
-path="res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"
+uid="uid://c37m74n130hvc"
+path="res://.godot/imported/types.png-b58cad877291b406e40f494ec36c1a2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Foreigner/portrait.png"
-dest_files=["res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"]
+source_file="res://Assets/Rulebook/types.png"
+dest_files=["res://.godot/imported/types.png-b58cad877291b406e40f494ec36c1a2a.ctex"]
 
 [params]
 

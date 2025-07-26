@@ -12,6 +12,13 @@
 			"id": "a",
 			"text": "This is shown with the durability bar above each table card.",
 			"options": [
+			  { "text": "Continue Game", "next": "b" }
+			]
+		},
+		{
+			"id": "b",
+			"text": "Try throwing another card.",
+			"options": [
 			  { "text": "Continue Game", "next": "end" }
 			]
 		}
