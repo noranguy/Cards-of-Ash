@@ -22,8 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://p5jy6wgjctr4" path="res://Assets/Out of Play Safe House/Radio.png" id="15_7jf0i"]
 [ext_resource type="Texture2D" uid="uid://bthud0h5smg1l" path="res://Assets/Out of Play Safe House/Phone.png" id="16_leres"]
 [ext_resource type="FontFile" uid="uid://ckvv2r38wlgnn" path="res://Assets/Font/KappasPororoca-B83G.ttf" id="19_7jf0i"]
-[ext_resource type="Texture2D" uid="uid://ci7pc88ohbs0" path="res://Assets/Out of Play Safe House/hud_design-Sheet.png" id="22_ifgqq"]
 [ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="22_4kjqu"]
+[ext_resource type="Texture2D" uid="uid://ci7pc88ohbs0" path="res://Assets/Out of Play Safe House/hud_design-Sheet.png" id="22_ifgqq"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
 a = Vector2(38, -10)
