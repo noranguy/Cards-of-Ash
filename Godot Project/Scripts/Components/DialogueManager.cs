@@ -199,7 +199,8 @@ public partial class DialogueManager : Control {
 				await ToSignal(GetTree().CreateTimer(2), "timeout");
 				break;
 			}
-
+			
+			optionsContainer.Visible = false;
 			for (int i = 0; i < node.options.Count; i++) {
 				var option = node.options[i];
 				Button button;
@@ -249,6 +250,7 @@ public partial class DialogueManager : Control {
 				button.FocusMode = FocusModeEnum.All;
 				button.GrabFocus();
 			}
+			optionsContainer.Visible = true;
 			
 			currentId = await nextNodeSource.Task;
 			if (skipButton != null) {

@@ -1,0 +1,41 @@
+{
+	"speaker": "Mom & Son",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Good evening, how are you doing tonight?",
+			"options": [
+				{ "text": "Good, could I ask you something?", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "Yes, what do you need?",
+			"options": [
+				{ "text": "What should I do during an earthquake?", "next": "b" }
+		  	]
+		},
+		{
+			"id": "b",
+			"text": "Good question! You should stay inside during an earthquake, and you should get close to the ground to keep your balance. The last thing you want is to not know what could fall on you.",
+			"options": [
+				{ "text": "...", "next": "c" }
+		  	]
+		},
+	 
+	   {
+			"id": "c",
+			"text": "Be careful around large furniture or objects that may fall over. You should find a table or other cover to stay under to avoid falling debris. That's why I had you board up those flimsy windows.",
+			"options": [
+				{ "text": "...", "next": "e" }
+		  	]
+		},
+		{
+			"id": "d",
+			"text": "Even though most earthquakes last only 10 seconds, some may last minutes so you should hold onto something to keep yourself in place. You also never know when one could happen again.",
+			"options": [
+				{ "text": "You're right, thanks!", "next": "end" }
+		  	]
+		}
+  	]
+}

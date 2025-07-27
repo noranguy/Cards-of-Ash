@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://6i6smfc1mrri"]
+[gd_scene load_steps=20 format=3 uid="uid://jbsre8c6xdc3"]
 
 [ext_resource type="Script" uid="uid://d2kpbmdspbs61" path="res://Scripts/Tasks/Task3.cs" id="1_gwhld"]
 [ext_resource type="Texture2D" uid="uid://k73ee2m3bumt" path="res://Assets/Out of Play Safe House/blinkoff.png" id="2_scn0f"]
