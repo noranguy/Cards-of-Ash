@@ -29,6 +29,13 @@ public partial class DialogueManager : Control {
 	private PackedScene optionButtonScene;
 	private Button skipButton;
 	private Panel panel;
+	private RichTextLabel nameText;
+	private TextureRect mainBox;
+	private TextureRect portrait;
+	private TextureRect namePlate;
+	private TextureRect optionsTexture;
+	private TextureRect skipTexture;
+	
 	
 	private TaskCompletionSource<string> nextNodeSource;
 	private string currentSpeaker;
@@ -40,11 +47,17 @@ public partial class DialogueManager : Control {
 	public override void _Ready() {
 		Instance = this;
 		dialogueText = GetNode<Label>("CanvasLayer/DialoguePanel/DialogueText");
-		optionsContainer = GetNode<VBoxContainer>("CanvasLayer/DialoguePanel/OptionsContainer");
+		optionsContainer = GetNode<VBoxContainer>("CanvasLayer/DialoguePanel/optionsTexture/OptionsContainer");
 		panel = GetNode<Panel>("CanvasLayer/DialoguePanel");
+		nameText = GetNode<RichTextLabel>("CanvasLayer/DialoguePanel/namePlate/NameText");
+		namePlate = GetNode<TextureRect>("CanvasLayer/DialoguePanel/namePlate");
+		portrait = GetNode<TextureRect>("CanvasLayer/DialoguePanel/portrait");
+		optionsTexture = GetNode<TextureRect>("CanvasLayer/DialoguePanel/optionsTexture");
+		mainBox = GetNode<TextureRect>("CanvasLayer/DialoguePanel/mainBox");
 		panel.ZIndex = 100;
 		panel.SetZAsRelative(false);
 		panel.Visible = false;
+		optionsTexture.Visible = false;
 		font = new FontFile();
 		font.LoadDynamicFont("res://Fonts/m5x7.ttf");
 	}
@@ -68,44 +81,68 @@ public partial class DialogueManager : Control {
 		var dialogue = JsonSerializer.Deserialize<Dialogue>(jsonText);
 		currentSpeaker = dialogue.speaker;
 		
-		var sprite = GetNode<Sprite2D>("CanvasLayer/DialoguePanel/Person");
-		
+		var sprite = GetNode<Sprite2D>("CanvasLayer/DialoguePanel/portrait/Person");
+
 		// display speaker portrait if not player
-		if (inPlay) {
+		if (inPlay)
+		{
 			dialogueText.Scale = new Vector2(0.5f, 0.5f);
-			optionsContainer.Scale = new Vector2(1, 1);
-			sprite.Scale = new Vector2(1.4f, 1.4f);
+			optionsTexture.Scale = new Vector2(1, 1);
+			portrait.Scale = new Vector2(1.4f, 1.4f);
+			namePlate.Scale = new Vector2(1.4f, 1.4f);
 			panel.Position = new Vector2(70, 224);
 			panel.Size = new Vector2(500, 120);
-			sprite.Position = new Vector2(55, 55);
-			dialogueText.Position = new Vector2(110, 5);
-			optionsContainer.Position = new Vector2(110, 80);
-		} else {
+			mainBox.Size = new Vector2(505, 125);
+			//mainBox.Position = new Vector2(-5, 5);
+			portrait.Position = new Vector2(8, 8);
+			dialogueText.Position = new Vector2(110, 10);
+			optionsTexture.Position = new Vector2(110, 70);
+			optionsTexture.Visible = false;
+		}
+		else
+		{
 			panel.Position = new Vector2(35, 112);
 			panel.Size = new Vector2(250, 60);
 			dialogueText.Scale = new Vector2(0.25f, 0.25f);
-			optionsContainer.Scale = new Vector2(0.5f, 0.5f);
-			sprite.Scale = new Vector2(0.65f, 0.65f);
-			sprite.Position = new Vector2(30, 30);
-			if (currentSpeaker == "self") {
-				sprite.Visible = false;
+			optionsTexture.Scale = new Vector2(0.5f, 0.5f);
+			portrait.Scale = new Vector2(0.65f, 0.65f);
+			//portrait.Position = new Vector2(30, 30);
+
+			if (currentSpeaker == "self")
+			{
+				//sprite.Visible = false;
+				portrait.Visible = false;
+				namePlate.Visible = false;
 				dialogueText.Size = new Vector2(960, 5);
 				dialogueText.Position = new Vector2(5, 5);
+				optionsTexture.Size = new Vector2(440, 20);
+				optionsTexture.Position = new Vector2(5, 45);
 				optionsContainer.Size = new Vector2(440, 20);
-				optionsContainer.Position = new Vector2(5, 45);
-			} else {
-				sprite.Visible = true;
+			}
+			else
+			{
+				//sprite.Visible = true;
+				portrait.Visible = true;
+				namePlate.Visible = true;
 				dialogueText.Size = new Vector2(760, 5);
-				dialogueText.Position = new Vector2(60, 5);
+				dialogueText.Position = new Vector2(60, 0);
+				optionsTexture.Size = new Vector2(320, 20);
 				optionsContainer.Size = new Vector2(320, 20);
-				optionsContainer.Position = new Vector2(60, 42);
+				optionsTexture.Position = new Vector2(60, 42);
 				var texture = GD.Load<Texture2D>($"res://Assets/Character Designs/{dialogue.speaker}/portrait.png");
 				sprite.Texture = texture;
 			}
 		}
+
+		if (currentSpeaker != "self") {
+			nameText.Text = currentSpeaker;
+			await ToSignal(GetTree().CreateTimer(0.05), "timeout");
+			namePlate.Size = nameText.Size + new Vector2(8,0);
+		}
 		
 		// build dialogue tree
-		foreach (var node in dialogue.dialogue) {
+		foreach (var node in dialogue.dialogue)
+		{
 			node.options ??= new List<DialogueOption>();
 			dialogueTree[node.id] = node;
 		}
@@ -121,24 +158,44 @@ public partial class DialogueManager : Control {
 			var node = dialogueTree[currentId];
 
 			ClearOptions();
-			dialogueText.Text = currentSpeaker == "self" ? "" : $"{currentSpeaker}: ";
+			dialogueText.Text = currentSpeaker == "self" ? "" : $"";
 
 			nextNodeSource = new TaskCompletionSource<string>();
-			
-			if (node.options.Count == 1) {
-				if (_inPlay) {
-					skipButton = new Button {
+
+			if (node.options.Count == 1)
+			{
+				if (_inPlay)
+				{
+					skipButton = new Button
+					{
 						Text = "Skip",
-						Visible = true,
+						
 						Size = new Vector2(40, 30),
-						Position = new Vector2(456, 86)
+						
+					};
+					skipTexture = new TextureRect
+					{
+						Texture = GD.Load<Texture2D>("res://Assets/Dialogue/options.png"),
+						Size = new Vector2(40, 30),
+						Position = new Vector2(445, 70),
+						Visible = true,
 					};
 					skipButton.AddThemeFontOverride("font", font);
-				} else {
-					skipButton = new Button {
+				}
+				else
+				{
+					skipButton = new Button
+					{
 						Text = "Skip",
 						Visible = true,
 						Size = new Vector2(40, 30),
+						
+					};
+					skipTexture = new TextureRect
+					{
+						Texture = GD.Load<Texture2D>("res://Assets/Dialogue/options.png"),
+						Size = new Vector2(40, 30),
+						Visible = true,
 						Position = new Vector2(228, 43),
 						Scale = new Vector2(0.5f, 0.5f)
 					};
@@ -146,7 +203,8 @@ public partial class DialogueManager : Control {
 				}
 				string targetId = node.options[0].next;
 				skipButton.Pressed += () => nextNodeSource.TrySetResult("end");
-				panel.AddChild(skipButton);
+				skipTexture.AddChild(skipButton);
+				panel.AddChild(skipTexture);
 			}
 			
 			// load current message one word at a time
@@ -171,19 +229,23 @@ public partial class DialogueManager : Control {
 						Name = i.ToString()
 					};
 				} else {
-					button = new Button {
+					button = new Button
+					{
 						Text = option.text,
 						Name = i.ToString(),
 						Size = new Vector2(40, 30),
 						Scale = new Vector2(0.25f, 0.25f)
+						
 					};
 					button.AddThemeFontOverride("font", font);
 					button.AddThemeFontSizeOverride("font_size", 16);
 				}
-				
+				GD.Print(button.Size);
 				string targetId = option.next;
 				button.Pressed += () => nextNodeSource.TrySetResult(targetId);
 				optionsContainer.AddChild(button);
+				optionsTexture.Size = optionsContainer.Size;
+				optionsTexture.Visible = true;
 				button.FocusMode = FocusModeEnum.All;
 				button.GrabFocus();
 			}
@@ -193,7 +255,12 @@ public partial class DialogueManager : Control {
 				skipButton.QueueFree();
 				skipButton = null;
 			}
-			if (currentId == "end") {
+			if (skipTexture != null) {
+				skipTexture.QueueFree();
+				skipTexture = null;
+			}
+			if (currentId == "end")
+			{
 				break;
 			}
 		}
@@ -201,9 +268,12 @@ public partial class DialogueManager : Control {
 		ClearOptions();
 	}
 
-	private void ClearOptions() {
-		foreach (Node child in optionsContainer.GetChildren()) {
+	private void ClearOptions()
+	{
+		foreach (Node child in optionsContainer.GetChildren())
+		{
 			child.QueueFree();
 		}
+		optionsTexture.Visible = false;
 	}
 }

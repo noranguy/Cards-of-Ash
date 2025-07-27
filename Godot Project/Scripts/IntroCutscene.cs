@@ -22,7 +22,6 @@ public partial class IntroCutscene : Node2D
 	private const float SHAKE_TIME = 1;
 	private float SHAKE_DELAY_RATE;
 
-
 	bool trainPlaying;
 	bool playFadeDay;
 	int num = 1;
@@ -51,6 +50,10 @@ public partial class IntroCutscene : Node2D
 
 	public override void _Process(double delta)
 	{
+		if (Input.IsActionJustPressed("ui_cancel"))
+		{ 
+			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
+		}
 		if (SHAKE_DELAY_RATE > 0f)
 		{
 			camera.GlobalPosition = camBasePosition + new Vector2(GetNoise(1), GetNoise(0));
@@ -60,6 +63,7 @@ public partial class IntroCutscene : Node2D
 	private async Task playParts(int partNumber)
 	{
 		GD.Print(partNumber);
+
 		switch (partNumber)
 		{
 			case 1:
