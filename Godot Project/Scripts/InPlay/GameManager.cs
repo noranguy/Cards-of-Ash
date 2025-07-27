@@ -48,6 +48,7 @@ public partial class GameManager : Node2D {
 	int round = 0;
 
 	public async override void _Ready() {
+		GlobalState.Instance.allowCardSelect = false;
 		anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		playerCardThrow = GetNode<AnimatedSprite2D>("Player_CardThrowAnimate");
 		oppCardThrow = GetNode<AnimatedSprite2D>("Opp_CardThrowAnimate");
@@ -115,7 +116,11 @@ public partial class GameManager : Node2D {
 
 		var playerFirst = playerHand.GetCards()[0];
 		var tableFirst = enemyTableCards[0];
-			
+		
+		await ToSignal(GetTree().CreateTimer(2), "timeout");
+		
+		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start", true);
+		
 		if (GlobalState.Instance.GetDay() == 0) {
 			playerHand.restrictAllow = new HashSet<Card> { playerFirst };
 			table.restrictAllow = new HashSet<Card> { tableFirst };
@@ -128,9 +133,7 @@ public partial class GameManager : Node2D {
 			}
 		}
 		
-		await ToSignal(GetTree().CreateTimer(2), "timeout");
-		
-		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start", true);
+		GlobalState.Instance.allowCardSelect = true;
 		
 		await NextRound();
 	}
@@ -312,6 +315,7 @@ public partial class GameManager : Node2D {
 	
 	private async void Round() {
 		if (!allowThrow) return;
+		GlobalState.Instance.allowCardSelect = false;
 		if (GlobalState.Instance.GetDay() == 0 && round < 3) {
 			playerHand.restrictAllow.Clear();
 			table.restrictAllow.Clear();
@@ -331,7 +335,7 @@ public partial class GameManager : Node2D {
 			return;
 		}
 		
-		await ToSignal(GetTree().CreateTimer(1), "timeout");
+		await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 		
 		// enemy turn
 		
@@ -350,7 +354,7 @@ public partial class GameManager : Node2D {
 		enemy.Backward();
 		enemyHand.RemoveCard(throwingCard);
 
-		await ToSignal(GetTree().CreateTimer(1), "timeout");
+		await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 		
 		// round end
 		round++;
@@ -395,6 +399,7 @@ public partial class GameManager : Node2D {
 			
 			switch (round) {
 				case 1:
+					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
 					playerCard = playerHand.GetCards()[0];
 					tableCard = enemyTableCards[1];
 					
@@ -403,11 +408,10 @@ public partial class GameManager : Node2D {
 					
 					playerCard.Focus();
 					tableCard.Focus();
-					
-					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
-					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
 					break;
+					
 				case 2:
+					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
 					playerCard = playerHand.GetCards()[0];
 					tableCard = playerTableCards[0];
 					
@@ -416,13 +420,10 @@ public partial class GameManager : Node2D {
 					
 					playerCard.Focus();
 					tableCard.Focus();
-					
-					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
-					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
 					break;
+					
 				case 3:
 					infoButton.Focus();
-					await ToSignal(GetTree().CreateTimer(0.25), "timeout");
 					await DialogueManager.Instance.StartDialogue($"agent_0/{round}", true);
 					infoButton.Unfocus();
 					break;
@@ -434,6 +435,7 @@ public partial class GameManager : Node2D {
 		lastFortune = -1;
 		
 		await NextRound();
+		GlobalState.Instance.allowCardSelect = true;
 	}
 	
 	private async Task SwapVision(List<Card> cards) {

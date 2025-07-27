@@ -33,6 +33,7 @@ public partial class Card : Control {
 	public Vector2 lowerPosition;
 	
 	public bool dragging = false;
+	public bool hoveringCard = false;
 	
 	public override void _Ready() {
 		Connect("mouse_entered", new Callable(this, nameof(OnMouseEntered)));
@@ -60,6 +61,12 @@ public partial class Card : Control {
 			} else if (indicator.Position.Y < indicatorMin) {
 				indicatorDir = 1;
 			}
+		}
+		
+		if (hoveringCard) {
+			Highlight();
+		} else {
+			Unhighlight();
 		}
 	}
 	
@@ -194,26 +201,22 @@ public partial class Card : Control {
 	}
 
 	public void OnInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
+		_GuiInput(@event);
+	}
+	
+	public override void _GuiInput(InputEvent @event) {
 		if (
 			@event is InputEventMouseButton mouseEvent &&
 			mouseEvent.Pressed &&
-			mouseEvent.ButtonIndex == MouseButton.Left
+			mouseEvent.ButtonIndex == MouseButton.Left &&
+			GlobalState.Instance.allowCardSelect
 		) {
 			EmitSignal(SignalName.CardClicked, this);
 		}
 	}
 	
-	public override void _GuiInput(InputEvent @event) {
-		if (@event is InputEventMouseButton mouseEvent &&
-			mouseEvent.Pressed &&
-			mouseEvent.ButtonIndex == MouseButton.Left)
-		{
-			EmitSignal(SignalName.CardClicked, this);
-		}
-	}
-	
 	public void Highlight() {
-		if ((index == -1 && !isPlayer) || !ready) return;
+		if ((index == -1 && !isPlayer) || !ready || !GlobalState.Instance.allowCardSelect) return;
 		Shader shader = GD.Load<Shader>("res://Shaders/card_highlight.gdshader");
 		ShaderMaterial mat = new ShaderMaterial { Shader = shader };
 		sprite.Material = mat;
@@ -235,10 +238,10 @@ public partial class Card : Control {
 	}
 
 	public void OnMouseEntered() {
-		Highlight();
+		hoveringCard = true;
 	}
 	
 	public void OnMouseExited() {
-		Unhighlight();
+		hoveringCard = false;
 	}
 }

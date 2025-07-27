@@ -157,28 +157,36 @@ public partial class DeckBuilder : Control {
 			Vector2 firstPosition = card.GlobalPosition;
 			Vector2 secondPosition = otherCard.GlobalPosition;
 			
-			var firstParent = card.GetParent();
-			var secondParent = otherCard.GetParent();
 			var rootParent = GetTree().Root.GetNode<Control>("DeckBuilder");
+
+			Card dup1 = CreateDuplicateCard(card);
+			Card dup2 = CreateDuplicateCard(otherCard);
+			rootParent.AddChild(dup1);
+			rootParent.AddChild(dup2);
 			
-			firstParent.RemoveChild(card);
-			rootParent.AddChild(card);
-			secondParent.RemoveChild(otherCard);
-			rootParent.AddChild(otherCard);
-			card.GlobalPosition = firstPosition;
-			otherCard.GlobalPosition = secondPosition;
+			card.sprite.Visible = false;
+			otherCard.sprite.Visible = false;
 			
-			await card.SwapPositions(otherCard);
+			await dup1.SwapPositions(dup2);
+			
+			rootParent.RemoveChild(dup1);
+			rootParent.RemoveChild(dup2);
+			dup1.QueueFree();
+			dup2.QueueFree();
+			
 			SwapCardFields(card, otherCard);
 			
-			rootParent.RemoveChild(card);
-			firstParent.AddChild(card);
-			rootParent.RemoveChild(otherCard);
-			secondParent.AddChild(otherCard);
-			
-			card.GlobalPosition = firstPosition;
-			otherCard.GlobalPosition = secondPosition;
+			card.sprite.Visible = true;
+			otherCard.sprite.Visible = true;
 		}
+	}
+	
+	private Card CreateDuplicateCard(Card original) {
+		var dup = (Card)original.Duplicate();
+		dup.Init(Card.DEFAULT_VERTICES, original.type, original.clas, true, true, -1);
+		dup.ZIndex = 100;
+		dup.GlobalPosition = original.GlobalPosition;
+		return dup;
 	}
 	
 	private void SwapCardFields(Card a, Card b) {
