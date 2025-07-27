@@ -39,7 +39,6 @@ public partial class Task1 : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-
 		if (Input.IsActionJustPressed("click"))
 		{
 			if (over_radio && !in_phone_game)

@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 public partial class Task3 : Node2D
 {
 	private bool fak_found;
+	private bool cans_found;
+	private bool water_found;
+	private bool garbo_found;
+
 
 	private bool near_cans;
 	private bool near_water;
@@ -15,6 +19,10 @@ public partial class Task3 : Node2D
 	public override void _Ready()
 	{
 		fak_found = false;
+		cans_found = false;
+		water_found = false;
+		garbo_found = false;
+
 		near_cans = false;
 		near_water = false;
 		near_fak = false;
@@ -43,46 +51,49 @@ public partial class Task3 : Node2D
 		GetNode<AnimationPlayer>("Garbage/GarbageBlink").Play("blink");
 	}
 
-	public void checkStars()
+	public string checkStars()
 	{
-		GD.Print(near_cans);
-		if (near_cans)
+		if (near_cans && !cans_found)
 		{
 			//Play dialogue -- didnt find the thing
 			GetNode<Area2D>("Cans").Visible = false;
+			GetNode<Area2D>("Cans").CollisionLayer = 0;
 			GetNode<AnimationPlayer>("Cans/CansBlink").Stop();
-			_ = InSafeHouse_Dialogue_setupAsync("cans");
+			cans_found = true;
+			return "cans";
 		}
 
-		else if (near_water)
+		else if (near_water && !water_found)
 		{
 			// Play dialogue
 			GetNode<Area2D>("Water").Visible = false;
+			GetNode<Area2D>("Water").CollisionLayer = 0;
 			GetNode<AnimationPlayer>("Water/WaterBlink").Stop();
-			_ = InSafeHouse_Dialogue_setupAsync("water");
+			water_found = true;
+			return "water";
 		}
 
-		else if (near_fak)
+		else if (near_fak && !fak_found)
 		{
 			// Play dialogue
 			GetNode<Area2D>("FirstAidKit").Visible = false;
 			GetNode<AnimationPlayer>("FirstAidKit/FirstAidKitBlink").Stop();
-			_ = InSafeHouse_Dialogue_setupAsync("fak");
+			GetNode<Area2D>("FirstAidKit").CollisionLayer = 0;
 			fak_found = true;
+			return "fak";
 		}
 
-		else if (near_garbo)
+		else if (near_garbo && !garbo_found)
 		{
 			// Play dialogue
 			GetNode<Area2D>("Garbage").Visible = false;
+			GetNode<Area2D>("Garbage").CollisionLayer = 0;
 			GetNode<AnimationPlayer>("Garbage/GarbageBlink").Stop();
-			_ = InSafeHouse_Dialogue_setupAsync("garbage");
+			garbo_found = true;
+			return "garbage";
 		}
-	}
 
-	public bool isGameWon()
-	{
-		return fak_found;
+		return null;
 	}
 
 	private void _on_cans_body_entered(Node2D body)
@@ -124,10 +135,5 @@ public partial class Task3 : Node2D
 	private void _on_garbage_body_exited(Node2D body)
 	{
 		near_garbo = false;
-	}
-
-	private async Task InSafeHouse_Dialogue_setupAsync(string item)
-	{
-		await DialogueManager.Instance.StartDialogue($"Tasks/Task3/{item}_found", false);
 	}
 }

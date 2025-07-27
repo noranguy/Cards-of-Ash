@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=4 uid="uid://xgx7hwjq0llw"]
+[gd_scene load_steps=84 format=4 uid="uid://xgx7hwjq0llw"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
@@ -23,8 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://bthud0h5smg1l" path="res://Assets/Out of Play Safe House/Phone.png" id="16_leres"]
 [ext_resource type="FontFile" uid="uid://ckvv2r38wlgnn" path="res://Assets/Font/KappasPororoca-B83G.ttf" id="19_7jf0i"]
 [ext_resource type="Texture2D" uid="uid://1lxbh1divmcx" path="res://Assets/Out of Play Safe House/hud_design.png" id="19_fiq5u"]
-[ext_resource type="Texture2D" uid="uid://k73ee2m3bumt" path="res://Assets/Out of Play Safe House/blinkoff.png" id="22_ifgqq"]
-[ext_resource type="Texture2D" uid="uid://cvqfm74incvt6" path="res://Assets/Out of Play Safe House/blink_on.png" id="23_4kjqu"]
 [ext_resource type="PackedScene" uid="uid://6i6smfc1mrri" path="res://Scenes/Tasks/task_3.tscn" id="26_8b0r6"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
@@ -16859,44 +16857,6 @@ _data = {
 &"fade_to_night": SubResource("Animation_algie")
 }
 
-[sub_resource type="Animation" id="Animation_8b0r6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-
-[sub_resource type="Animation" id="Animation_gvmke"]
-resource_name = "blink"
-length = 0.75
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [ExtResource("22_ifgqq"), ExtResource("23_4kjqu")]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ses6"]
-_data = {
-&"RESET": SubResource("Animation_8b0r6"),
-&"blink": SubResource("Animation_gvmke")
-}
-
 [node name="Safehouse" type="StaticBody2D"]
 light_mask = 0
 position = Vector2(-1, 1)
@@ -17102,9 +17062,10 @@ libraries = {
 }
 
 [node name="Boxes" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boxes"]
-z_index = 100
+z_index = 5
 position = Vector2(425, 101)
 shape = SubResource("RectangleShape2D_ks0xv")
 
@@ -17555,17 +17516,6 @@ editor_description = "\"Solo Jazz Guitar - Riverline\" by Tri-Tachyon - https://
 stream = ExtResource("14_0yw7c")
 autoplay = true
 parameters/looping = true
-
-[node name="Blinker" type="TextureRect" parent="."]
-z_index = 7
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Blinker")
-libraries = {
-&"": SubResource("AnimationLibrary_0ses6")
-}
 
 [node name="Task3" parent="." instance=ExtResource("26_8b0r6")]
 visible = false

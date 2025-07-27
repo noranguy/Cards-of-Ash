@@ -16,6 +16,7 @@ public class Tasks
 	public List<dayNode> tasks { get; set; }
 
 }
+
 // Safehouse area
 public partial class Safehouse : StaticBody2D
 {
@@ -34,7 +35,7 @@ public partial class Safehouse : StaticBody2D
 	private bool _at_door;
 	private bool _at_table;
 	private bool _at_boxes;
-	
+
 	private bool _task_ready;
 
 	// Flags to see if the player is trying to talk to an npc, order [kaishain, mom, kid, foreigner]
@@ -42,7 +43,7 @@ public partial class Safehouse : StaticBody2D
 
 	// Flags for what dialogue should be shown to the player
 	private bool[] _mission_completed;
-	private bool[] _dialogue_exhausted = {false, false, false, false};
+	private bool[] _dialogue_exhausted = { false, false, false, false };
 
 	private string[] characters = ["kaishain", "mom", "kid", "foreigner"];
 
@@ -99,8 +100,8 @@ public partial class Safehouse : StaticBody2D
 
 		tasks = GetNode<Label>("CanvasLayer/Tasks");
 
-		in_task_three = false;
 		task_three = GetNode<Task3>("Task3");
+		in_task_three = false;
 
 		dayTaskTree = new();
 		nightTaskTree = new();
@@ -166,7 +167,6 @@ public partial class Safehouse : StaticBody2D
 		if (!_in_minigame)
 		{
 			_ = Start_dayAsync();
-
 		}
 
 		else
@@ -186,12 +186,33 @@ public partial class Safehouse : StaticBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (_inhabitants[3] && !_mission_completed[3] && !in_task_three && _task_ready)
+		{
+			in_task_three = true;
+			task_three.Visible = true;
+			task_three.playGame();
+		}
+
 		// If the player is trying to interact with something
 		if (Input.IsActionJustPressed("interact"))
 		{
 			if (in_task_three)
 			{
-				task_three.checkStars();
+				string pos_dialogue = task_three.checkStars();
+
+				if (pos_dialogue != null)
+				{
+					_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task3/{pos_dialogue}_found");
+				}
+
+				if (pos_dialogue == "fak")
+				{
+					task_three.Visible = false;
+					in_task_three = false;
+					_mission_completed[3] = true;
+					GlobalState.Instance.MissionCompleted(3);
+					_dialogue_exhausted[2] = false;
+				}
 			}
 
 			// If the player is in an interactable area, then show the prompt for that object
@@ -227,15 +248,9 @@ public partial class Safehouse : StaticBody2D
 				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 			}
 
-			else if (_inhabitants[3] && !_mission_completed[3] && !in_task_three && _task_ready)
-			{
-				in_task_three = true;
-				task_three.Visible = true;
-				task_three.playGame();
-			}
-
 			else if (_at_boxes && _inhabitants[_day_num] && !_mission_completed[_day_num] && _task_ready)
 			{
+				GD.Print("In else if");
 				GlobalState.Instance.SetInMinigame(true);
 				GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Tasks/task_{_day_num}.tscn");
 			}
@@ -256,8 +271,8 @@ public partial class Safehouse : StaticBody2D
 
 						else
 						{
-							_task_ready = true;
 							_ = InSafeHouse_Dialogue_setupAsync($"Mission/{_dialogue_order[i + 1]}");
+							_task_ready = true;
 							tasks.Text += nightTaskTree[$"{i + 1}a"];
 							_dialogue_exhausted[i] = true;
 						}
@@ -277,50 +292,36 @@ public partial class Safehouse : StaticBody2D
 					break;
 				}
 			}
-
-			if (in_task_three && task_three.isGameWon())
-			{
-				task_three.Visible = false;
-				in_task_three = false;
-				_mission_completed[3] = true;
-				GlobalState.Instance.MissionCompleted(3);
-				_dialogue_exhausted[2] = false;
-			}
+			GD.Print("Done with process");
 		}
 	}
 
 	private void InhabitSafehouse()
 	{
 		tasks.Text = "";
-
 		if (_inhabitants[1])
 		{
 			GetNode<Area2D>("KaishainArea").Visible = true;
 			GetNode<Area2D>("KaishainArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("KaishainArea/Kaishain").CollisionLayer = 1;
-			tasks.Text += "- Talk to Kaishain\n";
-			
 		}
 		if (_inhabitants[2])
 		{
 			GetNode<Area2D>("MomArea").Visible = true;
 			GetNode<Area2D>("MomArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("MomArea/Mom").CollisionLayer = 1;
-			tasks.Text += "- Talk to Mom\n";
 		}
 		if (_inhabitants[3])
 		{
 			GetNode<Area2D>("KidArea").Visible = true;
 			GetNode<Area2D>("KidArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("KidArea/Kid").CollisionLayer = 1;
-			tasks.Text += "- Talk to Kid\n";
 		}
 		if (_inhabitants[4])
 		{
 			GetNode<Area2D>("ForeignerArea").Visible = true;
 			GetNode<Area2D>("ForeignerArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("ForeignerArea/Foreigner").CollisionLayer = 1;
-			tasks.Text += "- Talk to Foreigner\n";
 		}
 	}
 
@@ -499,11 +500,11 @@ public partial class Safehouse : StaticBody2D
 		_npc_waiting = false;
 		_day_over = false;
 		_game_ready = true;
-		
+
 		//GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Dialogue/{_dialogue_order[(int)_day_num]}.tscn"); for when theres a whole scene for dialogue
 	}
 
-	private async Task InSafeHouse_Dialogue_setupAsync(string dialogue_path)
+	public async Task InSafeHouse_Dialogue_setupAsync(string dialogue_path)
 	{
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 
@@ -562,16 +563,19 @@ public partial class Safehouse : StaticBody2D
 					break;
 				case 1:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_1", false);
-					tasks.Text += "- Talk to Kaishain";
+					tasks.Text += "- Talk to the Kaishain\n";
 					break;
 				case 2:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_2", false);
+					tasks.Text += "- Talk to the Mom\n";
 					break;
 				case 3:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_3", false);
+					tasks.Text += "- Talk to the Kid\n";
 					break;
 				case 4:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_4", false);
+					tasks.Text += "- Talk to the Foreigner\n";
 					break;
 				case 5:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_4", false);
