@@ -1,0 +1,12 @@
+{
+	"speaker": "Foreigner",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Come back to me when you’ve talked to everyone.",
+			"options": [
+				{ "text": "Thanks.", "next": "end" }
+			]
+		}
+  	]
+}

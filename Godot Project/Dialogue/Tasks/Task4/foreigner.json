@@ -1,0 +1,80 @@
+{
+	"speaker": "Foreigner",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Thank you again for talking to everyone. Now, can you help me make a plan?",
+			"options": [
+				{ "text": "Yes!", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "Who should I call if I need an ambulance during an earthquake?",
+			"options": [
+				{ "text": "119", "next": "b" },
+				{ "text": "110", "next": "wrong_1" },
+				{ "text": "171", "next": "wrong_1" }
+		  	]
+		},
+		{
+			"id": "b",
+			"text": "Thank you, I'll keep that in mind.",
+			"options": [
+				{ "text": "...", "next": "c" }
+		  	]
+		},
+    	{
+			"id": "c",
+			"text": "I want to be prepared so I have a flashlight, a portable radio, and matches, but it's taking up too much space. Is there anything that's not really important for an earthquake?",
+			"options": [
+				{ "text": "Flashlight", "next": "wrong_2" },
+                { "text": "Radio", "next": "wrong_2" },
+                { "text": "Matches", "next": "d" }
+		  	]
+		},
+		{
+			"id": "d",
+			"text": "Good to know!",
+			"options": [
+				{ "text": "...", "next": "e" }
+		  	]
+		},
+		{
+			"id": "e",
+			"text": "If I'm inside a store when an earthquake happens, should I run outside or hold onto the shelves?",
+			"options": [
+				{ "text": "Run Outside", "next": "wrong_3" },
+				{ "text": "Hold onto Shelves", "next": "f" }
+		  	]
+		},
+		{
+			"id": "f",
+			"text": "Thank you so much! I feel very prepared for an earthquake now.",
+			"options": [
+				{ "text": "No problem.", "next": "end" }
+		  	]
+		},
+		{
+			"id": "wrong_1",
+			"text": "Hmm… That doesn't sound right?",
+			"options": [
+				{ "text": "Ah, my bad...", "next": "a" }
+			]
+		},
+		{
+			"id": "wrong_2",
+			"text": "Hmm… That doesn't sound right?",
+			"options": [
+				{ "text": "Ah, my bad...", "next": "c" }
+			]
+		},
+		{
+			"id": "wrong_3",
+			"text": "Hmm… That doesn't sound right?",
+			"options": [
+				{ "text": "Ah, my bad...", "next": "e" }
+			]
+		}
+  	]
+}

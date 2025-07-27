@@ -1,0 +1,12 @@
+{
+	"speaker": "Mom & Son",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Back again? Don’t forget this time. When in an earthquake, make sure to stay inside and find cover.",
+			"options": [
+				{ "text": "Thanks.", "next": "end" }
+			]
+		}
+  	]
+}
