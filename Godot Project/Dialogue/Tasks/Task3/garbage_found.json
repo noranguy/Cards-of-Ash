@@ -1,0 +1,12 @@
+{
+	"speaker": "self",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "\"Garbage. Gross. I should probably clean this place up.\"",
+			"options": [
+				{ "text": "...", "next": "end" }
+			]
+		}
+	]
+}

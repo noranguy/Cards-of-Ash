@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://62p5ed87pb70" path="res://Assets/Character Designs/foreigner/foreigner mini sprite.png" id="1_omfxh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xjch"]
-size = Vector2(14, 16)
+size = Vector2(14, 24)
 
 [node name="Foreigner" type="CharacterBody2D"]
 
@@ -11,5 +11,5 @@ size = Vector2(14, 16)
 texture = ExtResource("1_omfxh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_3xjch")

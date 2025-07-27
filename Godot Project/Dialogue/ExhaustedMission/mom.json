@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Maybe We'll be able to find some peace here.",
+			"text": "Ah! Quick, go board up those windows. I’ll have a surprise for you when you get back.",
 			"options": [
 				{ "text": "...", "next": "end" }
 		  	]

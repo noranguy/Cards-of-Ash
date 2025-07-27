@@ -1,0 +1,91 @@
+{
+	"speaker": "Mom & Son",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Hi! Little Haru and I wanted to say thank you for the hospitable stay. I hope we can be useful here.",
+			"options": [
+				{ "text": "I never got your name.", "next": "b" }
+			]
+		},
+		{
+			"id": "b",
+			"text": "Oh! Apologies, My name is An Nomura and I think you know who this is.",
+			"options": [
+				{ "text": "...", "next": "c" }
+		  	]
+		},
+		{
+			"id": "c",
+			"text": "*Gestures to the baby sleeping*",
+			"options": [
+				{ "text": "...", "next": "d" }
+		  	]
+		},
+	 
+	   {
+			"id": "d",
+			"text": "Adorable, isn't he!",
+			"options": [
+				{ "text": "So cute", "next": "e" }
+		  	]
+		},
+		{
+			"id": "e",
+			"text": "Say, It’s awfully noisy…",
+			"options": [
+				{ "text": "...", "next": "f" }
+		  	]
+		},
+	  {
+			"id": "f",
+			"text": "You know, those windows should be boarded up by now.",
+			"options": [
+				{ "text": "Really, why?", "next": "g" }
+		  	]
+		},
+	  {
+			"id": "g",
+			"text": "Well, most buildings here can handle the violent shakes. However, this safehouse is old. We’re lucky those windows haven’t broken.",
+			"options": [
+				{ "text": "Ah... I see", "next": "h" }
+		  	]
+		},
+		{
+			"id": "h",
+			"text": "Boarding up the windows and securing the furniture minimizes dangers and injuries if there was another earthquake again.",
+			"options": [
+				{ "text": "I will", "next": "i" }
+		  	]
+		},
+				{
+			"id": "i",
+			"text": "Remember that for the next time before it’s too late.",
+			"options": [
+				{ "text": "I will", "next": "j" }
+		  	]
+		},
+		
+	  {
+			"id": "j",
+			"text": "Can never be too safe! Especially when you have a little guy with you.",
+			"options": [
+				{ "text": "...", "next": "k" }
+		  	]
+		},
+		 {
+			"id": "k",
+			"text": "Ah! He's starting to wake up...",
+			"options": [
+				{ "text": "...", "next": "l" }
+		  	]
+		},
+	  {
+			"id": "l",
+			"text": "Ah! Quick, go board up those windows. I’ll have a surprise for you when you get back.",
+			"options": [
+				{ "text": "Okay!", "next": "end" }
+		  	]
+		}
+  	]
+}

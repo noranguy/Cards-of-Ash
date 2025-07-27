@@ -1,21 +1,21 @@
 {
-    "tasks":[
-        {
-            "day_num": "1a",
-            "task":"Fix phone and radio"
-        },
-        {
-            "day_num": "2a",
-            "text":"Board up windows"
-        },
-        {
-            "day_num": "3a",
-            "task": "Search safehouse for helpful items"
-        },
-        {
-            "day_num": "4a",
-            "task": "Ask around the safehouse"
-        }
-        
-    ]
+	"tasks":[
+		{
+			"day_num": "1a",
+			"task":"Fix phone and radio"
+		},
+		{
+			"day_num": "2a",
+			"text":"Board up windows"
+		},
+		{
+			"day_num": "3a",
+			"task": "Search safehouse for helpful First Aid Kit"
+		},
+		{
+			"day_num": "4a",
+			"task": "Ask around the safehouse"
+		}
+		
+	]
 }

@@ -6,11 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dcpwly3u48me3" path="res://Scenes/Characters/old_man_tutorial.tscn" id="3_v5lnp"]
 [ext_resource type="Texture2D" uid="uid://u1eorlu248cw" path="res://Assets/Cards/Back of cards.png" id="4_vpc17"]
 [ext_resource type="PackedScene" uid="uid://dvxtlx4tedhx4" path="res://Scenes/Characters/kaishain.tscn" id="5_b4d46"]
-[ext_resource type="PackedScene" uid="uid://c31jjoe1c61rk" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
-[ext_resource type="PackedScene" uid="uid://bbmm0hjrhws3h" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
+[ext_resource type="PackedScene" uid="uid://mrr5ilnttmr8" path="res://Scenes/Characters/mom.tscn" id="6_mt6l6"]
+[ext_resource type="PackedScene" uid="uid://b3qbgdes5dw5o" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
-[ext_resource type="PackedScene" uid="uid://cgapps2simqch" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
+[ext_resource type="PackedScene" uid="uid://c8yf6fsttlpb0" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="10_40vev"]
 [ext_resource type="AudioStream" uid="uid://bqv27d7aumo2r" path="res://Assets/SFX/triple-knock-on-door.mp3" id="10_mt6l6"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://p5jy6wgjctr4" path="res://Assets/Out of Play Safe House/Radio.png" id="15_7jf0i"]
 [ext_resource type="Texture2D" uid="uid://bthud0h5smg1l" path="res://Assets/Out of Play Safe House/Phone.png" id="16_leres"]
 [ext_resource type="FontFile" uid="uid://ckvv2r38wlgnn" path="res://Assets/Font/KappasPororoca-B83G.ttf" id="19_7jf0i"]
+[ext_resource type="Texture2D" uid="uid://1lxbh1divmcx" path="res://Assets/Out of Play Safe House/hud_design.png" id="19_fiq5u"]
+[ext_resource type="PackedScene" uid="uid://6i6smfc1mrri" path="res://Scenes/Tasks/task_3.tscn" id="26_8b0r6"]
 [ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="22_4kjqu"]
 [ext_resource type="Texture2D" uid="uid://ci7pc88ohbs0" path="res://Assets/Out of Play Safe House/hud_design-Sheet.png" id="22_ifgqq"]
 
@@ -3464,7 +3466,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks0xv"]
-size = Vector2(66, 34)
+size = Vector2(110, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_algie"]
 size = Vector2(60, 22)
@@ -3590,7 +3592,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxkjp"]
-size = Vector2(68, 73.5)
+size = Vector2(68, 63.75)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_40vev"]
 texture = ExtResource("10_40vev")
@@ -16877,6 +16879,7 @@ bg_color = Color(0.788235, 0.12549, 0.211765, 1)
 
 [node name="Safehouse" type="StaticBody2D"]
 light_mask = 0
+position = Vector2(-1, 1)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_6l742")
 
@@ -16966,7 +16969,7 @@ position = Vector2(210, 95)
 scale = Vector2(2, 2)
 collision_layer = 0
 
-[node name="OldManTutorial2" parent="." instance=ExtResource("3_v5lnp")]
+[node name="OldManEndGame" parent="." instance=ExtResource("3_v5lnp")]
 visible = false
 z_index = 5
 position = Vector2(210, 95)
@@ -17079,10 +17082,11 @@ libraries = {
 }
 
 [node name="Boxes" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boxes"]
-z_index = 100
-position = Vector2(447, 101)
+z_index = 5
+position = Vector2(425, 101)
 shape = SubResource("RectangleShape2D_ks0xv")
 
 [node name="Furniture" type="StaticBody2D" parent="."]
@@ -17240,7 +17244,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KidArea"]
 z_index = 5
-position = Vector2(452, 305)
+position = Vector2(452, 309.875)
 shape = SubResource("RectangleShape2D_gxkjp")
 
 [node name="Kid" parent="KidArea" instance=ExtResource("7_b4d46")]
@@ -17590,6 +17594,9 @@ editor_description = "\"Solo Jazz Guitar - Riverline\" by Tri-Tachyon - https://
 stream = ExtResource("14_0yw7c")
 autoplay = true
 parameters/looping = true
+
+[node name="Task3" parent="." instance=ExtResource("26_8b0r6")]
+visible = false
 
 [connection signal="body_entered" from="Door" to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="Door" to="." method="_on_door_body_exited"]

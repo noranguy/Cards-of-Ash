@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bo7f5l20s816i" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_E.png" id="3_6rq2s"]
 [ext_resource type="Texture2D" uid="uid://bdugnjwd5gcdt" path="res://Assets/Out of Play Safe House/Pixel Art Top Down - Cainos/Texture/TX Props.png" id="4_vadw1"]
 [ext_resource type="Texture2D" uid="uid://ckfgjv3b7nhid" path="res://Assets/Out of Play Safe House/wall border and floor tilesheet 16.png" id="5_o07ir"]
-[ext_resource type="PackedScene" uid="uid://djy8flulv13w3" path="res://Scenes/Tasks/task_2_scenes/wood_panels.tscn" id="6_6rq2s"]
+[ext_resource type="PackedScene" uid="uid://qa8na0inpo2g" path="res://Scenes/Tasks/task_2_scenes/wood_panels.tscn" id="6_6rq2s"]
 [ext_resource type="Texture2D" uid="uid://4ofq4wt82idr" path="res://Assets/In Play Safe House/Tasks/wood panel.png" id="8_osf1r"]
 [ext_resource type="PackedScene" uid="uid://d15qx82cuvpj" path="res://Scenes/Tasks/task_2_scenes/wood_planks.tscn" id="8_vadw1"]
 [ext_resource type="Texture2D" uid="uid://lsi6cwej2ef1" path="res://Assets/In Play Safe House/Tasks/tile00.png" id="9_o07ir"]
