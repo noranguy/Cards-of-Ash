@@ -163,6 +163,7 @@ public partial class Safehouse : StaticBody2D
 		else
 		{
 			night_safehouse_lighting.Visible = true;
+			window_night.Visible = true;
 			_in_minigame = false;
 			GlobalState.Instance.SetInMinigame(false);
 			_ = ThoughtsDialogueAsync($"Tasks/Task{_day_num}/completed");
@@ -276,21 +277,21 @@ public partial class Safehouse : StaticBody2D
 			GetNode<Area2D>("MomArea").Visible = true;
 			GetNode<Area2D>("MomArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("MomArea/Mom").CollisionLayer = 1;
-			tasks.Text += "- Talk to Mom";
+			tasks.Text += "Talk to Mom";
 		}
 		if (_inhabitants[3])
 		{
 			GetNode<Area2D>("KidArea").Visible = true;
 			GetNode<Area2D>("KidArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("KidArea/Kid").CollisionLayer = 1;
-			tasks.Text += "- Talk to Kid";
+			tasks.Text += "Talk to Kid";
 		}
 		if (_inhabitants[4])
 		{
 			GetNode<Area2D>("ForeignerArea").Visible = true;
 			GetNode<Area2D>("ForeignerArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("ForeignerArea/Foreigner").CollisionLayer = 1;
-			tasks.Text += "- Talk to Foreigner";
+			tasks.Text += "Talk to Foreigner";
 		}
 	}
 
@@ -537,7 +538,7 @@ public partial class Safehouse : StaticBody2D
 					break;
 				case 1:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_1", false);
-					tasks.Text += "- Talk to Kaishain";
+					tasks.Text += "Talk to Kaishain";
 					break;
 				case 2:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_2", false);
