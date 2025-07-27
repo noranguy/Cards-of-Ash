@@ -12,7 +12,6 @@ z_index = 10
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 3
 anchors_preset = 0
-mouse_filter = 2
 script = ExtResource("1_rjlel")
 
 [node name="Area2D" type="Area2D" parent="."]

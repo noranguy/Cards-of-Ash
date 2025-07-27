@@ -22,6 +22,8 @@ public partial class GlobalState : Node {
 	
 	public override void _Ready() {
 		Instance = this;
+		
+		handDeck.Add(("tsunami", "ceramic"));
 	}
 	
 	private List<(string, string)> handDeck = new List<(string, string)>();

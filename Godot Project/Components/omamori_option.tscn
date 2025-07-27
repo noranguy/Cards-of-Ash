@@ -39,6 +39,7 @@ offset_bottom = 30.0
 texture = ExtResource("1_xy4vg")
 
 [node name="Tooltip" type="ColorRect" parent="."]
+visible = false
 z_index = 20
 layout_mode = 0
 offset_left = 34.0
