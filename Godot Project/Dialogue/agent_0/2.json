@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Well at least you know it's probably not a Tsunami card.",
+			"text": "Well at least you know it's probably not an Earthquake card.",
 			"options": [
 				{ "text": "Continue", "next": "a" }
 			]
