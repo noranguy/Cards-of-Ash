@@ -6,7 +6,7 @@ public partial class RadioGame: Control
     bool dial_moving;
     bool tracking;
     float lerped_angle;
-    float channel = 82.5f;
+    float channel = 790;
 
     public bool PlayGame(float goal_channel)
     {
@@ -30,14 +30,14 @@ public partial class RadioGame: Control
 
             Vector2 distance = GetNode<Node2D>("Dial/DialTexture/DialPoint").Position.Rotated(GetNode<TextureRect>("Dial/DialTexture").Rotation);
             float angle_to = GetNode<Node2D>("Dial/MiddlePoint").Position.AngleTo(distance);
-            channel = RangeLerp(angle_to, -3.14f, 3.14f, 80, 85);
-            channel = (float)Math.Round(channel, 1);
+            channel = RangeLerp(angle_to, -3.14f, 3.14f, 750, 830);
+            channel = (float)Math.Round(channel);
             //channel = (float)Math.Clamp(channel, 76.1, 94.9);
         }
 
         GetNode<TextureRect>("Dial/DialTexture").Rotation = Math.Clamp(lerped_angle, -2, 2);
 
-        GetNode<Label>("CenterContainer/ColorRect/ChannelLabel").Text = $"{channel.ToString()} FM";
+        GetNode<Label>("CenterContainer/ColorRect/ChannelLabel").Text = $"{channel.ToString()} AM";
 
         AudioStreamPlayer radio_sound = GetNode<AudioStreamPlayer>("RadioSound");
         AudioStreamPlayer static_sound = GetNode<AudioStreamPlayer>("StaticSound");
@@ -56,60 +56,60 @@ public partial class RadioGame: Control
         if (channel == goal_channel)
         {
             GetNode<TextureRect>("OnLight").Visible = true;
-            radio_sound.VolumeDb = -10;
+            radio_sound.VolumeDb = 5;
             static_sound.VolumeDb = -80;
         }
 
-        else if (Math.Abs(channel - goal_channel) < .1)
+        else if (Math.Abs(channel - goal_channel) < 2)
         {
             GetNode<TextureRect>("OnLight").Visible = false;
-            radio_sound.VolumeDb = -12;
+            radio_sound.VolumeDb = 3;
             static_sound.VolumeDb = -9;
         }
 
-        else if (Math.Abs(channel - goal_channel) < .2)
+        else if (Math.Abs(channel - goal_channel) < 5)
         {
             GetNode<TextureRect>("KindaOnLight").Visible = true;
             GetNode<TextureRect>("OnLight").Visible = false;
-            radio_sound.VolumeDb = -13;
+            radio_sound.VolumeDb = 0;
             static_sound.VolumeDb = -7;
         }
 
-        else if (Math.Abs(channel - goal_channel) < .3)
+        else if (Math.Abs(channel - goal_channel) < 7)
         {
-            radio_sound.VolumeDb = -15;
+            radio_sound.VolumeDb = -3;
             static_sound.VolumeDb = -6;
         }
 
-        else if (Math.Abs(channel - goal_channel) < .5)
+        else if (Math.Abs(channel - goal_channel) < 9)
         {
             GetNode<TextureRect>("BarelyOnLight").Visible = true;
             GetNode<TextureRect>("KindaOnLight").Visible = false;
             GetNode<TextureRect>("OnLight").Visible = false;
-            radio_sound.VolumeDb = -17;
+            radio_sound.VolumeDb = -5;
             static_sound.VolumeDb = -5;
         }
 
-        else if (Math.Abs(channel - goal_channel) < 1)
+        else if (Math.Abs(channel - goal_channel) < 12)
         {
             GetNode<TextureRect>("KindaOffLight").Visible = true;
             GetNode<TextureRect>("BarelyOnLight").Visible = false;
             GetNode<TextureRect>("KindaOnLight").Visible = false;
             GetNode<TextureRect>("OnLight").Visible = false;
 
-            radio_sound.VolumeDb = -20;
+            radio_sound.VolumeDb = -8;
             static_sound.VolumeDb = -4;
         }
 
-        else if (Math.Abs(channel - goal_channel) < 1.5)
+        else if (Math.Abs(channel - goal_channel) < 15)
         {
-            radio_sound.VolumeDb = -23;
+            radio_sound.VolumeDb = -9;
             static_sound.VolumeDb = -3;
         }
 
-        else if (Math.Abs(channel - goal_channel) < 2)
+        else if (Math.Abs(channel - goal_channel) < 20)
         {
-            radio_sound.VolumeDb = -25;
+            radio_sound.VolumeDb = -10;
             static_sound.VolumeDb = 0;
         }
 

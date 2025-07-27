@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=4 uid="uid://bvd7sgi6dix5n"]
+[gd_scene load_steps=91 format=4 uid="uid://xgx7hwjq0llw"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
@@ -22,10 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://p5jy6wgjctr4" path="res://Assets/Out of Play Safe House/Radio.png" id="15_7jf0i"]
 [ext_resource type="Texture2D" uid="uid://bthud0h5smg1l" path="res://Assets/Out of Play Safe House/Phone.png" id="16_leres"]
 [ext_resource type="FontFile" uid="uid://ckvv2r38wlgnn" path="res://Assets/Font/KappasPororoca-B83G.ttf" id="19_7jf0i"]
-[ext_resource type="Texture2D" uid="uid://1lxbh1divmcx" path="res://Assets/Out of Play Safe House/hud_design.png" id="19_fiq5u"]
-[ext_resource type="PackedScene" uid="uid://6i6smfc1mrri" path="res://Scenes/Tasks/task_3.tscn" id="26_8b0r6"]
 [ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="22_4kjqu"]
 [ext_resource type="Texture2D" uid="uid://ci7pc88ohbs0" path="res://Assets/Out of Play Safe House/hud_design-Sheet.png" id="22_ifgqq"]
+[ext_resource type="PackedScene" uid="uid://6i6smfc1mrri" path="res://Scenes/Tasks/task_3.tscn" id="26_8b0r6"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
 a = Vector2(38, -10)
@@ -17082,7 +17081,7 @@ libraries = {
 }
 
 [node name="Boxes" type="Area2D" parent="."]
-collision_mask = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boxes"]
 z_index = 5
@@ -17145,10 +17144,10 @@ expand_mode = 1
 
 [node name="Interact" type="TextureRect" parent="MenkoCards"]
 z_index = 7
-offset_left = -40.0
-offset_top = 12.0
-offset_right = -16.0
-offset_bottom = 36.0
+offset_left = -30.0
+offset_top = -50.0
+offset_right = -6.0
+offset_bottom = -26.0
 texture = ExtResource("7_gxkjp")
 expand_mode = 1
 

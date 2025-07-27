@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ce6w7aqxw46rv" path="res://Assets/Out of Play Safe House/on_light.png" id="11_qqf3i"]
 [ext_resource type="Texture2D" uid="uid://b287m2qpxk47h" path="res://Assets/Out of Play Safe House/barely_on_light.png" id="12_51h0v"]
 [ext_resource type="Texture2D" uid="uid://0uqbjjoyqeyr" path="res://Assets/Out of Play Safe House/kinda_on_light.png" id="13_3uugt"]
-[ext_resource type="AudioStream" uid="uid://b2p3tff7yifn8" path="res://Assets/Music/new and improved pirate type beat.mp3" id="16_1gtqw"]
+[ext_resource type="AudioStream" uid="uid://c7xokuw8qjrgs" path="res://Assets/SFX/radio-chatter.mp3" id="16_1gtqw"]
 [ext_resource type="Script" uid="uid://cj2mo7kuetfxf" path="res://Scripts/Tasks/PhoneGame.cs" id="16_3uugt"]
 [ext_resource type="Texture2D" uid="uid://wwg07af5tqxm" path="res://Assets/Out of Play Safe House/Red_wire.png" id="17_ghe47"]
 [ext_resource type="Texture2D" uid="uid://c582ultt1rbpo" path="res://Assets/Out of Play Safe House/Yellow_wire.png" id="18_44dbn"]
