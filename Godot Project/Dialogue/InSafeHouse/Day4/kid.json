@@ -3,94 +3,16 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "*sniff* mmm… *wince*",
+			"text": "You found it! I knew this building would have a first aid kit!",
 			"options": [
-				{ "text": "Kid?", "next":"b"}
+				{ "text": "...", "next":"a"}
 			]
 		},
 		{
-			"id": "b",
-			"text": "Oh!",
+			"id": "a",
+			"text": "Thank you for pathing me up. I'll try and be more careful from now on.",
 			"options": [
-				{ "text": "...", "next": "c" }
-		  	]
-		},
-		{
-			"id": "c",
-			"text": "*Quickly wipes the tears from his face*",
-			"options": [
-				{ "text": "...", "next": "d" }
-		  	]
-		},
-	 
-	  {
-			"id": "d",
-			"text": "Haha! Hello!! Wow! Thank you again for letting me stay here! This is so much better than outside! I never told you my name, I’m Ibuki! Nice to mee–",
-			"options": [
-				{ "text": "Are you hurt?", "next": "e" }
-		  	]
-		},
-		{
-			"id": "e",
-			"text": "...No.",
-			"options": [
-				{ "text": "...", "next": "f" }
-		  	]
-		},
-	  {
-			"id": "f",
-			"text": "*Hides his hands*",
-			"options": [
-				{ "text": "Ibuki...", "next": "g" }
-		  	]
-		},
-		{
-			"id": "g",
-			"text": "...okay.",
-			"options": [
-				{ "text": "...", "next": "i" }
-		  	]
-		},
-	  {
-			"id": "i",
-			"text": "*Slowly opens his palms stained dark red surrounding a shallow gash*",
-			"options": [
-				{ "text": "Oh my...", "next": "j" }
-		  	]
-		},
-		 {
-			"id": "j",
-			"text": "It’s not that bad! I'm okay!",
-			"options": [
-				{ "text": "No, you need first-aid.", "next": "k" }
-		  	]
-		},
-	  {
-			"id": "k",
-			"text": "…fine. Maybe keeping a knife in my pocket wasn’t a good idea.",
-			"options": [
-				{ "text": "You think?", "next": "l" }
-		  	]
-		},
-	  {
-			"id": "l",
-			"text": "Do you know where the first aid kit is? ",
-			"options": [
-				{ "text": "Umm...", "next": "m" }
-		  	]
-		},
-		{
-			"id": "m",
-			"text": "Ahh.. All buildings should have an emergency kit, my school taught me that! Especially during times like this! I can help you look!",
-			"options": [
-				{ "text": "No. Stay here.", "next": "n" }
-		  	]
-		},
-	  {
-			"id": "n",
-			"text": "Mmm. You’re no fun. Okay.. I’ll be here. Come back soon!",
-			"options": [
-				{ "text": "Will do.", "next": "end" }
+				{ "text": "...", "next": "end" }
 		  	]
 		}
   	]

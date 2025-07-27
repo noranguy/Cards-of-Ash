@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbmm0hjrhws3h"]
+[gd_scene load_steps=3 format=3 uid="uid://b3qbgdes5dw5o"]
 
-[ext_resource type="Texture2D" uid="uid://cea2nbfnapywq" path="res://Assets/Character Designs/Kid/kid mini sprite.png" id="1_u7y0k"]
+[ext_resource type="Texture2D" uid="uid://cea2nbfnapywq" path="res://Assets/Character Designs/kid/kid mini sprite.png" id="1_u7y0k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44k7n"]
-size = Vector2(14, 12)
+size = Vector2(14, 19)
 
 [node name="kid" type="CharacterBody2D"]
 
@@ -11,5 +11,5 @@ size = Vector2(14, 12)
 texture = ExtResource("1_u7y0k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_44k7n")

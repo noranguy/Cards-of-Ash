@@ -23,6 +23,7 @@ DialogueManager="*res://Components/dialogue_manager.tscn"
 PlayerCharacter="*res://Scenes/Characters/player_character.tscn"
 RadioGame="*res://Scripts/Tasks/RadioGame.cs"
 PhoneGame="*res://Scripts/Tasks/PhoneGame.cs"
+Task3="*res://Scripts/Tasks/Task3.cs"
 
 [dialogue_manager]
 

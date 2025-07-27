@@ -51,8 +51,15 @@
 				{ "text": "It's no problem", "next": "g" }
 		  	]
 		},
-	  {
+		{
 			"id": "g",
+			"text": "Getting the phone working is also important for getting ahold of emergency services. Always remember to call 119 if you're ever in trouble.",
+			"options": [
+				{ "text": "...", "next": "z" }
+		  	]
+		},
+	  {
+			"id": "z",
 			"text": "Check out that radio too, see if you can find the emergency channel. That's how we can get important information.",
 			"options": [
 				{ "text": "...", "next": "h" }
