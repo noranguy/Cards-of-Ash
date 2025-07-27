@@ -114,6 +114,8 @@ public partial class DeckBuilder : Control {
 			}
 		}
 		
+		GlobalState.Instance.UpdateOmamori(GetNode<OmamoriSelector>("OmamoriSelector").currentName);
+		
 		GlobalState.Instance.UpdateHandCards(handCards);
 		GlobalState.Instance.UpdateTableCards(tableCards);
 		GlobalState.Instance.UpdateHandDeck(handDeck);

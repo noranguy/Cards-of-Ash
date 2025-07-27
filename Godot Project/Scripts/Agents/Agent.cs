@@ -10,7 +10,7 @@ public abstract class Agent {
 	public abstract List<(string, string)> GetTableCards();
 	
 	// returns the [throwingCard, tableCard1, tableCard2] move that the agent wants to make
-	public abstract (Card, Card, Card) Move();
+	public abstract (Card, Card, Card) Move(bool blinded);
 	
 	// reveal a card to the agent
 	public virtual void RevealCard(Card card, int idx) { return; }

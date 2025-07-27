@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://crnwqqt8b0cth"]
+
+[ext_resource type="Texture2D" uid="uid://chmq0y578wgvd" path="res://Assets/Omamori/fortune_slip.png" id="1_xy4vg"]
+[ext_resource type="Script" uid="uid://tmt2852nbx12" path="res://Scripts/Components/OmamoriOption.cs" id="1_yh3yu"]
+[ext_resource type="Texture2D" uid="uid://c3tcotx2mm1up" path="res://Assets/Omamori/lock.png" id="2_yh3yu"]
+[ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="4_xemj3"]
+
+[node name="OmamoriOption" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 30.0
+offset_bottom = 30.0
+script = ExtResource("1_yh3yu")
+
+[node name="Lock" type="TextureRect" parent="."]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = 11.0
+offset_top = 10.0
+offset_right = 22.0
+offset_bottom = 21.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_yh3yu")
+
+[node name="HoverOverlay" type="ColorRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+color = Color(0.517647, 0.517647, 0.517647, 0.341176)
+
+[node name="Design" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 25.0
+offset_bottom = 30.0
+texture = ExtResource("1_xy4vg")
+
+[node name="Tooltip" type="ColorRect" parent="."]
+z_index = 20
+layout_mode = 0
+offset_left = 34.0
+offset_top = 1.0
+offset_right = 198.0
+offset_bottom = 65.0
+color = Color(0.489622, 0.489622, 0.489622, 1)
+
+[node name="Text" type="RichTextLabel" parent="Tooltip"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 160.0
+offset_bottom = 4.0
+theme_override_fonts/normal_font = ExtResource("4_xemj3")
+theme_override_font_sizes/normal_font_size = 0
+text = "Current Omamori"
+fit_content = true

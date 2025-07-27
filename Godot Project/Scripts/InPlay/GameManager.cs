@@ -26,9 +26,16 @@ public partial class GameManager : Node2D {
 	
 	private bool allowThrow = false;
 	
+	private string omamori;
+	private TextureButton omamoriButton;
+	
 	// y values for hand positions
-	private readonly int yEnemyHand = -140;
-	private readonly int yPlayerHand = 90;
+	private int yEnemyHand = -140;
+	private int yPlayerHand = 90;
+	
+	bool blindEnemy = false;
+	
+	private int lastFortune = -1;
 	
 	// relationship between card types
 	private readonly int[][] FlipRank = new int[][] {
@@ -48,6 +55,7 @@ public partial class GameManager : Node2D {
 		infoButton = GetNode<BetterButton>("InfoButton");
 		rulebook = GetNode<Panel>("Rulebook");
 		roundLabel = GetNode<Label>("RoundLabel");
+		omamoriButton = GetNode<TextureButton>("OmamoriBox/OmamoriButton");
 		
 		ThrowToggle(false);
 		throwButton.Connect(BetterButton.SignalName.Pressed, new Callable(this, nameof(Round)));
@@ -56,6 +64,14 @@ public partial class GameManager : Node2D {
 		playerHand = new Hand();
 		enemyHand = new Hand();
 		table = new CardTableContainer();
+		
+		omamori = GlobalState.Instance.GetOmamori();
+		var texture = GD.Load<Texture2D>($"res://Assets/Omamori/{omamori}.png");
+		omamoriButton.TextureNormal = texture;
+		
+		var hoverOverlay = omamoriButton.GetNode<ColorRect>("HoverOverlay");
+		hoverOverlay.MouseEntered += () => hoverOverlay.Visible = true;
+		hoverOverlay.MouseExited += () => hoverOverlay.Visible = false;
 		
 		AddChild(playerHand);
 		AddChild(enemyHand);
@@ -67,7 +83,6 @@ public partial class GameManager : Node2D {
 		var enemyHandInfo = enemy.GetHandCards();
 		var enemyTableInfo = enemy.GetTableCards();
 		
-		// loads player decks as hand (will be replaced with deck builder scene)
 		var playerHandInfo = GlobalState.Instance.GetHandCards();
 		var playerTableInfo = GlobalState.Instance.GetTableCards();
 		
@@ -82,6 +97,19 @@ public partial class GameManager : Node2D {
 		
 		playerHand.Connect(Hand.SignalName.ActiveCard, new Callable(this, nameof(UpdateActiveHandCard)));
 		table.Connect(CardTableContainer.SignalName.ActiveCard, new Callable(this, nameof(UpdateActiveTableCard)));
+		
+		switch (omamori) {
+			case "none":
+				GetNode<TextureRect>("OmamoriBox").Visible = false;
+				break;
+			case "aftershock": case "stone_cast": case "fortune_slip":
+				omamoriButton.Disabled = true;
+				omamoriButton.Modulate = new Color(1, 1, 1, 0.4f);
+				break;
+			case "bag_of_sand":
+				omamoriButton.Pressed += BagOfSandOmamori;
+				break;
+		}
 		
 		anim.Play($"agent_{GlobalState.Instance.GetDay()}");
 
@@ -103,6 +131,8 @@ public partial class GameManager : Node2D {
 		await ToSignal(GetTree().CreateTimer(2), "timeout");
 		
 		await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/start", true);
+		
+		await NextRound();
 	}
 	
 	public override void _Process(double delta) {
@@ -111,7 +141,32 @@ public partial class GameManager : Node2D {
 		}
 	}
 	
-	public void RulebookToggle() {
+	private async Task NextRound() {
+		if (omamori == "fortune_slip") {
+			await FortuneSlipOmamori();
+		}
+	}
+	
+	private async Task FortuneSlipOmamori() {
+		lastFortune = Rand.Next(4);
+		await DialogueManager.Instance.StartDialogue($"FortuneSlips/{lastFortune}", true);
+		
+		if (lastFortune == 3) {
+			var unflippedTableCards = enemyTableCards.Where(x => !x.visible).ToList();
+			Card card = unflippedTableCards[Rand.Next(unflippedTableCards.Count)];
+			card.Flip();
+			await ToSignal(GetTree().CreateTimer(1), "timeout");
+			card.Flip();
+		}
+	}
+	
+	private void BagOfSandOmamori() {
+		blindEnemy = true;
+		omamoriButton.Disabled = true;
+		omamoriButton.Modulate = new Color(1, 1, 1, 0.4f);
+	}
+	
+	private void RulebookToggle() {
 		if (rulebook.Visible) {
 			rulebook.Visible = false;
 			var sprite = GetNode<Sprite2D>("InfoButton/Image");
@@ -125,7 +180,7 @@ public partial class GameManager : Node2D {
 		}
 	}
 	
-	public void ThrowToggle(bool active) {
+	private void ThrowToggle(bool active) {
 		bool res = active && table.activeCard != null && playerHand.activeCard != null;
 		if (!active && allowThrow) {
 			if (!playerHand.restrictAllow.Contains(playerHand.activeCard)) {
@@ -135,20 +190,22 @@ public partial class GameManager : Node2D {
 			table.activeCard.locked = false;
 			table.activeCard.Unhighlight();
 			table.activeCard = null;
-	
 		}
 		allowThrow = res;
 		throwButton.Disabled = !res;
 		throwButton.Modulate = res ? Colors.White : new Color(1, 1, 1, 0.4f);
+		if (res && GlobalState.Instance.GetDay() == 0 && round == 0) {
+			throwButton.Focus();
+		}
 	}
 	
-	public void UpdateActiveHandCard(Card card) {
+	private void UpdateActiveHandCard(Card card) {
 		card.Unfocus();
 		playerHand.activeCard = card;
 		ThrowToggle(true);
 	}
 	
-	public void UpdateActiveTableCard(Card card) {
+	private void UpdateActiveTableCard(Card card) {
 		card.Unfocus();
 		table.activeCard = card;
 		ThrowToggle(true);
@@ -180,45 +237,60 @@ public partial class GameManager : Node2D {
 			tableCards[0].Flip();
 			return;
 		} else if (throwingCard.clas == "defense") {
-			tableCards[0].ReduceDurability();
+			tableCards[0].ReduceDurability(0.2);
 			tableCards[0].Shake();
 			return;
 		}
 		
 		for (int i = 0; i < tableCards.Count; i++) {
 			tableCardType = GlobalState.Instance.TypeMap[tableCards[i].type];
-			threshold = GlobalState.Instance.FlipProb[FlipRank[throwingCardType][tableCardType]] * tableCards[i].durability;
+			threshold = GlobalState.Instance.FlipProb[FlipRank[throwingCardType][tableCardType]];
+			
+			if (lastFortune != 2) {
+				threshold *= tableCards[i].durability;
+			}
+			
 			rnd = Rand.NextDouble();
 			if (GlobalState.Instance.GetDay() == 0) {
 				if (round == 0 || (round == 2 && throwingCard.isPlayer)) {
 					rnd = 0;
-				} else if (round == 1 && throwingCard.isPlayer) {
-					rnd = 1;
+				} else if ((round == 1 && throwingCard.isPlayer) ||
+					(!throwingCard.isPlayer &&
+					playerTableCards.Count(card => card.visible) >=
+					enemyTableCards.Count(card => card.visible) - 1)
+				) {
+					rnd = 100;
 				}
-			}
-			
-			if (
-				GlobalState.Instance.GetDay() == 0 && !throwingCard.isPlayer &&
-				enemyTableCards.Count(card => card.visible) >=
-				playerTableCards.Count(card => card.visible) - 1
-			) {
-				threshold = 0;
 			}
 			
 			if (i != 0) threshold *= GlobalState.Instance.CeramicProb;
 			if (throwingCard.clas == "elastic") threshold *= GlobalState.Instance.ElasticProb;
 			if (tableCards[i].clas == "defense") threshold *= GlobalState.Instance.DefenseProb;
 			
+			if (throwingCard.isPlayer && omamori == "aftershock" && tableCards[i].lastRound + 1 == round) {
+				threshold *= (tableCards[i].repeatMult *= 1.2);
+			} else {
+				tableCards[i].repeatMult = 1;
+			}
+			
+			if (lastFortune == 0) {
+				threshold += 0.05;
+			} else if (lastFortune == 1) {
+				threshold += 0.1;
+			}
+
+			tableCards[i].lastRound = round;
+			
 			if (rnd < threshold) {
 				tableCards[i].Flip();
-				tableCards[i].ReduceDurability();
+				tableCards[i].ReduceDurability(0.2);
 				
 				if (tableCards[i].clas == "ceramic") {
 					if (tableCards[i].index > 0) {
-						active[tableCards[i].index - 1].ReduceDurability();
+						active[tableCards[i].index - 1].ReduceDurability(0.1);
 					}
 					if (tableCards[i].index < 5) {
-						active[tableCards[i].index + 1].ReduceDurability();
+						active[tableCards[i].index + 1].ReduceDurability(0.1);
 					}
 				} else if (tableCards[i].clas == "elastic") {
 					List<Card> unFlippedCards =
@@ -230,6 +302,10 @@ public partial class GameManager : Node2D {
 				}
 			} else {
 				tableCards[i].Shake();
+				
+				if (!throwingCard.isPlayer && omamori == "stone_cast") {
+					tableCards[i].ReduceDurability(0.05);
+				}
 			}
 		}
 	}
@@ -239,6 +315,9 @@ public partial class GameManager : Node2D {
 		if (GlobalState.Instance.GetDay() == 0 && round < 3) {
 			playerHand.restrictAllow.Clear();
 			table.restrictAllow.Clear();
+			if (round == 0) {
+				throwButton.Unfocus();
+			}
 		}
 
 		// player turn
@@ -255,7 +334,9 @@ public partial class GameManager : Node2D {
 		await ToSignal(GetTree().CreateTimer(1), "timeout");
 		
 		// enemy turn
-		var (throwingCard, tableCard1, tableCard2) = enemy.Move();
+		
+		var (throwingCard, tableCard1, tableCard2) = enemy.Move(blindEnemy);
+		blindEnemy = false;
 		oppCardThrow.Visible = true;
 		oppCardThrow.Play("opp_card_throw");
 		await ThrowCard(throwingCard, new List<Card> {tableCard1});
@@ -273,6 +354,39 @@ public partial class GameManager : Node2D {
 		
 		// round end
 		round++;
+		
+		// track player and enemy score
+		int playerCount = enemyTableCards.Count(card => card.visible);
+		int enemyCount = playerTableCards.Count(card => card.visible);
+
+		// game end
+		GlobalState.Instance.NewInhabitant();
+		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
+			if (playerCount > enemyCount) {
+				roundLabel.Text = "You Win";
+				GlobalState.Instance.NewInhabitant();
+				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "win");
+			}
+			else if (playerCount < enemyCount) {
+				roundLabel.Text = "You Lose";
+				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "lose");
+			} else {
+				roundLabel.Text = "Tie";
+				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "tie");
+			}
+			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
+		} else {
+			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision"))) {
+				roundLabel.Text = $"Vision Cards Are Swapping";
+				await ToSignal(GetTree().CreateTimer(0.5), "timeout");
+				if (GlobalState.Instance.GetInfo().Class == "vision") {
+					await SwapVision(enemyTableCards);
+				} else {
+					await SwapVision(playerTableCards);
+				}
+			}
+			roundLabel.Text = $"Round {round + 1}";
+		}
 		
 		// tutorial dialogue
 		if (GlobalState.Instance.GetDay() == 0) {
@@ -315,38 +429,11 @@ public partial class GameManager : Node2D {
 			}
 		}
 		
-		// track player and enemy score
-		int playerCount = enemyTableCards.Count(card => card.visible);
-		int enemyCount = playerTableCards.Count(card => card.visible);
-
-		// game end
-		GlobalState.Instance.NewInhabitant();
-		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
-			if (playerCount > enemyCount) {
-				roundLabel.Text = "You Win";
-				GlobalState.Instance.NewInhabitant();
-				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "win");
-			}
-			else if (playerCount < enemyCount) {
-				roundLabel.Text = "You Lose";
-				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "lose");
-			} else {
-				roundLabel.Text = "Tie";
-				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "tie");
-			}
-			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
-		} else {
-			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision"))) {
-				roundLabel.Text = $"Vision Cards Are Swapping";
-				await ToSignal(GetTree().CreateTimer(0.5), "timeout");
-				if (GlobalState.Instance.GetInfo().Class == "vision") {
-					await SwapVision(enemyTableCards);
-				} else {
-					await SwapVision(playerTableCards);
-				}
-			}
-			roundLabel.Text = $"Round {round + 1}";
-		}
+		// next round start
+		
+		lastFortune = -1;
+		
+		await NextRound();
 	}
 	
 	private async Task SwapVision(List<Card> cards) {
@@ -375,7 +462,7 @@ public partial class GameManager : Node2D {
 		}
 	}
 	
-	void SwapCardFields(Card a, Card b) {
+	private void SwapCardFields(Card a, Card b) {
 		(a.type, b.type) = (b.type, a.type);
 		(a.clas, b.clas) = (b.clas, a.clas);
 		(a.visible, b.visible) = (b.visible, a.visible);

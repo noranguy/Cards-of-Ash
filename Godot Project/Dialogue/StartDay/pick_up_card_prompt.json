@@ -5,7 +5,7 @@
 		  "id": "start",
 		  "text": "Huh ... Have those cards been here this whole time? I should check them out",
 		  "options": [
-			{ "text": "Continue", "next": "a" }
+			{ "text": "Continue (space)", "next": "a" }
 		  ]
 		}
 	]

@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class Agent5 : Agent {
-	private readonly Random Rand = new Random();
+	private Random Rand = new Random();
 	
 	private List<Card> hand;
 	private List<Card> playerTable;
 	private List<Card> enemyTable;
-	private int round;
 	private int[] handFreq;
 	
 	public override List<(string, string)> GetHandCards() {
@@ -38,8 +37,6 @@ public class Agent5 : Agent {
 	}
 	
 	public override void Init(List<Card> hand, List<Card> playerTable, List<Card> enemyTable) {
-		round = 0;
-		
 		this.hand = hand;
 		this.playerTable = playerTable;
 		this.enemyTable = enemyTable;
@@ -47,7 +44,11 @@ public class Agent5 : Agent {
 		handFreq = new int[] {3, 3, 3};
 	}
 	
-	public override (Card, Card, Card) Move() {
+	public override (Card, Card, Card) Move(bool blinded) {
+		if (blinded) {
+			return (hand[Rand.Next(hand.Count)], playerTable[Rand.Next(playerTable.Count)], null);
+		}
+		
 		List<Card> unflippedPlayerTable = playerTable.Where(x => !x.visible).ToList();
 		List<Card> flippedEnemyTable = enemyTable.Where(x => x.visible).ToList();
 			
@@ -113,7 +114,5 @@ public class Agent5 : Agent {
 		return (hand[^1], tableCard, null);
 	}
 	
-	public override void Backward() {
-		round++;
-	}
+	public override void Backward() {}
 }

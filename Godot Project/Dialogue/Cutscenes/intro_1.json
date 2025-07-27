@@ -1,0 +1,19 @@
+{
+	"speaker": "self",
+	"dialogue": [
+		{
+		  "id": "start",
+		  "text": "Ahh... Finally here. I hate when the trains get delayed.",
+		  "options": [
+			{ "text": "Continue", "next": "b" }
+		  ]
+		},
+		{
+		  "id": "b",
+		  "text": "Maybe I can stop by the konbini before I head to class.",
+		  "options": [
+			{ "text": "Continue", "next": "end" }
+		  ]
+		}
+	]
+}

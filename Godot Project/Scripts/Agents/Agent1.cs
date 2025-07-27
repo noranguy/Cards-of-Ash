@@ -130,7 +130,7 @@ public class Agent1 : Agent {
 		});
 	}
 	
-	public override (Card, Card, Card) Move() {
+	public override (Card, Card, Card) Move(bool blinded) {
 		switch (round) {
 			case 0:
 				last = GlobalState.Instance.TypeMap[hand[^1].type];

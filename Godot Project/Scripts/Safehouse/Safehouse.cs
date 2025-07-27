@@ -60,6 +60,7 @@ public partial class Safehouse : StaticBody2D
 	private bool _npc_waiting;
 	private bool _game_ready;
 	private bool _day_over;
+	private bool _sleep_ready;
 
 	// Will be prompt nodes
 	private Control _end_day_prompt;
@@ -284,7 +285,6 @@ public partial class Safehouse : StaticBody2D
 				_mission_completed[3] = true;
 				GlobalState.Instance.MissionCompleted(3);
 				_dialogue_exhausted[2] = false;
-				tasks.Text += "- Go to Bed";
 			}
 		}
 	}
@@ -292,12 +292,13 @@ public partial class Safehouse : StaticBody2D
 	private void InhabitSafehouse()
 	{
 		tasks.Text = "";
-		
+
 		if (_inhabitants[1])
 		{
 			GetNode<Area2D>("KaishainArea").Visible = true;
 			GetNode<Area2D>("KaishainArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("KaishainArea/Kaishain").CollisionLayer = 1;
+			tasks.Text += "- Talk to Kaishain\n";
 			
 		}
 		if (_inhabitants[2])
@@ -305,21 +306,21 @@ public partial class Safehouse : StaticBody2D
 			GetNode<Area2D>("MomArea").Visible = true;
 			GetNode<Area2D>("MomArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("MomArea/Mom").CollisionLayer = 1;
-			tasks.Text += "- Talk to Mom";
+			tasks.Text += "- Talk to Mom\n";
 		}
 		if (_inhabitants[3])
 		{
 			GetNode<Area2D>("KidArea").Visible = true;
 			GetNode<Area2D>("KidArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("KidArea/Kid").CollisionLayer = 1;
-			tasks.Text += "- Talk to Kid";
+			tasks.Text += "- Talk to Kid\n";
 		}
 		if (_inhabitants[4])
 		{
 			GetNode<Area2D>("ForeignerArea").Visible = true;
 			GetNode<Area2D>("ForeignerArea").CollisionLayer = 3;
 			GetNode<CharacterBody2D>("ForeignerArea/Foreigner").CollisionLayer = 1;
-			tasks.Text += "- Talk to Foreigner";
+			tasks.Text += "- Talk to Foreigner\n";
 		}
 	}
 

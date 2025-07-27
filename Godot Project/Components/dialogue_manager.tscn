@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq7syp05wybi8"]
+[gd_scene load_steps=9 format=3 uid="uid://dq7syp05wybi8"]
 
 [ext_resource type="Script" uid="uid://bry0rb4f5o7ub" path="res://Scripts/Components/DialogueManager.cs" id="1_1dsj7"]
 [ext_resource type="Texture2D" uid="uid://bmiwowijb7e5e" path="res://Assets/Character Designs/Default/portrait.png" id="2_g0piw"]
 [ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="2_hsvmp"]
+[ext_resource type="Texture2D" uid="uid://cawowfmttgyj3" path="res://Assets/Dialogue/dialogue box_main.png" id="2_lbjoh"]
+[ext_resource type="Texture2D" uid="uid://c3hvbtoorxkal" path="res://Assets/Dialogue/dialogue_portrait.png" id="4_0ahvc"]
+[ext_resource type="Texture2D" uid="uid://bxf6qy88rwo5m" path="res://Assets/Dialogue/name_plate.png" id="6_v6ob6"]
+[ext_resource type="Texture2D" uid="uid://c2s5l5ux148iq" path="res://Assets/Dialogue/options.png" id="7_rra5a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dsj7"]
 bg_color = Color(0, 0, 0, 1)
@@ -27,6 +31,13 @@ offset_right = 285.0
 offset_bottom = 172.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1dsj7")
 
+[node name="mainBox" type="TextureRect" parent="CanvasLayer/DialoguePanel"]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 255.0
+offset_bottom = 65.0
+texture = ExtResource("2_lbjoh")
+
 [node name="DialogueText" type="Label" parent="CanvasLayer/DialoguePanel"]
 layout_mode = 0
 offset_left = 46.0
@@ -34,19 +45,56 @@ offset_top = 3.0
 offset_right = 195.0
 offset_bottom = 39.0
 scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_hsvmp")
 theme_override_font_sizes/font_size = 32
 autowrap_mode = 3
 
-[node name="OptionsContainer" type="VBoxContainer" parent="CanvasLayer/DialoguePanel"]
+[node name="portrait" type="TextureRect" parent="CanvasLayer/DialoguePanel"]
+z_index = 30
+layout_mode = 0
+offset_left = 7.00001
+offset_top = 7.0
+offset_right = 71.0
+offset_bottom = 71.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_0ahvc")
+
+[node name="Person" type="Sprite2D" parent="CanvasLayer/DialoguePanel/portrait"]
+z_index = 1
+position = Vector2(32, 32)
+texture = ExtResource("2_g0piw")
+
+[node name="namePlate" type="TextureRect" parent="CanvasLayer/DialoguePanel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = -19.0
+offset_right = 7.0
+offset_bottom = -5.0
+texture = ExtResource("6_v6ob6")
+expand_mode = 1
+
+[node name="NameText" type="RichTextLabel" parent="CanvasLayer/DialoguePanel/namePlate"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 5.0
+offset_bottom = 14.0
+theme_override_fonts/normal_font = ExtResource("2_hsvmp")
+theme_override_font_sizes/normal_font_size = 16
+fit_content = true
+autowrap_mode = 0
+
+[node name="optionsTexture" type="TextureRect" parent="CanvasLayer/DialoguePanel"]
 layout_mode = 0
 offset_left = 61.0
 offset_top = 38.0
-offset_right = 161.0
-offset_bottom = 57.0
-mouse_filter = 0
+offset_right = 76.0
+offset_bottom = 54.0
+texture = ExtResource("7_rra5a")
+expand_mode = 1
 
-[node name="Person" type="Sprite2D" parent="CanvasLayer/DialoguePanel"]
-position = Vector2(30, 30)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("2_g0piw")
+[node name="OptionsContainer" type="VBoxContainer" parent="CanvasLayer/DialoguePanel/optionsTexture"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 19.0
+mouse_filter = 0

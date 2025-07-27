@@ -1,0 +1,19 @@
+{
+	"speaker": "self",
+	"dialogue": [
+		{
+		  "id": "start",
+		  "text": "What was that?!",
+		  "options": [
+			{ "text": "Continue", "next": "b" }
+		  ]
+		},
+		{
+		  "id": "b",
+		  "text": "What's happening?!",
+		  "options": [
+			{ "text": "Continue", "next": "end" }
+		  ]
+		}
+	]
+}

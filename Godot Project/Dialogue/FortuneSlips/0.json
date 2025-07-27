@@ -1,0 +1,12 @@
+{
+	"speaker": "self",
+	"dialogue": [
+		{
+            "id": "start",
+            "text": "+5% flip chance on next card throw",
+            "options": [
+                { "text": "Continue", "next": "end" }
+            ]
+		}
+	]
+}
