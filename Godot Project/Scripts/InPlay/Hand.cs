@@ -13,6 +13,7 @@ public partial class Hand : Control {
 	private int y_min;
 	private int y_max;
 	private Vector2 scaleV;
+	private bool visible;
 	
 	public void Init(PackedScene scene, int y, float scale, bool visible, List<(string, string)> cardInfo) {
 		SetMouseFilter(Control.MouseFilterEnum.Ignore);
@@ -21,6 +22,7 @@ public partial class Hand : Control {
 		y_min = y + 100;
 		Size = new Vector2(250 * scale, 100 * scale);
 		scaleV = new Vector2(scale, scale);
+		this.visible = visible;
 		SpawnCards(visible, cardInfo);
 	}
 
@@ -29,7 +31,7 @@ public partial class Hand : Control {
 			Card card = cardScene.Instantiate<Card>();
 			card.Position = Vector2.Zero;
 			card.ZIndex = 15;
-			card.Init(Card.DEFAULT_VERTICES, type, clas, visible, visible, -1);
+			card.Init(Card.DEFAULT_VERTICES, type, clas, false, visible, -1);
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 
 			AddChild(card);
@@ -78,6 +80,8 @@ public partial class Hand : Control {
 			Vector2 finalV = new Vector2(finalX, finalY);
 			
 			if (first) {
+				card.visible = visible;
+				card.UpdateTexture();
 				await card.UpdatePosition(finalV, scaleV);
 			} else {
 				card.UpdatePosition(finalV);

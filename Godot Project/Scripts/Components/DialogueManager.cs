@@ -97,6 +97,8 @@ public partial class DialogueManager : Control {
 			dialogueText.Position = new Vector2(110, 10);
 			optionsContainer.Position = new Vector2(110, 80);
 			optionsContainer.Size = new Vector2(630, 40);
+			namePlate.Scale = new Vector2(1, 1);
+			namePlate.Position = new Vector2(7, -19);
 		} else {
 			mainBox.Size = new Vector2(260, 70);
 			panel.Position = new Vector2(35, 112);
@@ -112,6 +114,8 @@ public partial class DialogueManager : Control {
 				optionsContainer.Position = new Vector2(5, 45);
 				optionsContainer.Size = new Vector2(420, 20);
 			} else {
+				namePlate.Position = new Vector2(7, -12);
+				namePlate.Scale = new Vector2(0.5f, 0.5f);
 				portrait.Visible = true;
 				namePlate.Visible = true;
 				dialogueText.Size = new Vector2(760, 5);
