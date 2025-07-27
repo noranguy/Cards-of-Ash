@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=4 uid="uid://bvd7sgi6dix5n"]
+[gd_scene load_steps=90 format=4 uid="uid://bvd7sgi6dix5n"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bbmm0hjrhws3h" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
-[ext_resource type="PackedScene" uid="uid://c8yf6fsttlpb0" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
+[ext_resource type="PackedScene" uid="uid://cgapps2simqch" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="10_40vev"]
 [ext_resource type="AudioStream" uid="uid://bqv27d7aumo2r" path="res://Assets/SFX/triple-knock-on-door.mp3" id="10_mt6l6"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://p5jy6wgjctr4" path="res://Assets/Out of Play Safe House/Radio.png" id="15_7jf0i"]
 [ext_resource type="Texture2D" uid="uid://bthud0h5smg1l" path="res://Assets/Out of Play Safe House/Phone.png" id="16_leres"]
 [ext_resource type="FontFile" uid="uid://ckvv2r38wlgnn" path="res://Assets/Font/KappasPororoca-B83G.ttf" id="19_7jf0i"]
+[ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="22_4kjqu"]
 [ext_resource type="Texture2D" uid="uid://ci7pc88ohbs0" path="res://Assets/Out of Play Safe House/hud_design-Sheet.png" id="22_ifgqq"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
@@ -16856,6 +16857,24 @@ _data = {
 &"fade_to_night": SubResource("Animation_algie")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kjqu"]
+bg_color = Color(0.632314, 0.0842491, 0.159386, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ses6"]
+bg_color = Color(0.631373, 0.0823529, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvmke"]
+bg_color = Color(0.788235, 0.12549, 0.211765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_di8d1"]
+bg_color = Color(0.631373, 0.0823529, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8amw"]
+bg_color = Color(0.631373, 0.0823529, 0.172549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8b0r6"]
+bg_color = Color(0.788235, 0.12549, 0.211765, 1)
+
 [node name="Safehouse" type="StaticBody2D"]
 light_mask = 0
 scale = Vector2(0.5, 0.5)
@@ -17296,61 +17315,6 @@ theme_override_fonts/font = ExtResource("19_7jf0i")
 theme_override_font_sizes/font_size = 38
 text = "Day 1"
 
-[node name="EndDayPrompt" type="Control" parent="CanvasLayer"]
-visible = false
-z_index = 7
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/EndDayPrompt"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/EndDayPrompt/CenterContainer"]
-custom_minimum_size = Vector2(170, 120)
-layout_mode = 2
-color = Color(0.509286, 0.509286, 0.509286, 1)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EndDayPrompt/CenterContainer/ColorRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 35
-
-[node name="EndDay?" type="Label" parent="CanvasLayer/EndDayPrompt/CenterContainer/ColorRect/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "End the Day?"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/EndDayPrompt/CenterContainer/ColorRect/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
-[node name="EndDay" type="Button" parent="CanvasLayer/EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "End Day"
-
-[node name="Cancel" type="Button" parent="CanvasLayer/EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Cancel"
-
 [node name="OpenDoorPrompt" type="Control" parent="CanvasLayer"]
 visible = false
 z_index = 7
@@ -17362,22 +17326,24 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/OpenDoorPrompt"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/OpenDoorPrompt"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 110.0
+offset_right = 415.0
+offset_bottom = 250.0
+color = Color(0.788235, 0.12549, 0.211765, 1)
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/OpenDoorPrompt/CenterContainer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/OpenDoorPrompt"]
 custom_minimum_size = Vector2(170, 120)
 layout_mode = 2
-color = Color(0.509286, 0.509286, 0.509286, 1)
+offset_left = 235.0
+offset_top = 120.0
+offset_right = 405.0
+offset_bottom = 240.0
+color = Color(0.937255, 0.858824, 0.858824, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/OpenDoorPrompt/CenterContainer/ColorRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/OpenDoorPrompt/ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -17387,24 +17353,39 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 35
 
-[node name="OpenDoor?" type="Label" parent="CanvasLayer/OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/OpenDoorPrompt/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(5, 26)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.788235, 0.12549, 0.211765, 1)
+theme_override_fonts/normal_font = ExtResource("22_4kjqu")
+theme_override_font_sizes/normal_font_size = 32
 text = "Open Door?"
+horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/OpenDoorPrompt/ColorRect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="OpenDoor" type="Button" parent="CanvasLayer/OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+[node name="OpenDoor" type="Button" parent="CanvasLayer/OpenDoorPrompt/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("22_4kjqu")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/hover = SubResource("StyleBoxFlat_4kjqu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ses6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gvmke")
 text = "Open Door
 "
 
-[node name="Cancel" type="Button" parent="CanvasLayer/OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="CanvasLayer/OpenDoorPrompt/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("22_4kjqu")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/hover = SubResource("StyleBoxFlat_di8d1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c8amw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8b0r6")
 text = "Cancel"
 
 [node name="StartGamePrompt" type="Control" parent="CanvasLayer"]
@@ -17418,42 +17399,137 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/StartGamePrompt"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/StartGamePrompt"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 110.0
+offset_right = 415.0
+offset_bottom = 250.0
+color = Color(0.788235, 0.12549, 0.211765, 1)
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/StartGamePrompt/CenterContainer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/StartGamePrompt"]
 custom_minimum_size = Vector2(170, 120)
 layout_mode = 2
-color = Color(0.509286, 0.509286, 0.509286, 1)
+offset_left = 235.0
+offset_top = 120.0
+offset_right = 405.0
+offset_bottom = 240.0
+color = Color(0.937255, 0.858824, 0.858824, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StartGamePrompt/CenterContainer"]
-layout_mode = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StartGamePrompt/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 35
 
-[node name="StartGame?" type="Label" parent="CanvasLayer/StartGamePrompt/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/StartGamePrompt/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(5, 26)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/default_color = Color(0.788235, 0.12549, 0.211765, 1)
+theme_override_fonts/normal_font = ExtResource("22_4kjqu")
+theme_override_font_sizes/normal_font_size = 32
 text = "Start Game?"
+horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/StartGamePrompt/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/StartGamePrompt/ColorRect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="StartGame" type="Button" parent="CanvasLayer/StartGamePrompt/CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="StartGame" type="Button" parent="CanvasLayer/StartGamePrompt/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("22_4kjqu")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/hover = SubResource("StyleBoxFlat_4kjqu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ses6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gvmke")
 text = "Start Game"
 
-[node name="Cancel" type="Button" parent="CanvasLayer/StartGamePrompt/CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="CanvasLayer/StartGamePrompt/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 30)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("22_4kjqu")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/hover = SubResource("StyleBoxFlat_di8d1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c8amw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8b0r6")
+text = "Cancel"
+
+[node name="EndDayPrompt" type="Control" parent="CanvasLayer"]
+visible = false
+z_index = 7
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/EndDayPrompt"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 110.0
+offset_right = 415.0
+offset_bottom = 250.0
+color = Color(0.788235, 0.12549, 0.211765, 1)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/EndDayPrompt"]
+custom_minimum_size = Vector2(170, 120)
+layout_mode = 2
+offset_left = 235.0
+offset_top = 120.0
+offset_right = 405.0
+offset_bottom = 240.0
+color = Color(0.937255, 0.858824, 0.858824, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EndDayPrompt/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 35
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/EndDayPrompt/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(5, 26)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.788235, 0.12549, 0.211765, 1)
+theme_override_fonts/normal_font = ExtResource("22_4kjqu")
+theme_override_font_sizes/normal_font_size = 32
+text = "End the Day?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/EndDayPrompt/ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="StartGame" type="Button" parent="CanvasLayer/EndDayPrompt/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("22_4kjqu")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/hover = SubResource("StyleBoxFlat_4kjqu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ses6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gvmke")
+text = "End Day"
+
+[node name="Cancel" type="Button" parent="CanvasLayer/EndDayPrompt/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("22_4kjqu")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/hover = SubResource("StyleBoxFlat_di8d1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c8amw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8b0r6")
 text = "Cancel"
 
 [node name="Hud" type="Sprite2D" parent="CanvasLayer"]
@@ -17532,9 +17608,9 @@ parameters/looping = true
 [connection signal="body_entered" from="ForeignerArea" to="." method="_on_foreigner_area_body_entered"]
 [connection signal="body_exited" from="ForeignerArea" to="." method="_on_foreigner_area_body_exited"]
 [connection signal="animation_finished" from="FadeToBlack/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="pressed" from="CanvasLayer/EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/EndDay" to="." method="_on_end_day_pressed"]
-[connection signal="pressed" from="CanvasLayer/EndDayPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="CanvasLayer/OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/OpenDoor" to="." method="_on_open_door_pressed"]
-[connection signal="pressed" from="CanvasLayer/OpenDoorPrompt/CenterContainer/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
-[connection signal="pressed" from="CanvasLayer/StartGamePrompt/CenterContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="CanvasLayer/StartGamePrompt/CenterContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="CanvasLayer/OpenDoorPrompt/ColorRect/VBoxContainer/HBoxContainer/OpenDoor" to="." method="_on_open_door_pressed"]
+[connection signal="pressed" from="CanvasLayer/OpenDoorPrompt/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="CanvasLayer/StartGamePrompt/ColorRect/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/StartGamePrompt/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndDayPrompt/ColorRect/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_end_day_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndDayPrompt/ColorRect/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
