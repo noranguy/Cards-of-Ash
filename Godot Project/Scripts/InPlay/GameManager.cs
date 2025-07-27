@@ -88,7 +88,7 @@ public partial class GameManager : Node2D {
 		var playerTableInfo = GlobalState.Instance.GetTableCards();
 		
 		enemyHand.Init(cardScene, yEnemyHand, 0.75f, false, enemyHandInfo);
-		table.Init(cardScene, playerTableInfo, enemyTableInfo, GlobalState.Instance.GetDay() == 0);
+		table.Init(cardScene, playerTableInfo, enemyTableInfo, GlobalState.Instance.GetDay() != 0);
 		playerHand.Init(cardScene, yPlayerHand, 1.5f, true, playerHandInfo);
 		
 		playerTableCards = table.GetPlayerCards();
@@ -214,13 +214,13 @@ public partial class GameManager : Node2D {
 		ThrowToggle(true);
 	}
 	
-	private async Task ThrowCard(Card throwingCard, List<Card> tableCards) {
+	private async Task ThrowCard(Card throwingCard, List<Card> tableCards, bool fromTable) {
 		int throwingCardType = GlobalState.Instance.TypeMap[throwingCard.type];
 		int tableCardType;
 		double threshold;
 		double rnd;
 		List<Card> active = tableCards[0].isPlayer ? playerTableCards : enemyTableCards;
-		
+
 		if (throwingCard.clas == "ceramic") {
 			if (tableCards[0].index > 0) {
 				tableCards.Add(active[tableCards[0].index - 1]);
@@ -228,9 +228,9 @@ public partial class GameManager : Node2D {
 			if (tableCards[0].index < 5) {
 				tableCards.Add(active[tableCards[0].index + 1]);
 			}
-		} else if (throwingCard.clas == "elastic" && throwingCard.isPlayer == true) {
+		} else if (throwingCard.clas == "elastic" && throwingCard.isPlayer == true && !fromTable) {
 			if (playerHand.restrictAllow.Contains(throwingCard)) {
-				playerHand.restrictAllow.Remove(throwingCard);
+				playerHand.restrictAllow.Clear();
 			} else {
 				playerHand.restrictAllow.Add(throwingCard);
 			}
@@ -286,7 +286,7 @@ public partial class GameManager : Node2D {
 			
 			if (rnd < threshold) {
 				tableCards[i].Flip();
-				tableCards[i].ReduceDurability(0.2);
+				tableCards[i].ReduceDurability(0.1);
 				
 				if (tableCards[i].clas == "ceramic") {
 					if (tableCards[i].index > 0) {
@@ -301,7 +301,7 @@ public partial class GameManager : Node2D {
 						.Where(x => !x.visible).ToList();
 					
 					List<Card> eTableCards = new List<Card> {unFlippedCards[Rand.Next(unFlippedCards.Count)]};
-					await ThrowCard(tableCards[i], eTableCards);
+					await ThrowCard(tableCards[i], eTableCards, true);
 				}
 			} else {
 				tableCards[i].Shake();
@@ -323,15 +323,16 @@ public partial class GameManager : Node2D {
 				throwButton.Unfocus();
 			}
 		}
-
+		
 		// player turn
 		playerCardThrow.Visible = true;
 		playerCardThrow.Play("player_card_throw");
-		await ThrowCard(playerHand.activeCard, new List<Card> { table.activeCard });
+		await ThrowCard(playerHand.activeCard, new List<Card> { table.activeCard }, false);
 		ThrowToggle(false);
 		
 		// second throw with elastic card
 		if (playerHand.restrictAllow.Contains(playerHand.activeCard)) {
+			GlobalState.Instance.allowCardSelect = true;
 			return;
 		}
 		
@@ -343,9 +344,11 @@ public partial class GameManager : Node2D {
 		blindEnemy = false;
 		oppCardThrow.Visible = true;
 		oppCardThrow.Play("opp_card_throw");
-		await ThrowCard(throwingCard, new List<Card> {tableCard1});
 		if (throwingCard.clas == "elastic" || throwingCard.clas == "vision") {
-			await ThrowCard(throwingCard, new List<Card> {tableCard2});
+			ThrowCard(throwingCard, new List<Card> {tableCard1}, false);
+			await ThrowCard(throwingCard, new List<Card> {tableCard2}, false);
+		} else {
+			await ThrowCard(throwingCard, new List<Card> {tableCard1}, false);
 		}
 		if (throwingCard.clas == "vision") {
 			enemy.RevealCard(tableCard1, playerTableCards.IndexOf(tableCard1));

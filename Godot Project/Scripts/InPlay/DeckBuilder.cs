@@ -34,21 +34,21 @@ public partial class DeckBuilder : Control {
 		handCards = GlobalState.Instance.GetHandCards();
 		tableCards = GlobalState.Instance.GetTableCards();
 		
-		int numHandCards = GlobalState.Instance.NumHandCards;
-		int numTableCards = GlobalState.Instance.NumTableCards;
 		
-		for (int i = 0; i < numHandCards; i++) {
+		for (int i = 0; i < GlobalState.Instance.NumHandCards; i++) {
 			var card = CardScene.Instantiate<Card>();
 			card.Init(Card.DEFAULT_VERTICES, handCards[i].Item1, handCards[i].Item2, true, true, 0);
 			card.ready = true;
+			card.Name = $"HandSlot{i+1}";
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 			handSlots.GetNode<CenterContainer>($"HandSlot{i+1}").AddChild(card);
 		}
 		
-		for (int i = 0; i < numTableCards; i++) {
+		for (int i = 0; i < GlobalState.Instance.NumTableCards; i++) {
 			var card = CardScene.Instantiate<Card>();
 			card.Init(Card.DEFAULT_VERTICES, tableCards[i].Item1, tableCards[i].Item2, true, true, 2);
 			card.ready = true;
+			card.Name = $"TableSlot{i+1}";
 			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 			tableSlots.GetNode<CenterContainer>($"TableSlot{i+1}").AddChild(card);
 		}
@@ -75,6 +75,18 @@ public partial class DeckBuilder : Control {
 	public void Done() {
 		handDeck = new List<(string, string)>();
 		tableDeck = new List<(string, string)>();
+		handCards = new List<(string, string)>();
+		tableCards = new List<(string, string)>();
+		
+		for (int i = 0; i < GlobalState.Instance.NumHandCards; i++) {
+			Card card = (Card)handSlots.GetNode<CenterContainer>($"HandSlot{i+1}").GetChildren()[1];
+			handCards.Add((card.type, card.clas));
+		}
+		
+		for (int i = 0; i < GlobalState.Instance.NumTableCards; i++) {
+			Card card = (Card)tableSlots.GetNode<CenterContainer>($"TableSlot{i+1}").GetChildren()[1];
+			tableCards.Add((card.type, card.clas));
+		}
 		
 		foreach (Node child in handBench.GetChildren()) {
 			if (child is Card card) {
@@ -178,6 +190,7 @@ public partial class DeckBuilder : Control {
 			
 			card.sprite.Visible = true;
 			otherCard.sprite.Visible = true;
+			CheckValid();
 		}
 	}
 	

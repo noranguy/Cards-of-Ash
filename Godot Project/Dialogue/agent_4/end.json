@@ -3,14 +3,14 @@
 	"dialogue": [
 		{
 			"id": "win",
-			"text": "Oh wow, this is easy!",
+			"text": "Ah, well. What did I expect.",
 			"options": [
 				{ "text": "Back to Safe House", "next": "end" }
 			]
 		},
 		{
 			"id": "lose",
-			"text": "Ah, well. What did I expect.",
+			"text": "Oh wow, this is easy!",
 			"options": [
 				{ "text": "Back to Safe House", "next": "end" }
 			]
