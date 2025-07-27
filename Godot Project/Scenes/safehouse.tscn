@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bbmm0hjrhws3h" path="res://Scenes/Characters/kid.tscn" id="7_b4d46"]
 [ext_resource type="Texture2D" uid="uid://6ox7oubrkx3n" path="res://Assets/Out of Play Safe House/Interact_e.png" id="7_gxkjp"]
 [ext_resource type="Texture2D" uid="uid://5d61gse0mpo1" path="res://Assets/Out of Play Safe House/KO_2.png" id="8_gxkjp"]
-[ext_resource type="PackedScene" uid="uid://cgapps2simqch" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
+[ext_resource type="PackedScene" uid="uid://c8yf6fsttlpb0" path="res://Scenes/Characters/foreigner.tscn" id="8_krigs"]
 [ext_resource type="Texture2D" uid="uid://dgd1cliseiask" path="res://Assets/Out of Play Safe House/N_2.png" id="9_mt6l6"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="10_40vev"]
 [ext_resource type="AudioStream" uid="uid://bqv27d7aumo2r" path="res://Assets/SFX/triple-knock-on-door.mp3" id="10_mt6l6"]
