@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://p5jy6wgjctr4" path="res://Assets/Out of Play Safe House/Radio.png" id="15_7jf0i"]
 [ext_resource type="Texture2D" uid="uid://bthud0h5smg1l" path="res://Assets/Out of Play Safe House/Phone.png" id="16_leres"]
 [ext_resource type="FontFile" uid="uid://ckvv2r38wlgnn" path="res://Assets/Font/KappasPororoca-B83G.ttf" id="19_7jf0i"]
-[ext_resource type="Texture2D" uid="uid://1lxbh1divmcx" path="res://Assets/Out of Play Safe House/hud_design.png" id="19_fiq5u"]
+[ext_resource type="Texture2D" uid="uid://ci7pc88ohbs0" path="res://Assets/Out of Play Safe House/hud_design-Sheet.png" id="22_ifgqq"]
 [ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="22_4kjqu"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
@@ -17534,7 +17534,7 @@ text = "Cancel"
 
 [node name="Hud" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(160, 90)
-texture = ExtResource("19_fiq5u")
+texture = ExtResource("22_ifgqq")
 
 [node name="TaskLabel" type="Label" parent="CanvasLayer"]
 modulate = Color(0, 0.192157, 0.443137, 1)
@@ -17562,6 +17562,7 @@ text = "- survive"
 autowrap_mode = 3
 
 [node name="ResourcesLabel" type="Label" parent="CanvasLayer"]
+visible = false
 modulate = Color(0.788235, 0.121569, 0.215686, 1)
 z_index = 5
 offset_left = 267.0
