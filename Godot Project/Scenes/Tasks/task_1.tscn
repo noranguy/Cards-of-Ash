@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://ogn0svttcr8a"]
+[gd_scene load_steps=44 format=4 uid="uid://ogn0svttcr8a"]
 
 [ext_resource type="Texture2D" uid="uid://b4b5c3ksmylyf" path="res://Assets/In Play Safe House/Tasks/phone-Sheet.png" id="1_4hxa7"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_ckrol"]
@@ -53,27 +53,8 @@ texture = ExtResource("1_4hxa7")
 2:1/0 = 0
 3:1/0 = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3uugt"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_owsx8"]
-texture = SubResource("CompressedTexture2D_3uugt")
-0:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-
 [sub_resource type="TileSet" id="TileSet_6f6uv"]
 sources/0 = SubResource("TileSetAtlasSource_bl4aw")
-sources/1 = SubResource("TileSetAtlasSource_owsx8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_od4wg"]
 texture = ExtResource("1_ckrol")
