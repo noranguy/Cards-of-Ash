@@ -70,7 +70,11 @@ public partial class Safehouse : StaticBody2D
 	private Label tasks;
 
 	private Dictionary<string, string> dayTaskTree;
-	private Dictionary<string, string> nightTaskTree; 
+	private Dictionary<string, string> nightTaskTree;
+
+	private Task3 task_three;
+
+	private bool in_task_three;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -94,6 +98,9 @@ public partial class Safehouse : StaticBody2D
 
 		tasks = GetNode<Label>("CanvasLayer/Tasks");
 
+		in_task_three = false;
+		task_three = GetNode<Task3>("Task3");
+
 		dayTaskTree = new();
 		nightTaskTree = new();
 
@@ -112,6 +119,7 @@ public partial class Safehouse : StaticBody2D
 		{
 			dayTaskTree[node.day_num] = node.task;
 		}
+
 		foreach (var node in objective2.tasks)
 		{
 			nightTaskTree[node.day_num] = node.task;
@@ -163,9 +171,10 @@ public partial class Safehouse : StaticBody2D
 		else
 		{
 			night_safehouse_lighting.Visible = true;
+			window_night.Visible = true;
 			_in_minigame = false;
 			GlobalState.Instance.SetInMinigame(false);
-			_ = ThoughtsDialogueAsync($"Tasks/Task{_day_num}/completed");
+			_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task{_day_num}/completed");
 		}
 
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
@@ -179,6 +188,10 @@ public partial class Safehouse : StaticBody2D
 		// If the player is trying to interact with something
 		if (Input.IsActionJustPressed("interact"))
 		{
+			if (in_task_three)
+			{
+				task_three.checkStars();
+			}
 
 			// If the player is in an interactable area, then show the prompt for that object
 			if (_at_table)
@@ -213,10 +226,17 @@ public partial class Safehouse : StaticBody2D
 				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 			}
 
-			else if (_at_boxes && _inhabitants[1] && !_mission_completed[1] && _task_ready)
+			else if (_inhabitants[3] && !_mission_completed[3] && !in_task_three && _task_ready)
+			{
+				in_task_three = true;
+				task_three.Visible = true;
+				task_three.playGame();
+			}
+
+			else if (_at_boxes && _inhabitants[_day_num] && !_mission_completed[_day_num] && _task_ready)
 			{
 				GlobalState.Instance.SetInMinigame(true);
-				GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("Tasks/task_1.tscn");
+				GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Tasks/task_{_day_num}.tscn");
 			}
 
 			// If the player is trying to talk to an npc, start the dialogue, maybe different (smaller) dialogues for each day 
@@ -226,13 +246,11 @@ public partial class Safehouse : StaticBody2D
 				{
 					tasks.Text = "";
 					string partial_dialogue_path = $"Day{_day_num + 1}/{characters[i]}";
-					GD.Print(_mission_completed[i+1]);
-					if (!_mission_completed[i+1])
+					if (!_mission_completed[i + 1])
 					{
 						if (_dialogue_exhausted[i])
 						{
 							_ = InSafeHouse_Dialogue_setupAsync($"ExhaustedMission/{_dialogue_order[i + 1]}");
-							_dialogue_exhausted[i] = true;
 						}
 
 						else
@@ -240,6 +258,7 @@ public partial class Safehouse : StaticBody2D
 							_task_ready = true;
 							_ = InSafeHouse_Dialogue_setupAsync($"Mission/{_dialogue_order[i + 1]}");
 							tasks.Text += nightTaskTree[$"{i + 1}a"];
+							_dialogue_exhausted[i] = true;
 						}
 					}
 
@@ -256,6 +275,16 @@ public partial class Safehouse : StaticBody2D
 
 					break;
 				}
+			}
+
+			if (in_task_three && task_three.isGameWon())
+			{
+				task_three.Visible = false;
+				in_task_three = false;
+				_mission_completed[3] = true;
+				GlobalState.Instance.MissionCompleted(3);
+				_dialogue_exhausted[2] = false;
+				tasks.Text += "- Go to Bed";
 			}
 		}
 	}
@@ -482,15 +511,6 @@ public partial class Safehouse : StaticBody2D
 		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
 	}
 
-	private async Task ThoughtsDialogueAsync(string dialogue_path)
-	{
-		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
-
-		await DialogueManager.Instance.StartDialogue(dialogue_path, false);
-
-		GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(true);
-	}
-
 	private async Task Start_dayAsync()
 	{
 		if (!_day_over)
@@ -521,6 +541,10 @@ public partial class Safehouse : StaticBody2D
 					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt", false);
 					Knock_at_door();
 					break;
+				case 5:
+					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt", false);
+					Knock_at_door();
+					break;
 			}
 		}
 		else
@@ -528,12 +552,12 @@ public partial class Safehouse : StaticBody2D
 			window_day.Visible = false;
 			window_night.Visible = true;
 			night_safehouse_lighting.Visible = true;
-			
+
 			switch (_day_num)
 			{
 				case 0:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_0", false);
-					tasks.Text = "Go to sleep";
+					tasks.Text = "- Go to sleep";
 					break;
 				case 1:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_1", false);
@@ -546,6 +570,9 @@ public partial class Safehouse : StaticBody2D
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_3", false);
 					break;
 				case 4:
+					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_4", false);
+					break;
+				case 5:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_4", false);
 					break;
 			}

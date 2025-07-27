@@ -1,25 +1,467 @@
-[gd_scene load_steps=2 format=3 uid="uid://6i6smfc1mrri"]
+[gd_scene load_steps=20 format=3 uid="uid://6i6smfc1mrri"]
 
-[ext_resource type="PackedScene" uid="uid://cfyc8k4gjjnmr" path="res://Scenes/out_play_safehouse.tscn" id="1_3qtpo"]
+[ext_resource type="Script" uid="uid://d2kpbmdspbs61" path="res://Scripts/Tasks/Task3.cs" id="1_gwhld"]
+[ext_resource type="Texture2D" uid="uid://k73ee2m3bumt" path="res://Assets/Out of Play Safe House/blinkoff.png" id="2_scn0f"]
+[ext_resource type="Texture2D" uid="uid://tdiea4y67s0y" path="res://Assets/Out of Play Safe House/shine_on.png" id="3_gwhld"]
+
+[sub_resource type="Animation" id="Animation_kmg1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cans/CansStar:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cans/CansStar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cans/CansStar:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(400, 90)]
+}
+
+[sub_resource type="Animation" id="Animation_p3osg"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cans/CansStar:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [ExtResource("2_scn0f"), ExtResource("3_gwhld")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cans/CansStar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0.7, 0.7), Vector2(0.75, 0.75), Vector2(0.9, 0.9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cans/CansStar:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(400, 90), Vector2(399, 89)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_21gh2"]
+_data = {
+&"RESET": SubResource("Animation_kmg1y"),
+&"blink": SubResource("Animation_p3osg")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmg1y"]
+size = Vector2(22, 28)
+
+[sub_resource type="Animation" id="Animation_ayjak"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterStar:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_scn0f")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaterStar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.7, 0.7)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaterStar:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(274, 78)]
+}
+
+[sub_resource type="Animation" id="Animation_pain8"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WaterStar:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [ExtResource("2_scn0f"), ExtResource("3_gwhld")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WaterStar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0.7, 0.7), Vector2(0.75, 0.75), Vector2(0.9, 0.9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WaterStar:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(274, 78), Vector2(273, 77), Vector2(270, 74)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0bdij"]
+_data = {
+&"RESET": SubResource("Animation_ayjak"),
+&"blink": SubResource("Animation_pain8")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gwhld"]
+size = Vector2(24, 24)
+
+[sub_resource type="Animation" id="Animation_ya2uw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FirstAidKit/FirstAidKitStar:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_scn0f")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FirstAidKit/FirstAidKitStar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FirstAidKit/FirstAidKitStar:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320, 46)]
+}
+
+[sub_resource type="Animation" id="Animation_21gh2"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FirstAidKit/FirstAidKitStar:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_scn0f"), ExtResource("3_gwhld")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FirstAidKit/FirstAidKitStar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0.7, 0.7), Vector2(0.75, 0.75), Vector2(0.9, 0.9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FirstAidKit/FirstAidKitStar:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(320, 46), Vector2(319, 45), Vector2(317, 43)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pain8"]
+_data = {
+&"RESET": SubResource("Animation_ya2uw"),
+&"blink": SubResource("Animation_21gh2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3osg"]
+size = Vector2(32, 16)
+
+[sub_resource type="Animation" id="Animation_gwhld"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Garbage/GarbageStar:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_scn0f")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Garbage/GarbageStar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Garbage/GarbageStar:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(152, 306)]
+}
+
+[sub_resource type="Animation" id="Animation_scn0f"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Garbage/GarbageStar:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_scn0f"), ExtResource("3_gwhld")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Garbage/GarbageStar:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0.7, 0.7), Vector2(0.75, 0.75), Vector2(0.9, 0.9)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Garbage/GarbageStar:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(160, 308), Vector2(159, 307), Vector2(156, 304)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p3osg"]
+_data = {
+&"RESET": SubResource("Animation_gwhld"),
+&"blink": SubResource("Animation_scn0f")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21gh2"]
+size = Vector2(32, 32)
 
 [node name="Task3" type="Node2D"]
-scale = Vector2(0.5, 0.5)
+script = ExtResource("1_gwhld")
 
-[node name="Background" parent="." instance=ExtResource("1_3qtpo")]
-position = Vector2(320, 180)
+[node name="Cans" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
-[node name="Cans" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CansBlink" type="AnimationPlayer" parent="Cans"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_21gh2")
+}
 
-[node name="Water" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cans"]
+z_index = 5
+position = Vector2(405, 98)
+shape = SubResource("RectangleShape2D_kmg1y")
 
-[node name="FirstAidKit" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CansStar" type="TextureRect" parent="Cans"]
+z_index = 5
+offset_left = 400.0
+offset_top = 90.0
+offset_right = 416.0
+offset_bottom = 106.0
+scale = Vector2(0.8, 0.8)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="Thing4" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Water" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="WaterBlink" type="AnimationPlayer" parent="Water"]
+libraries = {
+&"": SubResource("AnimationLibrary_0bdij")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+z_index = 5
+position = Vector2(288, 96)
+shape = SubResource("RectangleShape2D_gwhld")
+
+[node name="WaterStar" type="TextureRect" parent="Water"]
+z_index = 5
+offset_left = 274.0
+offset_top = 78.0
+offset_right = 314.0
+offset_bottom = 118.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_scn0f")
+stretch_mode = 3
+
+[node name="FirstAidKit" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="FirstAidKitBlink" type="AnimationPlayer" parent="FirstAidKit"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_pain8")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FirstAidKit"]
+z_index = 5
+position = Vector2(338, 94)
+shape = SubResource("RectangleShape2D_p3osg")
+
+[node name="FirstAidKitStar" type="TextureRect" parent="FirstAidKit"]
+z_index = 5
+offset_left = 320.0
+offset_top = 46.0
+offset_right = 352.0
+offset_bottom = 80.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_scn0f")
+stretch_mode = 3
+
+[node name="Garbage" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="GarbageBlink" type="AnimationPlayer" parent="Garbage"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_p3osg")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Garbage"]
+z_index = 5
+position = Vector2(178, 322)
+shape = SubResource("RectangleShape2D_21gh2")
+
+[node name="GarbageStar" type="TextureRect" parent="Garbage"]
+z_index = 5
+offset_left = 152.0
+offset_top = 306.0
+offset_right = 192.0
+offset_bottom = 346.0
+texture = ExtResource("2_scn0f")
+stretch_mode = 3
+
+[connection signal="body_entered" from="Cans" to="." method="_on_cans_body_entered"]
+[connection signal="body_exited" from="Cans" to="." method="_on_cans_body_exited"]
+[connection signal="body_entered" from="Water" to="." method="_on_water_body_entered"]
+[connection signal="body_exited" from="Water" to="." method="_on_water_body_exited"]
+[connection signal="body_entered" from="FirstAidKit" to="." method="_on_first_aid_kit_body_entered"]
+[connection signal="body_exited" from="FirstAidKit" to="." method="_on_first_aid_kit_body_exited"]
+[connection signal="body_entered" from="Garbage" to="." method="_on_garbage_body_entered"]
+[connection signal="body_exited" from="Garbage" to="." method="_on_garbage_body_exited"]

@@ -1,0 +1,12 @@
+{
+	"speaker": "self",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "\"Now that it's all boared up I should go check on An.\"",
+			"options": [
+				{ "text": "Go Back", "next": "end" }
+			]
+		}
+	]
+}

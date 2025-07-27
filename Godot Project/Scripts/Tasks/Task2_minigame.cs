@@ -30,6 +30,7 @@ public partial class Task2_minigame : Node2D {
 		}
 		
 		if (GlobalState.Instance.phase == 6) {
+			GlobalState.Instance.MissionCompleted(2);
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		}
 	}

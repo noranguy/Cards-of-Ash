@@ -1,21 +1,21 @@
 {
-    "tasks": [
-        {
-            "day_num": "0a",
-            "task":"Get cards and answer door"
-        },
-                
-        {
-            "day_num": "0b",
-            "task": "Start Menko game"
-        },    
-        {
-            "day_num": "1a",
-            "task":"Answer door"
-        },
-        {
-            "day_num": "1b",
-            "task": "Start Menko game"
-        }
-    ]
+	"tasks": [
+		{
+			"day_num": "0a",
+			"task":"Get cards and answer door"
+		},
+				
+		{
+			"day_num": "0b",
+			"task": "Start Menko game"
+		},    
+		{
+			"day_num": "1a",
+			"task":"Answer door"
+		},
+		{
+			"day_num": "1b",
+			"task": "Start Menko game"
+		}
+	]
 }

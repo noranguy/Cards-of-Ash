@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c31jjoe1c61rk"]
+[gd_scene load_steps=3 format=3 uid="uid://mrr5ilnttmr8"]
 
 [ext_resource type="Texture2D" uid="uid://c2dt1yvnq5vg3" path="res://Assets/Character Designs/Mom & Son/mom & son mini sprite.png" id="1_0clr0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pyhvd"]
-size = Vector2(14, 17)
+size = Vector2(14, 23)
 
 [node name="mom" type="CharacterBody2D"]
 
@@ -11,5 +11,5 @@ size = Vector2(14, 17)
 texture = ExtResource("1_0clr0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7.5)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_pyhvd")
