@@ -28,11 +28,17 @@ public partial class Card : Control {
 	public double repeatMult = 1;
 	public int lastRound = -2;
 	
-	private Tween tween;
+	public Tween tween;
 	public Vector2 upperPosition;
 	public Vector2 lowerPosition;
 	
+	public bool dragging = false;
+	public bool hoveringCard = false;
+	
 	public override void _Ready() {
+		Connect("mouse_entered", new Callable(this, nameof(OnMouseEntered)));
+		Connect("mouse_exited", new Callable(this, nameof(OnMouseExited)));
+		
 		sprite = GetNode<Polygon2D>("CardImage");
 		if (indicator != null) {
 			indicator.Visible = false;
@@ -55,6 +61,12 @@ public partial class Card : Control {
 			} else if (indicator.Position.Y < indicatorMin) {
 				indicatorDir = 1;
 			}
+		}
+		
+		if (hoveringCard) {
+			Highlight();
+		} else {
+			Unhighlight();
 		}
 	}
 	
@@ -110,6 +122,20 @@ public partial class Card : Control {
 		tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "position", position, 0.1f);
 		await ToSignal(tween, "finished");
+	}
+
+	public async Task SwapPositions(Card other) {
+		Vector2 thisPosition = GlobalPosition;
+		Vector2 otherPosition = other.GlobalPosition;
+		
+		tween = GetTree().CreateTween();
+		tween.TweenProperty(this, "global_position", otherPosition, 0.25f);
+		
+		other.tween = GetTree().CreateTween();
+		other.tween.TweenProperty(other, "global_position", thisPosition, 0.25f);
+		
+		await ToSignal(tween, "finished");
+		await ToSignal(other.tween, "finished");
 	}
 	
 	public void UpdateTexture() {
@@ -175,35 +201,28 @@ public partial class Card : Control {
 	}
 
 	public void OnInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
+		_GuiInput(@event);
+	}
+	
+	public override void _GuiInput(InputEvent @event) {
 		if (
 			@event is InputEventMouseButton mouseEvent &&
 			mouseEvent.Pressed &&
-			mouseEvent.ButtonIndex == MouseButton.Left
+			mouseEvent.ButtonIndex == MouseButton.Left &&
+			GlobalState.Instance.allowCardSelect
 		) {
 			EmitSignal(SignalName.CardClicked, this);
 		}
 	}
 	
-	public override void _GuiInput(InputEvent @event) {
-		if (@event is InputEventMouseButton mouseEvent &&
-			mouseEvent.Pressed &&
-			mouseEvent.ButtonIndex == MouseButton.Left)
-		{
-			EmitSignal(SignalName.CardClicked, this);
-		}
-	}
-	
 	public void Highlight() {
-		if ((index == -1 && !isPlayer) || !ready) return;
+		if ((index == -1 && !isPlayer) || !ready || !GlobalState.Instance.allowCardSelect) return;
 		Shader shader = GD.Load<Shader>("res://Shaders/card_highlight.gdshader");
 		ShaderMaterial mat = new ShaderMaterial { Shader = shader };
 		sprite.Material = mat;
 		
-		if (index != -1) return;
+		if (index != -1 || (tween != null && tween.IsRunning())) return;
 
-		if (tween != null && tween.IsRunning()) {
-			return;
-		}
 		tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "position", upperPosition, 0.05f);
 	}
@@ -219,18 +238,10 @@ public partial class Card : Control {
 	}
 
 	public void OnMouseEntered() {
-		Highlight();
+		hoveringCard = true;
 	}
 	
 	public void OnMouseExited() {
-		Unhighlight();
-	}
-	
-	public override Variant _GetDragData(Vector2 atPosition) {
-		var dragPreview = Duplicate() as Control;
-		if (dragPreview != null) {
-			SetDragPreview(dragPreview);
-		}
-		return this;
+		hoveringCard = false;
 	}
 }

@@ -59,6 +59,7 @@ public class Agent4 : Agent {
 	
 	public override (Card, Card, Card) Move(bool blinded) {
 		if (blinded) {
+			round--;
 			return (hand[0], playerTable[Rand.Next(playerTable.Count)], null);
 		}
 		
@@ -70,7 +71,6 @@ public class Agent4 : Agent {
 				playerTable[order[round - 3]], null
 			);
 		}
-		round++;
 	}
 	
 	public override void Backward() {
@@ -85,5 +85,6 @@ public class Agent4 : Agent {
 				return 0;
 			});
 		}
+		round++;
 	}
 }

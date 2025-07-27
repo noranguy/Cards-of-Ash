@@ -16,6 +16,8 @@ public partial class DeckBuilder : Control {
 	List<(string, string)> tableCards;
 	List<(string, string)> handDeck;
 	List<(string, string)> tableDeck;
+	
+	Card[] activeCards = new Card[] {null, null, null, null};
 
 	public override void _Ready() {
 		handBench = GetNode<HBoxContainer>("Hand/Bench/BenchCards");
@@ -38,64 +40,36 @@ public partial class DeckBuilder : Control {
 		for (int i = 0; i < numHandCards; i++) {
 			var card = CardScene.Instantiate<Card>();
 			card.Init(Card.DEFAULT_VERTICES, handCards[i].Item1, handCards[i].Item2, true, true, 0);
-			card.CardClicked += OnCardReturnRequested;
-			card.MouseFilter = Control.MouseFilterEnum.Ignore;
+			card.ready = true;
+			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 			handSlots.GetNode<CenterContainer>($"HandSlot{i+1}").AddChild(card);
 		}
 		
 		for (int i = 0; i < numTableCards; i++) {
 			var card = CardScene.Instantiate<Card>();
-			card.Init(Card.DEFAULT_VERTICES, tableCards[i].Item1, tableCards[i].Item2, true, true, 1);
-			card.CardClicked += OnCardReturnRequested;
-			card.MouseFilter = Control.MouseFilterEnum.Ignore;
+			card.Init(Card.DEFAULT_VERTICES, tableCards[i].Item1, tableCards[i].Item2, true, true, 2);
+			card.ready = true;
+			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 			tableSlots.GetNode<CenterContainer>($"TableSlot{i+1}").AddChild(card);
 		}
 		
 		foreach ((string type, string clas) in handDeck) {
 			var card = CardScene.Instantiate<Card>();
-			card.Init(Card.DEFAULT_VERTICES, type, clas, true, true, 0);
-			card.CardClicked += OnCardReturnRequested;
-			card.MouseFilter = Control.MouseFilterEnum.Stop;
+			card.Init(Card.DEFAULT_VERTICES, type, clas, true, true, 1);
+			card.ready = true;
+			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 			handBench.AddChild(card);
 		}
 		
 		foreach ((string type, string clas) in tableDeck) {
 			var card = CardScene.Instantiate<Card>();
-			card.Init(Card.DEFAULT_VERTICES, type, clas, true, true, 1);
-			card.CardClicked += OnCardReturnRequested;
-			card.MouseFilter = Control.MouseFilterEnum.Stop;
+			card.Init(Card.DEFAULT_VERTICES, type, clas, true, true, 3);
+			card.ready = true;
+			card.Connect(Card.SignalName.CardClicked, new Callable(this, nameof(OnCardClicked)));
 			tableBench.AddChild(card);
 		}
 		
 		doneButton.Pressed += Done;
-		
-		foreach (Node child in handSlots.GetChildren()) {
-			if (child is CardSlot slot) {
-				slot.CardDropped += CheckValid;
-			}
-		}
-		
-		foreach (Node child in tableSlots.GetChildren()) {
-			if (child is CardSlot slot) {
-				slot.CardDropped += CheckValid;
-			}
-		}
-	}
-	
-	public void OnCardReturnRequested(Card card) {
-		HBoxContainer bench;
-		
-		if (card.index == 0) {
-			bench = GetNode<HBoxContainer>("Hand/Bench/BenchCards");
-		} else {
-			bench = GetNode<HBoxContainer>("Table/Bench/BenchCards");
-		}
-		if (card.GetParent() != bench) {
-			card.GetParent().RemoveChild(card);
-			bench.AddChild(card);
-		}
-		
-		CheckValid();
 	}
 	
 	public void Done() {
@@ -153,5 +127,71 @@ public partial class DeckBuilder : Control {
 			doneButton.Disabled = false;
 			doneButton.Modulate = Colors.White;
 		}
+	}
+	
+	public async void OnCardClicked(Card card) {
+		int idx = card.index;
+		
+		if (activeCards[idx] == card) {
+			return;
+		}
+		
+		if (activeCards[idx] != null) {
+			activeCards[idx].locked = false;
+			activeCards[idx].Unhighlight();
+		}
+		card.locked = true;
+		card.Highlight();
+		activeCards[idx] = card;
+		
+		int otherIdx = idx % 2 == 0 ? (idx + 1) : (idx - 1);
+		Card otherCard = activeCards[otherIdx];
+		if (otherCard != null) {
+			activeCards[idx].locked = false;
+			activeCards[idx].Unhighlight();
+			activeCards[idx] = null;
+			activeCards[otherIdx].locked = false;
+			activeCards[otherIdx].Unhighlight();
+			activeCards[otherIdx] = null;
+			
+			Vector2 firstPosition = card.GlobalPosition;
+			Vector2 secondPosition = otherCard.GlobalPosition;
+			
+			var rootParent = GetTree().Root.GetNode<Control>("DeckBuilder");
+
+			Card dup1 = CreateDuplicateCard(card);
+			Card dup2 = CreateDuplicateCard(otherCard);
+			rootParent.AddChild(dup1);
+			rootParent.AddChild(dup2);
+			
+			card.sprite.Visible = false;
+			otherCard.sprite.Visible = false;
+			
+			await dup1.SwapPositions(dup2);
+			
+			rootParent.RemoveChild(dup1);
+			rootParent.RemoveChild(dup2);
+			dup1.QueueFree();
+			dup2.QueueFree();
+			
+			SwapCardFields(card, otherCard);
+			
+			card.sprite.Visible = true;
+			otherCard.sprite.Visible = true;
+		}
+	}
+	
+	private Card CreateDuplicateCard(Card original) {
+		var dup = (Card)original.Duplicate();
+		dup.Init(Card.DEFAULT_VERTICES, original.type, original.clas, true, true, -1);
+		dup.ZIndex = 100;
+		dup.GlobalPosition = original.GlobalPosition;
+		return dup;
+	}
+	
+	private void SwapCardFields(Card a, Card b) {
+		(a.type, b.type) = (b.type, a.type);
+		(a.clas, b.clas) = (b.clas, a.clas);
+		(a.sprite.Texture, b.sprite.Texture) = (b.sprite.Texture, a.sprite.Texture);
 	}
 }

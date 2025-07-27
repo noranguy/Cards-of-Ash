@@ -20,6 +20,8 @@ public partial class OmamoriOption : Control {
 		hoverOverlay = GetNode<ColorRect>("HoverOverlay");
 		tooltip = GetNode<ColorRect>("Tooltip");
 		
+		tooltip.Visible = true;
+		
 		var tooltipLabel = tooltip.GetNode<RichTextLabel>("Text");
 		
 		if (Name != "Current" && Name != "OmamoriOption") {
