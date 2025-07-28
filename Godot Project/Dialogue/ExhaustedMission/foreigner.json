@@ -1,0 +1,12 @@
+{
+	"speaker": "Foreigner",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Thank you for helping me! I feel much more hopeful in case I find myself in a major earthquake again. ",
+			"options": [
+				{ "text": "No problem!", "next": "end" }
+			]
+		}
+	]
+}
