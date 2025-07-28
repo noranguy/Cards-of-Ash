@@ -6,11 +6,11 @@
 		},
 		{
 			"day_num": "2a",
-			"text":"Board up windows"
+			"task":"Board up windows"
 		},
 		{
 			"day_num": "3a",
-			"task": "Search safehouse for helpful First Aid Kit"
+			"task": "Search safehouse for First Aid Kit"
 		},
 		{
 			"day_num": "4a",
