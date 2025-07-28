@@ -346,4 +346,6 @@ Table Ability: After 3 rounds, each Vision card randomly swaps places with anoth
 	public int phase = 0;
 	
 	public bool allowCardSelect = true;
+	
+	public bool dialogueRunning = false;
 }

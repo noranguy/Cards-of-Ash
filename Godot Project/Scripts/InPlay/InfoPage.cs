@@ -25,7 +25,8 @@ public partial class InfoPage : Node2D {
 	
 	public override void _Input(InputEvent @event) {
 		if (@event is InputEventKey keyEvent && keyEvent.Pressed && keyEvent.Keycode == Key.Space) {
-			//if (GlobalState.Instance.GetDay() < 5) {
+			//if (GlobalState.Instance.GetDay() != -1) {
+				//GlobalState.Instance.NewInhabitant();
 				//GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 				//return;
 			//}

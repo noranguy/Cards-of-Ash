@@ -286,7 +286,7 @@ public partial class GameManager : Node2D {
 			if (lastFortune == 0) {
 				threshold += 0.05;
 			} else if (lastFortune == 1) {
-				threshold += 0.1;
+				threshold -= 0.05;
 			}
 
 			tableCards[i].lastRound = round;
