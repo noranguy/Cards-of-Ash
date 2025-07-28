@@ -1,0 +1,12 @@
+{
+	"speaker": "Kaishain",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Back again so soon? Ah, don't forget about 119 for emergency services like the ambulance or fire department.",
+			"options": [
+				{ "text": "Thanks.", "next": "end" }
+			]
+		}
+  	]
+}

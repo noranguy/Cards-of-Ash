@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Text.Json;
+using System.Linq;
 	//classes to parse json
 
 public class dayNode
@@ -77,6 +78,9 @@ public partial class Safehouse : StaticBody2D
 	private Task3 task_three;
 
 	private bool in_task_three;
+	private bool in_task_four;
+	
+	private bool[] taskFourDialogues = {false, false, false, true};
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -102,6 +106,7 @@ public partial class Safehouse : StaticBody2D
 
 		task_three = GetNode<Task3>("Task3");
 		in_task_three = false;
+		in_task_four = false;
 
 		dayTaskTree = new();
 		nightTaskTree = new();
@@ -192,6 +197,12 @@ public partial class Safehouse : StaticBody2D
 			task_three.Visible = true;
 			task_three.playGame();
 		}
+		
+		if (_inhabitants[4] && !_mission_completed[4] && !in_task_four && _task_ready)
+		{
+			tasks.Text = "- Talk with Kaishain\n- Talk with Kid\n- Talk with Mom";
+			in_task_four = true;
+		}
 
 		// If the player is trying to interact with something
 		if (Input.IsActionJustPressed("interact"))
@@ -250,7 +261,6 @@ public partial class Safehouse : StaticBody2D
 
 			else if (_at_boxes && _inhabitants[_day_num] && !_mission_completed[_day_num] && _task_ready && _day_num != 3)
 			{
-				GD.Print("In else if");
 				GlobalState.Instance.SetInMinigame(true);
 				GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Tasks/task_{_day_num}.tscn");
 			}
@@ -262,7 +272,29 @@ public partial class Safehouse : StaticBody2D
 				{
 					tasks.Text = "";
 					string partial_dialogue_path = $"Day{_day_num + 1}/{characters[i]}";
-					if (!_mission_completed[i + 1])
+					if (in_task_four) {
+						GD.Print($"{taskFourDialogues[0]} {taskFourDialogues[1]} {taskFourDialogues[2]} {taskFourDialogues[3]}");
+						if (taskFourDialogues.All(x => x)) {
+							tasks.Text = "- Talk with Foreigner";
+							if (i == 3) {
+								_mission_completed[4] = true;
+								in_task_four = false;
+								tasks.Text = "";
+								_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
+							} else {
+								_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
+							}
+						} else if (taskFourDialogues[i]) {
+							_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
+						} else {
+							_ =InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
+							taskFourDialogues[i] = true;
+						}
+						if (taskFourDialogues.All(x => x)) {
+							tasks.Text = "- Talk with Foreigner";
+						}
+					}
+					else if (!_mission_completed[i + 1])
 					{
 						if (_dialogue_exhausted[i])
 						{
@@ -292,7 +324,6 @@ public partial class Safehouse : StaticBody2D
 					break;
 				}
 			}
-			GD.Print("Done with process");
 		}
 	}
 

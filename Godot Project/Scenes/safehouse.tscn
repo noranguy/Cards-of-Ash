@@ -24,7 +24,7 @@
 [ext_resource type="FontFile" uid="uid://ckvv2r38wlgnn" path="res://Assets/Font/KappasPororoca-B83G.ttf" id="19_7jf0i"]
 [ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="22_4kjqu"]
 [ext_resource type="Texture2D" uid="uid://ci7pc88ohbs0" path="res://Assets/Out of Play Safe House/hud_design-Sheet.png" id="22_ifgqq"]
-[ext_resource type="PackedScene" uid="uid://6i6smfc1mrri" path="res://Scenes/Tasks/task_3.tscn" id="26_8b0r6"]
+[ext_resource type="PackedScene" uid="uid://jbsre8c6xdc3" path="res://Scenes/Tasks/task_3.tscn" id="26_8b0r6"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_qcbrc"]
 a = Vector2(38, -10)

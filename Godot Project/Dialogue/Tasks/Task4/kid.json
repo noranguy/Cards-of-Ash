@@ -1,0 +1,48 @@
+{
+	"speaker": "Kid",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Hello!! Thank you for the first-aid! I want to go outside and play, but it is too dark. Can we play inside?",
+			"options": [
+				{ "text": "Before playing, can I ask you something?", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "Sure! What’s up?",
+			"options": [
+				{ "text": "What should I have in the case of an earthquake?", "next": "b" }
+		  	]
+		},
+		{
+			"id": "b",
+			"text": "Hmm.. Make sure you have a flashlight with some batteries just in case the power goes out! I always keep one with me.",
+			"options": [
+				{ "text": "...", "next": "c" }
+		  	]
+		},
+	 
+	   {
+			"id": "c",
+			"text": "You can use a portable radio to receive emergency information from the government.",
+			"options": [
+				{ "text": "...", "next": "d" }
+		  	]
+		},
+		{
+			"id": "d",
+			"text": "Oh! Definitely have a first-aid kit with you just in case someone gets hurt! Or you play around too much with sharp objects... Learned that one the hard way...",
+			"options": [
+				{ "text": "...", "next": "e" }
+		  	]
+		},
+		{
+			"id": "e",
+			"text": "Be careful too! After an earthquake there might be a gas leakage, so you definitely don't want to light any matches. I almost burned off my hair after the last earthquake.",
+			"options": [
+				{ "text": "I see. Thanks!", "next": "end" }
+		  	]
+		}
+  	]
+}

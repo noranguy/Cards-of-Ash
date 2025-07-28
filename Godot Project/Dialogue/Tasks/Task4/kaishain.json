@@ -1,0 +1,41 @@
+{
+	"speaker": "Kaishain",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Hey kid, lovely night out today. I am just about to head out for a smoke.",
+			"options": [
+				{ "text": "Before you go, can I ask you some things?", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "Yes of course, fire away.",
+			"options": [
+				{ "text": "Are there any phone numbers helpful in an earthquake?", "next": "b" }
+		  	]
+		},
+		{
+			"id": "b",
+			"text": "You can call 119 in an emergency for an ambulance or the fire department. This is the most important during disasters like these.",
+			"options": [
+				{ "text": "...", "next": "c" }
+		  	]
+		},
+	 
+	   {
+			"id": "c",
+			"text": "Another important number is 110 for the police.",
+			"options": [
+				{ "text": "...", "next": "d" }
+		  	]
+		},
+		{
+			"id": "d",
+			"text": "You can leave a voice message or listen to voice messages from friends with the Disaster Line 171.",
+			"options": [
+				{ "text": "Thank you!", "next": "end" }
+		  	]
+		}
+  	]
+}

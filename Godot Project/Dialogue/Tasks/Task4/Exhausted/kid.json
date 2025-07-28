@@ -1,0 +1,12 @@
+{
+	"speaker": "Kid",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Hi again! Forget already? That's okay! I gave you a lot of items to remember. Items you should have are a flashlight, portable radio, and first aid kid! Don't carry unnecessary or dangerous items like matches.",
+			"options": [
+				{ "text": "Thanks.", "next": "end" }
+			]
+		}
+  	]
+}
