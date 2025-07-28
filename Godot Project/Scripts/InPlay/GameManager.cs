@@ -36,6 +36,7 @@ public partial class GameManager : Node2D {
 	bool blindEnemy = false;
 	
 	private int lastFortune = -1;
+	private Node2D omikuji;
 	
 	// relationship between card types
 	private readonly int[][] FlipRank = new int[][] {
@@ -57,6 +58,7 @@ public partial class GameManager : Node2D {
 		rulebook = GetNode<Panel>("Rulebook");
 		roundLabel = GetNode<Label>("RoundLabel");
 		omamoriButton = GetNode<TextureButton>("OmamoriBox/OmamoriButton");
+		omikuji = GetNode<Node2D>("omikuji");
 		
 		ThrowToggle(false);
 		throwButton.Connect(BetterButton.SignalName.Pressed, new Callable(this, nameof(Round)));
@@ -152,6 +154,16 @@ public partial class GameManager : Node2D {
 	
 	private async Task FortuneSlipOmamori() {
 		lastFortune = Rand.Next(4);
+		// here ani
+		omikuji.Visible = true;
+
+		TextureRect top = omikuji.GetChild<TextureRect>(1);
+		TextureRect bottom = omikuji.GetChild<TextureRect>(2);
+		top.Visible = true;
+		bottom.Visible = true;
+		//float the tween tf up :)
+		//make omikuji node invisible
+
 		await DialogueManager.Instance.StartDialogue($"FortuneSlips/{lastFortune}", true);
 		
 		if (lastFortune == 3) {
@@ -162,7 +174,7 @@ public partial class GameManager : Node2D {
 			card.Flip();
 		}
 	}
-	
+
 	private void BagOfSandOmamori() {
 		blindEnemy = true;
 		omamoriButton.Disabled = true;
