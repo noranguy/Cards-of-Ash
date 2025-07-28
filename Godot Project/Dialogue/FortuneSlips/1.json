@@ -2,11 +2,11 @@
 	"speaker": "self",
 	"dialogue": [
 		{
-            "id": "start",
-            "text": "+10% flip chance on next card throw",
-            "options": [
-                { "text": "Continue", "next": "end" }
-            ]
+			"id": "start",
+			"text": "-5% flip chance on next card throw",
+			"options": [
+				{ "text": "Continue", "next": "end" }
+			]
 		}
 	]
 }

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfmautmt4ebhl"
-path="res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"
+path="res://.godot/imported/portrait.png-43fc0d5adb3341729816baf77daeb638.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character Designs/Foreigner/portrait.png"
-dest_files=["res://.godot/imported/portrait.png-4d3e141bd25f6d1ea952de2180758aab.ctex"]
+source_file="res://Assets/Character Designs/foreigner/portrait.png"
+dest_files=["res://.godot/imported/portrait.png-43fc0d5adb3341729816baf77daeb638.ctex"]
 
 [params]
 

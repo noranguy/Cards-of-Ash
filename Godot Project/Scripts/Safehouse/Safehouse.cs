@@ -17,7 +17,6 @@ public class dayNode
 public class Tasks
 {
 	public List<dayNode> tasks { get; set; }
-
 }
 
 // Safehouse area

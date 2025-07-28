@@ -36,7 +36,6 @@ public partial class GameManager : Node2D {
 	bool blindEnemy = false;
 	
 	private int lastFortune = -1;
-	private Node2D omikuji;
 	
 	// relationship between card types
 	private readonly int[][] FlipRank = new int[][] {
@@ -58,7 +57,6 @@ public partial class GameManager : Node2D {
 		rulebook = GetNode<Panel>("Rulebook");
 		roundLabel = GetNode<Label>("RoundLabel");
 		omamoriButton = GetNode<TextureButton>("OmamoriBox/OmamoriButton");
-		omikuji = GetNode<Node2D>("omikuji");
 		
 		ThrowToggle(false);
 		throwButton.Connect(BetterButton.SignalName.Pressed, new Callable(this, nameof(Round)));
@@ -155,16 +153,15 @@ public partial class GameManager : Node2D {
 	private async Task FortuneSlipOmamori() {
 		lastFortune = Rand.Next(4);
 		// here ani
-		omikuji.Visible = true;
-
-		TextureRect top = omikuji.GetChild<TextureRect>(1);
-		TextureRect bottom = omikuji.GetChild<TextureRect>(2);
-		top.Visible = true;
-		bottom.Visible = true;
-		//float the tween tf up :)
-		//make omikuji node invisible
-
+		var OmikujiScene = GD.Load<PackedScene>("res://Components/omikuji.tscn");
+		Omikuji omikuji = OmikujiScene.Instantiate<Omikuji>();
+		AddChild(omikuji);
+		
+		await omikuji.Start(lastFortune);
+	
 		await DialogueManager.Instance.StartDialogue($"FortuneSlips/{lastFortune}", true);
+		RemoveChild(omikuji);
+		omikuji.QueueFree();
 		
 		if (lastFortune == 3) {
 			var unflippedTableCards = enemyTableCards.Where(x => !x.visible).ToList();
