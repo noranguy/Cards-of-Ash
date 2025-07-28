@@ -1,0 +1,19 @@
+{
+	"speaker": "Kaishain",
+	"dialogue": [
+		{
+			"id": "start",
+			"text": "Thanks for doing all that for me! I'll call my buddies tonight.",
+			"options": [
+				{ "text": "Good to have some company", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "Well I did, promise. Here's an omamori. This should help you with your future games.",
+			"options": [
+				{ "text": "Thank you!", "next": "end" }
+		  	]
+		}
+	]
+}

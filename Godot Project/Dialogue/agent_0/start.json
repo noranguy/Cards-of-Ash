@@ -5,28 +5,28 @@
 			"id": "start",
 			"text": "We will take turns throwing cards from our hand onto the opponent's table cards, trying to flip it.",
 			"options": [
-				{ "text": "Continue", "next": "a" }
+				{ "text": "...", "next": "a" }
 			]
 		},
 		{
 			"id": "a",
-			"text": "The first player to flip all 6 of their table cards wins.",
+			"text": "The first player to flip all 6 of the opponent's table cards wins.",
 			"options": [
-				{ "text": "Continue", "next": "b" }
+				{ "text": "...", "next": "b" }
 			]
 		},
 		{
 			"id": "b",
 			"text": "But remember, table card types are hidden until they are revealed.",
 			"options": [
-				{ "text": "Continue", "next": "c" }
+				{ "text": "...", "next": "c" }
 			]
 		},
 		{
 			"id": "c",
 			"text": "Throw your leftmost throwing card at my leftmost table card and press the Throw button.",
 			"options": [
-				{ "text": "Start Game", "next": "end" }
+				{ "text": "...", "next": "end" }
 			]
 		}
 	]

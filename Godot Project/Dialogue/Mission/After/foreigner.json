@@ -1,4 +1,4 @@
-{
+x`{
 	"speaker": "Foreigner",
 	"dialogue": [
 		{
@@ -24,13 +24,13 @@
 				{ "text": "...", "next": "c" }
 		  	]
 		},
-    	{
+		{
 			"id": "c",
 			"text": "I want to be prepared so I have a flashlight, a portable radio, and matches, but it's taking up too much space. Is there anything that's not really important for an earthquake?",
 			"options": [
 				{ "text": "Flashlight", "next": "wrong_2" },
-                { "text": "Radio", "next": "wrong_2" },
-                { "text": "Matches", "next": "d" }
+				{ "text": "Radio", "next": "wrong_2" },
+				{ "text": "Matches", "next": "d" }
 		  	]
 		},
 		{
@@ -52,7 +52,14 @@
 			"id": "f",
 			"text": "Thank you so much! I feel very prepared for an earthquake now.",
 			"options": [
-				{ "text": "No problem.", "next": "end" }
+				{ "text": "No problem.", "next": "g" }
+		  	]
+		},
+		{
+			"id": "g",
+			"text": "This will give you good luck for the rest of your time here.",
+			"options": [
+				{ "text": "Thank you.", "next": "end" }
 		  	]
 		},
 		{

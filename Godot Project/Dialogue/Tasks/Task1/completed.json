@@ -3,9 +3,9 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "\"I think that's everything, I should go talk to the Naoki.\"",
+			"text": "I think that's everything, I should go talk to the Naoki.",
 			"options": [
-				{ "text": "Go Back", "next": "end" }
+				{ "text": "...", "next": "end" }
 			]
 		}
 	]

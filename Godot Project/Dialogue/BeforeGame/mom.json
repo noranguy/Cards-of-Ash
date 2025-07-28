@@ -25,7 +25,7 @@
 		},
 		{
 			"id": "d",
-			"text": "Likewise, well listen… we’re running low on food and have been needing a shelter, do you happen to have any room here?",
+			"text": "Likewise, well listen… we're running low on food and have been needing a shelter, do you happen to have any room here?",
 			"options": [
 				{ "text": "Yes, but you must play against me.", "next": "e" }
 		  	]

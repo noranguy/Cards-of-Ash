@@ -12,7 +12,14 @@
 			"id": "a",
 			"text": "Thank you for patching me up. I'll try and be more careful from now on.",
 			"options": [
-				{ "text": "...", "next": "end" }
+				{ "text": "...", "next": "b" }
+		  	]
+		},
+		{
+			"id": "b",
+			"text": "Oh! I have something for you!",
+			"options": [
+				{ "text": "Thanks!", "next": "end" }
 		  	]
 		}
   	]

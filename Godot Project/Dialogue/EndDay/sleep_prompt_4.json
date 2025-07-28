@@ -2,11 +2,18 @@
 	"speaker": "self",
 	"dialogue": [
 		{
-		  "id": "start",
-		  "text": "Whew... Im beat. I should head to bed",
-		  "options": [
-			{ "text": "Continue", "next": "end" }
-		  ]
+			"id": "start",
+			"text": "Wow, this safe house is really turning into a home.",
+			"options": [
+				{ "text": "...", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "Maybe the old man was wrong. We can definitely get out of here.",
+			"options": [
+				{ "text": "...", "next": "end" }
+			]
 		}
 	]
 }
