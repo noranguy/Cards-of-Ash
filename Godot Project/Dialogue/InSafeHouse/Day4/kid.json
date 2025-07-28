@@ -10,7 +10,7 @@
 		},
 		{
 			"id": "a",
-			"text": "Thank you for pathing me up. I'll try and be more careful from now on.",
+			"text": "Thank you for patching me up. I'll try and be more careful from now on.",
 			"options": [
 				{ "text": "...", "next": "end" }
 		  	]

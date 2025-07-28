@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://ogn0svttcr8a"]
+[gd_scene load_steps=44 format=4 uid="uid://ogn0svttcr8a"]
 
 [ext_resource type="Texture2D" uid="uid://b4b5c3ksmylyf" path="res://Assets/In Play Safe House/Tasks/phone-Sheet.png" id="1_4hxa7"]
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_ckrol"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ce6w7aqxw46rv" path="res://Assets/Out of Play Safe House/on_light.png" id="11_qqf3i"]
 [ext_resource type="Texture2D" uid="uid://b287m2qpxk47h" path="res://Assets/Out of Play Safe House/barely_on_light.png" id="12_51h0v"]
 [ext_resource type="Texture2D" uid="uid://0uqbjjoyqeyr" path="res://Assets/Out of Play Safe House/kinda_on_light.png" id="13_3uugt"]
-[ext_resource type="AudioStream" uid="uid://b2p3tff7yifn8" path="res://Assets/Music/new and improved pirate type beat.mp3" id="16_1gtqw"]
+[ext_resource type="AudioStream" uid="uid://c7xokuw8qjrgs" path="res://Assets/SFX/radio-chatter.mp3" id="16_1gtqw"]
 [ext_resource type="Script" uid="uid://cj2mo7kuetfxf" path="res://Scripts/Tasks/PhoneGame.cs" id="16_3uugt"]
 [ext_resource type="Texture2D" uid="uid://wwg07af5tqxm" path="res://Assets/Out of Play Safe House/Red_wire.png" id="17_ghe47"]
 [ext_resource type="Texture2D" uid="uid://c582ultt1rbpo" path="res://Assets/Out of Play Safe House/Yellow_wire.png" id="18_44dbn"]
@@ -53,27 +53,8 @@ texture = ExtResource("1_4hxa7")
 2:1/0 = 0
 3:1/0 = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3uugt"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_owsx8"]
-texture = SubResource("CompressedTexture2D_3uugt")
-0:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-
 [sub_resource type="TileSet" id="TileSet_6f6uv"]
 sources/0 = SubResource("TileSetAtlasSource_bl4aw")
-sources/1 = SubResource("TileSetAtlasSource_owsx8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_od4wg"]
 texture = ExtResource("1_ckrol")

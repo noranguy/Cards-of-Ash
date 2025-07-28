@@ -191,7 +191,6 @@ public partial class Safehouse : StaticBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		_mission_completed[3] = true; // DEBUG
 		if (_inhabitants[3] && !_mission_completed[3] && !in_task_three && _task_ready)
 		{
 			in_task_three = true;
@@ -260,7 +259,7 @@ public partial class Safehouse : StaticBody2D
 				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 			}
 
-			else if (_at_boxes && _inhabitants[_day_num] && !_mission_completed[_day_num] && _task_ready)
+			else if (_at_boxes && _inhabitants[_day_num] && !_mission_completed[_day_num] && _task_ready && _day_num != 3)
 			{
 				GlobalState.Instance.SetInMinigame(true);
 				GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Tasks/task_{_day_num}.tscn");
@@ -281,14 +280,14 @@ public partial class Safehouse : StaticBody2D
 								_mission_completed[4] = true;
 								in_task_four = false;
 								tasks.Text = "";
-								InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
+								_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
 							} else {
-								InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
+								_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
 							}
 						} else if (taskFourDialogues[i]) {
-							InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
+							_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
 						} else {
-							InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
+							_ =InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
 							taskFourDialogues[i] = true;
 						}
 						if (taskFourDialogues.All(x => x)) {
@@ -325,7 +324,6 @@ public partial class Safehouse : StaticBody2D
 					break;
 				}
 			}
-			GD.Print("Done with process");
 		}
 	}
 
