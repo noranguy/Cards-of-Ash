@@ -3,23 +3,23 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "You got lucky that time. Whenever a table card flips, it deteriorates and becomes 20% harder to flip.",
+			"text": "You got lucky that time. Whenever a table card flips, it deteriorates and becomes 15% harder to flip.",
 			"options": [
-				{ "text": "Continue", "next": "a" }
+				{ "text": "...", "next": "a" }
 			]
 		},
 		{
 			"id": "a",
 			"text": "This is shown with the durability bar above each table card.",
 			"options": [
-				{ "text": "Continue", "next": "b" }
+				{ "text": "...", "next": "b" }
 			]
 		},
 		{
 			"id": "b",
 			"text": "Try throwing a Volcano card this time.",
 			"options": [
-				{ "text": "Continue Game", "next": "end" }
+				{ "text": "...", "next": "end" }
 			]
 		}
   	]

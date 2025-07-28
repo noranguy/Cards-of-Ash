@@ -3,17 +3,10 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "See if you can fix that phone over there. And don't forget to check for the emergency radio channel",
+			"text": "See if you can fix that phone over there. And don't forget to check for the emergency radio channel.",
 			"options": [
 				{ "text": "...", "next": "a" }
 			]
-		},
-		{
-			"id": "i",
-			"text": "After you're done come see me and I’ll give you something. My treat.",
-			"options": [
-				{ "text": "Deal.", "next": "end" }
-		  	]
 		}
 	]
 }

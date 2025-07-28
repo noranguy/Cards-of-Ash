@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Maybe staying here won't be so bad after all",
+			"text": "Maybe staying here won't be so bad after all.",
 			"options": [
 				{ "text": "...", "next": "end" }
 		  	]

@@ -5,7 +5,7 @@
 			"id": "start",
 			"text": "So how does this work again?",
 			"options": [
-				{ "text": "Continue", "next": "end" }
+				{ "text": "...", "next": "end" }
 			]
 		}
 	]

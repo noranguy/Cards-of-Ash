@@ -5,14 +5,14 @@
 			"id": "start",
 			"text": "Well at least you know it's probably not an Earthquake card.",
 			"options": [
-				{ "text": "Continue", "next": "a" }
+				{ "text": "...", "next": "a" }
 			]
 		},
 		{
 			"id": "a",
 			"text": "You can also unflip table cards that your opponent flipped.",
 			"options": [
-				{ "text": "Continue Game", "next": "end" }
+				{ "text": "...", "next": "end" }
 			]
 		}
   	]

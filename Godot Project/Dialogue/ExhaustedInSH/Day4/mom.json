@@ -1,125 +1,12 @@
 {
-	"speaker": "Old Man",
+	"speaker": "Mom",
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Excuse my intrusion, but I saw the lights on and was curious.",
+			"text": "Aww.. another kid! I wonder if Haru and him will get along.",
 			"options": [
-				{ "text": "I’ve been here since the earthquake", "next": "b" }
+				{ "text": "...", "next": "end" }
 			]
-		},
-		{
-			"id": "b",
-			"text": "I see. I’m sorry to say, but you won't survive by solely secluding yourself away in a “safehouse”.",
-			"options": [
-				{ "text": "I didn't know what to do...", "next": "d" }
-		  	]
-		},
-	 
-	  {
-			"id": "d",
-			"text": "I see... You know you remind me of my daughter.",
-			"options": [
-				{ "text": "Your daughter?", "next": "e" }
-		  	]
-		},
-		{
-			"id": "e",
-			"text": "She didn’t look out for herself. She cared too much for others.",
-			"options": [
-				{ "text": "...", "next": "f" }
-		  	]
-		},
-	  {
-			"id": "f",
-			"text": "She was... gone. In an instant. She panicked and didn't know what to do.",
-			"options": [
-				{ "text": "I'm sorry...", "next": "z" }
-		  	]
-		},
-	  {
-			"id": "z",
-			"text": "*Sigh* I suppose I can give you a few tips on how to handle yourself.",
-			"options": [
-				{ "text": "Really?", "next": "g" }
-		  	]
-		},
-		{
-			"id": "g",
-			"text": "That is if you promise to not share the same fate.",
-			"options": [
-				{ "text": "I promise", "next": "i" }
-		  	]
-		},
-	  {
-			"id": "i",
-			"text": "First off, you can't let the earthquake break you down.",
-			"options": [
-				{ "text": "...", "next": "j" }
-		  	]
-		},
-		 {
-			"id": "j",
-			"text": "Remember to hold on to any decent structure and find cover.",
-			"options": [
-				{ "text": "So under tables and desks?", "next": "k" }
-		  	]
-		},
-	  {
-			"id": "k",
-			"text": "Yes, exactly. *peers down at the cards in your hand* Are those menko cards?",
-			"options": [
-				{ "text": "These? I'm not sure", "next": "l" }
-		  	]
-		},
-	  {
-			"id": "l",
-			"text": "They are! Pay attention, I’m going to teach you the most important skills you'll need.",
-			"options": [
-				{ "text": "Through a card game?", "next": "m" }
-		  	]
-		},
-		{
-			"id": "m",
-			"text": "Look out for only yourself, and you might be able to make it out of this.",
-			"options": [
-				{ "text": "...", "next": "n" }
-		  	]
-		},
-	  {
-			"id": "n",
-			"text": "Menko’s a game where you put everything on the line.",
-			"options": [
-				{ "text": "Menko?", "next": "o" }
-		  	]
-		},
-		{
-			"id": "o",
-			"text": "Risk your own resources, and you'll get the chance to take your opponent’s.",
-			"options": [
-				{ "text": "I see...", "next": "p" }
-		  	]
-		},
-	  {
-			"id": "p",
-			"text": "Of course, losing means disastrous consequences.",
-			"options": [
-				{ "text": "...", "next": "q" }
-		  	]
-		},
-		{
-			"id": "q",
-			"text": "But I’ll teach you my own ways. I have never been defeated - not once.",
-			"options": [
-				{ "text": "Isn’t taking resources from other people kinda…", "next": "r" }
-		  	]
-		},
-	  {
-			"id": "r",
-			"text": "*Sigh* So naive… Go to the table and we can start a game.",
-			"options": [
-				{ "text": "Okay...", "next": "a" }
-		  	]
 		}
-  	]
+	]
 }

@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "\"These bottles have been collecting rain water for a bit. I need to make sure to boil it first before I drink it.\"",
+			"text": "These bottles have been collecting rain water for a bit. I need to make sure to boil it first before I drink it.",
 			"options": [
 				{ "text": "...", "next": "end" }
 			]

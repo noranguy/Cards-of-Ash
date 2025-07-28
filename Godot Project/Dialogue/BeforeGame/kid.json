@@ -10,14 +10,14 @@
 		},
 		{
 			"id": "b",
-			"text": "Oh, yea that was scary… the ground was shaking like crazy, and all the buildings fell, and went like “BOOOM”",
+			"text": "Oh, yea that was scary... the ground was shaking like crazy, and all the buildings fell, and went like “BOOOM”",
 			"options": [
 				{ "text": "No I mean, are you hurt?", "next": "c" }
 		  	]
 		},
 	  {
 			"id": "c",
-			"text": "Mmmh, no. I have just been looking for someone to play catch with me. Everyone is hiding away and leaving all these toys for me!",
+			"text": "No, I have just been looking for someone to play catch with me. Everyone is hiding away and leaving all these toys for me!",
 			"options": [
 				{ "text": "...", "next": "d" }
 		  	]
@@ -31,14 +31,14 @@
 		},
 	  {
 			"id": "e",
-			"text": "Hehe… I’ve been using it to find toys. Nothing's going to stop me from having a fun time!",
+			"text": "Hehe… I've been using it to find toys. Nothing's going to stop me from having a fun time!",
 			"options": [
 				{ "text": "Say kid. Have you played menko?", "next": "f" }
 		  	]
 		},
 	  {
 			"id": "f",
-			"text": "Yes! I play it with my friends all the time! I’m really good.",
+			"text": "Yes! I play it with my friends all the time! I'm really good.",
 			"options": [
 				{ "text": "If you win, you'll get my last candies?", "next": "g" }
 		  	]

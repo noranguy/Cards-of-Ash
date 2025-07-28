@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "\"The first aid kit! I should hurry and take this back to the kid\"",
+			"text": "The first aid kit! I should hurry and take this back to the kid.",
 			"options": [
 				{ "text": "Go Back", "next": "end" }
 			]

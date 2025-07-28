@@ -1,0 +1,26 @@
+{
+	"speaker": "Old Man",
+	"dialogue": [
+		{
+			"id": "win",
+			"text": "I'm impressed.",
+			"options": [
+				{ "text": "Back to Safe House", "next": "end" }
+			]
+		},
+		{
+			"id": "lose",
+			"text": "You have a long way to go.",
+			"options": [
+				{ "text": "Back to Safe House", "next": "end" }
+			]
+		},
+		{
+			"id": "tie",
+			"text": "I'm impressed.",
+			"options": [
+				{ "text": "Back to Safe House", "next": "end" }
+			]
+		}
+  	]
+}

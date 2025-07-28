@@ -235,6 +235,13 @@ public partial class GameManager : Node2D {
 				playerHand.restrictAllow.Add(throwingCard);
 			}
 		} else if (throwingCard.clas == "vision") {
+			if (throwingCard.isPlayer == true && !fromTable) {
+				if (playerHand.restrictAllow.Contains(throwingCard)) {
+					playerHand.restrictAllow.Clear();
+				} else {
+					playerHand.restrictAllow.Add(throwingCard);
+				}
+			}
 			tableCards[0].Flip();
 			await ToSignal(GetTree().CreateTimer(1), "timeout");
 			tableCards[0].Flip();
@@ -284,9 +291,9 @@ public partial class GameManager : Node2D {
 
 			tableCards[i].lastRound = round;
 			
-			if (rnd < threshold) {
+			if (rnd <= threshold) {
 				tableCards[i].Flip();
-				tableCards[i].ReduceDurability(0.1);
+				tableCards[i].ReduceDurability(0.15);
 				
 				if (tableCards[i].clas == "ceramic") {
 					if (tableCards[i].index > 0) {
@@ -330,7 +337,7 @@ public partial class GameManager : Node2D {
 		await ThrowCard(playerHand.activeCard, new List<Card> { table.activeCard }, false);
 		ThrowToggle(false);
 		
-		// second throw with elastic card
+		// second throw with elastic or vision card
 		if (playerHand.restrictAllow.Contains(playerHand.activeCard)) {
 			GlobalState.Instance.allowCardSelect = true;
 			return;
@@ -371,7 +378,6 @@ public partial class GameManager : Node2D {
 		if (round >= playerHand.startingAmount || playerCount == 6 || enemyCount == 6) {
 			if (playerCount > enemyCount) {
 				roundLabel.Text = "You Win";
-				GlobalState.Instance.NewInhabitant();
 				await DialogueManager.Instance.StartDialogue($"agent_{GlobalState.Instance.GetDay()}/end", true, "win");
 			}
 			else if (playerCount < enemyCount) {
