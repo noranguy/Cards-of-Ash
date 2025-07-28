@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=4 uid="uid://bvd7sgi6dix5n"]
+[gd_scene load_steps=91 format=4 uid="uid://xgx7hwjq0llw"]
 
 [ext_resource type="Script" uid="uid://bi3hkvgd6w82h" path="res://Scripts/Safehouse/Safehouse.cs" id="1_6l742"]
 [ext_resource type="PackedScene" uid="uid://r1ojrlcpekmu" path="res://Scenes/Characters/player_character.tscn" id="1_qcbrc"]

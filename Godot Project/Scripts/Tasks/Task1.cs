@@ -15,7 +15,7 @@ public partial class Task1 : Node2D
 
 	float channel;
 
-	float goal_channel = 81.3f;
+	float goal_channel = 810f;
 
 	RadioGame radio_game;
 	PhoneGame phone_game;
