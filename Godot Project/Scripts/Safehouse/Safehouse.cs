@@ -5,7 +5,9 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Linq;
-	//classes to parse json
+using System.Net;
+//classes to parse json
+
 
 public class dayNode
 {
@@ -79,8 +81,8 @@ public partial class Safehouse : StaticBody2D
 
 	private bool in_task_three;
 	private bool in_task_four;
-	
-	private bool[] taskFourDialogues = {false, false, false, true};
+
+	private bool[] taskFourDialogues = { false, false, false, true };
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -198,10 +200,11 @@ public partial class Safehouse : StaticBody2D
 			task_three.Visible = true;
 			task_three.playGame();
 		}
-		
+
 		if (_inhabitants[4] && !_mission_completed[4] && !in_task_four && _task_ready)
 		{
-			tasks.Text = "- Talk with Kaishain\n- Talk with Kid\n- Talk with Mom";
+			// tasks.Text = "- Talk to Kaishain\n- Talk to Kid\n- Talk to Mom";
+			updateObjective(4);
 			in_task_four = true;
 		}
 
@@ -271,42 +274,53 @@ public partial class Safehouse : StaticBody2D
 			{
 				if (_talking_to[i])
 				{
-					tasks.Text = "";
+					// tasks.Text = "";
 					string partial_dialogue_path = $"Day{_day_num + 1}/{characters[i]}";
-					if (in_task_four) {
+					if (in_task_four)
+					{
 						GD.Print($"{taskFourDialogues[0]} {taskFourDialogues[1]} {taskFourDialogues[2]} {taskFourDialogues[3]}");
-						if (taskFourDialogues.All(x => x)) {
-							tasks.Text = "- Talk with Foreigner";
-							if (i == 3) {
+						if (taskFourDialogues.All(x => x))
+						{
+							//tasks.Text = "- Talk with Foreigner";
+							updateObjective(4);
+							if (i == 3)
+							{
 								_mission_completed[4] = true;
 								in_task_four = false;
-								tasks.Text = "";
+								updateObjective(4);
 								InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
-							} else {
+							}
+							else
+							{
 								InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
 							}
-						} else if (taskFourDialogues[i]) {
+						}
+						else if (taskFourDialogues[i])
+						{
 							InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
-						} else {
+						}
+						else
+						{
 							InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
 							taskFourDialogues[i] = true;
 						}
-						if (taskFourDialogues.All(x => x)) {
-							tasks.Text = "- Talk with Foreigner";
+						if (taskFourDialogues.All(x => x))
+						{
+							// tasks.Text = "- Talk with Foreigner";
 						}
 					}
 					else if (!_mission_completed[i + 1])
 					{
 						if (_dialogue_exhausted[i])
 						{
-							_ = InSafeHouse_Dialogue_setupAsync($"ExhaustedMission/{_dialogue_order[i + 1]}");
+							_ = InSafeHouse_Dialogue_setupAsync($"ExhaustedMission/{_dialogue_order[i + 1]}"); // finished with task
 						}
 
 						else
 						{
 							_ = InSafeHouse_Dialogue_setupAsync($"Mission/{_dialogue_order[i + 1]}");
 							_task_ready = true;
-							tasks.Text += nightTaskTree[$"{i + 1}a"];
+							updateObjective(i + 1);
 							_dialogue_exhausted[i] = true;
 						}
 					}
@@ -324,6 +338,10 @@ public partial class Safehouse : StaticBody2D
 
 					break;
 				}
+				if (_mission_completed[i])
+				{
+					updateObjective(i);
+				}
 			}
 			GD.Print("Done with process");
 		}
@@ -331,7 +349,7 @@ public partial class Safehouse : StaticBody2D
 
 	private void InhabitSafehouse()
 	{
-		tasks.Text = "";
+		//tasks.Text = "";
 		if (_inhabitants[1])
 		{
 			GetNode<Area2D>("KaishainArea").Visible = true;
@@ -519,8 +537,8 @@ public partial class Safehouse : StaticBody2D
 		_player.Position = new Vector2(105, 77);
 
 		await DialogueManager.Instance.StartDialogue(dialogue, false);
-		tasks.Text = "";
-		tasks.Text += $"{dayTaskTree["0b"]}";
+		// tasks.Text = "";
+		// tasks.Text += $"{dayTaskTree["0b"]}";
 
 
 		if (_day_num == 0)
@@ -533,6 +551,7 @@ public partial class Safehouse : StaticBody2D
 		_npc_waiting = false;
 		_day_over = false;
 		_game_ready = true;
+		updateObjective(0);
 
 		//GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene($"Dialogue/{_dialogue_order[(int)_day_num]}.tscn"); for when theres a whole scene for dialogue
 	}
@@ -553,12 +572,12 @@ public partial class Safehouse : StaticBody2D
 			window_day.Visible = true;
 			window_night.Visible = false;
 			night_safehouse_lighting.Visible = false;
-			tasks.Text = "Survive\n";
+			tasks.Text = "Survive";
 			switch (_day_num)
 			{
 				case 0:
 					await DialogueManager.Instance.StartDialogue("StartDay/pick_up_card_prompt", false);
-					tasks.Text += $"{dayTaskTree["0a"]}";
+					updateObjective(0);
 					break;
 				case 1:
 					await DialogueManager.Instance.StartDialogue("StartDay/check_door_prompt", false);
@@ -592,28 +611,100 @@ public partial class Safehouse : StaticBody2D
 			{
 				case 0:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_0", false);
-					tasks.Text = "- Go to sleep";
+					updateObjective(0);
 					break;
 				case 1:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_1", false);
-					tasks.Text += "Talk to Kaishain";
+					updateObjective(0);
 					break;
 				case 2:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_2", false);
-					tasks.Text += "- Talk to the Mom\n";
+					updateObjective(0);
 					break;
 				case 3:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_3", false);
-					tasks.Text += "- Talk to the Kid\n";
+					updateObjective(0);
 					break;
 				case 4:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_4", false);
-					tasks.Text += "- Talk to the Foreigner\n";
+					updateObjective(0);
 					break;
 				case 5:
 					await DialogueManager.Instance.StartDialogue("EndDay/sleep_prompt_4", false);
+					updateObjective(0);
 					break;
 			}
 		}
+	}
+	private void updateObjective(int taskNumber)
+	{
+		if (_mission_completed[taskNumber])
+		{
+			tasks.Text = "Go to sleep";
+		}
+		if (taskNumber == 0)// not updating for task, day or night
+		{
+			if (!_day_over)
+			{
+				if (_game_ready)
+				{
+					tasks.Text = $"{dayTaskTree["0b"]}";
+					return; // clears survive objective and prompts player to go to F table
+				}
+				if (_day_num == 0)
+				{
+					tasks.Text = $"{dayTaskTree["0a"]}";
+				}
+				else if (_day_num != 0)
+				{
+					tasks.Text = $"{dayTaskTree["1a"]}";
+				}
+
+			}
+			else
+			{
+				switch (_day_num)
+				{
+					case 0:
+						tasks.Text = "Go to sleep";
+						break;
+					case 1:
+						tasks.Text = "Talk to Kaishain";
+						break;
+					case 2:
+						tasks.Text = "Talk to the Mom";
+						break;
+					case 3:
+						tasks.Text = "Talk to the Kid";
+						break;
+					case 4:
+						tasks.Text = "Talk to the Foreigner";
+						break;
+					case 5:
+						break;
+				}
+			}
+		}
+		else if (taskNumber == 4)
+		{ // 4 is completed 
+			if (_mission_completed[taskNumber])
+			{
+				tasks.Text = "Go to sleep";
+			}
+			if (!in_task_four)
+			{
+				tasks.Text = "Talk to Kaishain\nTalk to Kid\nTalk to Mom";
+			}
+			else
+			{
+				tasks.Text = "Go back to Foreigner";
+			}
+		}
+		else
+		{
+			GD.Print(taskNumber);
+			tasks.Text = nightTaskTree[$"{taskNumber}a"];
+		}
+		
 	}
 }
