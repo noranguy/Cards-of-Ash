@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=4 uid="uid://b1lpnxmiatxwa"]
+[gd_scene load_steps=115 format=4 uid="uid://b1lpnxmiatxwa"]
 
 [ext_resource type="Texture2D" uid="uid://btxcbnuu4fb6e" path="res://Assets/Out of Play Safe House/Top Down Pixel Horror TileSets kamisama887/Inside_C.png" id="1_f7naq"]
 [ext_resource type="Texture2D" uid="uid://ckb72wa81iywi" path="res://Assets/In Play Safe House/in_play_back_wall_roof.png" id="1_uaklh"]
@@ -24,6 +24,10 @@
 [ext_resource type="FontFile" uid="uid://cexv87tvtu5ju" path="res://Fonts/m5x7.ttf" id="22_mdhqq"]
 [ext_resource type="Texture2D" uid="uid://dvqhy0eqsbt6f" path="res://Assets/Omamori/aftershock.png" id="22_t6xv6"]
 [ext_resource type="Texture2D" uid="uid://bow7c4pr1q805" path="res://Assets/Omamori/omamori_slot.png" id="23_mdhqq"]
+[ext_resource type="Texture2D" uid="uid://d3621n77xsy2t" path="res://Assets/Omamori/omikuji-sheet.png" id="25_odxyl"]
+[ext_resource type="Texture2D" uid="uid://b1cua17qktnmm" path="res://Assets/Omamori/omikuji-top-half.png" id="26_1lq4u"]
+[ext_resource type="Texture2D" uid="uid://7x2rrsi8i1o2" path="res://Assets/Omamori/omikuji-bottom-half.png" id="27_1coug"]
+[ext_resource type="Texture2D" uid="uid://dyiup7o8skme8" path="res://Assets/Omamori/fortune_slips/0.png" id="28_qkoxr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rt2xm"]
 texture = ExtResource("1_f7naq")
@@ -6617,6 +6621,73 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwfh6"]
+atlas = ExtResource("25_odxyl")
+region = Rect2(0, 0, 60, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mfm4"]
+atlas = ExtResource("25_odxyl")
+region = Rect2(60, 0, 60, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6bu7"]
+atlas = ExtResource("25_odxyl")
+region = Rect2(120, 0, 60, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gp6x5"]
+atlas = ExtResource("25_odxyl")
+region = Rect2(180, 0, 60, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iufo2"]
+atlas = ExtResource("25_odxyl")
+region = Rect2(240, 0, 60, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6dp6"]
+atlas = ExtResource("25_odxyl")
+region = Rect2(300, 0, 60, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fgqx"]
+atlas = ExtResource("25_odxyl")
+region = Rect2(360, 0, 60, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ej4t8"]
+atlas = ExtResource("25_odxyl")
+region = Rect2(420, 0, 60, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mve4u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwfh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mfm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6bu7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gp6x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iufo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6dp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fgqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ej4t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwfh6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
 [node name="InPlaySafehouse" type="Node2D"]
 scale = Vector2(1, 0.996007)
 script = ExtResource("9_dyk6q")
@@ -6765,3 +6836,36 @@ offset_left = -4.84848
 offset_right = 25.1515
 offset_bottom = 30.0
 color = Color(0.517647, 0.517647, 0.517647, 0.341176)
+
+[node name="omikuji" type="Node2D" parent="."]
+visible = false
+z_index = 101
+position = Vector2(0, 45.1804)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="omikuji"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_mve4u")
+
+[node name="top" type="TextureRect" parent="omikuji"]
+visible = false
+offset_left = -60.0
+offset_top = -90.0
+scale = Vector2(2, 2)
+texture = ExtResource("26_1lq4u")
+
+[node name="bottom" type="TextureRect" parent="omikuji"]
+visible = false
+z_index = 2
+offset_left = -60.0
+offset_top = -90.0
+scale = Vector2(2, 2)
+texture = ExtResource("27_1coug")
+
+[node name="fortune" type="TextureRect" parent="omikuji"]
+z_index = 1
+offset_left = -21.0
+offset_top = -34.1363
+offset_bottom = -1.13631
+scale = Vector2(2, 2)
+texture = ExtResource("28_qkoxr")
+expand_mode = 1
