@@ -3,14 +3,7 @@
 	"dialogue": [
 	  {
 			"id": "start",
-			"text": "Maybe keeping a knife in my pocket wasn’t a good idea...",
-			"options": [
-				{ "text": "...", "next": "a" }
-		  	]
-		},
-	  {
-			"id": "a",
-			"text": "I could really use a first aid kit",
+			"text": "Maybe keeping a knife in my pocket wasn't a good idea... I could really use a first aid kit.",
 			"options": [
 				{ "text": "...", "next": "end" }
 		  	]

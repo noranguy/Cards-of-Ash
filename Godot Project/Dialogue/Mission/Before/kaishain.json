@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "That was a good match, kid. I have to thank you for letting me crash here. It’s much better than the subway floor after missing the last train.",
+			"text": "That was a good match, kid. I have to thank you for letting me crash here. It's much better than the subway floor after missing the last train.",
 			"options": [
 				{ "text": "The more the merrier.", "next": "a" }
 			]
@@ -67,14 +67,14 @@
 		},
 		{
 			"id": "h",
-			"text": "We’ll have a better chance of making it out in one piece.",
+			"text": "We'll have a better chance of making it out in one piece.",
 			"options": [
 				{ "text": "...", "next": "i" }
 		  	]
 		},
 		{
 			"id": "i",
-			"text": "After you're done come see me and I’ll give you something. My treat.",
+			"text": "After you're done, come see me and I'll give you something. My treat.",
 			"options": [
 				{ "text": "Deal.", "next": "end" }
 		  	]

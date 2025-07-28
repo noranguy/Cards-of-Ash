@@ -45,7 +45,7 @@ public partial class Safehouse : StaticBody2D
 	private bool[] _talking_to = { false, false, false, false };
 
 	// Flags for what dialogue should be shown to the player
-	private bool[] _mission_completed;
+	private bool[] _mission_completed = { false, false, false, false, false };
 	private bool[] _dialogue_exhausted = { false, false, false, false };
 
 	private string[] characters = ["kaishain", "mom", "kid", "foreigner"];
@@ -81,9 +81,9 @@ public partial class Safehouse : StaticBody2D
 
 	private bool in_task_three;
 	private bool in_task_four;
-
-	private bool[] taskFourDialogues = { false, false, false, true };
-
+	
+	private bool[] taskFourDialogues = {false, false, false, true};
+	private bool[] afterMissionDialogue = {false, false, false, false};
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -144,8 +144,14 @@ public partial class Safehouse : StaticBody2D
 			_dialogue_exhausted[i] = false;
 			_talking_to[i] = false;
 		}
-
-		_mission_completed = GlobalState.Instance.GetCompletedMission();
+		
+		var newMissionCompleted = GlobalState.Instance.GetCompletedMission();
+		for (int i = 0; i < 5; i++) {
+			if (!_mission_completed[i] && newMissionCompleted[i]) {
+				_mission_completed[i] = true;
+				afterMissionDialogue[i] = true;
+			}
+		}
 
 		// Get all the prompt nodes
 		_end_day_prompt = GetNode<Control>("CanvasLayer/EndDayPrompt");
@@ -226,6 +232,7 @@ public partial class Safehouse : StaticBody2D
 					task_three.Visible = false;
 					in_task_three = false;
 					_mission_completed[3] = true;
+					afterMissionDialogue[2] = true;
 					GlobalState.Instance.MissionCompleted(3);
 					_dialogue_exhausted[2] = false;
 				}
@@ -287,6 +294,7 @@ public partial class Safehouse : StaticBody2D
 							if (i == 3)
 							{
 								_mission_completed[4] = true;
+								afterMissionDialogue[3] = true;
 								in_task_four = false;
 
 								_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
@@ -320,7 +328,7 @@ public partial class Safehouse : StaticBody2D
 
 						else
 						{
-							_ = InSafeHouse_Dialogue_setupAsync($"Mission/{_dialogue_order[i + 1]}");
+							_ = InSafeHouse_Dialogue_setupAsync($"Mission/Before/{_dialogue_order[i + 1]}");
 							_task_ready = true;
 							GD.Print("running the prompt objective");
 							updateObjective(i);
@@ -328,6 +336,10 @@ public partial class Safehouse : StaticBody2D
 						}
 					}
 
+					else if (afterMissionDialogue[i]) {
+						InSafeHouse_Dialogue_setupAsync($"Mission/After/{_dialogue_order[i + 1]}");
+						afterMissionDialogue[i] = false;
+					}
 					else if (_dialogue_exhausted[i])
 					{
 						_ = InSafeHouse_Dialogue_setupAsync($"ExhaustedInSH/{partial_dialogue_path}");
@@ -335,7 +347,7 @@ public partial class Safehouse : StaticBody2D
 
 					else
 					{
-						_ = InSafeHouse_Dialogue_setupAsync($"InSafeHouse/{partial_dialogue_path}");
+						_ = InSafeHouse_Dialogue_setupAsync($"ExhaustedInSH/{partial_dialogue_path}");
 						_dialogue_exhausted[i] = true;
 						GD.Print(i);
 						updateObjective(i);

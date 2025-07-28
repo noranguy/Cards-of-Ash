@@ -5,14 +5,14 @@
 			"id": "start",
 			"text": "My first real match...",
 			"options": [
-				{"text":"...", "next":"b" }
+				{"text": "...", "next": "b" }
 			]
 		},
-				{
+		{
 			"id": "b",
 			"text": "I should check up on my new resident.",
 			"options": [
-				{"text":"...", "next":"end" }
+				{"text": "...", "next": "end" }
 			]
 		}
 	]

@@ -10,22 +10,22 @@
 		},
 		{
 			"id": "b",
-			"text": "I… I really don’t know what I am doing. I have been wandering for days, barely being able to make sense of any of this.",
+			"text": "I… I really don't know what I am doing. I have been wandering for days, barely being able to make sense of any of this.",
 			"options": [
 				{ "text": "...", "next": "c" } 
 		  	]
 		},
 		{
 			"id": "c",
-			"text": "One second, I am on vacation with no care in the world, and next…",
+			"text": "One second, I am on vacation with no care in the world, and next...",
 			"options": [
-				{ "text": "I’m guessing this is your first earthquake?", "next": "d" }
+				{ "text": "I'm guessing this is your first earthquake?", "next": "d" }
 		  	]
 		},
 		
 	  {
 			"id": "d",
-			"text": "I guess I can’t make it any more obvious. I can’t stand being here anymore, I cannot understand anything. No one is helping me. I don’t know… anything.",
+			"text": "I guess I can't make it any more obvious. I can't stand being here anymore, I cannot understand anything. No one is helping me. I don't know... anything.",
 			"options": [
 				{ "text": "Here, I can teach you something.", "next": "e" }
 		  	]
@@ -34,7 +34,7 @@
 			"id": "e",
 			"text": "What's this?",
 			"options": [
-				{ "text": "Menko cards. Let's play. With a twist.", "next": "f" }
+				{ "text": "Menko cards. Let's play... with a twist.", "next": "f" }
 		  	]
 		},
 		{
@@ -46,7 +46,7 @@
 		},
 		{
 			"id": "g",
-			"text": "Hehe, I’m already starting to like you.",
+			"text": "Hehe, I'm already starting to like you.",
 			"options": [
 				{ "text": "Someone's cheered up.", "next": "end" }
 		  	]

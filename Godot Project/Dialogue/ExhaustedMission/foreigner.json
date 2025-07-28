@@ -3,9 +3,9 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Thank you for helping me! I feel much more hopeful in case I find myself in a major earthquake again. ",
+			"text": "Thank you for helping me! Come back to me when you've talked to everyone.",
 			"options": [
-				{ "text": "No problem!", "next": "end" }
+				{ "text": "...", "next": "end" }
 			]
 		}
 	]

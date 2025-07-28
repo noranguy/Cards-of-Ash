@@ -1,9 +1,9 @@
 {
-	"speaker": "self",
+	"speaker": "Old Man",
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Garbage. Gross. I should probably clean this place up.",
+			"text": "Let's see how much you've improved.",
 			"options": [
 				{ "text": "...", "next": "end" }
 			]

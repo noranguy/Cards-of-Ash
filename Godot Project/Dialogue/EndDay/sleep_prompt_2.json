@@ -2,11 +2,25 @@
 	"speaker": "self",
 	"dialogue": [
 		{
-		  "id": "start",
-		  "text": "Whew... Im beat. I should head to bed",
-		  "options": [
-			{ "text": "Continue", "next": "end" }
-		  ]
+			"id": "start",
+			"text": "I hope the kid is okay... he was alone...",
+			"options": [
+				{ "text": "...", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "I really should be looking out for myself...",
+			"options": [
+				{ "text": "...", "next": "b" }
+			]
+		},
+		{
+			"id": "b",
+			"text": "No, I can't leave him alone, that's not fair to him. Let me go check on him.",
+			"options": [
+				{ "text": "...", "next": "end" }
+			]
 		}
 	]
 }

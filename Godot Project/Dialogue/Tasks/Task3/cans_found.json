@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "\"Some cans of food. Defintely useful for surviving, but not what im looking for right now.\"",
+			"text": "Some cans of food. Defintely useful for surviving, but not what im looking for right now.",
 			"options": [
 				{ "text": "...", "next": "end" }
 			]

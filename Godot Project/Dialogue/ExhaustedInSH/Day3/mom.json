@@ -3,7 +3,7 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "Maybe We'll be able to find some peace here.",
+			"text": "Maybe we'll be able to find some peace here.",
 			"options": [
 				{ "text": "...", "next": "end" }
 		  	]

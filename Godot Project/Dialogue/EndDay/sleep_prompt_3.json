@@ -2,11 +2,25 @@
 	"speaker": "self",
 	"dialogue": [
 		{
-		  "id": "start",
-		  "text": "Whew... Im beat. I should head to bed",
-		  "options": [
-			{ "text": "Continue", "next": "end" }
-		  ]
+			"id": "start",
+			"text": "I'm starting to get the hang of this game...",
+			"options": [
+				{ "text": "...", "next": "a" }
+			]
+		},
+		{
+			"id": "a",
+			"text": "I know I'm supposed to be selfish and take from others, but maybe we can all get out of here together.",
+			"options": [
+				{ "text": "...", "next": "b" }
+			]
+		},
+		{
+			"id": "b",
+			"text": "I should go see what the mom is up to.",
+			"options": [
+				{ "text": "...", "next": "end" }
+			]
 		}
 	]
 }
