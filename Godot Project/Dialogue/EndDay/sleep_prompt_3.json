@@ -3,21 +3,21 @@
 	"dialogue": [
 		{
 			"id": "start",
-			"text": "I'm starting to get the hang of this game...",
+			"text": "I hope the kid is okay... he was alone...",
 			"options": [
 				{ "text": "...", "next": "a" }
 			]
 		},
 		{
 			"id": "a",
-			"text": "I know I'm supposed to be selfish and take from others, but maybe we can all get out of here together.",
+			"text": "I really should be looking out for myself...",
 			"options": [
 				{ "text": "...", "next": "b" }
 			]
 		},
 		{
 			"id": "b",
-			"text": "I should go see what the mom is up to.",
+			"text": "No, I can't leave him alone, that's not fair to him. Let me go check on him.",
 			"options": [
 				{ "text": "...", "next": "end" }
 			]

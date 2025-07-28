@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5pj6doykd2d7"]
+
+[ext_resource type="Texture2D" uid="uid://dyiup7o8skme8" path="res://Assets/Omamori/fortune_slips/0.png" id="1_gxesu"]
+[ext_resource type="Script" uid="uid://cfh56ta2qq12m" path="res://Components/Omikuji.cs" id="1_oyucw"]
+[ext_resource type="Texture2D" uid="uid://b1cua17qktnmm" path="res://Assets/Omamori/omikuji-top-half.png" id="2_oyucw"]
+[ext_resource type="Texture2D" uid="uid://7x2rrsi8i1o2" path="res://Assets/Omamori/omikuji-bottom-half.png" id="3_gx8dd"]
+
+[node name="Omikuji" type="Control"]
+z_index = 101
+layout_mode = 3
+anchors_preset = 0
+offset_top = 45.1804
+offset_bottom = 45.1804
+script = ExtResource("1_oyucw")
+
+[node name="fortune" type="TextureRect" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = -21.0
+offset_top = -34.1363
+offset_bottom = -1.13631
+scale = Vector2(2, 2)
+texture = ExtResource("1_gxesu")
+expand_mode = 1
+
+[node name="Box" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="top" type="TextureRect" parent="Box"]
+layout_mode = 0
+offset_left = -60.0
+offset_top = -90.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_oyucw")
+
+[node name="bottom" type="TextureRect" parent="Box"]
+z_index = 2
+layout_mode = 0
+offset_left = -60.0
+offset_top = -90.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_gx8dd")

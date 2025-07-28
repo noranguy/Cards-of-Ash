@@ -34,7 +34,6 @@ public partial class DialogueManager : Control {
 	private TextureRect portrait;
 	private TextureRect namePlate;
 	private Texture2D optionsTexture;
-	private TextureRect skipTexture;
 	
 	private TaskCompletionSource<string> nextNodeSource;
 	private string currentSpeaker;
@@ -42,6 +41,9 @@ public partial class DialogueManager : Control {
 	private bool _inPlay = false;
 	
 	private FontFile font;
+	
+	StyleBoxFlat normalStyle;
+	StyleBoxFlat hoverStyle;
 	
 	public override void _Ready() {
 		Instance = this;
@@ -61,6 +63,24 @@ public partial class DialogueManager : Control {
 
 		font = new FontFile();
 		font.LoadDynamicFont("res://Fonts/m5x7.ttf");
+		
+		normalStyle = new StyleBoxFlat();
+		normalStyle.BgColor = new Color(0.031f, 0.172f, 0.392f);
+		normalStyle.DrawCenter = true;
+		normalStyle.ContentMarginBottom = 1;
+		normalStyle.CornerRadiusTopLeft = 3;
+		normalStyle.CornerRadiusTopRight = 3;
+		normalStyle.CornerRadiusBottomLeft = 3;
+		normalStyle.CornerRadiusBottomRight = 3;
+		
+		hoverStyle = new StyleBoxFlat();
+		hoverStyle.BgColor = new Color(0.031f*1.35f, 0.172f*1.35f, 0.392f*1.35f);
+		hoverStyle.DrawCenter = true;
+		hoverStyle.ContentMarginBottom = 3;
+		hoverStyle.CornerRadiusTopLeft = 3;
+		hoverStyle.CornerRadiusTopRight = 3;
+		hoverStyle.CornerRadiusBottomLeft = 3;
+		hoverStyle.CornerRadiusBottomRight = 3;
 	}
 	
 	public async Task StartDialogue(string name, bool inPlay) {
@@ -68,6 +88,8 @@ public partial class DialogueManager : Control {
 	}
 	
 	public async Task StartDialogue(string name, bool inPlay, string startNode) {
+		if (GlobalState.Instance.dialogueRunning) return;
+		GlobalState.Instance.dialogueRunning = true;
 		_inPlay = inPlay;
 		dialogueTree = new();
 		
@@ -141,6 +163,7 @@ public partial class DialogueManager : Control {
 		
 		await RunDialogue(startNode);
 		panel.Visible = false;
+		GlobalState.Instance.dialogueRunning = false;
 	}
 	
 	private async Task RunDialogue(string startId) {
@@ -158,34 +181,27 @@ public partial class DialogueManager : Control {
 				if (_inPlay) {
 					skipButton = new Button {
 						Text = "Skip",
-						Size = new Vector2(40, 30)
-					};
-					skipTexture = new TextureRect {
-						Texture = GD.Load<Texture2D>("res://Assets/Dialogue/options.png"),
 						Size = new Vector2(40, 30),
-						Position = new Vector2(445, 75),
-						Visible = true,
+						Position = new Vector2(440, 74)
 					};
-					skipButton.AddThemeFontOverride("font", font);
 				} else {
 					skipButton = new Button {
 						Text = "Skip",
 						Visible = true,
 						Size = new Vector2(40, 30),
+						Scale = new Vector2(0.5f, 0.5f),
+						Position = new Vector2(225, 42)
 					};
-					skipTexture = new TextureRect {
-						Texture = GD.Load<Texture2D>("res://Assets/Dialogue/options.png"),
-						Size = new Vector2(40, 30),
-						Visible = true,
-						Position = new Vector2(228, 43),
-						Scale = new Vector2(0.5f, 0.5f)
-					};
-					skipButton.AddThemeFontOverride("font", font);
 				}
+				
+				skipButton.AddThemeFontOverride("font", font);
+				skipButton.AddThemeStyleboxOverride("normal", normalStyle);
+				skipButton.AddThemeStyleboxOverride("hover", hoverStyle);
+				skipButton.AddThemeStyleboxOverride("pressed", hoverStyle);
+				
 				string targetId = node.options[0].next;
 				skipButton.Pressed += () => nextNodeSource.TrySetResult("end");
-				skipTexture.AddChild(skipButton);
-				panel.AddChild(skipTexture);
+				panel.AddChild(skipButton);
 			}
 			
 			// load current message one word at a time
@@ -205,16 +221,6 @@ public partial class DialogueManager : Control {
 				var option = node.options[i];
 				Button button;
 				
-				//var label = new Label();
-				//label.Text = option.text;
-				//label.HorizontalAlignment = HorizontalAlignment.Center;
-				//label.VerticalAlignment = VerticalAlignment.Center;
-				//label.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-				//label.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
-				//label.Scale = new Vector2(0.5f, 0.5f);
-				//label.AddThemeFontOverride("font", font);
-				//label.AddThemeFontSizeOverride("font_size", 32);
-				
 				button = new Button {
 					Text = option.text,
 					Name = i.ToString()
@@ -227,18 +233,7 @@ public partial class DialogueManager : Control {
 				}
 				button.Scale = new Vector2(0.25f, 0.25f);
 				
-				var normalStyle = new StyleBoxFlat();
-				normalStyle.BgColor = new Color(0.031f, 0.172f, 0.392f);
-				normalStyle.DrawCenter = true;
-				normalStyle.ContentMarginBottom = 1;
-				
 				button.AddThemeStyleboxOverride("normal", normalStyle);
-				
-				var hoverStyle = new StyleBoxFlat();
-				hoverStyle.BgColor = new Color(0.031f*1.35f, 0.172f*1.35f, 0.392f*1.35f);
-				hoverStyle.DrawCenter = true;
-				hoverStyle.ContentMarginBottom = 1;
-				
 				button.AddThemeStyleboxOverride("hover", hoverStyle);
 				button.AddThemeStyleboxOverride("pressed", hoverStyle);
 				
@@ -256,10 +251,6 @@ public partial class DialogueManager : Control {
 			if (skipButton != null) {
 				skipButton.QueueFree();
 				skipButton = null;
-			}
-			if (skipTexture != null) {
-				skipTexture.QueueFree();
-				skipTexture = null;
 			}
 			if (currentId == "end") {
 				break;

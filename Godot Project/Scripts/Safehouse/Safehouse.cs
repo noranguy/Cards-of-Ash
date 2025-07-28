@@ -17,7 +17,6 @@ public class dayNode
 public class Tasks
 {
 	public List<dayNode> tasks { get; set; }
-
 }
 
 // Safehouse area
@@ -287,25 +286,7 @@ public partial class Safehouse : StaticBody2D
 					if (in_task_four)
 					{
 						GD.Print($"{taskFourDialogues[0]} {taskFourDialogues[1]} {taskFourDialogues[2]} {taskFourDialogues[3]}");
-						if (taskFourDialogues.All(x => x))
-						{
-							//tasks.Text = "- Talk with Foreigner";
-							// updateObjective(i);
-							if (i == 3)
-							{
-								_mission_completed[4] = true;
-								afterMissionDialogue[3] = true;
-								in_task_four = false;
-
-								_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/{_dialogue_order[i + 1]}");
-								updateObjective(i);
-							}
-							else
-							{
-								_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
-							}
-						}
-						else if (taskFourDialogues[i])
+						if (taskFourDialogues[i])
 						{
 							_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
 						}
@@ -316,6 +297,9 @@ public partial class Safehouse : StaticBody2D
 						}
 						if (taskFourDialogues.All(x => x))
 						{
+							_mission_completed[4] = true;
+							afterMissionDialogue[3] = true;
+							in_task_four = false;
 							updateObjective(i); 
 						}
 					}
