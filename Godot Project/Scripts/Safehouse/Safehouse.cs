@@ -248,7 +248,7 @@ public partial class Safehouse : StaticBody2D
 				GetNode<PlayerCharacter>("PlayerCharacter")._set_movable(false);
 			}
 
-			else if (_at_boxes && _inhabitants[_day_num] && !_mission_completed[_day_num] && _task_ready)
+			else if (_at_boxes && _inhabitants[_day_num] && !_mission_completed[_day_num] && _task_ready && _day_num != 3)
 			{
 				GD.Print("In else if");
 				GlobalState.Instance.SetInMinigame(true);
