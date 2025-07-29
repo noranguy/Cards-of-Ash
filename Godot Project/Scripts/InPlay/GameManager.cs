@@ -399,7 +399,7 @@ public partial class GameManager : Node2D {
 			GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
 		} else {
 			if (round == 3 && (GlobalState.Instance.GetInfo().Class == "vision" || playerTableCards.Any(card => card.clas == "vision"))) {
-				roundLabel.Text = $"Vision Cards Are Swapping";
+				roundLabel.Text = "Vision Cards Are Swapping";
 				await ToSignal(GetTree().CreateTimer(0.5), "timeout");
 				if (GlobalState.Instance.GetInfo().Class == "vision") {
 					await SwapVision(enemyTableCards);

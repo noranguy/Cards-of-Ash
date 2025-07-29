@@ -281,7 +281,6 @@ public partial class Safehouse : StaticBody2D
 			{
 				if (_talking_to[i])
 				{
-					// tasks.Text = "";
 					string partial_dialogue_path = $"Day{_day_num + 1}/{characters[i]}";
 					if (in_task_four)
 					{
@@ -314,7 +313,6 @@ public partial class Safehouse : StaticBody2D
 						{
 							_ = InSafeHouse_Dialogue_setupAsync($"Mission/Before/{_dialogue_order[i + 1]}");
 							_task_ready = true;
-							GD.Print("running the prompt objective");
 							updateObjective(i);
 							_dialogue_exhausted[i] = true;
 						}
