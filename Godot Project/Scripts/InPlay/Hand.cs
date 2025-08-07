@@ -16,7 +16,7 @@ public partial class Hand : Control {
 	private bool visible;
 	
 	public void Init(PackedScene scene, int y, float scale, bool visible, List<(string, string)> cardInfo) {
-		SetMouseFilter(Control.MouseFilterEnum.Ignore);
+		SetMouseFilter(Control.MouseFilterEnum.Pass);
 		cardScene = scene;
 		y_max = y;
 		y_min = y + 100;

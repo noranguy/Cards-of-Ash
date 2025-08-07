@@ -2,11 +2,11 @@
 	"speaker": "self",
 	"dialogue": [
 		{
-            "id": "start",
-            "text": "A random enemy card will be revealed",
-            "options": [
-                { "text": "Continue", "next": "end" }
-            ]
+			"id": "start",
+			"text": "A random enemy card will be revealed.",
+			"options": [
+				{ "text": "Continue", "next": "end" }
+			]
 		}
 	]
 }

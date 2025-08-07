@@ -2,11 +2,11 @@
 	"speaker": "self",
 	"dialogue": [
 		{
-            "id": "start",
-            "text": "Durability has no effect on next card throw",
-            "options": [
-                { "text": "Continue", "next": "end" }
-            ]
+			"id": "start",
+			"text": "Durability has no effect on next card throw.",
+			"options": [
+				{ "text": "Continue", "next": "end" }
+			]
 		}
 	]
 }

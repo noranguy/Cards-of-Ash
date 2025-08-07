@@ -188,7 +188,6 @@ public partial class Safehouse : StaticBody2D
 			_in_minigame = false;
 			GlobalState.Instance.SetInMinigame(false);
 			_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task{_day_num}/completed");
-			GD.Print($"finished {_day_num}");
 			updateObjective(_day_num);
 		}
 
@@ -281,11 +280,9 @@ public partial class Safehouse : StaticBody2D
 			{
 				if (_talking_to[i])
 				{
-					// tasks.Text = "";
 					string partial_dialogue_path = $"Day{_day_num + 1}/{characters[i]}";
 					if (in_task_four)
 					{
-						GD.Print($"{taskFourDialogues[0]} {taskFourDialogues[1]} {taskFourDialogues[2]} {taskFourDialogues[3]}");
 						if (taskFourDialogues[i])
 						{
 							_ = InSafeHouse_Dialogue_setupAsync($"Tasks/Task4/Exhausted/{_dialogue_order[i + 1]}");
@@ -314,7 +311,6 @@ public partial class Safehouse : StaticBody2D
 						{
 							_ = InSafeHouse_Dialogue_setupAsync($"Mission/Before/{_dialogue_order[i + 1]}");
 							_task_ready = true;
-							GD.Print("running the prompt objective");
 							updateObjective(i);
 							_dialogue_exhausted[i] = true;
 						}
@@ -333,7 +329,6 @@ public partial class Safehouse : StaticBody2D
 					{
 						_ = InSafeHouse_Dialogue_setupAsync($"ExhaustedInSH/{partial_dialogue_path}");
 						_dialogue_exhausted[i] = true;
-						GD.Print(i);
 						updateObjective(i);
 					}
 
@@ -654,10 +649,6 @@ public partial class Safehouse : StaticBody2D
 		{
 			if (!_day_over)
 			{
-				GD.Print($"{ nightTaskTree[$"1a"]}");
-				GD.Print($"{ nightTaskTree[$"2a"]}");
-				GD.Print($"{ nightTaskTree[$"3a"]}");
-				GD.Print($"{ nightTaskTree[$"4a"]}");
 				if (_game_ready)
 				{
 					tasks.Text = $"{dayTaskTree["0b"]}";
@@ -687,8 +678,6 @@ public partial class Safehouse : StaticBody2D
 		}
 		else
 		{
-			GD.Print($"prompt mission:{taskNumber}");
-			GD.Print($"adjusted prompt mission:{taskNumber +1}");
 			tasks.Text = nightTaskTree[$"{taskNumber+1}a"];
 		}
 		

@@ -109,24 +109,37 @@ public partial class DialogueManager : Control {
 		
 		// display speaker portrait if not player
 		if (inPlay) {
-			dialogueText.Scale = new Vector2(0.5f, 0.5f);
-			portrait.Scale = new Vector2(1.4f, 1.4f);
-			namePlate.Scale = new Vector2(1.4f, 1.4f);
+			mainBox.Size = new Vector2(505, 125);
 			panel.Position = new Vector2(70, 224);
 			panel.Size = new Vector2(500, 120);
-			mainBox.Size = new Vector2(505, 125);
+			dialogueText.Scale = new Vector2(0.5f, 0.5f);
+			portrait.Scale = new Vector2(1.4f, 1.4f);
 			portrait.Position = new Vector2(8, 8);
-			dialogueText.Position = new Vector2(110, 10);
-			optionsContainer.Position = new Vector2(110, 80);
-			optionsContainer.Size = new Vector2(630, 40);
-			namePlate.Scale = new Vector2(1, 1);
-			namePlate.Position = new Vector2(7, -19);
+			
+			if (currentSpeaker == "self") {
+				portrait.Visible = false;
+				namePlate.Visible = false;
+				dialogueText.Size = new Vector2(960, 5);
+				dialogueText.Position = new Vector2(10, 10);
+				optionsContainer.Position = new Vector2(10, 80);
+				optionsContainer.Size = new Vector2(830, 40);
+			} else {
+				portrait.Visible = true;
+				namePlate.Visible = true;
+				namePlate.Position = new Vector2(7, -19);
+				namePlate.Scale = new Vector2(1, 1);
+				dialogueText.Size = new Vector2(760, 5);
+				dialogueText.Position = new Vector2(110, 10);
+				optionsContainer.Position = new Vector2(110, 80);
+				optionsContainer.Size = new Vector2(630, 40);
+			}
 		} else {
 			mainBox.Size = new Vector2(260, 70);
 			panel.Position = new Vector2(35, 112);
 			panel.Size = new Vector2(250, 60);
 			dialogueText.Scale = new Vector2(0.25f, 0.25f);
 			portrait.Scale = new Vector2(0.65f, 0.65f);
+			portrait.Position = new Vector2(8, 8);
 			
 			if (currentSpeaker == "self") {
 				portrait.Visible = false;
@@ -136,14 +149,14 @@ public partial class DialogueManager : Control {
 				optionsContainer.Position = new Vector2(5, 45);
 				optionsContainer.Size = new Vector2(420, 20);
 			} else {
-				namePlate.Position = new Vector2(7, -12);
-				namePlate.Scale = new Vector2(0.5f, 0.5f);
 				portrait.Visible = true;
 				namePlate.Visible = true;
+				namePlate.Position = new Vector2(7, -12);
+				namePlate.Scale = new Vector2(0.5f, 0.5f);
 				dialogueText.Size = new Vector2(760, 5);
 				dialogueText.Position = new Vector2(60, 5);
-				optionsContainer.Size = new Vector2(320, 20);
 				optionsContainer.Position = new Vector2(60, 45);
+				optionsContainer.Size = new Vector2(320, 20);
 				var texture = GD.Load<Texture2D>($"res://Assets/Character Designs/{dialogue.speaker}/portrait.png");
 				sprite.Texture = texture;
 			}

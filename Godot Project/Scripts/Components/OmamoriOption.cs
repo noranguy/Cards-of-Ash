@@ -26,7 +26,7 @@ public partial class OmamoriOption : Control {
 		
 		if (Name != "Current" && Name != "OmamoriOption") {
 			tooltipLabel.Text = GlobalState.Instance.OmamoriDescriptions[Name];
-			await ToSignal(GetTree().CreateTimer(0.10f), "timeout");
+			await ToSignal(GetTree().CreateTimer(0.15f), "timeout");
 			tooltip.Size = (Name == "none") ? new Vector2(68, 21) : tooltipLabel.Size + new Vector2(8, 8);
 		} else {
 			tooltipLabel.Text = "Current Omamori";

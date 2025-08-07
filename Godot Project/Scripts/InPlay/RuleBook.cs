@@ -31,10 +31,12 @@ public partial class RuleBook : Panel {
 	}
 	
 	public override void _Process(double delta) {
-		if (Input.IsActionJustPressed("ui_left")) {
-			PrevPage();
-		} else if (Input.IsActionJustPressed("ui_right")) {
-			NextPage();
+		if (Visible) {
+			if (Input.IsActionJustPressed("ui_left")) {
+				PrevPage();
+			} else if (Input.IsActionJustPressed("ui_right")) {
+				NextPage();
+			}
 		}
 	}
 	
