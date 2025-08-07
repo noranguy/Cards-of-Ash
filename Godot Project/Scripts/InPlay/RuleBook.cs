@@ -27,14 +27,16 @@ public partial class RuleBook : Panel {
 		if (GlobalState.Instance.GetDay() == 5) lastPage--;
 		
 		info.Text = GlobalState.Instance.RulebookPages[curPage];
-		pageNumberLabel.Text = $"{curPage + 1}"; 
+		pageNumberLabel.Text = $"{curPage + 1}";
 	}
 	
 	public override void _Process(double delta) {
-		if (Input.IsActionJustPressed("ui_left")) {
-			PrevPage();
-		} else if (Input.IsActionJustPressed("ui_right")) {
-			NextPage();
+		if (Visible) {
+			if (Input.IsActionJustPressed("ui_left")) {
+				PrevPage();
+			} else if (Input.IsActionJustPressed("ui_right")) {
+				NextPage();
+			}
 		}
 	}
 	

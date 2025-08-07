@@ -6666,6 +6666,14 @@ tile_set = SubResource("TileSet_a7hbh")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.841499, 0.724029, 0.610333, 1)
 
+[node name="Rulebook" parent="." instance=ExtResource("13_qn0kl")]
+visible = false
+z_index = 200
+offset_left = -250.0
+offset_top = -175.0
+offset_right = -250.0
+offset_bottom = -175.0
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-13, 195)
 scale = Vector2(11.109, 12.2075)
@@ -6718,14 +6726,6 @@ editor_description = "Coffee Black by GrimFrenzy"
 stream = ExtResource("13_juooh")
 autoplay = true
 parameters/looping = true
-
-[node name="Rulebook" parent="." instance=ExtResource("13_qn0kl")]
-visible = false
-offset_left = -250.0
-offset_top = -175.0
-offset_right = -250.0
-offset_bottom = -175.0
-script = null
 
 [node name="RoundLabel" type="Label" parent="."]
 z_index = 20

@@ -26,9 +26,9 @@ public partial class OmamoriSelector : Control {
 			omamoriMap[name].ActiveSet += UpdateActive;
 		}
 		
-		 //for (int i = Math.Max(1, GlobalState.Instance.GetDay()); i < omamories.Count; i++) {
-		 	//omamoriMap[omamories[i]].Lock();
-		 //}
+		 for (int i = Math.Max(1, GlobalState.Instance.GetDay()); i < omamories.Count; i++) {
+		 	omamoriMap[omamories[i]].Lock();
+		 }
 		
 		currentName = GlobalState.Instance.GetOmamori();
 		UpdateActive(omamoriMap[currentName]);

@@ -16,7 +16,7 @@ public partial class GameManager : Node2D {
 	
 	private BetterButton throwButton;
 	private BetterButton infoButton;
-	private Panel rulebook;
+	private RuleBook rulebook;
 	private Label roundLabel;
 	
 	private List<Card> playerTableCards;
@@ -46,7 +46,7 @@ public partial class GameManager : Node2D {
 	private readonly Random Rand = new Random();
 	
 	int round = 0;
-
+	
 	public async override void _Ready() {
 		GlobalState.Instance.allowCardSelect = false;
 		anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -54,7 +54,7 @@ public partial class GameManager : Node2D {
 		oppCardThrow = GetNode<AnimatedSprite2D>("Opp_CardThrowAnimate");
 		throwButton = GetNode<BetterButton>("ThrowButton");
 		infoButton = GetNode<BetterButton>("InfoButton");
-		rulebook = GetNode<Panel>("Rulebook");
+		rulebook = GetNode<RuleBook>("Rulebook");
 		roundLabel = GetNode<Label>("RoundLabel");
 		omamoriButton = GetNode<TextureButton>("OmamoriBox/OmamoriButton");
 		
@@ -111,6 +111,9 @@ public partial class GameManager : Node2D {
 				omamoriButton.Pressed += BagOfSandOmamori;
 				break;
 		}
+		
+		rulebook.MoveToFront();
+		rulebook.Position = new Vector2(-250, -175);
 		
 		anim.Play($"agent_{GlobalState.Instance.GetDay()}");
 

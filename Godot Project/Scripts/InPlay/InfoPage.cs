@@ -25,11 +25,11 @@ public partial class InfoPage : Node2D {
 	
 	public override void _Input(InputEvent @event) {
 		if (@event is InputEventKey keyEvent && keyEvent.Pressed && keyEvent.Keycode == Key.Space) {
-			if (GlobalState.Instance.GetDay() != 0 && GlobalState.Instance.GetDay() != 4) {
-				GlobalState.Instance.NewInhabitant();
-				GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
-				return;
-			}
+			//if (GlobalState.Instance.GetDay() != 0 && GlobalState.Instance.GetDay() != 4) {
+				//GlobalState.Instance.NewInhabitant();
+				//GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("safehouse.tscn");
+				//return;
+			//}
 			if (GlobalState.Instance.GetDay() < 2) {
 				GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("menko_game.tscn");
 			} else {
